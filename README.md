@@ -23,7 +23,7 @@ We have selected the OECD How’s Life? database for our project. This database 
 
 The data originates from official OECD statistics and reputable national sources, ensuring high reliability and credibility. Approximately 80% of the indicators are regularly published by the OECD, with additional data sourced from internationally recognized institutions such as national statistical offices, United Nations Statistics, and the Gallup World Poll.
 
-The How’s Life? database covers all 38 OECD member countries, which predominantly include developed economies along with select emerging economies such as Brazil, Russia, and South Africa. While comprehensive within this scope, the dataset notably excludes most developing countries, given its OECD-centered focus. Nevertheless, the countries represented provide robust insights into diverse economic, social, and governance contexts for comparative analyses of well-being.
+The How’s Life? database covers all 38 OECD member countries, which predominantly include developed economies. While comprehensive within this scope, the dataset notably excludes most developing countries, given its OECD-centered focus. Nevertheless, the countries represented provide robust insights into diverse economic, social, and governance contexts for comparative analyses of well-being.
 
 The dataset is rigorously maintained by OECD experts, ensuring completeness, accuracy, and consistency. It is openly accessible through OECD’s dedicated data portals and is exportable in widely used formats such as CSV and JSON. Due to its careful curation, the dataset requires minimal preprocessing or data cleaning, making it particularly suitable for robust research and analytical purposes.
 
