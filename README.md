@@ -49,6 +49,7 @@ The data is collected from 38 countries including many European countries, North
 To start with a classic example we have the median net wealth by country. As not all counties have measured this in the same year, we have take the most recent year of each country which are all close to each other.
 
 // Number of data points 89713.
+// Number of data points per time.
 
 ![Histogram of Median net wealth by country](net_wealth.png)
 
