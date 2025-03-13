@@ -42,10 +42,11 @@ The dataset consists of 11 main categories: Wealth, Employment, Housing, Free Ti
 
 The data is collected from 38 countries including many European countries, North America, Oceania, some countries of Central America and few of Asia. There is no data of African countries. All the data was collected between 2004 and 2024.
 
-To start with a classic example we have the median net wealth by country. As not all counties have measured this in the same year, we have take the most recent year of each country which are all close to each other.
+In total there are 89713 data points with the distribution as showed in the following histogram. For the year 2024 there are only 18 data points which is why there seems to be no data.
 
-// Number of data points 89713.
-// Number of data points per time.
+![Histogram of data points per year](data_per_year.png)
+
+To start with a classic example we have the median net wealth by country. As not all counties have measured this in the same year, we have take the most recent year of each country which are all close to each other.
 
 ![Histogram of Median net wealth by country](net_wealth.png)
 
