@@ -8,7 +8,7 @@
 
 [Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
 
-## Milestone 1 (29th March, 5pm)
+## Milestone 1 (21st March, 5pm)
 
 **10% of the final grade**
 
@@ -38,10 +38,6 @@ Dataset available at: [How’s Life? database](https://data-explorer.oecd.org/vi
 
 ### Exploratory Data Analysis
 
-> Pre-processing of the data set you chose
->
-> - Show some basic statistics and get insights about the data
-
 The dataset consists of 11 main categories: Wealth, Employment, Housing, Free Time, Health, Education, Social Environment, Political Say, Natural Environment, Crime and General Satisfaction. All those categories are further divided into subcategories.
 
 The data is collected from 38 countries including many European countries, North America, Oceania, some countries of Central America and few of Asia. There is no data of African countries. All the data was collected between 2004 and 2024.
@@ -61,16 +57,19 @@ If we compare this to the mean score of the highest quintile of life satisfactio
 
 ### Related work
 
-> - What others have already done with the data?
-> - Why is your approach original?
-> - What source of inspiration do you take? Visualizations that you found on other websites or magazines (might be unrelated to your data).
-> - In case you are using a dataset that you have already explored in another context (ML or ADA course, semester project...), you are required to share the report of that work to outline the differences with the submission for this class.
+OECD themselves have made multiple different visualizations for their own data, such as an interactive dashboard allowing users to weight 11 well-being dimensions, a mapping of BLI indicators geographically, and many different charts. esearchers have leveraged OECD BLI data to analyze well-being through composite indicators, regression models, and multivariate techniques, often linking metrics to economic equity or development . Some have reimagined aggregation methods such as hierarchical weighting to align with public priorities
 
-## Milestone 2 (26th April, 5pm)
+We plan on using OECD's own visualizations as a source of inspiration for our project. In particular, the interactive dashboard allows users to generate their own personalized rankings of country performance. We believe that this style of user-driven storytelling will be good to capture user's attention. In addition, their use of flowers to visualize the 11 well-being dimensions allows them to simplify the multivariate data without losing nuance. The geographic mapping of BLI indicators also offers a spatial lens to compare outcomes. These qualities are things we wish to emulate in our project. By blending modular interactivity and intuitive visual metaphors, we aim to empower users to explore well-being trends through their own priorities, in order to balance clarity with depth. None of us have used this dataset before in any previous works or personal projects.
+
+Our approach is original in two ways. This combination of accessible visuals and longitudinal analysis empowers users to explore how priorities and policies shape well-being over time.
+1. **Visual simplicity**: We replace complex metaphors (e.g., OECD’s flower charts) with intuitive geometric shapes and sizes to simplify multivariate data without sacrificing nuance.
+2. **Temporal exploration**: We add a time-slider feature to compare well-being trends across all years, a gap in existing tools that focus on static snapshots.
+
+## Milestone 2 (18th April, 5pm)
 
 **10% of the final grade**
 
-## Milestone 3 (31st May, 5pm)
+## Milestone 3 (30th May, 5pm)
 
 **80% of the final grade**
 
