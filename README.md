@@ -31,10 +31,13 @@ Dataset available at: [How’s Life? database](https://data-explorer.oecd.org/vi
 
 ### Problematic
 
-> Frame the general topic of your visualization and the main axis that you want to develop.
->
-> - What am I trying to show with my visualization?
-> - Think of an overview for the project, your motivation, and the target audience.
+Our visualization aims to clearly illustrate and explore how OECD countries compare with each other across the 11 dimensions of current well-being defined by the OECD How’s Life? database. Through this project, we seek to reveal nuanced insights into each country’s strengths, weaknesses, and overall performance in improving citizens’ quality of life beyond traditional economic indicators like GDP.
+
+One primary axis of exploration will be spatial comparison: a dynamic, interactive geographical map will allow users to select and adjust views according to specific well-being dimensions, such as Health, Work-Life Balance, Environmental Quality, or Social Connections. By leveraging this visual tool, users can intuitively observe regional patterns, identify clusters of high-performing or struggling countries, and quickly perceive contrasts and similarities across multiple dimensions.
+
+In addition to geographical comparisons, our project incorporates a temporal dimension. An interactive time slider will enable users to examine how each country’s well-being has evolved over the last 20 years (2004–2024). This will facilitate the discovery of trends, turning points, or policy impacts that may have influenced countries’ well-being trajectories, providing deeper insights into both the progress and regressions observed over time.
+
+The motivation behind this visualization stems from recognizing the limitations of GDP as the dominant measure of progress and wanting to highlight broader societal conditions that influence quality of life. By creating an engaging, accessible, and interactive tool, our project targets a general audience, particularly individuals interested in public policy, international development, social science, or simply curious citizens who seek an intuitive understanding of complex socio-economic issues.
 
 ### Exploratory Data Analysis
 
@@ -62,6 +65,7 @@ OECD themselves have made multiple different visualizations for their own data, 
 We plan on using OECD's own visualizations as a source of inspiration for our project. In particular, the interactive dashboard allows users to generate their own personalized rankings of country performance. We believe that this style of user-driven storytelling will be good to capture user's attention. In addition, their use of flowers to visualize the 11 well-being dimensions allows them to simplify the multivariate data without losing nuance. The geographic mapping of BLI indicators also offers a spatial lens to compare outcomes. These qualities are things we wish to emulate in our project. By blending modular interactivity and intuitive visual metaphors, we aim to empower users to explore well-being trends through their own priorities, in order to balance clarity with depth. None of us have used this dataset before in any previous works or personal projects.
 
 Our approach is original in two ways. This combination of accessible visuals and longitudinal analysis empowers users to explore how priorities and policies shape well-being over time.
+
 1. **Visual simplicity**: We replace complex metaphors (e.g., OECD’s flower charts) with intuitive geometric shapes and sizes to simplify multivariate data without sacrificing nuance.
 2. **Temporal exploration**: We add a time-slider feature to compare well-being trends across all years, a gap in existing tools that focus on static snapshots.
 
