@@ -19,11 +19,11 @@ _(max. 2000 characters per section)_
 
 ### Dataset
 
-We have selected the OECD How’s Life? database for our project. This database is an initiative by the Organisation for Economic Co-operation and Development (OECD) aimed at measuring well-being beyond GDP by comparing countries across multiple dimensions of quality of life. The dataset specifically focuses on 11 dimensions of current well-being, including Income and Wealth, Housing, Work and Job Quality, Health, Knowledge and Skills, Environmental Quality, Subjective Well-being, Safety, Work-Life Balance, Social Connections, and Civic Engagement. Each dimension is represented by multiple quantitative indicators, enabling comprehensive country profiles and detailed comparisons over a 20-year period (2004–2024).
+We have selected the "OECD How’s Life?" database for our project. This database is an initiative by the Organisation for Economic Co-operation and Development (OECD) aimed at measuring well-being beyond GDP by comparing countries across multiple dimensions of quality of life. The dataset specifically focuses on 11 dimensions of current well-being, including Income and Wealth, Housing, Work and Job Quality, Health, Knowledge and Skills, Environmental Quality, Subjective Well-being, Safety, Work-Life Balance, Social Connections, and Civic Engagement. Each dimension is represented by multiple quantitative indicators, enabling comprehensive country profiles and detailed comparisons over a 20-year period (2004–2024).
 
 The data originates from official OECD statistics and reputable national sources, ensuring high reliability and credibility. Approximately 80% of the indicators are regularly published by the OECD, with additional data sourced from internationally recognized institutions such as national statistical offices, United Nations Statistics, and the Gallup World Poll.
 
-The How’s Life? database covers all 38 OECD member countries, which predominantly include developed economies. While comprehensive within this scope, the dataset notably excludes most developing countries, given its OECD-centered focus. Nevertheless, the countries represented provide robust insights into diverse economic, social, and governance contexts for comparative analyses of well-being.
+The "OECD How’s Life?" database covers all 38 OECD member countries, which predominantly include developed economies. While comprehensive within this scope, the dataset notably excludes most developing countries, given its OECD-centered focus. Nevertheless, the countries represented provide robust insights into diverse economic, social, and governance contexts for comparative analyses of well-being.
 
 The dataset is rigorously maintained by OECD experts, ensuring completeness, accuracy, and consistency. It is openly accessible through OECD’s dedicated data portals and is exportable in widely used formats such as CSV and JSON. Due to its careful curation, the dataset requires minimal preprocessing or data cleaning, making it particularly suitable for robust research and analytical purposes.
 
@@ -31,7 +31,7 @@ Dataset available at: [How’s Life? database](https://data-explorer.oecd.org/vi
 
 ### Problematic
 
-Our visualization aims to clearly illustrate and explore how OECD countries compare with each other across the 11 dimensions of current well-being defined by the OECD How’s Life? database. Through this project, we seek to reveal nuanced insights into each country’s strengths, weaknesses, and overall performance in improving citizens’ quality of life beyond traditional economic indicators like GDP.
+Our visualization aims to clearly illustrate and explore how OECD countries compare with each other across the 11 dimensions of current well-being defined by the "OECD How’s Life?" database. Through this project, we seek to reveal nuanced insights into each country’s strengths, weaknesses, and overall performance in improving citizens’ quality of life beyond traditional economic indicators like GDP.
 
 One primary axis of exploration will be spatial comparison: a dynamic, interactive geographical map will allow users to select and adjust views according to specific well-being dimensions, such as Health, Work-Life Balance, Environmental Quality, or Social Connections. By leveraging this visual tool, users can intuitively observe regional patterns, identify clusters of high-performing or struggling countries, and quickly perceive contrasts and similarities across multiple dimensions.
 
@@ -53,9 +53,9 @@ To start with a classic example we have the median net wealth by country. As not
 
 ![Histogram of Median net wealth by country](net_wealth.png)
 
-As expected Luxemburg is on the first place by far. Interestingly, Denmark and Latvia are on the last places even behind Chile.
+As expected Luxembourg is on the first place by far. Interestingly, Denmark and Latvia are on the last places even behind Chile.
 
-If we compare this to the mean score of the highest quintile of life satisfaction we can see that for the 3 countries meantioned before median net wealth does not correlate with top quintile life satisfaction.
+If we compare this to the mean score of the highest quintile of life satisfaction we can see that for the 3 countries mentioned before median net wealth does not correlate with top quintile life satisfaction.
 
 ![Histogram of Top life satisfaction scores quintile by country](top_life_satisf.png)
 
