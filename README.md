@@ -43,27 +43,27 @@ The motivation behind this visualization stems from recognizing the limitations 
 
 The dataset consists of 11 main categories: Wealth, Employment, Housing, Free Time, Health, Education, Social Environment, Political Say, Natural Environment, Crime and General Satisfaction. All those categories are further divided into subcategories.
 
-The data is collected from 38 countries including many European countries, North America, Oceania, some countries of Central America and few of Asia. There is no data of African countries. All the data was collected between 2004 and 2024.
+The data is collected from 38 countries including many European countries, North America, Oceania, some countries of Central America and few in Asia. There is no data of African countries. All the data was collected between 2004 and 2024.
 
-In total there are 89713 data points with the distribution as showed in the following histogram. For the year 2024 there are only 18 data points which is why there seems to be no data.
+In total there are 89713 data points with the distribution as shown in the following histogram. For the year 2024 there are only 18 data points which is why there seems to be no data.
 
 ![Histogram of data points per year](data_per_year.png)
 
-To start with a classic example we have the median net wealth by country. As not all counties have measured this in the same year, we have take the most recent year of each country which are all close to each other.
+To start with a classic example, we have the median net wealth by country. As not all countries have measured this in the same year, we have taken the most recent year of each country which are all close to each other.
 
 ![Histogram of Median net wealth by country](net_wealth.png)
 
-As expected Luxembourg is on the first place by far. Interestingly, Denmark and Latvia are on the last places even behind Chile.
+As expected, Luxembourg is on the first place by far. Interestingly, Denmark and Latvia are on the last places even behind Chile.
 
-If we compare this to the mean score of the highest quintile of life satisfaction we can see that for the 3 countries mentioned before median net wealth does not correlate with top quintile life satisfaction.
+If we compare this to the mean score of the highest quintile of life satisfaction, we can see that for the 3 countries mentioned before, median net wealth does not correlate with top quintile life satisfaction.
 
 ![Histogram of Top life satisfaction scores quintile by country](top_life_satisf.png)
 
 ### Related work
 
-OECD themselves have made multiple different visualizations for their own data, such as an interactive dashboard allowing users to weight 11 well-being dimensions, a mapping of BLI indicators geographically, and many different charts. Researchers have leveraged OECD BLI data to analyze well-being through composite indicators, regression models, and multivariate techniques, often linking metrics to economic equity or development. Some have reimagined aggregation methods such as hierarchical weighting to align with public priorities.
+OECD themselves have made multiple different visualizations for their own data, such as an interactive dashboard allowing users to weigh 11 well-being dimensions, a mapping of BLI indicators geographically, and many different charts. Researchers have leveraged OECD BLI data to analyze well-being through composite indicators, regression models, and multivariate techniques, often linking metrics to economic equity or development. Some have reimagined aggregation methods such as hierarchical weighting to align with public priorities.
 
-We plan on using OECD's own visualizations as a source of inspiration for our project. In particular, the interactive dashboard allows users to generate their own personalized rankings of country performance. We believe that this style of user-driven storytelling will be good to capture user's attention. In addition, their use of flowers to visualize the 11 well-being dimensions allows them to simplify the multivariate data without losing nuance. The geographic mapping of BLI indicators also offers a spatial lens to compare outcomes. These qualities are things we wish to emulate in our project. By blending modular interactivity and intuitive visual metaphors, we aim to empower users to explore well-being trends through their own priorities, in order to balance clarity with depth. None of us have used this dataset before in any previous works or personal projects.
+We plan on using OECD's own visualizations as a source of inspiration for our project. In particular, the interactive dashboard allows users to generate their own personalized rankings of country performance. We believe that this style of user-driven storytelling will be good to capture users' attention. In addition, their use of flowers to visualize the 11 well-being dimensions allows them to simplify the multivariate data without losing nuance. The geographic mapping of BLI indicators also offers a spatial lens to compare outcomes. These qualities are things we wish to emulate in our project. By blending modular interactivity and intuitive visual metaphors, we aim to empower users to explore well-being trends through their own priorities, in order to balance clarity with depth. None of us have used this dataset before in any previous works or personal projects.
 
 Our approach is original in two ways. This combination of accessible visuals and longitudinal analysis empowers users to explore how priorities and policies shape well-being over time.
 
