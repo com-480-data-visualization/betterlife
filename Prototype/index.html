@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OECD Well-being Visualization Prototype (Click to Zoom)</title>
+
+    <!-- D3.js library for data visualization -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- TopoJSON library for topology-preserving geometry -->
+    <script src="https://unpkg.com/topojson@3"></script>
+
+    <!-- Google Fonts for consistent typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Page Header -->
+    <header>
+      <h1>OECD How's Life? - Well-being Visualization</h1>
+    </header>
+
+    <!-- Main Content Area: Grid layout containing controls and map -->
+    <main>
+      <!-- Controls Section: Contains user interface elements for interaction -->
+      <section class="controls-section">
+        <h2>Controls</h2>
+
+        <!-- Dimension Selector Dropdown -->
+        <div>
+          <label for="dimension-select">Select Well-being Dimension:</label>
+          <select
+            id="dimension-select"
+            name="dimension"
+            aria-label="Select Well-being Dimension"
+          >
+            <!-- Options for different well-being dimensions -->
+            <option value="income_wealth">Income and Wealth</option>
+            <option value="housing">Housing</option>
+            <option value="work_job_quality">Work and Job Quality</option>
+            <option value="health">Health</option>
+            <option value="knowledge_skills">Knowledge and Skills</option>
+            <option value="environmental_quality">Environmental Quality</option>
+            <!-- Default selected option -->
+            <option value="subjective_wellbeing" selected>
+              Subjective Well-being
+            </option>
+            <option value="safety">Safety</option>
+            <option value="work_life_balance">Work-Life Balance</option>
+            <option value="social_connections">Social Connections</option>
+            <option value="civic_engagement">Civic Engagement</option>
+          </select>
+        </div>
+
+        <!-- Year Selector Slider -->
+        <div>
+          <label for="year-slider">Select Year:</label>
+          <input
+            type="range"
+            id="year-slider"
+            name="year"
+            min="2004"
+            max="2024"
+            value="2024"
+            aria-label="Select Year"
+          />
+          <!-- Labels showing min, current selected, and max year -->
+          <div class="year-slider-labels">
+            <span>2004</span>
+            <!-- Current year display updated by JavaScript -->
+            <span id="year-display">2024</span>
+            <span>2024</span>
+          </div>
+        </div>
+
+        <!-- Checkbox to hide non-target countries -->
+        <div class="checkbox-container">
+          <input type="checkbox" id="hide-others-checkbox" name="hide-others" />
+          <label for="hide-others-checkbox">Hide non-target countries</label>
+        </div>
+
+        <!-- Display of Current Selections -->
+        <div class="selection-display">
+          <h3>Current Selection:</h3>
+          <!-- Placeholder spans updated by JavaScript -->
+          <p>
+            Dimension:
+            <span id="selected-dimension">Subjective Well-being</span>
+          </p>
+          <p>Year: <span id="selected-year">2024</span></p>
+          <p>Country: <span id="selected-country-display">World View</span></p>
+        </div>
+      </section>
+
+      <!-- Map Section: Contains the map visualization and related info -->
+      <section class="map-section">
+        <h2>Geographical Comparison</h2>
+        <!-- Container where the D3 map will be rendered by JavaScript -->
+        <div id="map-container"></div>
+        <!-- Informational text area below the map (e.g., instructions, country name) -->
+        <div id="country-info">
+          <!-- Initial instructions updated by JavaScript -->
+          Loading map...
+        </div>
+      </section>
+    </main>
+
+    <!-- Page Footer -->
+    <footer>
+      <p>
+        Data Source: OECD How's Life? Database (Placeholder - Data not yet
+        integrated)
+      </p>
+    </footer>
+
+    <!-- Link to the external JavaScript file -->
+    <!-- 'defer' attribute ensures the script executes after the HTML is parsed -->
+    <script defer src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,383 @@
+/* --- CSS Variables for Theming --- */
+/* Defines reusable colors, fonts, and layout properties */
+:root {
+  /* Font */
+  --font-sans: "Inter", sans-serif;
+
+  /* Color Palette */
+  --color-background: #f3f4f6; /* gray-100 */
+  --color-text: #374151; /* gray-700 */
+  --color-text-muted: #6b7280; /* gray-500 */
+  --color-text-strong: #1f2937; /* gray-800 */
+  --color-header-bg: #ffffff; /* white */
+  --color-section-bg: #ffffff; /* white */
+  --color-border: #d1d5db; /* border-gray-300 */
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-shadow-light: rgba(0, 0, 0, 0.06);
+  --color-primary: #0ea5e9; /* sky-500 */
+  --color-primary-light: #bae6fd; /* sky-200 */
+  --color-primary-lighter: #f0f9ff; /* sky-50 */
+  --color-primary-dark: #0284c7; /* sky-600 */
+
+  /* Map Specific Colors */
+  --color-map-bg: #e0f2fe; /* Lighter blue background for map container */
+  --color-map-default-fill: #e0e0e0; /* Default fill for non-target countries */
+  --color-map-target-fill: #ffffff; /* Default fill for TARGET countries */
+  --color-map-stroke: #6c757d; /* Darker stroke for country borders */
+  --color-map-graticule: #ced4da; /* Lighter graticule (lat/lon lines) */
+  --color-map-hover: #b3e5fc; /* Lighter blue hover (applies to target countries) */
+  --color-map-active: #4fc3f7; /* Distinct blue for selected target country */
+  --color-map-active-stroke: #01579b; /* Darker blue stroke for selected target country */
+  --color-map-inactive-fill: #f5f5f5; /* Very light gray for inactive target countries */
+  --color-map-inactive-opacity: 0.15; /* Opacity for inactive target countries */
+
+  /* Layout & Border */
+  --border-radius: 0.5rem; /* rounded-lg */
+  --border-radius-sm: 0.375rem; /* rounded-md */
+  --border-radius-full: 9999px; /* rounded-full */
+}
+
+/* --- Basic Reset and Body Styling --- */
+/* Basic reset for consistent browser rendering */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Styles for the main body element */
+body {
+  font-family: var(--font-sans); /* Use defined sans-serif font */
+  background-color: var(--color-background); /* Use defined background color */
+  color: var(--color-text); /* Use defined text color */
+  display: flex;
+  flex-direction: column; /* Stack header, main, footer vertically */
+  min-height: 100vh; /* Ensure body takes at least full viewport height */
+  line-height: 1.5; /* Set base line height for readability */
+}
+
+/* --- Header Styling --- */
+header {
+  background-color: var(--color-header-bg);
+  padding: 1rem;
+  box-shadow: 0 1px 3px 0 var(--color-shadow),
+    0 1px 2px 0 var(--color-shadow-light);
+  text-align: center;
+  flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+header h1 {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700; /* font-bold */
+  color: var(--color-text-strong);
+}
+
+/* --- Main Content Layout --- */
+main {
+  flex-grow: 1; /* Allow main content to fill available vertical space */
+  max-width: 1280px; /* Limit maximum content width */
+  margin-left: auto; /* Center content horizontally */
+  margin-right: auto;
+  padding: 1rem 1rem; /* Default padding */
+  display: grid; /* Use grid for layout */
+  grid-template-columns: 1fr; /* Default: single column layout (mobile first) */
+  gap: 1.5rem; /* Space between grid items */
+  width: 100%; /* Ensure main takes full width within its max-width */
+}
+
+/* Layout adjustments for larger screens (min-width 1024px) */
+@media (min-width: 1024px) {
+  main {
+    /* Two columns: Map takes 5 parts, Controls take 2 parts */
+    grid-template-columns: 5fr 2fr;
+    padding: 2rem 1rem; /* Increase padding */
+  }
+  /* Reorder sections on larger screens */
+  .controls-section {
+    order: 2; /* Put controls on the right side */
+  }
+  .map-section {
+    order: 1; /* Put map on the left side */
+  }
+}
+
+/* --- Section Styling --- */
+/* Common styles for content sections (controls, map) */
+section {
+  background-color: var(--color-section-bg);
+  padding: 1.5rem; /* Internal padding */
+  border-radius: var(--border-radius); /* Rounded corners */
+  box-shadow: 0 1px 3px 0 var(--color-shadow),
+    0 1px 2px 0 var(--color-shadow-light); /* Subtle shadow */
+}
+
+/* Specific styles for the controls section */
+.controls-section {
+  /* On larger screens (order: 2), prevent stretching vertically */
+  height: fit-content;
+}
+
+/* Specific styles for the map section */
+.map-section {
+  display: flex;
+  flex-direction: column; /* Stack title, map container, info text vertically */
+  min-height: 500px; /* Ensure map section has a decent minimum height */
+}
+
+/* Increase map section height significantly on larger screens */
+@media (min-width: 1024px) {
+  .map-section {
+    min-height: 85vh; /* Use viewport height for better responsiveness */
+  }
+}
+
+/* Section heading styles */
+section h2 {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 600; /* font-semibold */
+  margin-bottom: 1rem; /* Space below heading */
+  color: var(--color-text-muted); /* Slightly muted heading color */
+}
+
+/* --- Form Control Styling --- */
+/* Label styles */
+label {
+  display: block; /* Ensure labels are on their own line */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem; /* Space below label */
+}
+
+/* Styling for checkbox containers */
+.checkbox-container {
+  display: flex; /* Align checkbox and label horizontally */
+  align-items: center; /* Vertically center items */
+  margin-bottom: 1.5rem; /* Space below container */
+  cursor: pointer; /* Make the whole area clickable */
+}
+.checkbox-container input[type="checkbox"] {
+  width: auto; /* Override default width: 100% */
+  margin-bottom: 0; /* Override default margin */
+  margin-right: 0.5rem; /* Space between checkbox and label */
+  cursor: pointer;
+  /* Style the checkbox itself */
+  accent-color: var(--color-primary); /* Color the checkmark/box */
+  height: 1em; /* Match font size */
+  width: 1em; /* Match font size */
+}
+/* Label specifically within the checkbox container */
+.checkbox-container label {
+  margin-bottom: 0; /* Remove bottom margin specific to this label */
+  color: var(--color-text); /* Use standard text color */
+  cursor: pointer; /* Indicate label is clickable */
+}
+
+/* Common styles for select and range inputs */
+select,
+input[type="range"] {
+  width: 100%; /* Make controls fill their container width */
+  margin-bottom: 1.5rem; /* Space below control */
+}
+
+/* Select dropdown styles */
+select {
+  padding: 0.5rem; /* Internal padding */
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  box-shadow: 0 1px 2px 0 var(--color-shadow-light);
+  appearance: none; /* Remove default OS dropdown arrow */
+  /* Custom dropdown arrow using SVG background */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  cursor: pointer;
+}
+/* Style for when the select box is focused */
+select:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-light); /* Focus ring */
+}
+
+/* --- Range Slider Styling --- */
+input[type="range"] {
+  -webkit-appearance: none; /* Override default look in WebKit browsers */
+  appearance: none; /* Override default look in other browsers */
+  height: 8px; /* Slider track height */
+  background: var(--color-border); /* Slider track color */
+  outline: none; /* Remove default outline */
+  opacity: 0.9; /* Slightly transparent */
+  transition: opacity 0.2s; /* Smooth opacity transition on hover */
+  border-radius: var(--border-radius-full); /* Rounded track */
+  cursor: pointer;
+}
+input[type="range"]:hover {
+  opacity: 1; /* Fully opaque on hover */
+}
+/* Style for the slider thumb (Chrome/Safari) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px; /* Thumb width */
+  height: 20px; /* Thumb height */
+  background: var(--color-primary); /* Thumb color */
+  cursor: pointer;
+  border-radius: 50%; /* Circular thumb */
+  border: none; /* Remove default border */
+}
+/* Style for the slider thumb (Firefox) */
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--color-primary);
+  cursor: pointer;
+  border-radius: 50%;
+  border: none;
+}
+
+/* Labels below the year slider (Min, Current, Max) */
+.year-slider-labels {
+  display: flex;
+  justify-content: space-between; /* Distribute labels evenly */
+  font-size: 0.75rem; /* text-xs */
+  color: var(--color-text-muted);
+  margin-top: 0.25rem; /* Space above labels */
+  /* Add margin below slider labels before next element */
+  margin-bottom: 1.5rem; /* Ensure consistent spacing with other controls */
+}
+/* Style for the currently selected year display */
+#year-display {
+  font-weight: 600; /* font-semibold */
+  color: var(--color-primary-dark); /* Use a primary color variant */
+}
+
+/* --- Selection Display Box --- */
+/* Styles the box showing current dimension/year/country */
+.selection-display {
+  margin-top: 1.5rem; /* Space above the box */
+  padding: 1rem; /* Internal padding */
+  background-color: var(--color-primary-lighter); /* Light primary background */
+  border: 1px solid var(--color-primary-light); /* Subtle primary border */
+  border-radius: var(--border-radius-sm);
+  font-size: 0.875rem; /* text-sm */
+}
+.selection-display h3 {
+  font-weight: 600; /* font-semibold */
+  color: var(--color-text);
+  margin-bottom: 0.5rem; /* Space below heading */
+}
+/* Style the actual selected values within the box */
+.selection-display p span {
+  font-weight: 500; /* font-medium */
+  color: var(--color-text-strong);
+}
+
+/* --- Map Container Styling --- */
+/* Styles the div that holds the SVG map */
+#map-container {
+  width: 100%;
+  flex-grow: 1; /* Allow map container to fill vertical space in map-section */
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-map-bg); /* Map background color */
+  overflow: hidden; /* CRUCIAL: Prevents SVG content from spilling during zoom/pan */
+  position: relative; /* Needed for potential absolute positioning of children */
+  cursor: grab; /* Indicate map is pannable */
+}
+/* Change cursor while actively panning */
+#map-container:active {
+  cursor: grabbing;
+}
+
+/* SVG element within the map container */
+#map-container svg {
+  display: block; /* Remove extra space below inline SVG */
+  width: 100%; /* Fill container width */
+  height: 100%; /* Fill container height */
+  /* The background rectangle inside the SVG handles background clicks */
+}
+
+/* --- Styling for map paths (countries) --- */
+.country {
+  /* Default fill is for NON-TARGET countries */
+  fill: var(--color-map-default-fill);
+  stroke: var(--color-map-stroke); /* Country border color */
+  stroke-width: 0.5px; /* Base stroke width (relative to initial view) */
+  transition: fill 0.3s ease-in-out, opacity 0.5s ease-in-out; /* Smooth transitions */
+  /* Optimize rendering: stroke width doesn't scale visually with zoom */
+  vector-effect: non-scaling-stroke;
+}
+
+/* Target countries get a different default fill and cursor */
+.country.target-country {
+  fill: var(--color-map-target-fill); /* White fill for target countries */
+  cursor: pointer; /* Indicate target countries are clickable */
+}
+
+/* Non-target countries are not interactive */
+.country.other-country {
+  cursor: default; /* Indicate non-target countries are not interactive */
+}
+
+/* Hover effect ONLY for target countries */
+.country.target-country:hover {
+  fill: var(--color-map-hover); /* Apply hover color on mouse over */
+}
+
+/* --- Styling for the graticule (latitude/longitude lines) --- */
+.graticule {
+  fill: none; /* Graticule lines have no fill */
+  stroke: var(--color-map-graticule); /* Graticule line color */
+  stroke-width: 0.5px; /* Base stroke width (adjusted by JS based on zoom) */
+  stroke-opacity: 0.6; /* Make lines slightly transparent */
+  /* Prevent graticule lines from intercepting mouse events for countries */
+  pointer-events: none;
+  /* vector-effect: non-scaling-stroke; */ /* Stroke width controlled by JS */
+}
+
+/* --- Styling for selected/inactive country states --- */
+/* Active style ONLY applies to TARGET countries when selected */
+.country.target-country.active {
+  fill: var(--color-map-active); /* Distinct color for selected country */
+  stroke: var(--color-map-active-stroke); /* Darker border for selected */
+  stroke-width: 1px; /* Slightly thicker border (still non-scaling) */
+}
+
+/* Inactive state applies to ALL non-selected countries when one IS selected */
+.country.inactive {
+  fill: var(
+    --color-map-inactive-fill
+  ); /* Use the light gray fill for all inactive */
+  opacity: var(
+    --color-map-inactive-opacity
+  ); /* Apply transparency to all inactive */
+  /* stroke: var(--color-map-stroke); */ /* Optional: Keep default stroke or uncomment if needed */
+  pointer-events: none; /* Disable interaction for ALL inactive */
+}
+
+/* --- Country Info Text Area below map --- */
+/* Styles the text area providing context or showing selected country */
+#country-info {
+  margin-top: 1rem; /* Space above the text area */
+  font-size: 0.875rem; /* text-sm */
+  color: var(--color-text-muted);
+  text-align: center;
+  flex-shrink: 0; /* Prevent this area from shrinking */
+  min-height: 1.5em; /* Reserve space to prevent layout jumps when text changes */
+}
+
+/* --- Footer Styling --- */
+footer {
+  background-color: var(--color-text-strong); /* Dark background */
+  color: #ffffff; /* White text */
+  text-align: center;
+  padding: 1rem; /* Padding */
+  margin-top: 2rem; /* Space above the footer */
+  flex-shrink: 0; /* Prevent footer from shrinking */
+}
+footer p {
+  font-size: 0.875rem; /* text-sm */
+}
