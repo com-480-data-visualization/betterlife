@@ -60,6 +60,9 @@ const TARGET_COUNTRIES_LIST = [
   "Belgium",
   "Canada",
   "Chile",
+  "Colombia",
+  "Costa Rica",
+  "Costa Rica",
   "Denmark",
   "Estonia",
   "Finland",
@@ -67,12 +70,15 @@ const TARGET_COUNTRIES_LIST = [
   "Germany",
   "Greece",
   "Hungary",
+  "Iceland",
   "Ireland",
+  "Israel",
   "Italy",
-  "South Korea", // Note: Name must match TopoJSON data exactly.
+  "Japan",
   "Latvia",
   "Lithuania",
   "Luxembourg",
+  "Mexico",
   "Netherlands",
   "New Zealand",
   "Norway",
@@ -80,7 +86,11 @@ const TARGET_COUNTRIES_LIST = [
   "Portugal",
   "Slovakia",
   "Slovenia",
+  "South Korea", // Note: Name must match TopoJSON data exactly.
   "Spain",
+  "Sweden",
+  "Switzerland",
+  "Turkey",
   "United Kingdom",
   "United States of America", // Note: Name must match TopoJSON data exactly.
 ];
