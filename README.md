@@ -8,6 +8,8 @@
 
 [Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
 
+Website: https://com-480-data-visualization.github.io/betterlife/
+
 ## Milestone 1 (21st March, 5pm)
 
 **10% of the final grade**
