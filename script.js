@@ -184,6 +184,7 @@ d3.csv("Better_Life_Preprocessed.csv").then(data => {
     const key = `${d["Reference area"]}_${d["Domain"]}_${d["TIME_PERIOD"]}`;
     normalizedData.set(key, +d["mean_normalized_measure"]);
   });
+  console.log("Set colour map.");
 });
 
 // Colour map for the values of the data.
