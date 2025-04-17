@@ -146,7 +146,23 @@ const countryInfo = document.getElementById("country-info");
 /** @type {HTMLInputElement} The checkbox for toggling the visibility of non-target countries. */
 const hideOthersCheckbox = document.getElementById("hide-others-checkbox");
 
+// Map the data of the csv into d3.
+let normalizedData = new Map();
+d3.csv("Better_Life_Preprocessed.csv").then(data => {
+  data.forEach(d => {
+    const key = `${d["Reference area"]}_${d["Domain"]}_${d["TIME_PERIOD"]}`;
+    normalizedData.set(key, +d["mean_normalized_measure"]);
+  });
+  console.log("Set colour map.");
+});
+
 // --- Control Update Logic ---
+
+// Colour map for the values of the data.
+function getColorFromValue(value) {
+  if (value == null || isNaN(value)) return TARGET_COUNTRY_FILL;
+  return d3.interpolateRgbBasis(["#ff0000", "#ffff00", "#00cc00"])(value);
+}
 
 /**
  * Updates the text displays in the control panel (selection display area)
