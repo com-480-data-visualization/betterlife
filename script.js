@@ -123,6 +123,9 @@ let currentTransform = d3.zoomIdentity; // Initial state: no translation, scale 
 /** @type {d3.ZoomTransform} Stores the zoom/pan state *before* the last country was clicked. Used for resetting zoom. */
 let previousTransform = d3.zoomIdentity;
 
+let dimension;
+let year;
+
 // --- DOM Element References ---
 // Caching references to frequently accessed DOM elements for performance.
 /** @type {HTMLElement} The div element containing the map SVG. */
@@ -155,6 +158,30 @@ d3.csv("Better_Life_Preprocessed.csv").then(data => {
   });
   console.log("Set colour map.");
 });
+
+// Mapping from map country names → CSV Reference area names
+const countryNameMap = {
+  "Czechia": "Czech Republic",
+  "Slovakia": "Slovak Republic",
+  "South Korea": "Korea",
+  "Turkey": "Türkiye",
+  "United States of America": "United States",
+};
+
+// Mapping from dropdown dimension keys → CSV Domain names
+const domainNameMap = {
+  "income_wealth": "Income and wealth",
+  "work_job_quality": "Work and job quality",
+  "housing": "Housing",
+  "work_life_balance": "Work-life balance",
+  "health": "Health",
+  "knowledge_skills": "Knowledge and skills",
+  "social_connections": "Social connections",
+  "civic_engagement": "Civic engagement",
+  "environmental_quality": "Environmental quality",
+  "safety": "Safety",
+  "subjective_wellbeing": "Subjective well-being",
+};
 
 // --- Control Update Logic ---
 
@@ -190,6 +217,8 @@ function updateDisplay() {
   // Placeholder: In a real application, this function would fetch/filter data
   // based on the selected dimension and year, then update the map visualization
   // (e.g., color countries based on data).
+  dimension = selectedDimensionValue;
+  year = selectedYear;
   updateMapColors(selectedDimensionValue, selectedYear);
 }
 
@@ -199,16 +228,29 @@ function updateDisplay() {
  * @param {string} dimension - The selected dimension value (e.g., 'health').
  * @param {string} year - The selected year (e.g., '2023').
  */
-function updateMapColors(dimension, year) {
-  console.log(
-    `Placeholder: Update map colors for dimension '${dimension}', year ${year}.`
-  );
-  // Ensure the map group element (g) exists before trying to select countries
-  if (!g) return;
 
-  // Re-apply CSS classes and styles to ensure everything is up-to-date
-  // This is important after data changes or selection changes.
-  applyCountryStyles();
+function updateMapColors(dimension, year) {
+  if (!g || !normalizedData) return;
+
+  const mappedDomain = domainNameMap[dimension];
+  if (!mappedDomain) {
+    console.warn(`No domain mapping found for: ${dimension}`);
+    return;
+  }
+
+  g.selectAll(".country.target-country")
+    .attr("fill", function (d) {
+      const rawName = d.properties?.name;
+      const mappedName = countryNameMap[rawName] || rawName;
+      const key = `${mappedName}_${mappedDomain}_${year}`;
+      if (!normalizedData.has(key)) {
+        return "#ffffff";
+      }
+      const value = normalizedData.get(key);
+      const colour = getColorFromValue(value);
+      console.log(`Set colour of ${mappedName} to ${colour}`);
+      return colour;
+    });
 }
 
 /**
@@ -446,7 +488,7 @@ function drawMap() {
       .attr("fill", (d) => {
         const name = d.properties?.name;
         return name && targetCountriesSet.has(name)
-          ? TARGET_COUNTRY_FILL
+          ? "#0000ff"
           : null;
       })
       // Attach event listeners for interaction
@@ -538,7 +580,7 @@ function updateStrokeWidths(scale) {
  * @param {Event} event - The mouse event object.
  * @param {object} d - The GeoJSON feature data bound to the hovered element.
  */
-function handleMouseOver(event, d) {
+function handleMouseOver(event, d, dimension, year) {
   const el = d3.select(event.currentTarget); // Select the path element that triggered the event
 
   // Ignore if the element is not a target country or if it's marked as inactive
@@ -584,7 +626,19 @@ function handleMouseOut(event, d) {
   // Only revert the fill color if the country is NOT inactive and NOT the active (selected) one.
   if (!el.classed("inactive") && !el.classed("active")) {
     // Revert fill to the default target country fill (white)
-    el.attr("fill", TARGET_COUNTRY_FILL);
+    el.attr("fill", function (d) {
+      const rawName = d.properties?.name;
+      const mappedName = countryNameMap[rawName] || rawName;
+      const mappedDomain = domainNameMap[dimension];
+      const key = `${mappedName}_${mappedDomain}_${year}`;
+      if (!normalizedData.has(key)) {
+        return "#ffffff";
+      }
+      const value = normalizedData.get(key);
+      const colour = getColorFromValue(value);
+      console.log(`Set colour of ${mappedName} to ${colour}`);
+      return colour;
+    });
   }
 
   // Update the info text based on whether a country is currently selected
@@ -843,7 +897,7 @@ function resetZoom(event) {
  *   - Default styles (fill, pointer-events) are reapplied.
  * Manages pointer events and raises the active country visually.
  */
-function applyCountryStyles() {
+function applyCountryStyles(dimension, year) {
   if (!g) return; // Ensure map group exists
 
   // Select all country elements

@@ -303,7 +303,6 @@ input[type="range"]::-moz-range-thumb {
 /* --- Styling for map paths (countries) --- */
 .country {
   /* Default fill is for NON-TARGET countries */
-  fill: var(--color-map-default-fill);
   stroke: var(--color-map-stroke); /* Country border color */
   stroke-width: 0.5px; /* Base stroke width (relative to initial view) */
   transition: fill 0.3s ease-in-out, opacity 0.5s ease-in-out; /* Smooth transitions */
@@ -312,20 +311,24 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* Target countries get a different default fill and cursor */
+/* White fill for target countries */
+/* Indicate target countries are clickable */
 .country.target-country {
-  fill: var(--color-map-target-fill); /* White fill for target countries */
-  cursor: pointer; /* Indicate target countries are clickable */
+  /* fill: #00ff00;  */
+  cursor: pointer; 
 }
 
 /* Non-target countries are not interactive */
 .country.other-country {
+  fill: var(--color-map-default-fill);
   cursor: default; /* Indicate non-target countries are not interactive */
 }
 
 /* Hover effect ONLY for target countries */
-.country.target-country:hover {
-  fill: var(--color-map-hover); /* Apply hover color on mouse over */
-}
+/* Apply hover color on mouse over */
+/* .country.target-country:hover {
+  fill: var(--color-map-hover); 
+} */
 
 /* --- Styling for the graticule (latitude/longitude lines) --- */
 .graticule {
@@ -340,11 +343,14 @@ input[type="range"]::-moz-range-thumb {
 
 /* --- Styling for selected/inactive country states --- */
 /* Active style ONLY applies to TARGET countries when selected */
-.country.target-country.active {
-  fill: var(--color-map-active); /* Distinct color for selected country */
-  stroke: var(--color-map-active-stroke); /* Darker border for selected */
-  stroke-width: 1px; /* Slightly thicker border (still non-scaling) */
-}
+/* Distinct color for selected country */
+/* Darker border for selected */
+/* Slightly thicker border (still non-scaling) */
+/* .country.target-country.active {
+  fill: var(--color-map-active); 
+  stroke: var(--color-map-active-stroke); 
+  stroke-width: 1px; 
+} */
 
 /* Inactive state applies to ALL non-selected countries when one IS selected */
 .country.inactive {
