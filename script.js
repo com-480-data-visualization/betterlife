@@ -179,7 +179,7 @@ function updateDisplay() {
 
 // Map the data of the csv into d3.
 let normalizedData = new Map();
-d3.csv("./Dataset/Better_Life_Preprocessed.csv").then(data => {
+d3.csv("Better_Life_Preprocessed.csv").then(data => {
   data.forEach(d => {
     const key = `${d["Reference area"]}_${d["Domain"]}_${d["TIME_PERIOD"]}`;
     normalizedData.set(key, +d["mean_normalized_measure"]);
