@@ -198,32 +198,32 @@ function getColorFromValue(value) {
  * @param {string} dimension - The selected dimension value (e.g., 'health').
  * @param {string} year - The selected year (e.g., '2023').
  */
-// function updateMapColors(dimension, year) {
-//   console.log(
-//     `Placeholder: Update map colors for dimension '${dimension}', year ${year}.`
-//   );
-//   // Ensure the map group element (g) exists before trying to select countries
-//   if (!g) return;
-
-//   // Re-apply CSS classes and styles to ensure everything is up-to-date
-//   // This is important after data changes or selection changes.
-//   applyCountryStyles();
-// }
-
 function updateMapColors(dimension, year) {
   console.log(
     `Placeholder: Update map colors for dimension '${dimension}', year ${year}.`
   );
-  if (!g || !normalizedData) return;
+  // Ensure the map group element (g) exists before trying to select countries
+  if (!g) return;
 
-  g.selectAll(".country.target-country")
-    .attr("fill", function (d) {
-      const countryName = d.properties?.name;
-      const key = `${countryName}_${dimension}_${year}`;
-      const value = normalizedData.get(key);
-      return getColorFromValue(value);
-    });
+  // Re-apply CSS classes and styles to ensure everything is up-to-date
+  // This is important after data changes or selection changes.
+  applyCountryStyles();
 }
+
+// function updateMapColors(dimension, year) {
+//   console.log(
+//     `Placeholder2: Update map colors for dimension '${dimension}', year ${year}.`
+//   );
+//   if (!g || !normalizedData) return;
+
+//   g.selectAll(".country.target-country")
+//     .attr("fill", function (d) {
+//       const countryName = d.properties?.name;
+//       const key = `${countryName}_${dimension}_${year}`;
+//       const value = normalizedData.get(key);
+//       return getColorFromValue(value);
+//     });
+// }
 
 /**
  * Toggles the visibility of non-target countries based on the checkbox state.
