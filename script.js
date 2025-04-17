@@ -219,7 +219,7 @@ function updateDisplay() {
   // (e.g., color countries based on data).
   dimension = selectedDimensionValue;
   year = selectedYear;
-  updateMapColors(selectedDimensionValue, selectedYear);
+  updateMapColors();
 }
 
 /**
@@ -229,7 +229,7 @@ function updateDisplay() {
  * @param {string} year - The selected year (e.g., '2023').
  */
 
-function updateMapColors(dimension, year) {
+function updateMapColors() {
   if (!g || !normalizedData) return;
 
   const mappedDomain = domainNameMap[dimension];
@@ -248,7 +248,7 @@ function updateMapColors(dimension, year) {
       }
       const value = normalizedData.get(key);
       const colour = getColorFromValue(value);
-      console.log(`Set colour of ${mappedName} to ${colour}`);
+      // console.log(`Set colour of ${mappedName} to ${colour}`);
       return colour;
     });
 }
@@ -580,7 +580,7 @@ function updateStrokeWidths(scale) {
  * @param {Event} event - The mouse event object.
  * @param {object} d - The GeoJSON feature data bound to the hovered element.
  */
-function handleMouseOver(event, d, dimension, year) {
+function handleMouseOver(event, d) {
   const el = d3.select(event.currentTarget); // Select the path element that triggered the event
 
   // Ignore if the element is not a target country or if it's marked as inactive
@@ -636,7 +636,7 @@ function handleMouseOut(event, d) {
       }
       const value = normalizedData.get(key);
       const colour = getColorFromValue(value);
-      console.log(`Set colour of ${mappedName} to ${colour}`);
+      // console.log(`Set colour of ${mappedName} to ${colour}`);
       return colour;
     });
   }
@@ -897,7 +897,7 @@ function resetZoom(event) {
  *   - Default styles (fill, pointer-events) are reapplied.
  * Manages pointer events and raises the active country visually.
  */
-function applyCountryStyles(dimension, year) {
+function applyCountryStyles() {
   if (!g) return; // Ensure map group exists
 
   // Select all country elements
@@ -936,14 +936,21 @@ function applyCountryStyles(dimension, year) {
       // (pointer for target-country, default for other-country)
       .style("pointer-events", null)
       // 2. Explicitly reset fill colors based on country type
-      .attr("fill", (d) => {
-        const name = d.properties?.name;
-        // If it's a target country, set fill to TARGET_COUNTRY_FILL (white).
-        // Otherwise, set fill to null, letting the default CSS rule for
-        // .country or .other-country apply (grey).
-        return name && targetCountriesSet.has(name)
-          ? TARGET_COUNTRY_FILL
-          : null;
+      .attr("fill", function (d) {
+        console.log(dimension);
+        console.log(year);
+        const rawName = d.properties?.name;
+        const mappedName = countryNameMap[rawName] || rawName;
+        const mappedDomain = domainNameMap[dimension];
+        const key = `${mappedName}_${mappedDomain}_${year}`;
+        console.log(key);
+        if (!normalizedData.has(key)) {
+          return "#ff0000";
+        }
+        const value = normalizedData.get(key);
+        const colour = getColorFromValue(value);
+        // console.log(`Set colour of ${mappedName} to ${colour}`);
+        return colour;
       });
   }
 }
