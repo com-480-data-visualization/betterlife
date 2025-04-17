@@ -177,22 +177,49 @@ function updateDisplay() {
   updateMapColors(selectedDimensionValue, selectedYear);
 }
 
+// Map the data of the csv into d3.
+let normalizedData = new Map();
+d3.csv("Better_Life_Preprocessed.csv").then(data => {
+  data.forEach(d => {
+    const key = `${d["Reference area"]}_${d["Domain"]}_${d["TIME_PERIOD"]}`;
+    normalizedData.set(key, +d["mean_normalized_measure"]);
+  });
+});
+
+// Colour map for the values of the data.
+function getColorFromValue(value) {
+  if (value == null || isNaN(value)) return TARGET_COUNTRY_FILL;
+  return d3.interpolateRgbBasis(["#ff0000", "#ffff00", "#00cc00"])(value);
+}
+
 /**
  * Placeholder function intended to update map colors based on selected data.
  * In this prototype, it mainly re-applies styles to ensure correct active/inactive states.
  * @param {string} dimension - The selected dimension value (e.g., 'health').
  * @param {string} year - The selected year (e.g., '2023').
  */
-function updateMapColors(dimension, year) {
-  console.log(
-    `Placeholder: Update map colors for dimension '${dimension}', year ${year}.`
-  );
-  // Ensure the map group element (g) exists before trying to select countries
-  if (!g) return;
+// function updateMapColors(dimension, year) {
+//   console.log(
+//     `Placeholder: Update map colors for dimension '${dimension}', year ${year}.`
+//   );
+//   // Ensure the map group element (g) exists before trying to select countries
+//   if (!g) return;
 
-  // Re-apply CSS classes and styles to ensure everything is up-to-date
-  // This is important after data changes or selection changes.
-  applyCountryStyles();
+//   // Re-apply CSS classes and styles to ensure everything is up-to-date
+//   // This is important after data changes or selection changes.
+//   applyCountryStyles();
+// }
+
+function updateMapColors(dimension, year) {
+  if (!g || !normalizedData) return;
+
+  g.selectAll(".country.target-country")
+    .attr("fill", function (d) {
+      const countryName = d.properties?.name;
+      const key = `${countryName}_${dimension}_${year}`;
+      const value = normalizedData.get(key);
+      return getColorFromValue(value);
+    });
 }
 
 /**
