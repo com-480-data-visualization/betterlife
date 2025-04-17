@@ -49,17 +49,17 @@ The data is collected from 38 countries including many European countries, North
 
 In total there are 89713 data points with the distribution as shown in the following histogram. For the year 2024 there are only 18 data points which is why there seems to be no data.
 
-![Histogram of data points per year](Histogram/data_per_year.png)
+![Histogram of data points per year](Histograms/data_per_year.png)
 
 To start with a classic example, we have the median net wealth by country. As not all countries have measured this in the same year, we have taken the most recent year of each country which are all close to each other.
 
-![Histogram of Median net wealth by country](Histogram/net_wealth.png)
+![Histogram of Median net wealth by country](Histograms/net_wealth.png)
 
 As expected, Luxembourg is on the first place by far. Interestingly, Denmark and Latvia are on the last places even behind Chile.
 
 If we compare this to the mean score of the highest quintile of life satisfaction, we can see that for the 3 countries mentioned before, median net wealth does not correlate with top quintile life satisfaction.
 
-![Histogram of Top life satisfaction scores quintile by country](Histogram/top_life_satisf.png)
+![Histogram of Top life satisfaction scores quintile by country](Histograms/top_life_satisf.png)
 
 ### Related work
 
