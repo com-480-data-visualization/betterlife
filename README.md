@@ -49,7 +49,7 @@ The data is collected from 38 countries including many European countries, North
 
 In total there are 89713 data points with the distribution as shown in the following histogram. For the year 2024 there are only 18 data points which is why there seems to be no data.
 
-![Histogram of data points per year](data_per_year.png)
+![Histogram of data points per year](histogram/data_per_year.png)
 
 To start with a classic example, we have the median net wealth by country. As not all countries have measured this in the same year, we have taken the most recent year of each country which are all close to each other.
 
