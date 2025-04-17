@@ -1,0 +1,415 @@
+REF_AREA,Reference area,DOMAIN,Domain,mean_normalized_measure
+AUS,Australia,HSL_1,Income and wealth,0.4516031263031647
+AUS,Australia,HSL_10,Safety,0.415480953310617
+AUS,Australia,HSL_11,Subjective well-being,0.32125771067283404
+AUS,Australia,HSL_2,Work and job quality,0.3174323542249896
+AUS,Australia,HSL_3,Housing,0.5371321389478935
+AUS,Australia,HSL_4,Work-life balance,0.1882289050619691
+AUS,Australia,HSL_5,Health,0.5249586878252481
+AUS,Australia,HSL_6,Knowledge and skills,0.6675578641418815
+AUS,Australia,HSL_7,Social connections,0.49823190431619147
+AUS,Australia,HSL_8,Civic engagement,0.5870568447896531
+AUS,Australia,HSL_9,Environmental quality,0.5541613299400946
+AUT,Austria,HSL_1,Income and wealth,0.29228837498741334
+AUT,Austria,HSL_10,Safety,0.41450299329347456
+AUT,Austria,HSL_11,Subjective well-being,0.28153774977263396
+AUT,Austria,HSL_2,Work and job quality,0.3097340909459873
+AUT,Austria,HSL_3,Housing,0.37603647512808464
+AUT,Austria,HSL_4,Work-life balance,0.42150677058939495
+AUT,Austria,HSL_5,Health,0.5422199395788095
+AUT,Austria,HSL_6,Knowledge and skills,0.6309445641419194
+AUT,Austria,HSL_7,Social connections,0.48245248540652386
+AUT,Austria,HSL_8,Civic engagement,0.6079140370596541
+AUT,Austria,HSL_9,Environmental quality,0.47236316312348575
+BEL,Belgium,HSL_1,Income and wealth,0.33828383147583596
+BEL,Belgium,HSL_10,Safety,0.42112518840947705
+BEL,Belgium,HSL_11,Subjective well-being,0.38043666583058844
+BEL,Belgium,HSL_2,Work and job quality,0.27862209203234
+BEL,Belgium,HSL_3,Housing,0.40889764069265827
+BEL,Belgium,HSL_4,Work-life balance,0.3883467094887484
+BEL,Belgium,HSL_5,Health,0.5749828266524257
+BEL,Belgium,HSL_6,Knowledge and skills,0.6634190929584263
+BEL,Belgium,HSL_7,Social connections,0.46309970242897913
+BEL,Belgium,HSL_8,Civic engagement,0.5061424844049855
+BEL,Belgium,HSL_9,Environmental quality,0.45350857844458287
+CAN,Canada,HSL_1,Income and wealth,0.3753460986877868
+CAN,Canada,HSL_10,Safety,0.4167991625628743
+CAN,Canada,HSL_11,Subjective well-being,0.4571330545913234
+CAN,Canada,HSL_2,Work and job quality,0.3003346113992598
+CAN,Canada,HSL_3,Housing,0.5730800030811466
+CAN,Canada,HSL_4,Work-life balance,0.5138882961012567
+CAN,Canada,HSL_5,Health,0.5785462153126769
+CAN,Canada,HSL_6,Knowledge and skills,0.6696123340730433
+CAN,Canada,HSL_7,Social connections,0.5025891401437107
+CAN,Canada,HSL_8,Civic engagement,0.5192784818240564
+CAN,Canada,HSL_9,Environmental quality,0.3849646061902708
+CHE,Switzerland,HSL_1,Income and wealth,0.3137321500584379
+CHE,Switzerland,HSL_10,Safety,0.38904795227702105
+CHE,Switzerland,HSL_11,Subjective well-being,0.400064673296354
+CHE,Switzerland,HSL_2,Work and job quality,0.3736188398621517
+CHE,Switzerland,HSL_3,Housing,0.3658084461763789
+CHE,Switzerland,HSL_4,Work-life balance,0.573757761691789
+CHE,Switzerland,HSL_5,Health,0.574198833272503
+CHE,Switzerland,HSL_6,Knowledge and skills,0.6711134509921541
+CHE,Switzerland,HSL_7,Social connections,0.5504568195204813
+CHE,Switzerland,HSL_8,Civic engagement,0.46798815224026596
+CHE,Switzerland,HSL_9,Environmental quality,0.4639285091581475
+CHL,Chile,HSL_1,Income and wealth,0.5931976485392485
+CHL,Chile,HSL_10,Safety,0.4349512382655081
+CHL,Chile,HSL_11,Subjective well-being,0.4505381001216607
+CHL,Chile,HSL_2,Work and job quality,0.34773960816108873
+CHL,Chile,HSL_3,Housing,0.5679885711846571
+CHL,Chile,HSL_5,Health,0.4424340856927743
+CHL,Chile,HSL_6,Knowledge and skills,0.48552373548109795
+CHL,Chile,HSL_7,Social connections,0.5000000000000001
+CHL,Chile,HSL_8,Civic engagement,0.5551158685399591
+CHL,Chile,HSL_9,Environmental quality,0.456597282793747
+COL,Colombia,HSL_10,Safety,0.4730111699000588
+COL,Colombia,HSL_11,Subjective well-being,0.4374605340442075
+COL,Colombia,HSL_2,Work and job quality,0.4059371356640634
+COL,Colombia,HSL_3,Housing,0.7627052484960992
+COL,Colombia,HSL_4,Work-life balance,0.5709251818529133
+COL,Colombia,HSL_5,Health,0.34372587875960625
+COL,Colombia,HSL_6,Knowledge and skills,0.48098533852348985
+COL,Colombia,HSL_7,Social connections,0.4999999999999999
+COL,Colombia,HSL_8,Civic engagement,0.4809237301246363
+COL,Colombia,HSL_9,Environmental quality,0.5520696967136909
+CRI,Costa Rica,HSL_1,Income and wealth,0.728012482381279
+CRI,Costa Rica,HSL_10,Safety,0.44075420875420873
+CRI,Costa Rica,HSL_11,Subjective well-being,0.35421286979032496
+CRI,Costa Rica,HSL_2,Work and job quality,0.41016021933981184
+CRI,Costa Rica,HSL_3,Housing,0.43182252352524836
+CRI,Costa Rica,HSL_5,Health,0.4096120224142323
+CRI,Costa Rica,HSL_6,Knowledge and skills,0.4776277820396635
+CRI,Costa Rica,HSL_7,Social connections,0.5000000000000001
+CRI,Costa Rica,HSL_8,Civic engagement,0.5096353750510858
+CRI,Costa Rica,HSL_9,Environmental quality,0.4612070514317767
+CZE,Czechia,HSL_1,Income and wealth,0.18195399552229635
+CZE,Czechia,HSL_10,Safety,0.4155231405850105
+CZE,Czechia,HSL_11,Subjective well-being,0.3480114535006295
+CZE,Czechia,HSL_2,Work and job quality,0.29851705733149364
+CZE,Czechia,HSL_3,Housing,0.31236752457704253
+CZE,Czechia,HSL_4,Work-life balance,0.4264461591637917
+CZE,Czechia,HSL_5,Health,0.49066851683005924
+CZE,Czechia,HSL_6,Knowledge and skills,0.633140167946152
+CZE,Czechia,HSL_7,Social connections,0.4735046805877079
+CZE,Czechia,HSL_8,Civic engagement,0.549542227395951
+CZE,Czechia,HSL_9,Environmental quality,0.4801479648372215
+DEU,Germany,HSL_1,Income and wealth,0.2945288264588738
+DEU,Germany,HSL_10,Safety,0.4179242376569955
+DEU,Germany,HSL_11,Subjective well-being,0.31870721733696844
+DEU,Germany,HSL_2,Work and job quality,0.3343827254413837
+DEU,Germany,HSL_3,Housing,0.4183348684703707
+DEU,Germany,HSL_4,Work-life balance,0.4628818500654013
+DEU,Germany,HSL_5,Health,0.5175971737691253
+DEU,Germany,HSL_6,Knowledge and skills,0.6688696364988139
+DEU,Germany,HSL_7,Social connections,0.4921518391561143
+DEU,Germany,HSL_8,Civic engagement,0.6063087288887725
+DEU,Germany,HSL_9,Environmental quality,0.46268929569064154
+DNK,Denmark,HSL_1,Income and wealth,0.21636476555972892
+DNK,Denmark,HSL_10,Safety,0.41506386221079156
+DNK,Denmark,HSL_11,Subjective well-being,0.3196829391323387
+DNK,Denmark,HSL_2,Work and job quality,0.3008823621303976
+DNK,Denmark,HSL_3,Housing,0.37616280382792383
+DNK,Denmark,HSL_4,Work-life balance,0.44324152966285363
+DNK,Denmark,HSL_5,Health,0.5372834330133213
+DNK,Denmark,HSL_6,Knowledge and skills,0.6190466642431045
+DNK,Denmark,HSL_7,Social connections,0.48480765275474635
+DNK,Denmark,HSL_8,Civic engagement,0.49066714178274684
+DNK,Denmark,HSL_9,Environmental quality,0.44847004336099117
+ESP,Spain,HSL_1,Income and wealth,0.384504300478121
+ESP,Spain,HSL_10,Safety,0.4160845143850879
+ESP,Spain,HSL_11,Subjective well-being,0.4029039733421271
+ESP,Spain,HSL_2,Work and job quality,0.34614004009719584
+ESP,Spain,HSL_3,Housing,0.4122450544405036
+ESP,Spain,HSL_4,Work-life balance,0.4404365057636894
+ESP,Spain,HSL_5,Health,0.5544918751392472
+ESP,Spain,HSL_6,Knowledge and skills,0.5985975074606972
+ESP,Spain,HSL_7,Social connections,0.46507774200251034
+ESP,Spain,HSL_8,Civic engagement,0.5094195287861184
+ESP,Spain,HSL_9,Environmental quality,0.7290751722321277
+EST,Estonia,HSL_1,Income and wealth,0.2605039654918034
+EST,Estonia,HSL_10,Safety,0.4203736650661652
+EST,Estonia,HSL_11,Subjective well-being,0.2963501237793883
+EST,Estonia,HSL_2,Work and job quality,0.3126370589644768
+EST,Estonia,HSL_3,Housing,0.3946382067058076
+EST,Estonia,HSL_4,Work-life balance,0.41662569627397605
+EST,Estonia,HSL_5,Health,0.4976021182134193
+EST,Estonia,HSL_6,Knowledge and skills,0.6550697420828195
+EST,Estonia,HSL_7,Social connections,0.47645314066525546
+EST,Estonia,HSL_8,Civic engagement,0.48424035458313214
+EST,Estonia,HSL_9,Environmental quality,0.45533734156643974
+FIN,Finland,HSL_1,Income and wealth,0.18984289149980857
+FIN,Finland,HSL_10,Safety,0.4088516088203775
+FIN,Finland,HSL_11,Subjective well-being,0.2965103282978464
+FIN,Finland,HSL_2,Work and job quality,0.290648657684308
+FIN,Finland,HSL_3,Housing,0.37861056343446
+FIN,Finland,HSL_4,Work-life balance,0.40554509358379254
+FIN,Finland,HSL_5,Health,0.5524730520388282
+FIN,Finland,HSL_6,Knowledge and skills,0.6841502288754188
+FIN,Finland,HSL_7,Social connections,0.4693717149055995
+FIN,Finland,HSL_8,Civic engagement,0.5097931418685593
+FIN,Finland,HSL_9,Environmental quality,0.3465749609540906
+FRA,France,HSL_1,Income and wealth,0.3494827103713627
+FRA,France,HSL_10,Safety,0.41954991702484734
+FRA,France,HSL_11,Subjective well-being,0.3723166999428434
+FRA,France,HSL_2,Work and job quality,0.30196302829366245
+FRA,France,HSL_3,Housing,0.373903095243969
+FRA,France,HSL_4,Work-life balance,0.43493468601318513
+FRA,France,HSL_5,Health,0.5484759055188474
+FRA,France,HSL_6,Knowledge and skills,0.6266187387649892
+FRA,France,HSL_7,Social connections,0.47452875070430217
+FRA,France,HSL_8,Civic engagement,0.6378116254614283
+FRA,France,HSL_9,Environmental quality,0.4607246398648185
+GBR,United Kingdom,HSL_1,Income and wealth,0.28210199264065416
+GBR,United Kingdom,HSL_10,Safety,0.41511424486879916
+GBR,United Kingdom,HSL_11,Subjective well-being,0.33365908525103555
+GBR,United Kingdom,HSL_2,Work and job quality,0.34092108706976065
+GBR,United Kingdom,HSL_3,Housing,0.3449405356998691
+GBR,United Kingdom,HSL_4,Work-life balance,0.4333944318209766
+GBR,United Kingdom,HSL_5,Health,0.5433592337452658
+GBR,United Kingdom,HSL_6,Knowledge and skills,0.6569965887694635
+GBR,United Kingdom,HSL_7,Social connections,0.479499305581961
+GBR,United Kingdom,HSL_8,Civic engagement,0.5102480613129963
+GBR,United Kingdom,HSL_9,Environmental quality,0.44985222381414236
+GRC,Greece,HSL_1,Income and wealth,0.45281161683986904
+GRC,Greece,HSL_10,Safety,0.426594704178225
+GRC,Greece,HSL_11,Subjective well-being,0.4309882479645537
+GRC,Greece,HSL_2,Work and job quality,0.35297128332832284
+GRC,Greece,HSL_3,Housing,0.49268046167198526
+GRC,Greece,HSL_4,Work-life balance,0.4632534708868361
+GRC,Greece,HSL_5,Health,0.6027335625940896
+GRC,Greece,HSL_6,Knowledge and skills,0.5591717384929369
+GRC,Greece,HSL_7,Social connections,0.4793396152831593
+GRC,Greece,HSL_8,Civic engagement,0.6057541392590373
+GRC,Greece,HSL_9,Environmental quality,0.6142320351556552
+HUN,Hungary,HSL_1,Income and wealth,0.248762838344945
+HUN,Hungary,HSL_10,Safety,0.41720747628485594
+HUN,Hungary,HSL_11,Subjective well-being,0.4114415334319159
+HUN,Hungary,HSL_2,Work and job quality,0.2957028023982067
+HUN,Hungary,HSL_3,Housing,0.4741185317373048
+HUN,Hungary,HSL_4,Work-life balance,0.4245528228055522
+HUN,Hungary,HSL_5,Health,0.4895286343122118
+HUN,Hungary,HSL_6,Knowledge and skills,0.5963987389271149
+HUN,Hungary,HSL_7,Social connections,0.4791837574803992
+HUN,Hungary,HSL_8,Civic engagement,0.7015595599856611
+HUN,Hungary,HSL_9,Environmental quality,0.48704261744018595
+IRL,Ireland,HSL_1,Income and wealth,0.28191854309209563
+IRL,Ireland,HSL_10,Safety,0.4145904414330921
+IRL,Ireland,HSL_11,Subjective well-being,0.27347444490236533
+IRL,Ireland,HSL_2,Work and job quality,0.3152932035123964
+IRL,Ireland,HSL_3,Housing,0.3619543017294332
+IRL,Ireland,HSL_4,Work-life balance,0.4086488124486908
+IRL,Ireland,HSL_5,Health,0.578759479884908
+IRL,Ireland,HSL_6,Knowledge and skills,0.6123339259731609
+IRL,Ireland,HSL_7,Social connections,0.47208111529185875
+IRL,Ireland,HSL_8,Civic engagement,0.6067451960692033
+IRL,Ireland,HSL_9,Environmental quality,0.46558536555372154
+ISL,Iceland,HSL_1,Income and wealth,0.10585086801519027
+ISL,Iceland,HSL_10,Safety,0.39520057930763003
+ISL,Iceland,HSL_11,Subjective well-being,0.35406511639914995
+ISL,Iceland,HSL_2,Work and job quality,0.3606676268684981
+ISL,Iceland,HSL_3,Housing,0.3994945573193314
+ISL,Iceland,HSL_4,Work-life balance,0.4422949682601385
+ISL,Iceland,HSL_5,Health,0.5590999869596625
+ISL,Iceland,HSL_6,Knowledge and skills,0.6034620479504561
+ISL,Iceland,HSL_7,Social connections,0.47402522672918984
+ISL,Iceland,HSL_8,Civic engagement,0.5266707808062442
+ISL,Iceland,HSL_9,Environmental quality,0.3064877494521695
+ISR,Israel,HSL_1,Income and wealth,0.5613284548269069
+ISR,Israel,HSL_10,Safety,0.41892594140610445
+ISR,Israel,HSL_11,Subjective well-being,0.44589959624582254
+ISR,Israel,HSL_2,Work and job quality,0.37737590746970595
+ISR,Israel,HSL_4,Work-life balance,0.41023395264123025
+ISR,Israel,HSL_5,Health,0.6249046111868468
+ISR,Israel,HSL_6,Knowledge and skills,0.628620998937897
+ISR,Israel,HSL_7,Social connections,0.5048878677345677
+ISR,Israel,HSL_8,Civic engagement,0.7645933056285803
+ISR,Israel,HSL_9,Environmental quality,0.7575532967929093
+ITA,Italy,HSL_1,Income and wealth,0.39194700402723326
+ITA,Italy,HSL_10,Safety,0.4215455971086411
+ITA,Italy,HSL_11,Subjective well-being,0.3653065456189932
+ITA,Italy,HSL_2,Work and job quality,0.30827998387088135
+ITA,Italy,HSL_3,Housing,0.4261592629073995
+ITA,Italy,HSL_4,Work-life balance,0.40726124509341466
+ITA,Italy,HSL_5,Health,0.5423722481545619
+ITA,Italy,HSL_6,Knowledge and skills,0.5838131981309317
+ITA,Italy,HSL_7,Social connections,0.46402720226221106
+ITA,Italy,HSL_8,Civic engagement,0.586069201610226
+ITA,Italy,HSL_9,Environmental quality,0.46691014326794716
+JPN,Japan,HSL_1,Income and wealth,0.3523672931855137
+JPN,Japan,HSL_10,Safety,0.41353601394931355
+JPN,Japan,HSL_11,Subjective well-being,0.22159243261111305
+JPN,Japan,HSL_2,Work and job quality,0.32428044205101564
+JPN,Japan,HSL_3,Housing,0.4189846699730103
+JPN,Japan,HSL_4,Work-life balance,0.3228401503266795
+JPN,Japan,HSL_5,Health,0.4620253311111488
+JPN,Japan,HSL_6,Knowledge and skills,0.6900654080951774
+JPN,Japan,HSL_7,Social connections,0.44875540961941346
+JPN,Japan,HSL_8,Civic engagement,0.49052140187573756
+JPN,Japan,HSL_9,Environmental quality,0.45842426348285137
+KOR,Korea,HSL_1,Income and wealth,0.3911710114823735
+KOR,Korea,HSL_10,Safety,0.42791655847081117
+KOR,Korea,HSL_11,Subjective well-being,0.35342684168958427
+KOR,Korea,HSL_2,Work and job quality,0.3797837584339671
+KOR,Korea,HSL_3,Housing,0.7919175128916792
+KOR,Korea,HSL_4,Work-life balance,0.3169707463772629
+KOR,Korea,HSL_5,Health,0.497394090626264
+KOR,Korea,HSL_6,Knowledge and skills,0.6761653583238434
+KOR,Korea,HSL_7,Social connections,0.498129416779971
+KOR,Korea,HSL_8,Civic engagement,0.5001092247654404
+KOR,Korea,HSL_9,Environmental quality,0.46005030069743413
+LTU,Lithuania,HSL_1,Income and wealth,0.36014040938552216
+LTU,Lithuania,HSL_10,Safety,0.43319513021365347
+LTU,Lithuania,HSL_11,Subjective well-being,0.38207272214018034
+LTU,Lithuania,HSL_2,Work and job quality,0.33270954150064774
+LTU,Lithuania,HSL_3,Housing,0.5044646773816819
+LTU,Lithuania,HSL_4,Work-life balance,0.44600991272667806
+LTU,Lithuania,HSL_5,Health,0.4630132821460648
+LTU,Lithuania,HSL_6,Knowledge and skills,0.5878204599174808
+LTU,Lithuania,HSL_7,Social connections,0.4893317017205114
+LTU,Lithuania,HSL_8,Civic engagement,0.5774289799195943
+LTU,Lithuania,HSL_9,Environmental quality,0.4703634262236706
+LUX,Luxembourg,HSL_1,Income and wealth,0.3939779015127587
+LUX,Luxembourg,HSL_10,Safety,0.40292245969910223
+LUX,Luxembourg,HSL_11,Subjective well-being,0.3355173755552849
+LUX,Luxembourg,HSL_2,Work and job quality,0.2843060390412835
+LUX,Luxembourg,HSL_3,Housing,0.38035526465364394
+LUX,Luxembourg,HSL_4,Work-life balance,0.4313880977750908
+LUX,Luxembourg,HSL_5,Health,0.55334110948697
+LUX,Luxembourg,HSL_6,Knowledge and skills,0.6586749279382454
+LUX,Luxembourg,HSL_7,Social connections,0.46021104951133035
+LUX,Luxembourg,HSL_8,Civic engagement,0.5002616102212303
+LUX,Luxembourg,HSL_9,Environmental quality,0.47789580162243733
+LVA,Latvia,HSL_1,Income and wealth,0.39899126127824286
+LVA,Latvia,HSL_10,Safety,0.4345413737187754
+LVA,Latvia,HSL_11,Subjective well-being,0.33852148645184094
+LVA,Latvia,HSL_2,Work and job quality,0.3203511031950094
+LVA,Latvia,HSL_3,Housing,0.5402722039821154
+LVA,Latvia,HSL_4,Work-life balance,0.36361388349993823
+LVA,Latvia,HSL_5,Health,0.447740221267857
+LVA,Latvia,HSL_6,Knowledge and skills,0.5785280410245958
+LVA,Latvia,HSL_7,Social connections,0.4670494599990195
+LVA,Latvia,HSL_8,Civic engagement,0.5056725647364393
+LVA,Latvia,HSL_9,Environmental quality,0.46268751411278647
+MEX,Mexico,HSL_1,Income and wealth,0.29348230660837876
+MEX,Mexico,HSL_10,Safety,0.4388972342124832
+MEX,Mexico,HSL_11,Subjective well-being,0.32552784420811914
+MEX,Mexico,HSL_2,Work and job quality,0.33659167501186
+MEX,Mexico,HSL_3,Housing,0.4694817229963094
+MEX,Mexico,HSL_4,Work-life balance,0.6076961880020285
+MEX,Mexico,HSL_5,Health,0.36747709256740346
+MEX,Mexico,HSL_6,Knowledge and skills,0.45072383902788093
+MEX,Mexico,HSL_7,Social connections,0.502591488118839
+MEX,Mexico,HSL_8,Civic engagement,0.5617138875218203
+MEX,Mexico,HSL_9,Environmental quality,0.7005999374409166
+NLD,Netherlands,HSL_1,Income and wealth,0.2703774492970948
+NLD,Netherlands,HSL_10,Safety,0.40502098645928375
+NLD,Netherlands,HSL_11,Subjective well-being,0.2781961871679349
+NLD,Netherlands,HSL_2,Work and job quality,0.29668402263199806
+NLD,Netherlands,HSL_3,Housing,0.40228318131434915
+NLD,Netherlands,HSL_4,Work-life balance,0.35307222480213046
+NLD,Netherlands,HSL_5,Health,0.5415961014106653
+NLD,Netherlands,HSL_6,Knowledge and skills,0.6922171041942867
+NLD,Netherlands,HSL_7,Social connections,0.4650275219437943
+NLD,Netherlands,HSL_8,Civic engagement,0.482084593887584
+NLD,Netherlands,HSL_9,Environmental quality,0.4672942230587438
+NOR,Norway,HSL_1,Income and wealth,0.23641080997996525
+NOR,Norway,HSL_10,Safety,0.4059937861996777
+NOR,Norway,HSL_11,Subjective well-being,0.31443807081098324
+NOR,Norway,HSL_2,Work and job quality,0.2886479013812184
+NOR,Norway,HSL_3,Housing,0.4239272962112665
+NOR,Norway,HSL_4,Work-life balance,0.4688514900108146
+NOR,Norway,HSL_5,Health,0.5662574533339791
+NOR,Norway,HSL_6,Knowledge and skills,0.6442603632266042
+NOR,Norway,HSL_7,Social connections,0.48788028180269627
+NOR,Norway,HSL_8,Civic engagement,0.6179216858157025
+NOR,Norway,HSL_9,Environmental quality,0.3686365335416693
+NZL,New Zealand,HSL_1,Income and wealth,0.35676863614181814
+NZL,New Zealand,HSL_10,Safety,0.43677603760110517
+NZL,New Zealand,HSL_11,Subjective well-being,0.3142578046228345
+NZL,New Zealand,HSL_2,Work and job quality,0.34534980714532576
+NZL,New Zealand,HSL_3,Housing,0.30424144944804005
+NZL,New Zealand,HSL_4,Work-life balance,0.235408186408267
+NZL,New Zealand,HSL_5,Health,0.6015275940161101
+NZL,New Zealand,HSL_6,Knowledge and skills,0.67598034055462
+NZL,New Zealand,HSL_7,Social connections,0.486660456420154
+NZL,New Zealand,HSL_8,Civic engagement,0.5450137960200435
+NZL,New Zealand,HSL_9,Environmental quality,0.45256929883339214
+POL,Poland,HSL_1,Income and wealth,0.25730141093188214
+POL,Poland,HSL_10,Safety,0.42804576262735367
+POL,Poland,HSL_11,Subjective well-being,0.3000942997428976
+POL,Poland,HSL_2,Work and job quality,0.2951804888146607
+POL,Poland,HSL_3,Housing,0.4740431696702783
+POL,Poland,HSL_4,Work-life balance,0.4277196827883984
+POL,Poland,HSL_5,Health,0.484731126124596
+POL,Poland,HSL_6,Knowledge and skills,0.648623590372223
+POL,Poland,HSL_7,Social connections,0.4717207208706415
+POL,Poland,HSL_8,Civic engagement,0.5357491121345248
+POL,Poland,HSL_9,Environmental quality,0.46331341382437696
+PRT,Portugal,HSL_1,Income and wealth,0.3459019965896297
+PRT,Portugal,HSL_10,Safety,0.43662048943815385
+PRT,Portugal,HSL_11,Subjective well-being,0.45240825255830075
+PRT,Portugal,HSL_2,Work and job quality,0.32838548448506194
+PRT,Portugal,HSL_3,Housing,0.5137028266703477
+PRT,Portugal,HSL_4,Work-life balance,0.46428426350792773
+PRT,Portugal,HSL_5,Health,0.5211608851012414
+PRT,Portugal,HSL_6,Knowledge and skills,0.6371501453292338
+PRT,Portugal,HSL_7,Social connections,0.47766780915856877
+PRT,Portugal,HSL_8,Civic engagement,0.49801762834772517
+PRT,Portugal,HSL_9,Environmental quality,0.4892750547497795
+SVK,Slovak Republic,HSL_1,Income and wealth,0.2002189883571561
+SVK,Slovak Republic,HSL_10,Safety,0.4240225274122047
+SVK,Slovak Republic,HSL_11,Subjective well-being,0.3798288718035028
+SVK,Slovak Republic,HSL_2,Work and job quality,0.3312239024749351
+SVK,Slovak Republic,HSL_3,Housing,0.29859992049884393
+SVK,Slovak Republic,HSL_4,Work-life balance,0.42379020229896935
+SVK,Slovak Republic,HSL_5,Health,0.4922486513603232
+SVK,Slovak Republic,HSL_6,Knowledge and skills,0.5921864477786046
+SVK,Slovak Republic,HSL_7,Social connections,0.4725620769786765
+SVK,Slovak Republic,HSL_8,Civic engagement,0.5337993545038185
+SVK,Slovak Republic,HSL_9,Environmental quality,0.474611485273164
+SVN,Slovenia,HSL_1,Income and wealth,0.21806290996774153
+SVN,Slovenia,HSL_10,Safety,0.41856224226489275
+SVN,Slovenia,HSL_11,Subjective well-being,0.3683578299939409
+SVN,Slovenia,HSL_2,Work and job quality,0.2977422811362627
+SVN,Slovenia,HSL_3,Housing,0.3989178130314298
+SVN,Slovenia,HSL_4,Work-life balance,0.44418604065328793
+SVN,Slovenia,HSL_5,Health,0.5568266135332989
+SVN,Slovenia,HSL_6,Knowledge and skills,0.6203185121903808
+SVN,Slovenia,HSL_7,Social connections,0.4715537060381284
+SVN,Slovenia,HSL_8,Civic engagement,0.5229777664134333
+SVN,Slovenia,HSL_9,Environmental quality,0.4556354335048951
+SWE,Sweden,HSL_1,Income and wealth,0.24359492858949355
+SWE,Sweden,HSL_10,Safety,0.40790926675444006
+SWE,Sweden,HSL_11,Subjective well-being,0.2760551898426294
+SWE,Sweden,HSL_2,Work and job quality,0.3008631758068499
+SWE,Sweden,HSL_3,Housing,0.42204421142658344
+SWE,Sweden,HSL_4,Work-life balance,0.43561969064939315
+SWE,Sweden,HSL_5,Health,0.5619671025684078
+SWE,Sweden,HSL_6,Knowledge and skills,0.6475190530644191
+SWE,Sweden,HSL_7,Social connections,0.48024219834911513
+SWE,Sweden,HSL_8,Civic engagement,0.6319565745319334
+SWE,Sweden,HSL_9,Environmental quality,0.4141746385297043
+TUR,Türkiye,HSL_1,Income and wealth,0.5327934617465089
+TUR,Türkiye,HSL_10,Safety,0.4433053790217732
+TUR,Türkiye,HSL_11,Subjective well-being,0.4625062713948402
+TUR,Türkiye,HSL_2,Work and job quality,0.39961513735727444
+TUR,Türkiye,HSL_3,Housing,0.5338265249624018
+TUR,Türkiye,HSL_4,Work-life balance,0.2104028419199317
+TUR,Türkiye,HSL_5,Health,0.5132128058571088
+TUR,Türkiye,HSL_6,Knowledge and skills,0.5013184565133285
+TUR,Türkiye,HSL_7,Social connections,0.4848330886108065
+TUR,Türkiye,HSL_8,Civic engagement,0.8930437733611369
+TUR,Türkiye,HSL_9,Environmental quality,0.7054944998383191
+USA,United States,HSL_1,Income and wealth,0.6617264465413455
+USA,United States,HSL_10,Safety,0.43716560892108486
+USA,United States,HSL_11,Subjective well-being,0.3672795180792413
+USA,United States,HSL_2,Work and job quality,0.3341461133965155
+USA,United States,HSL_3,Housing,0.5346391177034037
+USA,United States,HSL_4,Work-life balance,0.21330740038921475
+USA,United States,HSL_5,Health,0.5841442029047679
+USA,United States,HSL_6,Knowledge and skills,0.6295742265165527
+USA,United States,HSL_7,Social connections,0.49888646411305765
+USA,United States,HSL_8,Civic engagement,0.639123264638773
+USA,United States,HSL_9,Environmental quality,0.6447704507973181
