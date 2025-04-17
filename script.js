@@ -211,6 +211,9 @@ function getColorFromValue(value) {
 // }
 
 function updateMapColors(dimension, year) {
+  console.log(
+    `Placeholder: Update map colors for dimension '${dimension}', year ${year}.`
+  );
   if (!g || !normalizedData) return;
 
   g.selectAll(".country.target-country")
