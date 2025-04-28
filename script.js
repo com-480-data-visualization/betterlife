@@ -97,8 +97,8 @@ const CONFIG = Object.freeze({
     transitionMs: 750, // Duration for zoom transitions
   }),
   animation: Object.freeze({
-    playMs: 600, // Delay between year steps during playback
-    colorMs: 200, // Duration for color/legend transitions
+    playMs: 1000, // Delay between year steps during playback
+    colorMs: 250, // Duration for color/legend transitions
   }),
 });
 
@@ -342,7 +342,7 @@ class OECDWellbeingMap {
   /** @type {d3.ZoomBehavior<Element, unknown> | null} D3 zoom behavior */
   #zoomBehaviour = null;
   /** @type {d3.ScaleSequential<number, string>} D3 color scale for data values */
-  #colorScale = d3.scaleSequential(d3.interpolateInferno); // Example interpolator
+  #colorScale = d3.scaleSequential(d3.interpolateRdYlGn); // Default color scale
   /** @type {Map<string, number>} Stores CSV data: key = "Country_Domain_Year", value = score */
   #dataCsv = new Map();
   /** @type {Array<import('geojson').Feature>} Array of TopoJSON features */
@@ -931,7 +931,9 @@ class OECDWellbeingMap {
     // Only apply hover effect if no country is currently selected (active)
     if (!this.#selected) {
       countryElement.raise().style("fill", CONFIG.colors.hover); // Bring to front and apply hover color
-      this.#inform(`Country: ${feature.properties.name}`); // Update status message
+      // Combine country name and score for the info box
+      const infoText = `${feature.properties.name} | Score: ${scoreText}`; // Example format
+      this.#inform(infoText);
     } else if (this.#selected === feature) {
       // If hovering over the *selected* country, update info message
       this.#inform(
