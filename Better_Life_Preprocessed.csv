@@ -1,15 +1,22 @@
 Reference area,Domain,TIME_PERIOD,mean_normalized_measure
-Australia,Civic engagement,2004,1.0
+Australia,Civic engagement,2006,1.0
 Australia,Civic engagement,2007,1.0
+Australia,Civic engagement,2008,0.9940666666666667
+Australia,Civic engagement,2009,0.9881333333333333
 Australia,Civic engagement,2010,0.9822
+Australia,Civic engagement,2011,0.9710333333333333
+Australia,Civic engagement,2012,0.9598666666666666
 Australia,Civic engagement,2013,0.9487
+Australia,Civic engagement,2014,0.9422333333333334
+Australia,Civic engagement,2015,0.9357666666666666
 Australia,Civic engagement,2016,0.9293
+Australia,Civic engagement,2017,0.9528666666666666
+Australia,Civic engagement,2018,0.9764333333333334
 Australia,Civic engagement,2019,1.0
+Australia,Civic engagement,2020,0.6959
 Australia,Civic engagement,2021,0.3918
 Australia,Civic engagement,2022,0.9527
 Australia,Civic engagement,2023,0.6758
-Australia,Environmental quality,2004,0.5485
-Australia,Environmental quality,2005,0.761
 Australia,Environmental quality,2006,0.6932
 Australia,Environmental quality,2007,0.7271
 Australia,Environmental quality,2008,0.7553
@@ -28,8 +35,6 @@ Australia,Environmental quality,2020,0.9244
 Australia,Environmental quality,2021,0.9161
 Australia,Environmental quality,2022,0.7785
 Australia,Environmental quality,2023,0.8845
-Australia,Health,2004,0.6794
-Australia,Health,2005,0.7751
 Australia,Health,2006,0.8437
 Australia,Health,2007,0.699
 Australia,Health,2008,0.8375
@@ -47,8 +52,7 @@ Australia,Health,2019,0.7339
 Australia,Health,2020,0.7605
 Australia,Health,2021,0.7905
 Australia,Health,2022,0.7006
-Australia,Housing,2004,0.7319
-Australia,Housing,2005,0.504
+Australia,Health,2023,0.7006
 Australia,Housing,2006,0.6035
 Australia,Housing,2007,0.6657
 Australia,Housing,2008,0.7181
@@ -65,8 +69,8 @@ Australia,Housing,2018,0.4743
 Australia,Housing,2019,0.4451
 Australia,Housing,2020,0.4551
 Australia,Housing,2021,0.4319
-Australia,Income and wealth,2004,0.5649
-Australia,Income and wealth,2005,0.5701
+Australia,Housing,2022,0.4319
+Australia,Housing,2023,0.4319
 Australia,Income and wealth,2006,0.5793
 Australia,Income and wealth,2007,0.613
 Australia,Income and wealth,2008,0.6603
@@ -83,14 +87,26 @@ Australia,Income and wealth,2018,0.4468
 Australia,Income and wealth,2019,0.6304
 Australia,Income and wealth,2020,0.4339
 Australia,Income and wealth,2021,0.6116
+Australia,Income and wealth,2022,0.6116
+Australia,Income and wealth,2023,0.6116
 Australia,Knowledge and skills,2006,0.7933
+Australia,Knowledge and skills,2007,0.7997333333333333
+Australia,Knowledge and skills,2008,0.8061666666666667
 Australia,Knowledge and skills,2009,0.8126
+Australia,Knowledge and skills,2010,0.7326
+Australia,Knowledge and skills,2011,0.6526
 Australia,Knowledge and skills,2012,0.5726
+Australia,Knowledge and skills,2013,0.6279333333333333
+Australia,Knowledge and skills,2014,0.6832666666666667
 Australia,Knowledge and skills,2015,0.7386
+Australia,Knowledge and skills,2016,0.724
+Australia,Knowledge and skills,2017,0.7094
 Australia,Knowledge and skills,2018,0.6948
+Australia,Knowledge and skills,2019,0.696225
+Australia,Knowledge and skills,2020,0.69765
+Australia,Knowledge and skills,2021,0.699075
 Australia,Knowledge and skills,2022,0.7005
-Australia,Safety,2004,0.9482
-Australia,Safety,2005,0.8087
+Australia,Knowledge and skills,2023,0.7005
 Australia,Safety,2006,0.6337
 Australia,Safety,2007,0.6395
 Australia,Safety,2008,0.632
@@ -112,6 +128,7 @@ Australia,Safety,2023,0.5613
 Australia,Social connections,2006,0.8487
 Australia,Social connections,2007,0.9277
 Australia,Social connections,2008,0.8976
+Australia,Social connections,2009,0.8922
 Australia,Social connections,2010,0.8868
 Australia,Social connections,2011,0.8834
 Australia,Social connections,2012,0.8762
@@ -129,6 +146,7 @@ Australia,Social connections,2023,0.8096
 Australia,Subjective well-being,2006,0.7078
 Australia,Subjective well-being,2007,0.6694
 Australia,Subjective well-being,2008,0.6737
+Australia,Subjective well-being,2009,0.6899
 Australia,Subjective well-being,2010,0.7061
 Australia,Subjective well-being,2011,0.7168
 Australia,Subjective well-being,2012,0.7168
@@ -143,8 +161,6 @@ Australia,Subjective well-being,2020,0.6604
 Australia,Subjective well-being,2021,0.688
 Australia,Subjective well-being,2022,0.6419
 Australia,Subjective well-being,2023,0.6419
-Australia,Work and job quality,2004,0.7682
-Australia,Work and job quality,2005,0.6614
 Australia,Work and job quality,2006,0.768
 Australia,Work and job quality,2007,0.8016
 Australia,Work and job quality,2008,0.8073
@@ -164,15 +180,41 @@ Australia,Work and job quality,2021,0.811
 Australia,Work and job quality,2022,0.7895
 Australia,Work and job quality,2023,0.7968
 Australia,Work-life balance,2006,0.4992
+Australia,Work-life balance,2007,0.4992
+Australia,Work-life balance,2008,0.4992
+Australia,Work-life balance,2009,0.4992
+Australia,Work-life balance,2010,0.4992
+Australia,Work-life balance,2011,0.4992
+Australia,Work-life balance,2012,0.4992
+Australia,Work-life balance,2013,0.4992
+Australia,Work-life balance,2014,0.4992
+Australia,Work-life balance,2015,0.4992
+Australia,Work-life balance,2016,0.4992
+Australia,Work-life balance,2017,0.4992
+Australia,Work-life balance,2018,0.4992
+Australia,Work-life balance,2019,0.4992
+Australia,Work-life balance,2020,0.4992
+Australia,Work-life balance,2021,0.4992
+Australia,Work-life balance,2022,0.4992
+Australia,Work-life balance,2023,0.4992
 Austria,Civic engagement,2006,0.7044
+Austria,Civic engagement,2007,0.81105
 Austria,Civic engagement,2008,0.9177
+Austria,Civic engagement,2009,0.8669399999999999
+Austria,Civic engagement,2010,0.81618
+Austria,Civic engagement,2011,0.76542
+Austria,Civic engagement,2012,0.7146600000000001
 Austria,Civic engagement,2013,0.6639
+Austria,Civic engagement,2014,0.6991750000000001
+Austria,Civic engagement,2015,0.73445
+Austria,Civic engagement,2016,0.769725
 Austria,Civic engagement,2017,0.805
+Austria,Civic engagement,2018,0.80815
 Austria,Civic engagement,2019,0.8113
+Austria,Civic engagement,2020,0.4923
 Austria,Civic engagement,2021,0.1733
-Austria,Civic engagement,2024,0.6674
-Austria,Environmental quality,2004,0.9999
-Austria,Environmental quality,2005,0.9999
+Austria,Civic engagement,2022,0.1733
+Austria,Civic engagement,2023,0.1733
 Austria,Environmental quality,2006,0.9999
 Austria,Environmental quality,2007,0.9999
 Austria,Environmental quality,2008,0.9999
@@ -191,8 +233,6 @@ Austria,Environmental quality,2020,0.9999
 Austria,Environmental quality,2021,1.0
 Austria,Environmental quality,2022,1.0
 Austria,Environmental quality,2023,1.0
-Austria,Health,2004,0.6326
-Austria,Health,2005,0.6392
 Austria,Health,2006,0.6444
 Austria,Health,2007,0.6609
 Austria,Health,2008,0.6524
@@ -211,8 +251,6 @@ Austria,Health,2020,0.6593
 Austria,Health,2021,0.6725
 Austria,Health,2022,0.6277
 Austria,Health,2023,0.6054
-Austria,Housing,2004,0.3827
-Austria,Housing,2005,0.3271
 Austria,Housing,2006,0.3866
 Austria,Housing,2007,0.4391
 Austria,Housing,2008,0.4648
@@ -231,8 +269,6 @@ Austria,Housing,2020,0.4209
 Austria,Housing,2021,0.4227
 Austria,Housing,2022,0.3964
 Austria,Housing,2023,0.3667
-Austria,Income and wealth,2004,0.4584
-Austria,Income and wealth,2005,0.4718
 Austria,Income and wealth,2006,0.4586
 Austria,Income and wealth,2007,0.3823
 Austria,Income and wealth,2008,0.3783
@@ -252,13 +288,23 @@ Austria,Income and wealth,2021,0.2625
 Austria,Income and wealth,2022,0.3893
 Austria,Income and wealth,2023,0.1232
 Austria,Knowledge and skills,2006,0.6915
+Austria,Knowledge and skills,2007,0.6561666666666667
+Austria,Knowledge and skills,2008,0.6208333333333333
 Austria,Knowledge and skills,2009,0.5855
+Austria,Knowledge and skills,2010,0.586
+Austria,Knowledge and skills,2011,0.5865
 Austria,Knowledge and skills,2012,0.587
+Austria,Knowledge and skills,2013,0.6122666666666666
+Austria,Knowledge and skills,2014,0.6375333333333333
 Austria,Knowledge and skills,2015,0.6628
+Austria,Knowledge and skills,2016,0.6548999999999999
+Austria,Knowledge and skills,2017,0.647
 Austria,Knowledge and skills,2018,0.6391
+Austria,Knowledge and skills,2019,0.6331249999999999
+Austria,Knowledge and skills,2020,0.62715
+Austria,Knowledge and skills,2021,0.621175
 Austria,Knowledge and skills,2022,0.6152
-Austria,Safety,2004,0.9103
-Austria,Safety,2005,0.9303
+Austria,Knowledge and skills,2023,0.6152
 Austria,Safety,2006,0.8132
 Austria,Safety,2007,0.9484
 Austria,Safety,2008,0.8049
@@ -278,6 +324,7 @@ Austria,Safety,2021,0.8039
 Austria,Safety,2022,0.7996
 Austria,Safety,2023,0.801
 Austria,Social connections,2006,0.8568
+Austria,Social connections,2007,0.83545
 Austria,Social connections,2008,0.8141
 Austria,Social connections,2009,0.8261
 Austria,Social connections,2010,0.8552
@@ -295,6 +342,7 @@ Austria,Social connections,2021,0.717
 Austria,Social connections,2022,0.6933
 Austria,Social connections,2023,0.6995
 Austria,Subjective well-being,2006,0.8412
+Austria,Subjective well-being,2007,0.7917
 Austria,Subjective well-being,2008,0.7422
 Austria,Subjective well-being,2009,0.7806
 Austria,Subjective well-being,2010,0.7846
@@ -311,8 +359,6 @@ Austria,Subjective well-being,2020,0.7872
 Austria,Subjective well-being,2021,0.8031
 Austria,Subjective well-being,2022,0.7999
 Austria,Subjective well-being,2023,0.7736
-Austria,Work and job quality,2004,0.7359
-Austria,Work and job quality,2005,0.6526
 Austria,Work and job quality,2006,0.7423
 Austria,Work and job quality,2007,0.7951
 Austria,Work and job quality,2008,0.807
@@ -331,20 +377,42 @@ Austria,Work and job quality,2020,0.7889
 Austria,Work and job quality,2021,0.8088
 Austria,Work and job quality,2022,0.7877
 Austria,Work and job quality,2023,0.7764
+Austria,Work-life balance,2006,0.2757
+Austria,Work-life balance,2007,0.2757
 Austria,Work-life balance,2008,0.2757
 Austria,Work-life balance,2009,0.3576
+Austria,Work-life balance,2010,0.39399999999999996
+Austria,Work-life balance,2011,0.4304
+Austria,Work-life balance,2012,0.4668
 Austria,Work-life balance,2013,0.5032
+Austria,Work-life balance,2014,0.49554
+Austria,Work-life balance,2015,0.48788
+Austria,Work-life balance,2016,0.48022
+Austria,Work-life balance,2017,0.47256
 Austria,Work-life balance,2018,0.4649
+Austria,Work-life balance,2019,0.464375
+Austria,Work-life balance,2020,0.46385
+Austria,Work-life balance,2021,0.463325
 Austria,Work-life balance,2022,0.4628
+Austria,Work-life balance,2023,0.4628
+Belgium,Civic engagement,2006,0.9406
 Belgium,Civic engagement,2007,0.9406
+Belgium,Civic engagement,2008,0.9324666666666667
+Belgium,Civic engagement,2009,0.9243333333333333
 Belgium,Civic engagement,2010,0.9162
+Belgium,Civic engagement,2011,0.905575
+Belgium,Civic engagement,2012,0.89495
+Belgium,Civic engagement,2013,0.884325
 Belgium,Civic engagement,2014,0.8737
+Belgium,Civic engagement,2015,0.8908400000000001
+Belgium,Civic engagement,2016,0.90798
+Belgium,Civic engagement,2017,0.92512
+Belgium,Civic engagement,2018,0.94226
 Belgium,Civic engagement,2019,0.9594
+Belgium,Civic engagement,2020,0.5918
 Belgium,Civic engagement,2021,0.2242
+Belgium,Civic engagement,2022,0.30905
 Belgium,Civic engagement,2023,0.3939
-Belgium,Civic engagement,2024,1.0
-Belgium,Environmental quality,2004,0.9954
-Belgium,Environmental quality,2005,0.9959
 Belgium,Environmental quality,2006,0.9953
 Belgium,Environmental quality,2007,0.9963
 Belgium,Environmental quality,2008,0.997
@@ -363,8 +431,6 @@ Belgium,Environmental quality,2020,0.9996
 Belgium,Environmental quality,2021,1.0
 Belgium,Environmental quality,2022,1.0
 Belgium,Environmental quality,2023,1.0
-Belgium,Health,2004,0.6578
-Belgium,Health,2005,0.6566
 Belgium,Health,2006,0.6705
 Belgium,Health,2007,0.6788
 Belgium,Health,2008,0.6681
@@ -383,8 +449,6 @@ Belgium,Health,2020,0.6623
 Belgium,Health,2021,0.6844
 Belgium,Health,2022,0.6602
 Belgium,Health,2023,0.6605
-Belgium,Housing,2004,0.4762
-Belgium,Housing,2005,0.5088
 Belgium,Housing,2006,0.5535
 Belgium,Housing,2007,0.5972
 Belgium,Housing,2008,0.5252
@@ -403,8 +467,6 @@ Belgium,Housing,2020,0.5463
 Belgium,Housing,2021,0.5191
 Belgium,Housing,2022,0.5142
 Belgium,Housing,2023,0.4802
-Belgium,Income and wealth,2004,0.5198
-Belgium,Income and wealth,2005,0.4967
 Belgium,Income and wealth,2006,0.4768
 Belgium,Income and wealth,2007,0.4631
 Belgium,Income and wealth,2008,0.5249
@@ -424,13 +486,23 @@ Belgium,Income and wealth,2021,0.2206
 Belgium,Income and wealth,2022,0.392
 Belgium,Income and wealth,2023,0.1527
 Belgium,Knowledge and skills,2006,0.7393
+Belgium,Knowledge and skills,2007,0.7414
+Belgium,Knowledge and skills,2008,0.7435
 Belgium,Knowledge and skills,2009,0.7456
+Belgium,Knowledge and skills,2010,0.7501
+Belgium,Knowledge and skills,2011,0.7546
 Belgium,Knowledge and skills,2012,0.7591
+Belgium,Knowledge and skills,2013,0.7407
+Belgium,Knowledge and skills,2014,0.7222999999999999
 Belgium,Knowledge and skills,2015,0.7039
+Belgium,Knowledge and skills,2016,0.6975666666666667
+Belgium,Knowledge and skills,2017,0.6912333333333333
 Belgium,Knowledge and skills,2018,0.6849
+Belgium,Knowledge and skills,2019,0.6697
+Belgium,Knowledge and skills,2020,0.6545
+Belgium,Knowledge and skills,2021,0.6393
 Belgium,Knowledge and skills,2022,0.6241
-Belgium,Safety,2004,0.8984
-Belgium,Safety,2005,0.9049
+Belgium,Knowledge and skills,2023,0.6241
 Belgium,Safety,2006,0.7392
 Belgium,Safety,2007,0.7018
 Belgium,Safety,2008,0.6805
@@ -449,10 +521,10 @@ Belgium,Safety,2020,0.6074
 Belgium,Safety,2021,0.547
 Belgium,Safety,2022,0.6214
 Belgium,Safety,2023,0.6162
-Belgium,Social connections,2005,0.6272
 Belgium,Social connections,2006,0.86
 Belgium,Social connections,2007,0.8555
 Belgium,Social connections,2008,0.8377
+Belgium,Social connections,2009,0.83985
 Belgium,Social connections,2010,0.842
 Belgium,Social connections,2011,0.8399
 Belgium,Social connections,2012,0.7358
@@ -470,6 +542,7 @@ Belgium,Social connections,2023,0.7568
 Belgium,Subjective well-being,2006,0.706
 Belgium,Subjective well-being,2007,0.6481
 Belgium,Subjective well-being,2008,0.6368
+Belgium,Subjective well-being,2009,0.6411
 Belgium,Subjective well-being,2010,0.6454
 Belgium,Subjective well-being,2011,0.6403
 Belgium,Subjective well-being,2012,0.6403
@@ -484,8 +557,6 @@ Belgium,Subjective well-being,2020,0.5925
 Belgium,Subjective well-being,2021,0.6818
 Belgium,Subjective well-being,2022,0.6885
 Belgium,Subjective well-being,2023,0.6309
-Belgium,Work and job quality,2004,0.6836
-Belgium,Work and job quality,2005,0.62
 Belgium,Work and job quality,2006,0.6881
 Belgium,Work and job quality,2007,0.7283
 Belgium,Work and job quality,2008,0.728
@@ -504,22 +575,42 @@ Belgium,Work and job quality,2020,0.7561
 Belgium,Work and job quality,2021,0.7916
 Belgium,Work and job quality,2022,0.7559
 Belgium,Work and job quality,2023,0.7494
-Belgium,Work-life balance,2005,1.0
+Belgium,Work-life balance,2006,0.6447
+Belgium,Work-life balance,2007,0.6447
+Belgium,Work-life balance,2008,0.6447
+Belgium,Work-life balance,2009,0.6447
+Belgium,Work-life balance,2010,0.6447
+Belgium,Work-life balance,2011,0.6447
 Belgium,Work-life balance,2012,0.6447
 Belgium,Work-life balance,2013,0.4125
+Belgium,Work-life balance,2014,0.4093
+Belgium,Work-life balance,2015,0.4061
+Belgium,Work-life balance,2016,0.4029
+Belgium,Work-life balance,2017,0.3997
 Belgium,Work-life balance,2018,0.3965
+Belgium,Work-life balance,2019,0.3872
+Belgium,Work-life balance,2020,0.3779
+Belgium,Work-life balance,2021,0.36860000000000004
 Belgium,Work-life balance,2022,0.3593
-Canada,Civic engagement,2004,0.4681
+Belgium,Work-life balance,2023,0.3593
 Canada,Civic engagement,2006,0.4127
+Canada,Civic engagement,2007,0.20635
 Canada,Civic engagement,2008,0.0
+Canada,Civic engagement,2009,0.10466666666666667
+Canada,Civic engagement,2010,0.20933333333333334
 Canada,Civic engagement,2011,0.314
+Canada,Civic engagement,2012,0.340075
+Canada,Civic engagement,2013,0.36615
+Canada,Civic engagement,2014,0.392225
 Canada,Civic engagement,2015,0.4183
+Canada,Civic engagement,2016,0.49355000000000004
+Canada,Civic engagement,2017,0.5688
+Canada,Civic engagement,2018,0.64405
 Canada,Civic engagement,2019,0.7193
 Canada,Civic engagement,2020,0.8215
 Canada,Civic engagement,2021,0.4509
+Canada,Civic engagement,2022,0.50885
 Canada,Civic engagement,2023,0.5668
-Canada,Environmental quality,2004,0.8527
-Canada,Environmental quality,2005,0.7958
 Canada,Environmental quality,2006,0.8076
 Canada,Environmental quality,2007,0.7823
 Canada,Environmental quality,2008,0.7921
@@ -538,8 +629,6 @@ Canada,Environmental quality,2020,0.816
 Canada,Environmental quality,2021,1.0
 Canada,Environmental quality,2022,1.0
 Canada,Environmental quality,2023,1.0
-Canada,Health,2004,0.8115
-Canada,Health,2005,0.6767
 Canada,Health,2006,0.8161
 Canada,Health,2007,0.6898
 Canada,Health,2008,0.6826
@@ -557,8 +646,7 @@ Canada,Health,2019,0.6946
 Canada,Health,2020,0.6905
 Canada,Health,2021,0.6946
 Canada,Health,2022,0.6871
-Canada,Housing,2004,0.5439
-Canada,Housing,2005,0.5191
+Canada,Health,2023,0.6871
 Canada,Housing,2006,0.5881
 Canada,Housing,2007,0.6208
 Canada,Housing,2008,0.6298
@@ -577,8 +665,6 @@ Canada,Housing,2020,0.5631
 Canada,Housing,2021,0.5717
 Canada,Housing,2022,0.427
 Canada,Housing,2023,0.4022
-Canada,Income and wealth,2004,0.6334
-Canada,Income and wealth,2005,0.4923
 Canada,Income and wealth,2006,0.6554
 Canada,Income and wealth,2007,0.5289
 Canada,Income and wealth,2008,0.5233
@@ -598,13 +684,23 @@ Canada,Income and wealth,2021,0.3003
 Canada,Income and wealth,2022,0.5734
 Canada,Income and wealth,2023,0.7627
 Canada,Knowledge and skills,2006,0.8486
+Canada,Knowledge and skills,2007,0.8542666666666667
+Canada,Knowledge and skills,2008,0.8599333333333333
 Canada,Knowledge and skills,2009,0.8656
+Canada,Knowledge and skills,2010,0.7708
+Canada,Knowledge and skills,2011,0.676
 Canada,Knowledge and skills,2012,0.5812
+Canada,Knowledge and skills,2013,0.6598
+Canada,Knowledge and skills,2014,0.7384
 Canada,Knowledge and skills,2015,0.817
+Canada,Knowledge and skills,2016,0.7933333333333333
+Canada,Knowledge and skills,2017,0.7696666666666666
 Canada,Knowledge and skills,2018,0.746
+Canada,Knowledge and skills,2019,0.7387
+Canada,Knowledge and skills,2020,0.7314
+Canada,Knowledge and skills,2021,0.7241
 Canada,Knowledge and skills,2022,0.7168
-Canada,Safety,2004,0.9346
-Canada,Safety,2005,0.9275
+Canada,Knowledge and skills,2023,0.7168
 Canada,Safety,2006,0.7838
 Canada,Safety,2007,0.8063
 Canada,Safety,2008,0.7821
@@ -624,6 +720,7 @@ Canada,Safety,2021,0.7246
 Canada,Safety,2022,0.6986
 Canada,Safety,2023,0.6802
 Canada,Social connections,2006,0.9114
+Canada,Social connections,2007,0.8987
 Canada,Social connections,2008,0.886
 Canada,Social connections,2009,0.8906
 Canada,Social connections,2010,0.8585
@@ -658,8 +755,6 @@ Canada,Subjective well-being,2020,0.6899
 Canada,Subjective well-being,2021,0.6685
 Canada,Subjective well-being,2022,0.6243
 Canada,Subjective well-being,2023,0.5768
-Canada,Work and job quality,2004,0.8087
-Canada,Work and job quality,2005,0.7005
 Canada,Work and job quality,2006,0.804
 Canada,Work and job quality,2007,0.8229
 Canada,Work and job quality,2008,0.8257
@@ -678,20 +773,42 @@ Canada,Work and job quality,2020,0.7917
 Canada,Work and job quality,2021,0.8188
 Canada,Work and job quality,2022,0.8069
 Canada,Work and job quality,2023,0.8235
+Canada,Work-life balance,2006,0.1506
+Canada,Work-life balance,2007,0.1506
+Canada,Work-life balance,2008,0.1506
+Canada,Work-life balance,2009,0.1506
 Canada,Work-life balance,2010,0.1506
+Canada,Work-life balance,2011,0.2296
+Canada,Work-life balance,2012,0.3086
+Canada,Work-life balance,2013,0.38759999999999994
+Canada,Work-life balance,2014,0.46659999999999996
 Canada,Work-life balance,2015,0.5456
+Canada,Work-life balance,2016,0.58755
+Canada,Work-life balance,2017,0.6295
+Canada,Work-life balance,2018,0.67145
+Canada,Work-life balance,2019,0.7134
+Canada,Work-life balance,2020,0.75535
 Canada,Work-life balance,2021,0.7973
 Canada,Work-life balance,2022,0.6375
-Chile,Civic engagement,2005,1.0
+Canada,Work-life balance,2023,0.6375
 Chile,Civic engagement,2006,0.8865
+Chile,Civic engagement,2007,0.8998666666666666
+Chile,Civic engagement,2008,0.9132333333333333
 Chile,Civic engagement,2009,0.9266
 Chile,Civic engagement,2010,0.8786
+Chile,Civic engagement,2011,0.6776666666666668
+Chile,Civic engagement,2012,0.4767333333333334
 Chile,Civic engagement,2013,0.2758
+Chile,Civic engagement,2014,0.297875
+Chile,Civic engagement,2015,0.31994999999999996
+Chile,Civic engagement,2016,0.34202499999999997
 Chile,Civic engagement,2017,0.3641
+Chile,Civic engagement,2018,0.366275
+Chile,Civic engagement,2019,0.36845
+Chile,Civic engagement,2020,0.370625
 Chile,Civic engagement,2021,0.3728
+Chile,Civic engagement,2022,0.31095
 Chile,Civic engagement,2023,0.2491
-Chile,Environmental quality,2004,0.9567
-Chile,Environmental quality,2005,0.9621
 Chile,Environmental quality,2006,0.957
 Chile,Environmental quality,2007,0.9668
 Chile,Environmental quality,2008,0.9729
@@ -710,8 +827,6 @@ Chile,Environmental quality,2020,0.9969
 Chile,Environmental quality,2021,1.0
 Chile,Environmental quality,2022,1.0
 Chile,Environmental quality,2023,1.0
-Chile,Health,2004,0.7033
-Chile,Health,2005,0.7229
 Chile,Health,2006,0.5124
 Chile,Health,2007,0.7384
 Chile,Health,2008,0.7113
@@ -731,7 +846,10 @@ Chile,Health,2021,0.5518
 Chile,Health,2022,0.6685
 Chile,Health,2023,0.6667
 Chile,Housing,2006,0.1249
+Chile,Housing,2007,0.12853333333333333
+Chile,Housing,2008,0.13216666666666665
 Chile,Housing,2009,0.1358
+Chile,Housing,2010,0.36034999999999995
 Chile,Housing,2011,0.5849
 Chile,Housing,2012,0.4927
 Chile,Housing,2013,0.5434
@@ -744,23 +862,43 @@ Chile,Housing,2019,0.8005
 Chile,Housing,2020,0.8882
 Chile,Housing,2021,0.7827
 Chile,Housing,2022,0.7859
+Chile,Housing,2023,0.7859
+Chile,Income and wealth,2006,1.0
+Chile,Income and wealth,2007,1.0
+Chile,Income and wealth,2008,1.0
 Chile,Income and wealth,2009,1.0
+Chile,Income and wealth,2010,0.7737
 Chile,Income and wealth,2011,0.5474
+Chile,Income and wealth,2012,0.6252
 Chile,Income and wealth,2013,0.703
 Chile,Income and wealth,2014,0.548
 Chile,Income and wealth,2015,0.6785
+Chile,Income and wealth,2016,0.6488499999999999
 Chile,Income and wealth,2017,0.6192
+Chile,Income and wealth,2018,0.7208
+Chile,Income and wealth,2019,0.8224
 Chile,Income and wealth,2020,0.924
+Chile,Income and wealth,2021,0.81435
 Chile,Income and wealth,2022,0.7047
+Chile,Income and wealth,2023,0.7047
 Chile,Knowledge and skills,2006,0.2835
+Chile,Knowledge and skills,2007,0.28126666666666666
+Chile,Knowledge and skills,2008,0.2790333333333333
 Chile,Knowledge and skills,2009,0.2768
+Chile,Knowledge and skills,2010,0.2795333333333333
+Chile,Knowledge and skills,2011,0.28226666666666667
 Chile,Knowledge and skills,2012,0.285
+Chile,Knowledge and skills,2013,0.31305
 Chile,Knowledge and skills,2014,0.3411
 Chile,Knowledge and skills,2015,0.5212
+Chile,Knowledge and skills,2016,0.4789333333333333
+Chile,Knowledge and skills,2017,0.43666666666666665
 Chile,Knowledge and skills,2018,0.3944
+Chile,Knowledge and skills,2019,0.37844999999999995
+Chile,Knowledge and skills,2020,0.3625
+Chile,Knowledge and skills,2021,0.34655
 Chile,Knowledge and skills,2022,0.3306
-Chile,Safety,2004,0.8306
-Chile,Safety,2005,0.8391
+Chile,Knowledge and skills,2023,0.3306
 Chile,Safety,2006,0.359
 Chile,Safety,2007,0.3318
 Chile,Safety,2008,0.3378
@@ -815,8 +953,6 @@ Chile,Subjective well-being,2020,0.5484
 Chile,Subjective well-being,2021,0.5484
 Chile,Subjective well-being,2022,0.5424
 Chile,Subjective well-being,2023,0.5424
-Chile,Work and job quality,2004,0.6503
-Chile,Work and job quality,2005,0.6457
 Chile,Work and job quality,2006,0.6406
 Chile,Work and job quality,2007,0.6492
 Chile,Work and job quality,2008,0.6671
@@ -836,14 +972,23 @@ Chile,Work and job quality,2021,0.6795
 Chile,Work and job quality,2022,0.6559
 Chile,Work and job quality,2023,0.7386
 Colombia,Civic engagement,2006,0.0
+Colombia,Civic engagement,2007,0.064425
+Colombia,Civic engagement,2008,0.12885
+Colombia,Civic engagement,2009,0.19327499999999997
 Colombia,Civic engagement,2010,0.2577
+Colombia,Civic engagement,2011,0.2601
+Colombia,Civic engagement,2012,0.26249999999999996
+Colombia,Civic engagement,2013,0.26489999999999997
 Colombia,Civic engagement,2014,0.2673
+Colombia,Civic engagement,2015,0.20484999999999998
+Colombia,Civic engagement,2016,0.1424
+Colombia,Civic engagement,2017,0.07995000000000001
 Colombia,Civic engagement,2018,0.0175
+Colombia,Civic engagement,2019,0.05266666666666667
+Colombia,Civic engagement,2020,0.08783333333333333
 Colombia,Civic engagement,2021,0.123
 Colombia,Civic engagement,2022,0.431
 Colombia,Civic engagement,2023,0.2736
-Colombia,Environmental quality,2004,0.8013
-Colombia,Environmental quality,2005,0.8404
 Colombia,Environmental quality,2006,0.8738
 Colombia,Environmental quality,2007,0.8652
 Colombia,Environmental quality,2008,0.9435
@@ -862,8 +1007,6 @@ Colombia,Environmental quality,2020,0.8107
 Colombia,Environmental quality,2021,0.8144
 Colombia,Environmental quality,2022,0.8781
 Colombia,Environmental quality,2023,0.7288
-Colombia,Health,2004,0.6336
-Colombia,Health,2005,0.6549
 Colombia,Health,2006,0.6509
 Colombia,Health,2007,0.6708
 Colombia,Health,2008,0.6506
@@ -881,6 +1024,11 @@ Colombia,Health,2019,0.5948
 Colombia,Health,2020,0.678
 Colombia,Health,2021,0.7006
 Colombia,Health,2022,0.4256
+Colombia,Health,2023,0.4256
+Colombia,Housing,2006,0.1635
+Colombia,Housing,2007,0.1635
+Colombia,Housing,2008,0.1635
+Colombia,Housing,2009,0.1635
 Colombia,Housing,2010,0.1635
 Colombia,Housing,2011,0.0075
 Colombia,Housing,2012,0.4996
@@ -894,14 +1042,25 @@ Colombia,Housing,2019,0.5
 Colombia,Housing,2020,0.5
 Colombia,Housing,2021,0.5
 Colombia,Housing,2022,0.5102
+Colombia,Housing,2023,0.5102
 Colombia,Knowledge and skills,2006,0.0
+Colombia,Knowledge and skills,2007,0.0
+Colombia,Knowledge and skills,2008,0.0
 Colombia,Knowledge and skills,2009,0.0
+Colombia,Knowledge and skills,2010,0.0
+Colombia,Knowledge and skills,2011,0.0
 Colombia,Knowledge and skills,2012,0.0
+Colombia,Knowledge and skills,2013,0.14173333333333335
+Colombia,Knowledge and skills,2014,0.2834666666666667
 Colombia,Knowledge and skills,2015,0.4252
+Colombia,Knowledge and skills,2016,0.35126666666666667
+Colombia,Knowledge and skills,2017,0.2773333333333333
 Colombia,Knowledge and skills,2018,0.2034
+Colombia,Knowledge and skills,2019,0.182375
+Colombia,Knowledge and skills,2020,0.16135
+Colombia,Knowledge and skills,2021,0.140325
 Colombia,Knowledge and skills,2022,0.1193
-Colombia,Safety,2004,0.4684
-Colombia,Safety,2005,0.4664
+Colombia,Knowledge and skills,2023,0.1193
 Colombia,Safety,2006,0.3921
 Colombia,Safety,2007,0.3952
 Colombia,Safety,2008,0.3554
@@ -956,8 +1115,6 @@ Colombia,Subjective well-being,2020,0.6628
 Colombia,Subjective well-being,2021,0.648
 Colombia,Subjective well-being,2022,0.6414
 Colombia,Subjective well-being,2023,0.5551
-Colombia,Work and job quality,2004,0.5656
-Colombia,Work and job quality,2005,0.5636
 Colombia,Work and job quality,2006,0.3589
 Colombia,Work and job quality,2007,0.6084
 Colombia,Work and job quality,2008,0.6118
@@ -976,18 +1133,42 @@ Colombia,Work and job quality,2020,0.5682
 Colombia,Work and job quality,2021,0.6495
 Colombia,Work and job quality,2022,0.624
 Colombia,Work and job quality,2023,0.6452
+Colombia,Work-life balance,2006,0.5885
+Colombia,Work-life balance,2007,0.5885
+Colombia,Work-life balance,2008,0.5885
+Colombia,Work-life balance,2009,0.5885
+Colombia,Work-life balance,2010,0.5885
+Colombia,Work-life balance,2011,0.5885
 Colombia,Work-life balance,2012,0.5885
+Colombia,Work-life balance,2013,0.548725
+Colombia,Work-life balance,2014,0.50895
+Colombia,Work-life balance,2015,0.469175
+Colombia,Work-life balance,2016,0.4294
+Colombia,Work-life balance,2017,0.389625
+Colombia,Work-life balance,2018,0.34985
+Colombia,Work-life balance,2019,0.310075
 Colombia,Work-life balance,2020,0.2703
 Colombia,Work-life balance,2021,0.6354
 Colombia,Work-life balance,2022,0.5481
+Colombia,Work-life balance,2023,0.5481
 Costa Rica,Civic engagement,2006,0.4225
+Costa Rica,Civic engagement,2007,0.46299999999999997
+Costa Rica,Civic engagement,2008,0.5035000000000001
+Costa Rica,Civic engagement,2009,0.544
 Costa Rica,Civic engagement,2010,0.5845
+Costa Rica,Civic engagement,2011,0.57995
+Costa Rica,Civic engagement,2012,0.5754
+Costa Rica,Civic engagement,2013,0.5708500000000001
 Costa Rica,Civic engagement,2014,0.5663
+Costa Rica,Civic engagement,2015,0.50115
+Costa Rica,Civic engagement,2016,0.43600000000000005
+Costa Rica,Civic engagement,2017,0.37085
 Costa Rica,Civic engagement,2018,0.3057
+Costa Rica,Civic engagement,2019,0.347275
+Costa Rica,Civic engagement,2020,0.38885000000000003
+Costa Rica,Civic engagement,2021,0.430425
 Costa Rica,Civic engagement,2022,0.472
 Costa Rica,Civic engagement,2023,0.2391
-Costa Rica,Environmental quality,2004,0.9925
-Costa Rica,Environmental quality,2005,0.9831
 Costa Rica,Environmental quality,2006,0.9925
 Costa Rica,Environmental quality,2007,0.9942
 Costa Rica,Environmental quality,2008,0.9952
@@ -1006,8 +1187,6 @@ Costa Rica,Environmental quality,2020,0.9956
 Costa Rica,Environmental quality,2021,1.0
 Costa Rica,Environmental quality,2022,1.0
 Costa Rica,Environmental quality,2023,0.9925
-Costa Rica,Health,2004,0.7879
-Costa Rica,Health,2005,0.8069
 Costa Rica,Health,2006,0.7909
 Costa Rica,Health,2007,0.8103
 Costa Rica,Health,2008,0.7961
@@ -1026,6 +1205,10 @@ Costa Rica,Health,2020,0.7745
 Costa Rica,Health,2021,0.699
 Costa Rica,Health,2022,0.6497
 Costa Rica,Health,2023,0.6415
+Costa Rica,Housing,2006,0.5437
+Costa Rica,Housing,2007,0.5437
+Costa Rica,Housing,2008,0.5437
+Costa Rica,Housing,2009,0.5437
 Costa Rica,Housing,2010,0.5437
 Costa Rica,Housing,2011,0.5616
 Costa Rica,Housing,2012,0.647
@@ -1039,6 +1222,11 @@ Costa Rica,Housing,2019,0.6987
 Costa Rica,Housing,2020,0.7871
 Costa Rica,Housing,2021,0.7064
 Costa Rica,Housing,2022,0.6446
+Costa Rica,Housing,2023,0.6446
+Costa Rica,Income and wealth,2006,1.0
+Costa Rica,Income and wealth,2007,1.0
+Costa Rica,Income and wealth,2008,1.0
+Costa Rica,Income and wealth,2009,1.0
 Costa Rica,Income and wealth,2010,1.0
 Costa Rica,Income and wealth,2011,1.0
 Costa Rica,Income and wealth,2012,0.6667
@@ -1053,12 +1241,24 @@ Costa Rica,Income and wealth,2020,1.0
 Costa Rica,Income and wealth,2021,1.0
 Costa Rica,Income and wealth,2022,1.0
 Costa Rica,Income and wealth,2023,0.5
+Costa Rica,Knowledge and skills,2006,0.2184
+Costa Rica,Knowledge and skills,2007,0.2184
+Costa Rica,Knowledge and skills,2008,0.2184
+Costa Rica,Knowledge and skills,2009,0.2184
+Costa Rica,Knowledge and skills,2010,0.2184
+Costa Rica,Knowledge and skills,2011,0.2184
 Costa Rica,Knowledge and skills,2012,0.2184
+Costa Rica,Knowledge and skills,2013,0.2973
+Costa Rica,Knowledge and skills,2014,0.3762
 Costa Rica,Knowledge and skills,2015,0.4551
+Costa Rica,Knowledge and skills,2016,0.3794
+Costa Rica,Knowledge and skills,2017,0.30369999999999997
 Costa Rica,Knowledge and skills,2018,0.228
+Costa Rica,Knowledge and skills,2019,0.19592500000000002
+Costa Rica,Knowledge and skills,2020,0.16385
+Costa Rica,Knowledge and skills,2021,0.13177499999999998
 Costa Rica,Knowledge and skills,2022,0.0997
-Costa Rica,Safety,2004,0.9412
-Costa Rica,Safety,2005,0.9174
+Costa Rica,Knowledge and skills,2023,0.0997
 Costa Rica,Safety,2006,0.4389
 Costa Rica,Safety,2007,0.4005
 Costa Rica,Safety,2008,0.3924
@@ -1113,8 +1313,6 @@ Costa Rica,Subjective well-being,2020,0.5616
 Costa Rica,Subjective well-being,2021,0.5616
 Costa Rica,Subjective well-being,2022,0.5681
 Costa Rica,Subjective well-being,2023,0.5681
-Costa Rica,Work and job quality,2004,0.5559
-Costa Rica,Work and job quality,2005,0.5754
 Costa Rica,Work and job quality,2006,0.5739
 Costa Rica,Work and job quality,2007,0.5877
 Costa Rica,Work and job quality,2008,0.5985
@@ -1133,16 +1331,24 @@ Costa Rica,Work and job quality,2020,0.614
 Costa Rica,Work and job quality,2021,0.6317
 Costa Rica,Work and job quality,2022,0.6003
 Costa Rica,Work and job quality,2023,0.5933
-Denmark,Civic engagement,2005,0.9335
+Denmark,Civic engagement,2006,0.8681
 Denmark,Civic engagement,2007,0.8681
+Denmark,Civic engagement,2008,0.901075
+Denmark,Civic engagement,2009,0.93405
+Denmark,Civic engagement,2010,0.967025
 Denmark,Civic engagement,2011,1.0
+Denmark,Civic engagement,2012,0.9477
+Denmark,Civic engagement,2013,0.8954
+Denmark,Civic engagement,2014,0.8431
 Denmark,Civic engagement,2015,0.7908
+Denmark,Civic engagement,2016,0.822
+Denmark,Civic engagement,2017,0.8532
+Denmark,Civic engagement,2018,0.8844
 Denmark,Civic engagement,2019,0.9156
+Denmark,Civic engagement,2020,0.71625
 Denmark,Civic engagement,2021,0.5169
 Denmark,Civic engagement,2022,0.8605
 Denmark,Civic engagement,2023,0.6271
-Denmark,Environmental quality,2004,0.8983
-Denmark,Environmental quality,2005,0.9099
 Denmark,Environmental quality,2006,0.8966
 Denmark,Environmental quality,2007,0.9195
 Denmark,Environmental quality,2008,0.9337
@@ -1161,8 +1367,6 @@ Denmark,Environmental quality,2020,0.9919
 Denmark,Environmental quality,2021,1.0
 Denmark,Environmental quality,2022,1.0
 Denmark,Environmental quality,2023,1.0
-Denmark,Health,2004,0.6698
-Denmark,Health,2005,0.6686
 Denmark,Health,2006,0.6686
 Denmark,Health,2007,0.6792
 Denmark,Health,2008,0.666
@@ -1181,8 +1385,6 @@ Denmark,Health,2020,0.6568
 Denmark,Health,2021,0.6629
 Denmark,Health,2022,0.5783
 Denmark,Health,2023,0.5988
-Denmark,Housing,2004,0.3743
-Denmark,Housing,2005,0.3942
 Denmark,Housing,2006,0.4586
 Denmark,Housing,2007,0.4769
 Denmark,Housing,2008,0.4129
@@ -1201,8 +1403,6 @@ Denmark,Housing,2020,0.467
 Denmark,Housing,2021,0.4273
 Denmark,Housing,2022,0.4446
 Denmark,Housing,2023,0.3371
-Denmark,Income and wealth,2004,0.2941
-Denmark,Income and wealth,2005,0.289
 Denmark,Income and wealth,2006,0.3051
 Denmark,Income and wealth,2007,0.2762
 Denmark,Income and wealth,2008,0.2757
@@ -1222,13 +1422,23 @@ Denmark,Income and wealth,2021,0.2687
 Denmark,Income and wealth,2022,0.3082
 Denmark,Income and wealth,2023,0.4296
 Denmark,Knowledge and skills,2006,0.6856
+Denmark,Knowledge and skills,2007,0.6825333333333333
+Denmark,Knowledge and skills,2008,0.6794666666666667
 Denmark,Knowledge and skills,2009,0.6764
+Denmark,Knowledge and skills,2010,0.6572
+Denmark,Knowledge and skills,2011,0.638
 Denmark,Knowledge and skills,2012,0.6188
+Denmark,Knowledge and skills,2013,0.6514333333333333
+Denmark,Knowledge and skills,2014,0.6840666666666667
 Denmark,Knowledge and skills,2015,0.7167
+Denmark,Knowledge and skills,2016,0.6973666666666667
+Denmark,Knowledge and skills,2017,0.6780333333333333
 Denmark,Knowledge and skills,2018,0.6587
+Denmark,Knowledge and skills,2019,0.6443749999999999
+Denmark,Knowledge and skills,2020,0.63005
+Denmark,Knowledge and skills,2021,0.6157250000000001
 Denmark,Knowledge and skills,2022,0.6014
-Denmark,Safety,2004,0.9642
-Denmark,Safety,2005,0.9716
+Denmark,Knowledge and skills,2023,0.6014
 Denmark,Safety,2006,0.8894
 Denmark,Safety,2007,0.8846
 Denmark,Safety,2008,0.8612
@@ -1283,8 +1493,6 @@ Denmark,Subjective well-being,2020,0.7108
 Denmark,Subjective well-being,2021,0.6828
 Denmark,Subjective well-being,2022,0.6971
 Denmark,Subjective well-being,2023,0.7063
-Denmark,Work and job quality,2004,0.8061
-Denmark,Work and job quality,2005,0.6725
 Denmark,Work and job quality,2006,0.8162
 Denmark,Work and job quality,2007,0.8499
 Denmark,Work and job quality,2008,0.846
@@ -1303,13 +1511,42 @@ Denmark,Work and job quality,2020,0.8342
 Denmark,Work and job quality,2021,0.8264
 Denmark,Work and job quality,2022,0.8101
 Denmark,Work and job quality,2023,0.7928
+Denmark,Work-life balance,2006,0.4853
+Denmark,Work-life balance,2007,0.4853
+Denmark,Work-life balance,2008,0.4853
+Denmark,Work-life balance,2009,0.4853
+Denmark,Work-life balance,2010,0.4853
+Denmark,Work-life balance,2011,0.4853
+Denmark,Work-life balance,2012,0.4853
 Denmark,Work-life balance,2013,0.4853
+Denmark,Work-life balance,2014,0.48498
+Denmark,Work-life balance,2015,0.48466000000000004
+Denmark,Work-life balance,2016,0.48434
+Denmark,Work-life balance,2017,0.48402
 Denmark,Work-life balance,2018,0.4837
+Denmark,Work-life balance,2019,0.4707
+Denmark,Work-life balance,2020,0.4577
+Denmark,Work-life balance,2021,0.4447
 Denmark,Work-life balance,2022,0.4317
+Denmark,Work-life balance,2023,0.4317
+Estonia,Civic engagement,2006,0.2159
+Estonia,Civic engagement,2007,0.2159
+Estonia,Civic engagement,2008,0.2159
+Estonia,Civic engagement,2009,0.2159
+Estonia,Civic engagement,2010,0.2159
+Estonia,Civic engagement,2011,0.2159
+Estonia,Civic engagement,2012,0.2159
+Estonia,Civic engagement,2013,0.2159
+Estonia,Civic engagement,2014,0.2159
+Estonia,Civic engagement,2015,0.2159
+Estonia,Civic engagement,2016,0.2159
+Estonia,Civic engagement,2017,0.2159
+Estonia,Civic engagement,2018,0.2159
+Estonia,Civic engagement,2019,0.2159
+Estonia,Civic engagement,2020,0.2159
 Estonia,Civic engagement,2021,0.2159
+Estonia,Civic engagement,2022,0.1801
 Estonia,Civic engagement,2023,0.1443
-Estonia,Environmental quality,2004,0.9925
-Estonia,Environmental quality,2005,0.9934
 Estonia,Environmental quality,2006,0.9924
 Estonia,Environmental quality,2007,0.9922
 Estonia,Environmental quality,2008,0.9927
@@ -1328,8 +1565,6 @@ Estonia,Environmental quality,2020,0.8958
 Estonia,Environmental quality,2021,1.0
 Estonia,Environmental quality,2022,1.0
 Estonia,Environmental quality,2023,1.0
-Estonia,Health,2004,0.4418
-Estonia,Health,2005,0.4827
 Estonia,Health,2006,0.4799
 Estonia,Health,2007,0.4855
 Estonia,Health,2008,0.5006
@@ -1348,8 +1583,6 @@ Estonia,Health,2020,0.5675
 Estonia,Health,2021,0.5911
 Estonia,Health,2022,0.5454
 Estonia,Health,2023,0.5481
-Estonia,Housing,2004,0.3326
-Estonia,Housing,2005,0.306
 Estonia,Housing,2006,0.3531
 Estonia,Housing,2007,0.4074
 Estonia,Housing,2008,0.4596
@@ -1368,8 +1601,6 @@ Estonia,Housing,2020,0.5427
 Estonia,Housing,2021,0.4638
 Estonia,Housing,2022,0.3474
 Estonia,Housing,2023,0.2579
-Estonia,Income and wealth,2004,0.126
-Estonia,Income and wealth,2005,0.0806
 Estonia,Income and wealth,2006,0.1254
 Estonia,Income and wealth,2007,0.1027
 Estonia,Income and wealth,2008,0.1195
@@ -1389,13 +1620,23 @@ Estonia,Income and wealth,2021,0.3089
 Estonia,Income and wealth,2022,0.1402
 Estonia,Income and wealth,2023,0.0903
 Estonia,Knowledge and skills,2006,0.7682
+Estonia,Knowledge and skills,2007,0.7696333333333333
+Estonia,Knowledge and skills,2008,0.7710666666666667
 Estonia,Knowledge and skills,2009,0.7725
+Estonia,Knowledge and skills,2010,0.7189
+Estonia,Knowledge and skills,2011,0.6653
 Estonia,Knowledge and skills,2012,0.6117
+Estonia,Knowledge and skills,2013,0.6838333333333333
+Estonia,Knowledge and skills,2014,0.7559666666666667
 Estonia,Knowledge and skills,2015,0.8281
+Estonia,Knowledge and skills,2016,0.8088666666666666
+Estonia,Knowledge and skills,2017,0.7896333333333333
 Estonia,Knowledge and skills,2018,0.7704
+Estonia,Knowledge and skills,2019,0.75485
+Estonia,Knowledge and skills,2020,0.7393000000000001
+Estonia,Knowledge and skills,2021,0.72375
 Estonia,Knowledge and skills,2022,0.7082
-Estonia,Safety,2004,0.8353
-Estonia,Safety,2005,0.8152
+Estonia,Knowledge and skills,2023,0.7082
 Estonia,Safety,2006,0.5751
 Estonia,Safety,2007,0.5801
 Estonia,Safety,2008,0.5859
@@ -1418,6 +1659,7 @@ Estonia,Social connections,2006,0.7924
 Estonia,Social connections,2007,0.7966
 Estonia,Social connections,2008,0.77
 Estonia,Social connections,2009,0.5999
+Estonia,Social connections,2010,0.69675
 Estonia,Social connections,2011,0.7936
 Estonia,Social connections,2012,0.7872
 Estonia,Social connections,2013,0.6285
@@ -1435,6 +1677,7 @@ Estonia,Subjective well-being,2006,0.6792
 Estonia,Subjective well-being,2007,0.6506
 Estonia,Subjective well-being,2008,0.6372
 Estonia,Subjective well-being,2009,0.6363
+Estonia,Subjective well-being,2010,0.66045
 Estonia,Subjective well-being,2011,0.6846
 Estonia,Subjective well-being,2012,0.6846
 Estonia,Subjective well-being,2013,0.5923
@@ -1448,8 +1691,6 @@ Estonia,Subjective well-being,2020,0.8254
 Estonia,Subjective well-being,2021,0.7484
 Estonia,Subjective well-being,2022,0.7469
 Estonia,Subjective well-being,2023,0.7565
-Estonia,Work and job quality,2004,0.7042
-Estonia,Work and job quality,2005,0.6339
 Estonia,Work and job quality,2006,0.7442
 Estonia,Work and job quality,2007,0.7873
 Estonia,Work and job quality,2008,0.7914
@@ -1468,18 +1709,42 @@ Estonia,Work and job quality,2020,0.8056
 Estonia,Work and job quality,2021,0.8159
 Estonia,Work and job quality,2022,0.7969
 Estonia,Work and job quality,2023,0.7621
+Estonia,Work-life balance,2006,0.4625
+Estonia,Work-life balance,2007,0.4625
+Estonia,Work-life balance,2008,0.4625
 Estonia,Work-life balance,2009,0.4625
+Estonia,Work-life balance,2010,0.4608
+Estonia,Work-life balance,2011,0.4591
+Estonia,Work-life balance,2012,0.45740000000000003
 Estonia,Work-life balance,2013,0.4557
+Estonia,Work-life balance,2014,0.44912
+Estonia,Work-life balance,2015,0.44254
+Estonia,Work-life balance,2016,0.43596
+Estonia,Work-life balance,2017,0.42938
 Estonia,Work-life balance,2018,0.4228
+Estonia,Work-life balance,2019,0.41645
+Estonia,Work-life balance,2020,0.4101
+Estonia,Work-life balance,2021,0.40375
 Estonia,Work-life balance,2022,0.3974
+Estonia,Work-life balance,2023,0.3974
 Finland,Civic engagement,2006,0.6107
+Finland,Civic engagement,2007,0.6113
+Finland,Civic engagement,2008,0.6119
+Finland,Civic engagement,2009,0.6125
+Finland,Civic engagement,2010,0.6131
+Finland,Civic engagement,2011,0.6136999999999999
 Finland,Civic engagement,2012,0.6143
+Finland,Civic engagement,2013,0.5676
+Finland,Civic engagement,2014,0.5208999999999999
+Finland,Civic engagement,2015,0.47419999999999995
+Finland,Civic engagement,2016,0.4275
+Finland,Civic engagement,2017,0.3808
 Finland,Civic engagement,2018,0.3341
+Finland,Civic engagement,2019,0.32330000000000003
+Finland,Civic engagement,2020,0.3125
 Finland,Civic engagement,2021,0.3017
+Finland,Civic engagement,2022,0.2519
 Finland,Civic engagement,2023,0.2021
-Finland,Civic engagement,2024,0.5274
-Finland,Environmental quality,2004,0.6012
-Finland,Environmental quality,2005,0.6355
 Finland,Environmental quality,2006,0.6666
 Finland,Environmental quality,2007,0.6548
 Finland,Environmental quality,2008,0.6213
@@ -1498,8 +1763,6 @@ Finland,Environmental quality,2020,0.5
 Finland,Environmental quality,2021,1.0
 Finland,Environmental quality,2022,1.0
 Finland,Environmental quality,2023,1.0
-Finland,Health,2004,0.5926
-Finland,Health,2005,0.591
 Finland,Health,2006,0.5895
 Finland,Health,2007,0.5909
 Finland,Health,2008,0.5776
@@ -1518,8 +1781,6 @@ Finland,Health,2020,0.5672
 Finland,Health,2021,0.5901
 Finland,Health,2022,0.5681
 Finland,Health,2023,0.5613
-Finland,Housing,2004,0.3584
-Finland,Housing,2005,0.3449
 Finland,Housing,2006,0.416
 Finland,Housing,2007,0.4534
 Finland,Housing,2008,0.4663
@@ -1538,8 +1799,6 @@ Finland,Housing,2020,0.4753
 Finland,Housing,2021,0.4441
 Finland,Housing,2022,0.4051
 Finland,Housing,2023,0.2619
-Finland,Income and wealth,2004,0.2062
-Finland,Income and wealth,2005,0.2005
 Finland,Income and wealth,2006,0.226
 Finland,Income and wealth,2007,0.2286
 Finland,Income and wealth,2008,0.23
@@ -1559,13 +1818,23 @@ Finland,Income and wealth,2021,0.1493
 Finland,Income and wealth,2022,0.1312
 Finland,Income and wealth,2023,0.3658
 Finland,Knowledge and skills,2006,0.9821
+Finland,Knowledge and skills,2007,0.9812333333333333
+Finland,Knowledge and skills,2008,0.9803666666666667
 Finland,Knowledge and skills,2009,0.9795
+Finland,Knowledge and skills,2010,0.8945000000000001
+Finland,Knowledge and skills,2011,0.8095
 Finland,Knowledge and skills,2012,0.7245
+Finland,Knowledge and skills,2013,0.7363000000000001
+Finland,Knowledge and skills,2014,0.7481
 Finland,Knowledge and skills,2015,0.7599
+Finland,Knowledge and skills,2016,0.7526333333333334
+Finland,Knowledge and skills,2017,0.7453666666666666
 Finland,Knowledge and skills,2018,0.7381
+Finland,Knowledge and skills,2019,0.719875
+Finland,Knowledge and skills,2020,0.70165
+Finland,Knowledge and skills,2021,0.683425
 Finland,Knowledge and skills,2022,0.6652
-Finland,Safety,2004,0.948
-Finland,Safety,2005,0.9493
+Finland,Knowledge and skills,2023,0.6652
 Finland,Safety,2006,0.8485
 Finland,Safety,2007,0.9487
 Finland,Safety,2008,0.8266
@@ -1585,6 +1854,7 @@ Finland,Safety,2021,0.86
 Finland,Safety,2022,0.8513
 Finland,Safety,2023,0.852
 Finland,Social connections,2006,0.9349
+Finland,Social connections,2007,0.9179999999999999
 Finland,Social connections,2008,0.9011
 Finland,Social connections,2009,0.346
 Finland,Social connections,2010,0.8881
@@ -1602,7 +1872,9 @@ Finland,Social connections,2021,0.9055
 Finland,Social connections,2022,0.7719
 Finland,Social connections,2023,0.9003
 Finland,Subjective well-being,2006,0.8193
+Finland,Subjective well-being,2007,0.80705
 Finland,Subjective well-being,2008,0.7948
+Finland,Subjective well-being,2009,0.76885
 Finland,Subjective well-being,2010,0.7429
 Finland,Subjective well-being,2011,0.7116
 Finland,Subjective well-being,2012,0.7116
@@ -1617,8 +1889,6 @@ Finland,Subjective well-being,2020,0.7773
 Finland,Subjective well-being,2021,0.806
 Finland,Subjective well-being,2022,0.7924
 Finland,Subjective well-being,2023,0.7741
-Finland,Work and job quality,2004,0.7391
-Finland,Work and job quality,2005,0.614
 Finland,Work and job quality,2006,0.7456
 Finland,Work and job quality,2007,0.7859
 Finland,Work and job quality,2008,0.7964
@@ -1637,18 +1907,42 @@ Finland,Work and job quality,2020,0.7946
 Finland,Work and job quality,2021,0.7951
 Finland,Work and job quality,2022,0.7708
 Finland,Work and job quality,2023,0.7824
+Finland,Work-life balance,2006,0.3898
+Finland,Work-life balance,2007,0.3898
+Finland,Work-life balance,2008,0.3898
 Finland,Work-life balance,2009,0.3898
+Finland,Work-life balance,2010,0.403325
+Finland,Work-life balance,2011,0.41685
+Finland,Work-life balance,2012,0.430375
 Finland,Work-life balance,2013,0.4439
+Finland,Work-life balance,2014,0.44212
+Finland,Work-life balance,2015,0.44034
+Finland,Work-life balance,2016,0.43856
+Finland,Work-life balance,2017,0.43678
 Finland,Work-life balance,2018,0.435
+Finland,Work-life balance,2019,0.4299
+Finland,Work-life balance,2020,0.4248
+Finland,Work-life balance,2021,0.4197
 Finland,Work-life balance,2022,0.4146
+Finland,Work-life balance,2023,0.4146
+France,Civic engagement,2006,0.8708
 France,Civic engagement,2007,0.8708
+France,Civic engagement,2008,0.8697400000000001
+France,Civic engagement,2009,0.86868
+France,Civic engagement,2010,0.8676200000000001
+France,Civic engagement,2011,0.86656
 France,Civic engagement,2012,0.8655
+France,Civic engagement,2013,0.8362200000000001
+France,Civic engagement,2014,0.80694
+France,Civic engagement,2015,0.77766
+France,Civic engagement,2016,0.7483799999999999
 France,Civic engagement,2017,0.7191
+France,Civic engagement,2018,0.6147
+France,Civic engagement,2019,0.5103
+France,Civic engagement,2020,0.4059
 France,Civic engagement,2021,0.3015
 France,Civic engagement,2022,0.7355
 France,Civic engagement,2023,0.3184
-France,Environmental quality,2004,0.9613
-France,Environmental quality,2005,0.9675
 France,Environmental quality,2006,0.9587
 France,Environmental quality,2007,0.971
 France,Environmental quality,2008,0.9732
@@ -1667,8 +1961,6 @@ France,Environmental quality,2020,0.9966
 France,Environmental quality,2021,0.9996
 France,Environmental quality,2022,0.7982
 France,Environmental quality,2023,0.9758
-France,Health,2004,0.6528
-France,Health,2005,0.6586
 France,Health,2006,0.6663
 France,Health,2007,0.6809
 France,Health,2008,0.6602
@@ -1687,8 +1979,6 @@ France,Health,2020,0.6578
 France,Health,2021,0.6506
 France,Health,2022,0.6295
 France,Health,2023,0.6335
-France,Housing,2004,0.4049
-France,Housing,2005,0.3622
 France,Housing,2006,0.3632
 France,Housing,2007,0.4271
 France,Housing,2008,0.4516
@@ -1707,8 +1997,6 @@ France,Housing,2020,0.4188
 France,Housing,2021,0.544
 France,Housing,2022,0.523
 France,Housing,2023,0.5827
-France,Income and wealth,2004,0.4863
-France,Income and wealth,2005,0.4592
 France,Income and wealth,2006,0.445
 France,Income and wealth,2007,0.4494
 France,Income and wealth,2008,0.4416
@@ -1728,13 +2016,23 @@ France,Income and wealth,2021,0.2561
 France,Income and wealth,2022,0.4421
 France,Income and wealth,2023,0.5666
 France,Knowledge and skills,2006,0.6384
+France,Knowledge and skills,2007,0.6465
+France,Knowledge and skills,2008,0.6546
 France,Knowledge and skills,2009,0.6627
+France,Knowledge and skills,2010,0.5967333333333333
+France,Knowledge and skills,2011,0.5307666666666666
 France,Knowledge and skills,2012,0.4648
+France,Knowledge and skills,2013,0.5401333333333334
+France,Knowledge and skills,2014,0.6154666666666666
 France,Knowledge and skills,2015,0.6908
+France,Knowledge and skills,2016,0.6780666666666666
+France,Knowledge and skills,2017,0.6653333333333333
 France,Knowledge and skills,2018,0.6526
+France,Knowledge and skills,2019,0.6356499999999999
+France,Knowledge and skills,2020,0.6187
+France,Knowledge and skills,2021,0.60175
 France,Knowledge and skills,2022,0.5848
-France,Safety,2004,0.9351
-France,Safety,2005,0.9431
+France,Knowledge and skills,2023,0.5848
 France,Safety,2006,0.7534
 France,Safety,2007,0.76
 France,Safety,2008,0.7184
@@ -1789,8 +2087,6 @@ France,Subjective well-being,2020,0.6768
 France,Subjective well-being,2021,0.6333
 France,Subjective well-being,2022,0.645
 France,Subjective well-being,2023,0.6442
-France,Work and job quality,2004,0.7412
-France,Work and job quality,2005,0.6533
 France,Work and job quality,2006,0.6858
 France,Work and job quality,2007,0.7645
 France,Work and job quality,2008,0.7636
@@ -1809,18 +2105,42 @@ France,Work and job quality,2020,0.7028
 France,Work and job quality,2021,0.7631
 France,Work and job quality,2022,0.7223
 France,Work and job quality,2023,0.6815
+France,Work-life balance,2006,0.5503
+France,Work-life balance,2007,0.5503
+France,Work-life balance,2008,0.5503
 France,Work-life balance,2009,0.5503
+France,Work-life balance,2010,0.5282250000000001
+France,Work-life balance,2011,0.50615
+France,Work-life balance,2012,0.48407500000000003
 France,Work-life balance,2013,0.462
+France,Work-life balance,2014,0.45418000000000003
+France,Work-life balance,2015,0.44636000000000003
+France,Work-life balance,2016,0.43854
+France,Work-life balance,2017,0.43072
 France,Work-life balance,2018,0.4229
+France,Work-life balance,2019,0.424725
+France,Work-life balance,2020,0.42655
+France,Work-life balance,2021,0.428375
 France,Work-life balance,2022,0.4302
-Germany,Civic engagement,2005,0.7873
+France,Work-life balance,2023,0.4302
+Germany,Civic engagement,2006,0.5448
+Germany,Civic engagement,2007,0.5448
+Germany,Civic engagement,2008,0.5448
 Germany,Civic engagement,2009,0.5448
+Germany,Civic engagement,2010,0.56175
+Germany,Civic engagement,2011,0.5787
+Germany,Civic engagement,2012,0.59565
 Germany,Civic engagement,2013,0.6126
+Germany,Civic engagement,2014,0.6728000000000001
+Germany,Civic engagement,2015,0.7330000000000001
+Germany,Civic engagement,2016,0.7932
 Germany,Civic engagement,2017,0.8534
+Germany,Civic engagement,2018,0.8347
+Germany,Civic engagement,2019,0.8160000000000001
+Germany,Civic engagement,2020,0.7973
 Germany,Civic engagement,2021,0.7786
+Germany,Civic engagement,2022,0.5878
 Germany,Civic engagement,2023,0.397
-Germany,Environmental quality,2004,0.9978
-Germany,Environmental quality,2005,0.998
 Germany,Environmental quality,2006,0.9977
 Germany,Environmental quality,2007,0.9982
 Germany,Environmental quality,2008,0.9985
@@ -1839,8 +2159,6 @@ Germany,Environmental quality,2020,0.9998
 Germany,Environmental quality,2021,1.0
 Germany,Environmental quality,2022,1.0
 Germany,Environmental quality,2023,1.0
-Germany,Health,2004,0.777
-Germany,Health,2005,0.6051
 Germany,Health,2006,0.6138
 Germany,Health,2007,0.6196
 Germany,Health,2008,0.6289
@@ -1859,8 +2177,6 @@ Germany,Health,2020,0.6616
 Germany,Health,2021,0.6585
 Germany,Health,2022,0.6252
 Germany,Health,2023,0.598
-Germany,Housing,2004,0.6676
-Germany,Housing,2005,0.3261
 Germany,Housing,2006,0.3791
 Germany,Housing,2007,0.4473
 Germany,Housing,2008,0.4537
@@ -1879,8 +2195,6 @@ Germany,Housing,2020,0.5394
 Germany,Housing,2021,0.464
 Germany,Housing,2022,0.488
 Germany,Housing,2023,0.5628
-Germany,Income and wealth,2004,0.7437
-Germany,Income and wealth,2005,0.4382
 Germany,Income and wealth,2006,0.3993
 Germany,Income and wealth,2007,0.373
 Germany,Income and wealth,2008,0.3011
@@ -1900,13 +2214,23 @@ Germany,Income and wealth,2021,0.3283
 Germany,Income and wealth,2022,0.3675
 Germany,Income and wealth,2023,0.4897
 Germany,Knowledge and skills,2006,0.7068
+Germany,Knowledge and skills,2007,0.7205333333333334
+Germany,Knowledge and skills,2008,0.7342666666666666
 Germany,Knowledge and skills,2009,0.748
+Germany,Knowledge and skills,2010,0.7010333333333333
+Germany,Knowledge and skills,2011,0.6540666666666667
 Germany,Knowledge and skills,2012,0.6071
+Germany,Knowledge and skills,2013,0.6565
+Germany,Knowledge and skills,2014,0.7059
 Germany,Knowledge and skills,2015,0.7553
+Germany,Knowledge and skills,2016,0.7406333333333334
+Germany,Knowledge and skills,2017,0.7259666666666666
 Germany,Knowledge and skills,2018,0.7113
+Germany,Knowledge and skills,2019,0.685875
+Germany,Knowledge and skills,2020,0.66045
+Germany,Knowledge and skills,2021,0.6350250000000001
 Germany,Knowledge and skills,2022,0.6096
-Germany,Safety,2004,0.961
-Germany,Safety,2005,0.9702
+Germany,Knowledge and skills,2023,0.6096
 Germany,Safety,2006,0.7894
 Germany,Safety,2007,0.7718
 Germany,Safety,2008,0.7612
@@ -1961,8 +2285,6 @@ Germany,Subjective well-being,2020,0.7515
 Germany,Subjective well-being,2021,0.6837
 Germany,Subjective well-being,2022,0.5603
 Germany,Subjective well-being,2023,0.6779
-Germany,Work and job quality,2004,0.7065
-Germany,Work and job quality,2005,0.6795
 Germany,Work and job quality,2006,0.702
 Germany,Work and job quality,2007,0.7123
 Germany,Work and job quality,2008,0.7281
@@ -1981,19 +2303,42 @@ Germany,Work and job quality,2020,0.8221
 Germany,Work and job quality,2021,0.8411
 Germany,Work and job quality,2022,0.819
 Germany,Work and job quality,2023,0.7616
+Germany,Work-life balance,2006,0.4749
+Germany,Work-life balance,2007,0.4749
+Germany,Work-life balance,2008,0.4749
+Germany,Work-life balance,2009,0.4749
+Germany,Work-life balance,2010,0.4749
+Germany,Work-life balance,2011,0.4749
 Germany,Work-life balance,2012,0.4749
 Germany,Work-life balance,2013,0.5556
+Germany,Work-life balance,2014,0.54458
+Germany,Work-life balance,2015,0.5335599999999999
+Germany,Work-life balance,2016,0.52254
+Germany,Work-life balance,2017,0.51152
 Germany,Work-life balance,2018,0.5005
+Germany,Work-life balance,2019,0.48532499999999995
+Germany,Work-life balance,2020,0.47014999999999996
+Germany,Work-life balance,2021,0.454975
 Germany,Work-life balance,2022,0.4398
-Greece,Civic engagement,2004,0.7182
+Germany,Work-life balance,2023,0.4398
+Greece,Civic engagement,2006,0.6671
 Greece,Civic engagement,2007,0.6671
+Greece,Civic engagement,2008,0.60755
 Greece,Civic engagement,2009,0.548
+Greece,Civic engagement,2010,0.5268666666666667
+Greece,Civic engagement,2011,0.5057333333333334
 Greece,Civic engagement,2012,0.4846
+Greece,Civic engagement,2013,0.5693333333333334
+Greece,Civic engagement,2014,0.6540666666666667
 Greece,Civic engagement,2015,0.7388
+Greece,Civic engagement,2016,0.70535
+Greece,Civic engagement,2017,0.6718999999999999
+Greece,Civic engagement,2018,0.63845
 Greece,Civic engagement,2019,0.605
+Greece,Civic engagement,2020,0.5095
+Greece,Civic engagement,2021,0.414
+Greece,Civic engagement,2022,0.3185
 Greece,Civic engagement,2023,0.223
-Greece,Environmental quality,2004,0.9537
-Greece,Environmental quality,2005,0.9587
 Greece,Environmental quality,2006,0.9408
 Greece,Environmental quality,2007,0.4691
 Greece,Environmental quality,2008,0.7522
@@ -2012,8 +2357,6 @@ Greece,Environmental quality,2020,0.9778
 Greece,Environmental quality,2021,0.0
 Greece,Environmental quality,2022,0.8978
 Greece,Environmental quality,2023,0.0805
-Greece,Health,2004,0.6556
-Greece,Health,2005,0.6648
 Greece,Health,2006,0.6717
 Greece,Health,2007,0.6665
 Greece,Health,2008,0.6695
@@ -2032,8 +2375,6 @@ Greece,Health,2020,0.7007
 Greece,Health,2021,0.6634
 Greece,Health,2022,0.6574
 Greece,Health,2023,0.6501
-Greece,Housing,2004,0.6359
-Greece,Housing,2005,0.3675
 Greece,Housing,2006,0.3698
 Greece,Housing,2007,0.3994
 Greece,Housing,2008,0.4244
@@ -2052,8 +2393,6 @@ Greece,Housing,2020,0.4755
 Greece,Housing,2021,0.4845
 Greece,Housing,2022,0.522
 Greece,Housing,2023,0.9212
-Greece,Income and wealth,2004,0.7015
-Greece,Income and wealth,2005,0.6441
 Greece,Income and wealth,2006,0.7267
 Greece,Income and wealth,2007,0.6128
 Greece,Income and wealth,2008,0.6249
@@ -2073,14 +2412,23 @@ Greece,Income and wealth,2021,0.4329
 Greece,Income and wealth,2022,0.5967
 Greece,Income and wealth,2023,1.0
 Greece,Knowledge and skills,2006,0.4743
+Greece,Knowledge and skills,2007,0.48466666666666663
+Greece,Knowledge and skills,2008,0.4950333333333333
 Greece,Knowledge and skills,2009,0.5054
+Greece,Knowledge and skills,2010,0.4968333333333333
+Greece,Knowledge and skills,2011,0.4882666666666667
 Greece,Knowledge and skills,2012,0.4797
+Greece,Knowledge and skills,2013,0.5491
 Greece,Knowledge and skills,2014,0.6185
 Greece,Knowledge and skills,2015,0.574
+Greece,Knowledge and skills,2016,0.5381333333333334
+Greece,Knowledge and skills,2017,0.5022666666666666
 Greece,Knowledge and skills,2018,0.4664
+Greece,Knowledge and skills,2019,0.43565
+Greece,Knowledge and skills,2020,0.4049
+Greece,Knowledge and skills,2021,0.37415
 Greece,Knowledge and skills,2022,0.3434
-Greece,Safety,2004,0.8481
-Greece,Safety,2005,0.8519
+Greece,Knowledge and skills,2023,0.3434
 Greece,Safety,2006,0.6014
 Greece,Safety,2007,0.5733
 Greece,Safety,2008,0.7732
@@ -2101,6 +2449,7 @@ Greece,Safety,2022,0.5157
 Greece,Safety,2023,0.5138
 Greece,Social connections,2006,0.6218
 Greece,Social connections,2007,0.6165
+Greece,Social connections,2008,0.6069
 Greece,Social connections,2009,0.5973
 Greece,Social connections,2010,0.5985
 Greece,Social connections,2011,0.56
@@ -2118,6 +2467,7 @@ Greece,Social connections,2022,0.5109
 Greece,Social connections,2023,0.5511
 Greece,Subjective well-being,2006,0.6498
 Greece,Subjective well-being,2007,0.629
+Greece,Subjective well-being,2008,0.5915
 Greece,Subjective well-being,2009,0.554
 Greece,Subjective well-being,2010,0.5233
 Greece,Subjective well-being,2011,0.463
@@ -2133,8 +2483,6 @@ Greece,Subjective well-being,2020,0.5661
 Greece,Subjective well-being,2021,0.5619
 Greece,Subjective well-being,2022,0.5646
 Greece,Subjective well-being,2023,0.5696
-Greece,Work and job quality,2004,0.666
-Greece,Work and job quality,2005,0.6696
 Greece,Work and job quality,2006,0.6572
 Greece,Work and job quality,2007,0.6908
 Greece,Work and job quality,2008,0.6819
@@ -2153,17 +2501,42 @@ Greece,Work and job quality,2020,0.5732
 Greece,Work and job quality,2021,0.6654
 Greece,Work and job quality,2022,0.5921
 Greece,Work and job quality,2023,0.5182
+Greece,Work-life balance,2006,0.4571
+Greece,Work-life balance,2007,0.4571
+Greece,Work-life balance,2008,0.4571
+Greece,Work-life balance,2009,0.4571
+Greece,Work-life balance,2010,0.4571
+Greece,Work-life balance,2011,0.4571
 Greece,Work-life balance,2012,0.4571
 Greece,Work-life balance,2013,0.4201
+Greece,Work-life balance,2014,0.42485999999999996
+Greece,Work-life balance,2015,0.42962
+Greece,Work-life balance,2016,0.43438
+Greece,Work-life balance,2017,0.43914000000000003
 Greece,Work-life balance,2018,0.4439
+Greece,Work-life balance,2019,0.46205
+Greece,Work-life balance,2020,0.48019999999999996
+Greece,Work-life balance,2021,0.49834999999999996
 Greece,Work-life balance,2022,0.5165
+Greece,Work-life balance,2023,0.5165
 Hungary,Civic engagement,2006,0.4739
+Hungary,Civic engagement,2007,0.482025
+Hungary,Civic engagement,2008,0.49015
+Hungary,Civic engagement,2009,0.49827499999999997
 Hungary,Civic engagement,2010,0.5064
+Hungary,Civic engagement,2011,0.49742499999999995
+Hungary,Civic engagement,2012,0.48844999999999994
+Hungary,Civic engagement,2013,0.479475
 Hungary,Civic engagement,2014,0.4705
+Hungary,Civic engagement,2015,0.471425
+Hungary,Civic engagement,2016,0.47235
+Hungary,Civic engagement,2017,0.473275
 Hungary,Civic engagement,2018,0.4742
+Hungary,Civic engagement,2019,0.510575
+Hungary,Civic engagement,2020,0.54695
+Hungary,Civic engagement,2021,0.583325
 Hungary,Civic engagement,2022,0.6197
-Hungary,Environmental quality,2004,0.9997
-Hungary,Environmental quality,2005,0.9997
+Hungary,Civic engagement,2023,0.6197
 Hungary,Environmental quality,2006,0.9997
 Hungary,Environmental quality,2007,0.9998
 Hungary,Environmental quality,2008,0.9998
@@ -2182,8 +2555,6 @@ Hungary,Environmental quality,2020,1.0
 Hungary,Environmental quality,2021,0.9068
 Hungary,Environmental quality,2022,0.9057
 Hungary,Environmental quality,2023,0.9993
-Hungary,Health,2004,0.5277
-Hungary,Health,2005,0.5152
 Hungary,Health,2006,0.5377
 Hungary,Health,2007,0.547
 Hungary,Health,2008,0.5787
@@ -2202,8 +2573,6 @@ Hungary,Health,2020,0.5641
 Hungary,Health,2021,0.572
 Hungary,Health,2022,0.5677
 Hungary,Health,2023,0.5309
-Hungary,Housing,2004,0.7221
-Hungary,Housing,2005,0.424
 Hungary,Housing,2006,0.4461
 Hungary,Housing,2007,0.4399
 Hungary,Housing,2008,0.4359
@@ -2222,8 +2591,6 @@ Hungary,Housing,2020,0.4563
 Hungary,Housing,2021,0.5542
 Hungary,Housing,2022,0.5784
 Hungary,Housing,2023,0.33
-Hungary,Income and wealth,2004,0.1629
-Hungary,Income and wealth,2005,0.3948
 Hungary,Income and wealth,2006,0.2584
 Hungary,Income and wealth,2007,0.2166
 Hungary,Income and wealth,2008,0.2114
@@ -2243,14 +2610,23 @@ Hungary,Income and wealth,2021,0.1588
 Hungary,Income and wealth,2022,0.2594
 Hungary,Income and wealth,2023,0.2726
 Hungary,Knowledge and skills,2006,0.636
+Hungary,Knowledge and skills,2007,0.6424333333333333
+Hungary,Knowledge and skills,2008,0.6488666666666667
 Hungary,Knowledge and skills,2009,0.6553
+Hungary,Knowledge and skills,2010,0.6418333333333334
+Hungary,Knowledge and skills,2011,0.6283666666666666
 Hungary,Knowledge and skills,2012,0.6149
+Hungary,Knowledge and skills,2013,0.5971
+Hungary,Knowledge and skills,2014,0.5793
 Hungary,Knowledge and skills,2015,0.5615
+Hungary,Knowledge and skills,2016,0.6679999999999999
 Hungary,Knowledge and skills,2017,0.7745
 Hungary,Knowledge and skills,2018,0.5763
+Hungary,Knowledge and skills,2019,0.5745
+Hungary,Knowledge and skills,2020,0.5727
+Hungary,Knowledge and skills,2021,0.5709000000000001
 Hungary,Knowledge and skills,2022,0.5691
-Hungary,Safety,2004,0.8724
-Hungary,Safety,2005,0.8767
+Hungary,Knowledge and skills,2023,0.5691
 Hungary,Safety,2006,0.5819
 Hungary,Safety,2007,0.5882
 Hungary,Safety,2008,0.567
@@ -2290,6 +2666,7 @@ Hungary,Social connections,2023,0.8447
 Hungary,Subjective well-being,2006,0.5483
 Hungary,Subjective well-being,2007,0.5204
 Hungary,Subjective well-being,2008,0.5477
+Hungary,Subjective well-being,2009,0.5356
 Hungary,Subjective well-being,2010,0.5235
 Hungary,Subjective well-being,2011,0.4529
 Hungary,Subjective well-being,2012,0.4529
@@ -2304,8 +2681,6 @@ Hungary,Subjective well-being,2020,0.6465
 Hungary,Subjective well-being,2021,0.5763
 Hungary,Subjective well-being,2022,0.613
 Hungary,Subjective well-being,2023,0.6278
-Hungary,Work and job quality,2004,0.7283
-Hungary,Work and job quality,2005,0.7011
 Hungary,Work and job quality,2006,0.7003
 Hungary,Work and job quality,2007,0.7
 Hungary,Work and job quality,2008,0.6677
@@ -2324,20 +2699,42 @@ Hungary,Work and job quality,2020,0.7971
 Hungary,Work and job quality,2021,0.8246
 Hungary,Work and job quality,2022,0.7972
 Hungary,Work and job quality,2023,0.7596
+Hungary,Work-life balance,2006,0.4683
+Hungary,Work-life balance,2007,0.4683
+Hungary,Work-life balance,2008,0.4683
 Hungary,Work-life balance,2009,0.4683
+Hungary,Work-life balance,2010,0.46655
+Hungary,Work-life balance,2011,0.4648
+Hungary,Work-life balance,2012,0.46304999999999996
 Hungary,Work-life balance,2013,0.4613
+Hungary,Work-life balance,2014,0.45208
+Hungary,Work-life balance,2015,0.44286
+Hungary,Work-life balance,2016,0.43364
+Hungary,Work-life balance,2017,0.42442
 Hungary,Work-life balance,2018,0.4152
+Hungary,Work-life balance,2019,0.415375
+Hungary,Work-life balance,2020,0.41555
+Hungary,Work-life balance,2021,0.415725
 Hungary,Work-life balance,2022,0.4159
-Iceland,Civic engagement,2004,0.5001
+Hungary,Work-life balance,2023,0.4159
+Iceland,Civic engagement,2006,0.6068
+Iceland,Civic engagement,2007,0.6068
+Iceland,Civic engagement,2008,0.6068
+Iceland,Civic engagement,2009,0.6068
+Iceland,Civic engagement,2010,0.6068
+Iceland,Civic engagement,2011,0.6068
 Iceland,Civic engagement,2012,0.6068
 Iceland,Civic engagement,2013,0.8348
+Iceland,Civic engagement,2014,0.7718
+Iceland,Civic engagement,2015,0.7088
 Iceland,Civic engagement,2016,0.6458
+Iceland,Civic engagement,2017,0.521225
+Iceland,Civic engagement,2018,0.39665
+Iceland,Civic engagement,2019,0.27207499999999996
 Iceland,Civic engagement,2020,0.1475
 Iceland,Civic engagement,2021,0.2348
+Iceland,Civic engagement,2022,0.2563
 Iceland,Civic engagement,2023,0.2778
-Iceland,Civic engagement,2024,0.8023
-Iceland,Environmental quality,2004,0.5
-Iceland,Environmental quality,2005,0.5
 Iceland,Environmental quality,2006,0.5
 Iceland,Environmental quality,2007,0.5
 Iceland,Environmental quality,2008,0.5
@@ -2356,8 +2753,6 @@ Iceland,Environmental quality,2020,0.6899
 Iceland,Environmental quality,2021,1.0
 Iceland,Environmental quality,2022,1.0
 Iceland,Environmental quality,2023,1.0
-Iceland,Health,2004,0.6891
-Iceland,Health,2005,0.6966
 Iceland,Health,2006,0.6978
 Iceland,Health,2007,0.6881
 Iceland,Health,2008,0.6812
@@ -2376,8 +2771,6 @@ Iceland,Health,2020,0.7699
 Iceland,Health,2021,0.8062
 Iceland,Health,2022,0.7931
 Iceland,Health,2023,0.7442
-Iceland,Housing,2004,0.1882
-Iceland,Housing,2005,0.4486
 Iceland,Housing,2006,0.5044
 Iceland,Housing,2007,0.5014
 Iceland,Housing,2008,0.4374
@@ -2394,8 +2787,8 @@ Iceland,Housing,2018,0.526
 Iceland,Housing,2019,0.4607
 Iceland,Housing,2020,0.9247
 Iceland,Housing,2021,0.8509
-Iceland,Income and wealth,2004,0.1227
-Iceland,Income and wealth,2005,0.1101
+Iceland,Housing,2022,0.8509
+Iceland,Housing,2023,0.8509
 Iceland,Income and wealth,2006,0.1251
 Iceland,Income and wealth,2007,0.1116
 Iceland,Income and wealth,2008,0.1275
@@ -2410,14 +2803,28 @@ Iceland,Income and wealth,2016,0.0561
 Iceland,Income and wealth,2017,0.04
 Iceland,Income and wealth,2018,0.0762
 Iceland,Income and wealth,2019,0.1108
+Iceland,Income and wealth,2020,0.1108
+Iceland,Income and wealth,2021,0.1108
+Iceland,Income and wealth,2022,0.1108
+Iceland,Income and wealth,2023,0.1108
 Iceland,Knowledge and skills,2006,0.6423
+Iceland,Knowledge and skills,2007,0.6579333333333334
+Iceland,Knowledge and skills,2008,0.6735666666666666
 Iceland,Knowledge and skills,2009,0.6892
+Iceland,Knowledge and skills,2010,0.6573
+Iceland,Knowledge and skills,2011,0.6254000000000001
 Iceland,Knowledge and skills,2012,0.5935
+Iceland,Knowledge and skills,2013,0.5931000000000001
+Iceland,Knowledge and skills,2014,0.5927
 Iceland,Knowledge and skills,2015,0.5923
+Iceland,Knowledge and skills,2016,0.5941000000000001
+Iceland,Knowledge and skills,2017,0.5959
 Iceland,Knowledge and skills,2018,0.5977
+Iceland,Knowledge and skills,2019,0.554025
+Iceland,Knowledge and skills,2020,0.51035
+Iceland,Knowledge and skills,2021,0.466675
 Iceland,Knowledge and skills,2022,0.423
-Iceland,Safety,2004,0.9458
-Iceland,Safety,2005,0.9562
+Iceland,Knowledge and skills,2023,0.423
 Iceland,Safety,2006,0.899
 Iceland,Safety,2007,0.9947
 Iceland,Safety,2008,0.8367
@@ -2436,9 +2843,15 @@ Iceland,Safety,2020,0.8716
 Iceland,Safety,2021,0.8708
 Iceland,Safety,2022,0.843
 Iceland,Safety,2023,0.8651
+Iceland,Social connections,2006,0.9495
+Iceland,Social connections,2007,0.9495
 Iceland,Social connections,2008,0.9495
+Iceland,Social connections,2009,0.949725
+Iceland,Social connections,2010,0.9499500000000001
+Iceland,Social connections,2011,0.950175
 Iceland,Social connections,2012,0.9504
 Iceland,Social connections,2013,0.8274
+Iceland,Social connections,2014,0.89445
 Iceland,Social connections,2015,0.9615
 Iceland,Social connections,2016,0.9615
 Iceland,Social connections,2017,0.9543
@@ -2448,9 +2861,15 @@ Iceland,Social connections,2020,0.9578
 Iceland,Social connections,2021,0.9578
 Iceland,Social connections,2022,0.9578
 Iceland,Social connections,2023,0.9578
+Iceland,Subjective well-being,2006,0.7142
+Iceland,Subjective well-being,2007,0.7142
 Iceland,Subjective well-being,2008,0.7142
+Iceland,Subjective well-being,2009,0.7021499999999999
+Iceland,Subjective well-being,2010,0.6900999999999999
+Iceland,Subjective well-being,2011,0.67805
 Iceland,Subjective well-being,2012,0.666
 Iceland,Subjective well-being,2013,0.7686
+Iceland,Subjective well-being,2014,0.7295499999999999
 Iceland,Subjective well-being,2015,0.6905
 Iceland,Subjective well-being,2016,0.6905
 Iceland,Subjective well-being,2017,0.708
@@ -2460,8 +2879,6 @@ Iceland,Subjective well-being,2020,0.6655
 Iceland,Subjective well-being,2021,0.6655
 Iceland,Subjective well-being,2022,0.6169
 Iceland,Subjective well-being,2023,0.6169
-Iceland,Work and job quality,2004,0.8576
-Iceland,Work and job quality,2005,0.8592
 Iceland,Work and job quality,2006,0.8042
 Iceland,Work and job quality,2007,0.8926
 Iceland,Work and job quality,2008,0.8869
@@ -2480,16 +2897,42 @@ Iceland,Work and job quality,2020,0.8374
 Iceland,Work and job quality,2021,0.8563
 Iceland,Work and job quality,2022,0.8749
 Iceland,Work and job quality,2023,0.8881
+Iceland,Work-life balance,2006,0.4944
+Iceland,Work-life balance,2007,0.4944
+Iceland,Work-life balance,2008,0.4944
+Iceland,Work-life balance,2009,0.4944
+Iceland,Work-life balance,2010,0.4944
+Iceland,Work-life balance,2011,0.4944
+Iceland,Work-life balance,2012,0.4944
 Iceland,Work-life balance,2013,0.4944
+Iceland,Work-life balance,2014,0.48812
+Iceland,Work-life balance,2015,0.48184
+Iceland,Work-life balance,2016,0.47556000000000004
+Iceland,Work-life balance,2017,0.46928000000000003
 Iceland,Work-life balance,2018,0.463
+Iceland,Work-life balance,2019,0.463
+Iceland,Work-life balance,2020,0.463
+Iceland,Work-life balance,2021,0.463
+Iceland,Work-life balance,2022,0.463
+Iceland,Work-life balance,2023,0.463
+Ireland,Civic engagement,2006,0.5523
 Ireland,Civic engagement,2007,0.5523
+Ireland,Civic engagement,2008,0.5493250000000001
+Ireland,Civic engagement,2009,0.54635
+Ireland,Civic engagement,2010,0.5433749999999999
 Ireland,Civic engagement,2011,0.5404
+Ireland,Civic engagement,2012,0.59892
+Ireland,Civic engagement,2013,0.65744
+Ireland,Civic engagement,2014,0.7159599999999999
+Ireland,Civic engagement,2015,0.77448
 Ireland,Civic engagement,2016,0.833
+Ireland,Civic engagement,2017,0.6247499999999999
+Ireland,Civic engagement,2018,0.4165
+Ireland,Civic engagement,2019,0.20825
 Ireland,Civic engagement,2020,0.0
 Ireland,Civic engagement,2021,0.414
+Ireland,Civic engagement,2022,0.41685
 Ireland,Civic engagement,2023,0.4197
-Ireland,Environmental quality,2004,0.9906
-Ireland,Environmental quality,2005,0.9917
 Ireland,Environmental quality,2006,0.9906
 Ireland,Environmental quality,2007,0.9927
 Ireland,Environmental quality,2008,0.994
@@ -2508,8 +2951,6 @@ Ireland,Environmental quality,2020,0.9992
 Ireland,Environmental quality,2021,1.0
 Ireland,Environmental quality,2022,1.0
 Ireland,Environmental quality,2023,1.0
-Ireland,Health,2004,0.6308
-Ireland,Health,2005,0.6392
 Ireland,Health,2006,0.6407
 Ireland,Health,2007,0.6919
 Ireland,Health,2008,0.6893
@@ -2528,8 +2969,6 @@ Ireland,Health,2020,0.6789
 Ireland,Health,2021,0.6766
 Ireland,Health,2022,0.6615
 Ireland,Health,2023,0.6136
-Ireland,Housing,2004,0.3889
-Ireland,Housing,2005,0.2887
 Ireland,Housing,2006,0.313
 Ireland,Housing,2007,0.3651
 Ireland,Housing,2008,0.3998
@@ -2548,8 +2987,6 @@ Ireland,Housing,2020,0.5629
 Ireland,Housing,2021,0.5229
 Ireland,Housing,2022,0.5012
 Ireland,Housing,2023,0.4568
-Ireland,Income and wealth,2004,0.5628
-Ireland,Income and wealth,2005,0.4256
 Ireland,Income and wealth,2006,0.4834
 Ireland,Income and wealth,2007,0.3286
 Ireland,Income and wealth,2008,0.3253
@@ -2569,13 +3006,23 @@ Ireland,Income and wealth,2021,0.2284
 Ireland,Income and wealth,2022,0.3154
 Ireland,Income and wealth,2023,0.3901
 Ireland,Knowledge and skills,2006,0.7322
+Ireland,Knowledge and skills,2007,0.7097
+Ireland,Knowledge and skills,2008,0.6871999999999999
 Ireland,Knowledge and skills,2009,0.6647
+Ireland,Knowledge and skills,2010,0.5939
+Ireland,Knowledge and skills,2011,0.5231
 Ireland,Knowledge and skills,2012,0.4523
+Ireland,Knowledge and skills,2013,0.5505
+Ireland,Knowledge and skills,2014,0.6487
 Ireland,Knowledge and skills,2015,0.7469
+Ireland,Knowledge and skills,2016,0.7249
+Ireland,Knowledge and skills,2017,0.7029
 Ireland,Knowledge and skills,2018,0.6809
+Ireland,Knowledge and skills,2019,0.6734249999999999
+Ireland,Knowledge and skills,2020,0.66595
+Ireland,Knowledge and skills,2021,0.658475
 Ireland,Knowledge and skills,2022,0.651
-Ireland,Safety,2004,0.9328
-Ireland,Safety,2005,0.9273
+Ireland,Knowledge and skills,2023,0.651
 Ireland,Safety,2006,0.7216
 Ireland,Safety,2007,0.9534
 Ireland,Safety,2008,0.6803
@@ -2594,8 +3041,8 @@ Ireland,Safety,2020,0.7075
 Ireland,Safety,2021,0.6622
 Ireland,Safety,2022,0.7051
 Ireland,Safety,2023,0.6946
-Ireland,Social connections,2005,0.439
 Ireland,Social connections,2006,0.9436
+Ireland,Social connections,2007,0.94245
 Ireland,Social connections,2008,0.9413
 Ireland,Social connections,2009,0.9472
 Ireland,Social connections,2010,0.9408
@@ -2613,6 +3060,7 @@ Ireland,Social connections,2021,0.7539
 Ireland,Social connections,2022,0.7735
 Ireland,Social connections,2023,0.7625
 Ireland,Subjective well-being,2006,0.8633
+Ireland,Subjective well-being,2007,0.8353999999999999
 Ireland,Subjective well-being,2008,0.8075
 Ireland,Subjective well-being,2009,0.7759
 Ireland,Subjective well-being,2010,0.7689
@@ -2629,8 +3077,6 @@ Ireland,Subjective well-being,2020,0.7949
 Ireland,Subjective well-being,2021,0.7315
 Ireland,Subjective well-being,2022,0.7508
 Ireland,Subjective well-being,2023,0.776
-Ireland,Work and job quality,2004,0.8042
-Ireland,Work and job quality,2005,0.6785
 Ireland,Work and job quality,2006,0.7753
 Ireland,Work and job quality,2007,0.8416
 Ireland,Work and job quality,2008,0.8
@@ -2649,20 +3095,42 @@ Ireland,Work and job quality,2020,0.7775
 Ireland,Work and job quality,2021,0.8113
 Ireland,Work and job quality,2022,0.8054
 Ireland,Work and job quality,2023,0.771
-Ireland,Work-life balance,2005,0.4876
+Ireland,Work-life balance,2006,0.5101
+Ireland,Work-life balance,2007,0.5101
+Ireland,Work-life balance,2008,0.5101
+Ireland,Work-life balance,2009,0.5101
+Ireland,Work-life balance,2010,0.5101
+Ireland,Work-life balance,2011,0.5101
+Ireland,Work-life balance,2012,0.5101
 Ireland,Work-life balance,2013,0.5101
+Ireland,Work-life balance,2014,0.49906
+Ireland,Work-life balance,2015,0.48802
+Ireland,Work-life balance,2016,0.47698
+Ireland,Work-life balance,2017,0.46594
 Ireland,Work-life balance,2018,0.4549
+Ireland,Work-life balance,2019,0.44225000000000003
+Ireland,Work-life balance,2020,0.4296
+Ireland,Work-life balance,2021,0.41695
 Ireland,Work-life balance,2022,0.4043
+Ireland,Work-life balance,2023,0.4043
 Israel,Civic engagement,2006,0.3891
+Israel,Civic engagement,2007,0.39536666666666664
+Israel,Civic engagement,2008,0.40163333333333334
 Israel,Civic engagement,2009,0.4079
+Israel,Civic engagement,2010,0.4448
+Israel,Civic engagement,2011,0.4817
+Israel,Civic engagement,2012,0.5186
 Israel,Civic engagement,2013,0.5555
+Israel,Civic engagement,2014,0.64785
 Israel,Civic engagement,2015,0.7402
+Israel,Civic engagement,2016,0.7413
+Israel,Civic engagement,2017,0.7424
+Israel,Civic engagement,2018,0.7435
 Israel,Civic engagement,2019,0.7446
 Israel,Civic engagement,2020,0.3111
 Israel,Civic engagement,2021,0.6015
 Israel,Civic engagement,2022,0.6369
-Israel,Environmental quality,2004,0.4898
-Israel,Environmental quality,2005,0.639
+Israel,Civic engagement,2023,0.6369
 Israel,Environmental quality,2006,0.6619
 Israel,Environmental quality,2007,0.6349
 Israel,Environmental quality,2008,0.4972
@@ -2681,8 +3149,6 @@ Israel,Environmental quality,2020,0.4994
 Israel,Environmental quality,2021,0.5242
 Israel,Environmental quality,2022,0.585
 Israel,Environmental quality,2023,0.0
-Israel,Health,2004,0.7885
-Israel,Health,2005,0.7964
 Israel,Health,2006,0.8075
 Israel,Health,2007,0.8005
 Israel,Health,2008,0.8104
@@ -2700,6 +3166,12 @@ Israel,Health,2019,0.715
 Israel,Health,2020,0.7152
 Israel,Health,2021,0.7503
 Israel,Health,2022,0.6938
+Israel,Health,2023,0.6938
+Israel,Income and wealth,2006,0.6075
+Israel,Income and wealth,2007,0.6075
+Israel,Income and wealth,2008,0.6075
+Israel,Income and wealth,2009,0.6075
+Israel,Income and wealth,2010,0.6075
 Israel,Income and wealth,2011,0.6075
 Israel,Income and wealth,2012,0.6099
 Israel,Income and wealth,2013,0.6199
@@ -2711,15 +3183,26 @@ Israel,Income and wealth,2018,0.5195
 Israel,Income and wealth,2019,0.5775
 Israel,Income and wealth,2020,0.5032
 Israel,Income and wealth,2021,0.5816
+Israel,Income and wealth,2022,0.5816
+Israel,Income and wealth,2023,0.5816
 Israel,Knowledge and skills,2006,0.3638
+Israel,Knowledge and skills,2007,0.3792
+Israel,Knowledge and skills,2008,0.3946
 Israel,Knowledge and skills,2009,0.41
+Israel,Knowledge and skills,2010,0.4513
+Israel,Knowledge and skills,2011,0.49260000000000004
 Israel,Knowledge and skills,2012,0.5339
+Israel,Knowledge and skills,2013,0.5908
 Israel,Knowledge and skills,2014,0.6477
 Israel,Knowledge and skills,2015,0.596
+Israel,Knowledge and skills,2016,0.5961333333333333
+Israel,Knowledge and skills,2017,0.5962666666666667
 Israel,Knowledge and skills,2018,0.5964
+Israel,Knowledge and skills,2019,0.5979000000000001
+Israel,Knowledge and skills,2020,0.5994
+Israel,Knowledge and skills,2021,0.6009
 Israel,Knowledge and skills,2022,0.6024
-Israel,Safety,2004,0.9362
-Israel,Safety,2005,0.9444
+Israel,Knowledge and skills,2023,0.6024
 Israel,Safety,2006,0.7308
 Israel,Safety,2007,0.7399
 Israel,Safety,2008,0.7118
@@ -2774,8 +3257,6 @@ Israel,Subjective well-being,2020,0.6747
 Israel,Subjective well-being,2021,0.7229
 Israel,Subjective well-being,2022,0.6198
 Israel,Subjective well-being,2023,0.6198
-Israel,Work and job quality,2004,0.6589
-Israel,Work and job quality,2005,0.6078
 Israel,Work and job quality,2006,0.6496
 Israel,Work and job quality,2007,0.6356
 Israel,Work and job quality,2008,0.6637
@@ -2794,15 +3275,42 @@ Israel,Work and job quality,2020,0.7485
 Israel,Work and job quality,2021,0.7537
 Israel,Work and job quality,2022,0.7483
 Israel,Work and job quality,2023,0.7661
+Israel,Work-life balance,2006,0.3059
+Israel,Work-life balance,2007,0.3059
+Israel,Work-life balance,2008,0.3059
+Israel,Work-life balance,2009,0.3059
+Israel,Work-life balance,2010,0.3059
+Israel,Work-life balance,2011,0.3059
+Israel,Work-life balance,2012,0.3059
+Israel,Work-life balance,2013,0.3059
+Israel,Work-life balance,2014,0.3059
+Israel,Work-life balance,2015,0.3059
+Israel,Work-life balance,2016,0.3059
+Israel,Work-life balance,2017,0.3059
+Israel,Work-life balance,2018,0.3059
+Israel,Work-life balance,2019,0.3059
+Israel,Work-life balance,2020,0.3059
 Israel,Work-life balance,2021,0.3059
+Israel,Work-life balance,2022,0.3059
+Israel,Work-life balance,2023,0.3059
 Italy,Civic engagement,2006,0.8126
+Italy,Civic engagement,2007,0.9063
 Italy,Civic engagement,2008,1.0
+Italy,Civic engagement,2009,0.93362
+Italy,Civic engagement,2010,0.86724
+Italy,Civic engagement,2011,0.80086
+Italy,Civic engagement,2012,0.73448
 Italy,Civic engagement,2013,0.6681
+Italy,Civic engagement,2014,0.65696
+Italy,Civic engagement,2015,0.6458200000000001
+Italy,Civic engagement,2016,0.63468
+Italy,Civic engagement,2017,0.6235400000000001
 Italy,Civic engagement,2018,0.6124
+Italy,Civic engagement,2019,0.59025
+Italy,Civic engagement,2020,0.5681
+Italy,Civic engagement,2021,0.54595
 Italy,Civic engagement,2022,0.5238
 Italy,Civic engagement,2023,0.2884
-Italy,Environmental quality,2004,0.8778
-Italy,Environmental quality,2005,0.8928
 Italy,Environmental quality,2006,0.8708
 Italy,Environmental quality,2007,0.8934
 Italy,Environmental quality,2008,0.9076
@@ -2821,8 +3329,6 @@ Italy,Environmental quality,2020,0.9882
 Italy,Environmental quality,2021,0.9243
 Italy,Environmental quality,2022,0.8477
 Italy,Environmental quality,2023,0.9072
-Italy,Health,2004,0.6192
-Italy,Health,2005,0.6246
 Italy,Health,2006,0.6324
 Italy,Health,2007,0.6742
 Italy,Health,2008,0.6728
@@ -2841,8 +3347,6 @@ Italy,Health,2020,0.8107
 Italy,Health,2021,0.6849
 Italy,Health,2022,0.647
 Italy,Health,2023,0.6453
-Italy,Housing,2004,0.4943
-Italy,Housing,2005,0.3496
 Italy,Housing,2006,0.3647
 Italy,Housing,2007,0.3987
 Italy,Housing,2008,0.4012
@@ -2861,8 +3365,6 @@ Italy,Housing,2020,0.4357
 Italy,Housing,2021,0.3941
 Italy,Housing,2022,0.3864
 Italy,Housing,2023,0.4279
-Italy,Income and wealth,2004,0.7021
-Italy,Income and wealth,2005,0.6061
 Italy,Income and wealth,2006,0.6802
 Italy,Income and wealth,2007,0.5564
 Italy,Income and wealth,2008,0.5614
@@ -2882,13 +3384,23 @@ Italy,Income and wealth,2021,0.3544
 Italy,Income and wealth,2022,0.3621
 Italy,Income and wealth,2023,0.4156
 Italy,Knowledge and skills,2006,0.5
+Italy,Knowledge and skills,2007,0.5296333333333333
+Italy,Knowledge and skills,2008,0.5592666666666667
 Italy,Knowledge and skills,2009,0.5889
+Italy,Knowledge and skills,2010,0.5136333333333333
+Italy,Knowledge and skills,2011,0.4383666666666667
 Italy,Knowledge and skills,2012,0.3631
+Italy,Knowledge and skills,2013,0.4654
+Italy,Knowledge and skills,2014,0.5677
 Italy,Knowledge and skills,2015,0.67
+Italy,Knowledge and skills,2016,0.6429333333333334
+Italy,Knowledge and skills,2017,0.6158666666666667
 Italy,Knowledge and skills,2018,0.5888
+Italy,Knowledge and skills,2019,0.5802499999999999
+Italy,Knowledge and skills,2020,0.5717
+Italy,Knowledge and skills,2021,0.56315
 Italy,Knowledge and skills,2022,0.5546
-Italy,Safety,2004,0.9103
-Italy,Safety,2005,0.9202
+Italy,Knowledge and skills,2023,0.5546
 Italy,Safety,2006,0.6379
 Italy,Safety,2007,0.6457
 Italy,Safety,2008,0.5941
@@ -2943,8 +3455,6 @@ Italy,Subjective well-being,2020,0.6708
 Italy,Subjective well-being,2021,0.678
 Italy,Subjective well-being,2022,0.7011
 Italy,Subjective well-being,2023,0.6522
-Italy,Work and job quality,2004,0.6875
-Italy,Work and job quality,2005,0.6187
 Italy,Work and job quality,2006,0.6581
 Italy,Work and job quality,2007,0.7173
 Italy,Work and job quality,2008,0.691
@@ -2963,27 +3473,42 @@ Italy,Work and job quality,2020,0.6441
 Italy,Work and job quality,2021,0.6805
 Italy,Work and job quality,2022,0.6157
 Italy,Work and job quality,2023,0.5985
+Italy,Work-life balance,2006,1.0
+Italy,Work-life balance,2007,1.0
 Italy,Work-life balance,2008,1.0
+Italy,Work-life balance,2009,0.90122
+Italy,Work-life balance,2010,0.80244
+Italy,Work-life balance,2011,0.70366
+Italy,Work-life balance,2012,0.60488
 Italy,Work-life balance,2013,0.5061
+Italy,Work-life balance,2014,0.47586
+Italy,Work-life balance,2015,0.44562
+Italy,Work-life balance,2016,0.41537999999999997
+Italy,Work-life balance,2017,0.38514
 Italy,Work-life balance,2018,0.3549
+Italy,Work-life balance,2019,0.34585
+Italy,Work-life balance,2020,0.3368
+Italy,Work-life balance,2021,0.32775
 Italy,Work-life balance,2022,0.3187
-Japan,Civic engagement,2004,0.3454
-Japan,Civic engagement,2005,0.5075
+Italy,Work-life balance,2023,0.3187
+Japan,Civic engagement,2006,0.3563
 Japan,Civic engagement,2007,0.3563
+Japan,Civic engagement,2008,0.40354999999999996
 Japan,Civic engagement,2009,0.4508
 Japan,Civic engagement,2010,0.3435
+Japan,Civic engagement,2011,0.35715
 Japan,Civic engagement,2012,0.3708
 Japan,Civic engagement,2013,0.4001
 Japan,Civic engagement,2014,0.2913
+Japan,Civic engagement,2015,0.26925
 Japan,Civic engagement,2016,0.2472
 Japan,Civic engagement,2017,0.2277
+Japan,Civic engagement,2018,0.3476
 Japan,Civic engagement,2019,0.4675
+Japan,Civic engagement,2020,0.4439
 Japan,Civic engagement,2021,0.4203
 Japan,Civic engagement,2022,0.2749
 Japan,Civic engagement,2023,0.1602
-Japan,Civic engagement,2024,0.0
-Japan,Environmental quality,2004,0.9114
-Japan,Environmental quality,2005,0.9217
 Japan,Environmental quality,2006,0.9106
 Japan,Environmental quality,2007,0.9307
 Japan,Environmental quality,2008,0.9432
@@ -3002,8 +3527,6 @@ Japan,Environmental quality,2020,0.9936
 Japan,Environmental quality,2021,1.0
 Japan,Environmental quality,2022,1.0
 Japan,Environmental quality,2023,0.8716
-Japan,Health,2004,0.5472
-Japan,Health,2005,0.8054
 Japan,Health,2006,0.8031
 Japan,Health,2007,0.5545
 Japan,Health,2008,0.806
@@ -3021,8 +3544,7 @@ Japan,Health,2019,0.542
 Japan,Health,2020,0.8074
 Japan,Health,2021,0.8273
 Japan,Health,2022,0.5108
-Japan,Housing,2004,0.6209
-Japan,Housing,2005,0.5122
+Japan,Health,2023,0.5108
 Japan,Housing,2006,0.5165
 Japan,Housing,2007,0.5812
 Japan,Housing,2008,0.5922
@@ -3040,8 +3562,7 @@ Japan,Housing,2019,0.5866
 Japan,Housing,2020,0.6371
 Japan,Housing,2021,0.5871
 Japan,Housing,2022,0.5557
-Japan,Income and wealth,2004,0.4396
-Japan,Income and wealth,2005,0.441
+Japan,Housing,2023,0.5557
 Japan,Income and wealth,2006,0.424
 Japan,Income and wealth,2007,0.4295
 Japan,Income and wealth,2008,0.412
@@ -3059,14 +3580,25 @@ Japan,Income and wealth,2019,0.1915
 Japan,Income and wealth,2020,0.3878
 Japan,Income and wealth,2021,0.4384
 Japan,Income and wealth,2022,0.3817
+Japan,Income and wealth,2023,0.3817
 Japan,Knowledge and skills,2006,0.7787
+Japan,Knowledge and skills,2007,0.8130999999999999
+Japan,Knowledge and skills,2008,0.8475
 Japan,Knowledge and skills,2009,0.8819
+Japan,Knowledge and skills,2010,0.8321333333333334
+Japan,Knowledge and skills,2011,0.7823666666666667
 Japan,Knowledge and skills,2012,0.7326
+Japan,Knowledge and skills,2013,0.7874
+Japan,Knowledge and skills,2014,0.8422000000000001
 Japan,Knowledge and skills,2015,0.897
+Japan,Knowledge and skills,2016,0.8464666666666667
+Japan,Knowledge and skills,2017,0.7959333333333333
 Japan,Knowledge and skills,2018,0.7454
+Japan,Knowledge and skills,2019,0.75605
+Japan,Knowledge and skills,2020,0.7666999999999999
+Japan,Knowledge and skills,2021,0.77735
 Japan,Knowledge and skills,2022,0.788
-Japan,Safety,2004,0.9667
-Japan,Safety,2005,0.974
+Japan,Knowledge and skills,2023,0.788
 Japan,Safety,2006,0.6704
 Japan,Safety,2007,0.6677
 Japan,Safety,2008,0.6849
@@ -3121,8 +3653,6 @@ Japan,Subjective well-being,2020,0.6131
 Japan,Subjective well-being,2021,0.634
 Japan,Subjective well-being,2022,0.606
 Japan,Subjective well-being,2023,0.6066
-Japan,Work and job quality,2004,0.6803
-Japan,Work and job quality,2005,0.6419
 Japan,Work and job quality,2006,0.7188
 Japan,Work and job quality,2007,0.7629
 Japan,Work and job quality,2008,0.7538
@@ -3141,18 +3671,42 @@ Japan,Work and job quality,2020,0.7503
 Japan,Work and job quality,2021,0.7801
 Japan,Work and job quality,2022,0.7617
 Japan,Work and job quality,2023,0.7498
+Japan,Work-life balance,2006,0.699
+Japan,Work-life balance,2007,0.699
+Japan,Work-life balance,2008,0.699
+Japan,Work-life balance,2009,0.699
+Japan,Work-life balance,2010,0.699
 Japan,Work-life balance,2011,0.699
+Japan,Work-life balance,2012,0.6415799999999999
+Japan,Work-life balance,2013,0.58416
+Japan,Work-life balance,2014,0.52674
+Japan,Work-life balance,2015,0.46931999999999996
 Japan,Work-life balance,2016,0.4119
+Japan,Work-life balance,2017,0.45302
+Japan,Work-life balance,2018,0.49414
+Japan,Work-life balance,2019,0.5352600000000001
+Japan,Work-life balance,2020,0.57638
 Japan,Work-life balance,2021,0.6175
+Japan,Work-life balance,2022,0.6175
+Japan,Work-life balance,2023,0.6175
+Korea,Civic engagement,2006,0.4874
 Korea,Civic engagement,2007,0.4874
+Korea,Civic engagement,2008,0.53452
+Korea,Civic engagement,2009,0.5816399999999999
+Korea,Civic engagement,2010,0.62876
+Korea,Civic engagement,2011,0.67588
 Korea,Civic engagement,2012,0.723
+Korea,Civic engagement,2013,0.6230249999999999
+Korea,Civic engagement,2014,0.52305
+Korea,Civic engagement,2015,0.423075
 Korea,Civic engagement,2016,0.3231
 Korea,Civic engagement,2017,0.6745
+Korea,Civic engagement,2018,0.6837
+Korea,Civic engagement,2019,0.6929000000000001
+Korea,Civic engagement,2020,0.7021000000000001
 Korea,Civic engagement,2021,0.7113
 Korea,Civic engagement,2022,0.7435
 Korea,Civic engagement,2023,0.547
-Korea,Environmental quality,2004,0.8755
-Korea,Environmental quality,2005,0.8956
 Korea,Environmental quality,2006,0.8808
 Korea,Environmental quality,2007,0.9075
 Korea,Environmental quality,2008,0.9242
@@ -3171,8 +3725,6 @@ Korea,Environmental quality,2020,0.9912
 Korea,Environmental quality,2021,1.0
 Korea,Environmental quality,2022,1.0
 Korea,Environmental quality,2023,1.0
-Korea,Health,2004,0.6335
-Korea,Health,2005,0.6349
 Korea,Health,2006,0.526
 Korea,Health,2007,0.6987
 Korea,Health,2008,0.5576
@@ -3190,8 +3742,7 @@ Korea,Health,2019,0.7055
 Korea,Health,2020,0.5905
 Korea,Health,2021,0.742
 Korea,Health,2022,0.5751
-Korea,Housing,2004,0.7992
-Korea,Housing,2005,0.8813
+Korea,Health,2023,0.5751
 Korea,Housing,2006,0.9166
 Korea,Housing,2007,0.9554
 Korea,Housing,2008,0.9685
@@ -3210,8 +3761,6 @@ Korea,Housing,2020,0.9607
 Korea,Housing,2021,0.9675
 Korea,Housing,2022,1.0
 Korea,Housing,2023,1.0
-Korea,Income and wealth,2004,0.1912
-Korea,Income and wealth,2005,0.1692
 Korea,Income and wealth,2006,0.1599
 Korea,Income and wealth,2007,0.1898
 Korea,Income and wealth,2008,0.2027
@@ -3229,14 +3778,25 @@ Korea,Income and wealth,2019,0.5016
 Korea,Income and wealth,2020,0.3962
 Korea,Income and wealth,2021,0.3936
 Korea,Income and wealth,2022,0.3862
+Korea,Income and wealth,2023,0.3862
 Korea,Knowledge and skills,2006,0.92
+Korea,Knowledge and skills,2007,0.9349333333333334
+Korea,Knowledge and skills,2008,0.9498666666666666
 Korea,Knowledge and skills,2009,0.9648
+Korea,Knowledge and skills,2010,0.8207
+Korea,Knowledge and skills,2011,0.6766
 Korea,Knowledge and skills,2012,0.5325
+Korea,Knowledge and skills,2013,0.6172333333333333
+Korea,Knowledge and skills,2014,0.7019666666666666
 Korea,Knowledge and skills,2015,0.7867
+Korea,Knowledge and skills,2016,0.7785666666666666
+Korea,Knowledge and skills,2017,0.7704333333333333
 Korea,Knowledge and skills,2018,0.7623
+Korea,Knowledge and skills,2019,0.770125
+Korea,Knowledge and skills,2020,0.7779499999999999
+Korea,Knowledge and skills,2021,0.785775
 Korea,Knowledge and skills,2022,0.7936
-Korea,Safety,2004,0.8629
-Korea,Safety,2005,0.8694
+Korea,Knowledge and skills,2023,0.7936
 Korea,Safety,2006,0.5983
 Korea,Safety,2007,0.6041
 Korea,Safety,2008,0.5795
@@ -3291,8 +3851,6 @@ Korea,Subjective well-being,2020,0.5115
 Korea,Subjective well-being,2021,0.5671
 Korea,Subjective well-being,2022,0.5652
 Korea,Subjective well-being,2023,0.6465
-Korea,Work and job quality,2004,0.7265
-Korea,Work and job quality,2005,0.653
 Korea,Work and job quality,2006,0.7096
 Korea,Work and job quality,2007,0.759
 Korea,Work and job quality,2008,0.7738
@@ -3311,18 +3869,42 @@ Korea,Work and job quality,2020,0.7108
 Korea,Work and job quality,2021,0.7179
 Korea,Work and job quality,2022,0.7168
 Korea,Work and job quality,2023,0.7212
+Korea,Work-life balance,2006,0.2202
+Korea,Work-life balance,2007,0.2202
+Korea,Work-life balance,2008,0.2202
 Korea,Work-life balance,2009,0.2202
+Korea,Work-life balance,2010,0.28952
+Korea,Work-life balance,2011,0.35884
+Korea,Work-life balance,2012,0.42816
+Korea,Work-life balance,2013,0.49748
 Korea,Work-life balance,2014,0.5668
+Korea,Work-life balance,2015,0.5668
+Korea,Work-life balance,2016,0.5668
+Korea,Work-life balance,2017,0.5668
+Korea,Work-life balance,2018,0.5668
+Korea,Work-life balance,2019,0.5668
+Korea,Work-life balance,2020,0.5668
+Korea,Work-life balance,2021,0.5668
+Korea,Work-life balance,2022,0.5668
+Korea,Work-life balance,2023,0.5668
 Latvia,Civic engagement,2006,0.3349
+Latvia,Civic engagement,2007,0.379175
+Latvia,Civic engagement,2008,0.42345
+Latvia,Civic engagement,2009,0.467725
 Latvia,Civic engagement,2010,0.512
 Latvia,Civic engagement,2011,0.2723
+Latvia,Civic engagement,2012,0.32353333333333334
+Latvia,Civic engagement,2013,0.37476666666666664
 Latvia,Civic engagement,2014,0.426
+Latvia,Civic engagement,2015,0.330975
+Latvia,Civic engagement,2016,0.23595
+Latvia,Civic engagement,2017,0.140925
 Latvia,Civic engagement,2018,0.0459
+Latvia,Civic engagement,2019,0.05586666666666667
+Latvia,Civic engagement,2020,0.06583333333333334
 Latvia,Civic engagement,2021,0.0758
 Latvia,Civic engagement,2022,0.4518
 Latvia,Civic engagement,2023,0.082
-Latvia,Environmental quality,2004,0.9809
-Latvia,Environmental quality,2005,0.9831
 Latvia,Environmental quality,2006,0.9807
 Latvia,Environmental quality,2007,0.985
 Latvia,Environmental quality,2008,0.9877
@@ -3341,8 +3923,6 @@ Latvia,Environmental quality,2020,0.9986
 Latvia,Environmental quality,2021,1.0
 Latvia,Environmental quality,2022,1.0
 Latvia,Environmental quality,2023,1.0
-Latvia,Health,2004,0.4651
-Latvia,Health,2005,0.4483
 Latvia,Health,2006,0.4657
 Latvia,Health,2007,0.4868
 Latvia,Health,2008,0.4688
@@ -3361,8 +3941,6 @@ Latvia,Health,2020,0.5157
 Latvia,Health,2021,0.4949
 Latvia,Health,2022,0.497
 Latvia,Health,2023,0.4924
-Latvia,Housing,2004,1.0
-Latvia,Housing,2005,0.6279
 Latvia,Housing,2006,0.6152
 Latvia,Housing,2007,0.5954
 Latvia,Housing,2008,0.5843
@@ -3381,8 +3959,6 @@ Latvia,Housing,2020,0.3792
 Latvia,Housing,2021,0.3659
 Latvia,Housing,2022,0.2971
 Latvia,Housing,2023,0.608
-Latvia,Income and wealth,2004,0.6389
-Latvia,Income and wealth,2005,0.75
 Latvia,Income and wealth,2006,0.6887
 Latvia,Income and wealth,2007,0.6792
 Latvia,Income and wealth,2008,0.6926
@@ -3402,13 +3978,23 @@ Latvia,Income and wealth,2021,0.3454
 Latvia,Income and wealth,2022,0.3456
 Latvia,Income and wealth,2023,0.2625
 Latvia,Knowledge and skills,2006,0.594
+Latvia,Knowledge and skills,2007,0.5935
+Latvia,Knowledge and skills,2008,0.593
 Latvia,Knowledge and skills,2009,0.5925
+Latvia,Knowledge and skills,2010,0.6145666666666667
+Latvia,Knowledge and skills,2011,0.6366333333333333
 Latvia,Knowledge and skills,2012,0.6587
+Latvia,Knowledge and skills,2013,0.6603333333333333
+Latvia,Knowledge and skills,2014,0.6619666666666666
 Latvia,Knowledge and skills,2015,0.6636
+Latvia,Knowledge and skills,2016,0.6417999999999999
+Latvia,Knowledge and skills,2017,0.62
 Latvia,Knowledge and skills,2018,0.5982
+Latvia,Knowledge and skills,2019,0.5857
+Latvia,Knowledge and skills,2020,0.5731999999999999
+Latvia,Knowledge and skills,2021,0.5607
 Latvia,Knowledge and skills,2022,0.5482
-Latvia,Safety,2004,0.685
-Latvia,Safety,2005,0.7108
+Latvia,Knowledge and skills,2023,0.5482
 Latvia,Safety,2006,0.4289
 Latvia,Safety,2007,0.4301
 Latvia,Safety,2008,0.438
@@ -3431,6 +4017,7 @@ Latvia,Social connections,2006,0.7008
 Latvia,Social connections,2007,0.7045
 Latvia,Social connections,2008,0.6696
 Latvia,Social connections,2009,0.6415
+Latvia,Social connections,2010,0.65325
 Latvia,Social connections,2011,0.665
 Latvia,Social connections,2012,0.6596
 Latvia,Social connections,2013,0.6944
@@ -3448,6 +4035,7 @@ Latvia,Subjective well-being,2006,0.6521
 Latvia,Subjective well-being,2007,0.6236
 Latvia,Subjective well-being,2008,0.5995
 Latvia,Subjective well-being,2009,0.5911
+Latvia,Subjective well-being,2010,0.6013
 Latvia,Subjective well-being,2011,0.6115
 Latvia,Subjective well-being,2012,0.6115
 Latvia,Subjective well-being,2013,0.5741
@@ -3461,8 +4049,6 @@ Latvia,Subjective well-being,2020,0.7687
 Latvia,Subjective well-being,2021,0.6833
 Latvia,Subjective well-being,2022,0.6725
 Latvia,Subjective well-being,2023,0.6829
-Latvia,Work and job quality,2004,0.6698
-Latvia,Work and job quality,2005,0.6329
 Latvia,Work and job quality,2006,0.7597
 Latvia,Work and job quality,2007,0.7963
 Latvia,Work and job quality,2008,0.7702
@@ -3481,17 +4067,42 @@ Latvia,Work and job quality,2020,0.7906
 Latvia,Work and job quality,2021,0.8104
 Latvia,Work and job quality,2022,0.7789
 Latvia,Work and job quality,2023,0.7465
+Latvia,Work-life balance,2006,0.3768
+Latvia,Work-life balance,2007,0.3768
+Latvia,Work-life balance,2008,0.3768
+Latvia,Work-life balance,2009,0.3768
+Latvia,Work-life balance,2010,0.3768
+Latvia,Work-life balance,2011,0.3768
+Latvia,Work-life balance,2012,0.3768
 Latvia,Work-life balance,2013,0.3768
+Latvia,Work-life balance,2014,0.37746
+Latvia,Work-life balance,2015,0.37812
+Latvia,Work-life balance,2016,0.37878
+Latvia,Work-life balance,2017,0.37944
 Latvia,Work-life balance,2018,0.3801
+Latvia,Work-life balance,2019,0.370375
+Latvia,Work-life balance,2020,0.36065
+Latvia,Work-life balance,2021,0.350925
 Latvia,Work-life balance,2022,0.3412
-Lithuania,Civic engagement,2004,0.3336
+Latvia,Work-life balance,2023,0.3412
+Lithuania,Civic engagement,2006,0.1152
+Lithuania,Civic engagement,2007,0.1152
+Lithuania,Civic engagement,2008,0.1152
 Lithuania,Civic engagement,2009,0.1152
+Lithuania,Civic engagement,2010,0.1581
+Lithuania,Civic engagement,2011,0.201
+Lithuania,Civic engagement,2012,0.2439
+Lithuania,Civic engagement,2013,0.2868
 Lithuania,Civic engagement,2014,0.3297
+Lithuania,Civic engagement,2015,0.36055000000000004
 Lithuania,Civic engagement,2016,0.3914
+Lithuania,Civic engagement,2017,0.46103333333333335
+Lithuania,Civic engagement,2018,0.5306666666666666
 Lithuania,Civic engagement,2019,0.6003
-Lithuania,Civic engagement,2024,0.182
-Lithuania,Environmental quality,2004,0.9999
-Lithuania,Environmental quality,2005,0.9999
+Lithuania,Civic engagement,2020,0.6003
+Lithuania,Civic engagement,2021,0.6003
+Lithuania,Civic engagement,2022,0.6003
+Lithuania,Civic engagement,2023,0.6003
 Lithuania,Environmental quality,2006,0.9999
 Lithuania,Environmental quality,2007,0.9999
 Lithuania,Environmental quality,2008,1.0
@@ -3510,8 +4121,6 @@ Lithuania,Environmental quality,2020,1.0
 Lithuania,Environmental quality,2021,1.0
 Lithuania,Environmental quality,2022,1.0
 Lithuania,Environmental quality,2023,1.0
-Lithuania,Health,2004,0.4196
-Lithuania,Health,2005,0.4489
 Lithuania,Health,2006,0.447
 Lithuania,Health,2007,0.4645
 Lithuania,Health,2008,0.47
@@ -3530,7 +4139,6 @@ Lithuania,Health,2020,0.4694
 Lithuania,Health,2021,0.4744
 Lithuania,Health,2022,0.4477
 Lithuania,Health,2023,0.4568
-Lithuania,Housing,2005,0.493
 Lithuania,Housing,2006,0.4299
 Lithuania,Housing,2007,0.4237
 Lithuania,Housing,2008,0.4676
@@ -3549,8 +4157,6 @@ Lithuania,Housing,2020,0.619
 Lithuania,Housing,2021,0.598
 Lithuania,Housing,2022,0.5854
 Lithuania,Housing,2023,0.8677
-Lithuania,Income and wealth,2004,0.6223
-Lithuania,Income and wealth,2005,0.5198
 Lithuania,Income and wealth,2006,0.5554
 Lithuania,Income and wealth,2007,0.4271
 Lithuania,Income and wealth,2008,0.5115
@@ -3570,14 +4176,23 @@ Lithuania,Income and wealth,2021,0.3408
 Lithuania,Income and wealth,2022,0.2513
 Lithuania,Income and wealth,2023,0.1199
 Lithuania,Knowledge and skills,2006,0.5731
+Lithuania,Knowledge and skills,2007,0.5605
+Lithuania,Knowledge and skills,2008,0.5479
 Lithuania,Knowledge and skills,2009,0.5353
+Lithuania,Knowledge and skills,2010,0.5548
+Lithuania,Knowledge and skills,2011,0.5743
 Lithuania,Knowledge and skills,2012,0.5938
+Lithuania,Knowledge and skills,2013,0.649
 Lithuania,Knowledge and skills,2014,0.7042
 Lithuania,Knowledge and skills,2015,0.6325
+Lithuania,Knowledge and skills,2016,0.6141333333333333
+Lithuania,Knowledge and skills,2017,0.5957666666666667
 Lithuania,Knowledge and skills,2018,0.5774
+Lithuania,Knowledge and skills,2019,0.5686
+Lithuania,Knowledge and skills,2020,0.5598000000000001
+Lithuania,Knowledge and skills,2021,0.551
 Lithuania,Knowledge and skills,2022,0.5422
-Lithuania,Safety,2004,0.6998
-Lithuania,Safety,2005,0.6713
+Lithuania,Knowledge and skills,2023,0.5422
 Lithuania,Safety,2006,0.2204
 Lithuania,Safety,2007,0.2208
 Lithuania,Safety,2008,0.2235
@@ -3632,8 +4247,6 @@ Lithuania,Subjective well-being,2020,0.7504
 Lithuania,Subjective well-being,2021,0.6763
 Lithuania,Subjective well-being,2022,0.6837
 Lithuania,Subjective well-being,2023,0.6841
-Lithuania,Work and job quality,2004,0.6781
-Lithuania,Work and job quality,2005,0.6887
 Lithuania,Work and job quality,2006,0.7385
 Lithuania,Work and job quality,2007,0.7727
 Lithuania,Work and job quality,2008,0.7691
@@ -3652,17 +4265,42 @@ Lithuania,Work and job quality,2020,0.7979
 Lithuania,Work and job quality,2021,0.8236
 Lithuania,Work and job quality,2022,0.7827
 Lithuania,Work and job quality,2023,0.7285
+Lithuania,Work-life balance,2006,0.4627
+Lithuania,Work-life balance,2007,0.4627
+Lithuania,Work-life balance,2008,0.4627
+Lithuania,Work-life balance,2009,0.4627
+Lithuania,Work-life balance,2010,0.4627
+Lithuania,Work-life balance,2011,0.4627
+Lithuania,Work-life balance,2012,0.4627
 Lithuania,Work-life balance,2013,0.4627
+Lithuania,Work-life balance,2014,0.46976
+Lithuania,Work-life balance,2015,0.47682
+Lithuania,Work-life balance,2016,0.48388
+Lithuania,Work-life balance,2017,0.49094
 Lithuania,Work-life balance,2018,0.498
+Lithuania,Work-life balance,2019,0.4794
+Lithuania,Work-life balance,2020,0.4608
+Lithuania,Work-life balance,2021,0.4422
 Lithuania,Work-life balance,2022,0.4236
-Luxembourg,Civic engagement,2004,0.958
+Lithuania,Work-life balance,2023,0.4236
+Luxembourg,Civic engagement,2006,1.0
+Luxembourg,Civic engagement,2007,1.0
+Luxembourg,Civic engagement,2008,1.0
 Luxembourg,Civic engagement,2009,1.0
+Luxembourg,Civic engagement,2010,0.9776
+Luxembourg,Civic engagement,2011,0.9552
+Luxembourg,Civic engagement,2012,0.9328
 Luxembourg,Civic engagement,2013,0.9104
+Luxembourg,Civic engagement,2014,0.90352
+Luxembourg,Civic engagement,2015,0.89664
+Luxembourg,Civic engagement,2016,0.88976
+Luxembourg,Civic engagement,2017,0.88288
 Luxembourg,Civic engagement,2018,0.876
+Luxembourg,Civic engagement,2019,0.7179
+Luxembourg,Civic engagement,2020,0.5598000000000001
 Luxembourg,Civic engagement,2021,0.4017
+Luxembourg,Civic engagement,2022,0.4042
 Luxembourg,Civic engagement,2023,0.4067
-Luxembourg,Environmental quality,2004,1.0
-Luxembourg,Environmental quality,2005,1.0
 Luxembourg,Environmental quality,2006,1.0
 Luxembourg,Environmental quality,2007,1.0
 Luxembourg,Environmental quality,2008,1.0
@@ -3681,8 +4319,6 @@ Luxembourg,Environmental quality,2020,1.0
 Luxembourg,Environmental quality,2021,1.0
 Luxembourg,Environmental quality,2022,1.0
 Luxembourg,Environmental quality,2023,1.0
-Luxembourg,Health,2004,0.6598
-Luxembourg,Health,2005,0.6639
 Luxembourg,Health,2006,0.6545
 Luxembourg,Health,2007,0.6567
 Luxembourg,Health,2008,0.6775
@@ -3701,8 +4337,6 @@ Luxembourg,Health,2020,0.6741
 Luxembourg,Health,2021,0.7013
 Luxembourg,Health,2022,0.6749
 Luxembourg,Health,2023,0.6195
-Luxembourg,Housing,2004,0.2701
-Luxembourg,Housing,2005,0.2906
 Luxembourg,Housing,2006,0.339
 Luxembourg,Housing,2007,0.3916
 Luxembourg,Housing,2008,0.3927
@@ -3721,8 +4355,6 @@ Luxembourg,Housing,2020,0.6062
 Luxembourg,Housing,2021,0.5612
 Luxembourg,Housing,2022,0.5986
 Luxembourg,Housing,2023,0.0788
-Luxembourg,Income and wealth,2004,0.5
-Luxembourg,Income and wealth,2005,0.5
 Luxembourg,Income and wealth,2006,0.4965
 Luxembourg,Income and wealth,2007,0.5035
 Luxembourg,Income and wealth,2008,0.5008
@@ -3742,12 +4374,23 @@ Luxembourg,Income and wealth,2021,0.3145
 Luxembourg,Income and wealth,2022,0.4534
 Luxembourg,Income and wealth,2023,0.0
 Luxembourg,Knowledge and skills,2006,0.5948
+Luxembourg,Knowledge and skills,2007,0.5811666666666666
+Luxembourg,Knowledge and skills,2008,0.5675333333333333
 Luxembourg,Knowledge and skills,2009,0.5539
+Luxembourg,Knowledge and skills,2010,0.5793999999999999
+Luxembourg,Knowledge and skills,2011,0.6049
 Luxembourg,Knowledge and skills,2012,0.6304
+Luxembourg,Knowledge and skills,2013,0.6489333333333334
+Luxembourg,Knowledge and skills,2014,0.6674666666666667
 Luxembourg,Knowledge and skills,2015,0.686
+Luxembourg,Knowledge and skills,2016,0.6574333333333333
+Luxembourg,Knowledge and skills,2017,0.6288666666666667
 Luxembourg,Knowledge and skills,2018,0.6003
-Luxembourg,Safety,2004,0.91
-Luxembourg,Safety,2005,0.9135
+Luxembourg,Knowledge and skills,2019,0.6003
+Luxembourg,Knowledge and skills,2020,0.6003
+Luxembourg,Knowledge and skills,2021,0.6003
+Luxembourg,Knowledge and skills,2022,0.6003
+Luxembourg,Knowledge and skills,2023,0.6003
 Luxembourg,Safety,2006,0.9304
 Luxembourg,Safety,2007,0.9274
 Luxembourg,Safety,2008,0.7797
@@ -3766,7 +4409,10 @@ Luxembourg,Safety,2020,0.9164
 Luxembourg,Safety,2021,0.9415
 Luxembourg,Safety,2022,0.8039
 Luxembourg,Safety,2023,0.8558
+Luxembourg,Social connections,2006,0.8777
+Luxembourg,Social connections,2007,0.8777
 Luxembourg,Social connections,2008,0.8777
+Luxembourg,Social connections,2009,0.8672500000000001
 Luxembourg,Social connections,2010,0.8568
 Luxembourg,Social connections,2011,0.8376
 Luxembourg,Social connections,2012,0.6375
@@ -3777,9 +4423,14 @@ Luxembourg,Social connections,2016,0.8028
 Luxembourg,Social connections,2017,0.77
 Luxembourg,Social connections,2018,0.7196
 Luxembourg,Social connections,2019,0.6895
+Luxembourg,Social connections,2020,0.6668666666666667
+Luxembourg,Social connections,2021,0.6442333333333333
 Luxembourg,Social connections,2022,0.6216
 Luxembourg,Social connections,2023,0.6626
+Luxembourg,Subjective well-being,2006,0.6448
+Luxembourg,Subjective well-being,2007,0.6448
 Luxembourg,Subjective well-being,2008,0.6448
+Luxembourg,Subjective well-being,2009,0.6589
 Luxembourg,Subjective well-being,2010,0.673
 Luxembourg,Subjective well-being,2011,0.6466
 Luxembourg,Subjective well-being,2012,0.6466
@@ -3790,11 +4441,10 @@ Luxembourg,Subjective well-being,2016,0.7411
 Luxembourg,Subjective well-being,2017,0.753
 Luxembourg,Subjective well-being,2018,0.7577
 Luxembourg,Subjective well-being,2019,0.735
+Luxembourg,Subjective well-being,2020,0.7239
 Luxembourg,Subjective well-being,2021,0.7128
 Luxembourg,Subjective well-being,2022,0.6912
 Luxembourg,Subjective well-being,2023,0.7063
-Luxembourg,Work and job quality,2004,0.8006
-Luxembourg,Work and job quality,2005,0.6927
 Luxembourg,Work and job quality,2006,0.7265
 Luxembourg,Work and job quality,2007,0.8265
 Luxembourg,Work and job quality,2008,0.8136
@@ -3813,17 +4463,42 @@ Luxembourg,Work and job quality,2020,0.7809
 Luxembourg,Work and job quality,2021,0.7998
 Luxembourg,Work and job quality,2022,0.782
 Luxembourg,Work and job quality,2023,0.7143
+Luxembourg,Work-life balance,2006,0.4748
+Luxembourg,Work-life balance,2007,0.4748
+Luxembourg,Work-life balance,2008,0.4748
+Luxembourg,Work-life balance,2009,0.4748
+Luxembourg,Work-life balance,2010,0.4748
+Luxembourg,Work-life balance,2011,0.4748
+Luxembourg,Work-life balance,2012,0.4748
 Luxembourg,Work-life balance,2013,0.4748
 Luxembourg,Work-life balance,2014,1.0
+Luxembourg,Work-life balance,2015,0.858
+Luxembourg,Work-life balance,2016,0.716
+Luxembourg,Work-life balance,2017,0.574
 Luxembourg,Work-life balance,2018,0.432
+Luxembourg,Work-life balance,2019,0.4331
+Luxembourg,Work-life balance,2020,0.43420000000000003
+Luxembourg,Work-life balance,2021,0.4353
 Luxembourg,Work-life balance,2022,0.4364
+Luxembourg,Work-life balance,2023,0.4364
 Mexico,Civic engagement,2006,0.2836
+Mexico,Civic engagement,2007,0.37821666666666665
+Mexico,Civic engagement,2008,0.4728333333333333
+Mexico,Civic engagement,2009,0.5674499999999999
+Mexico,Civic engagement,2010,0.6620666666666666
+Mexico,Civic engagement,2011,0.7566833333333333
 Mexico,Civic engagement,2012,0.8513
+Mexico,Civic engagement,2013,0.7519666666666667
+Mexico,Civic engagement,2014,0.6526333333333333
+Mexico,Civic engagement,2015,0.5533
+Mexico,Civic engagement,2016,0.4539666666666667
+Mexico,Civic engagement,2017,0.35463333333333336
 Mexico,Civic engagement,2018,0.2553
+Mexico,Civic engagement,2019,0.33322
+Mexico,Civic engagement,2020,0.41114000000000006
+Mexico,Civic engagement,2021,0.48906000000000005
+Mexico,Civic engagement,2022,0.56698
 Mexico,Civic engagement,2023,0.6449
-Mexico,Civic engagement,2024,0.2144
-Mexico,Environmental quality,2004,0.6578
-Mexico,Environmental quality,2005,0.5422
 Mexico,Environmental quality,2006,0.6215
 Mexico,Environmental quality,2007,0.8104
 Mexico,Environmental quality,2008,0.564
@@ -3842,8 +4517,6 @@ Mexico,Environmental quality,2020,0.7142
 Mexico,Environmental quality,2021,0.558
 Mexico,Environmental quality,2022,0.4361
 Mexico,Environmental quality,2023,0.2286
-Mexico,Health,2004,0.642
-Mexico,Health,2005,0.6257
 Mexico,Health,2006,0.6265
 Mexico,Health,2007,0.65
 Mexico,Health,2008,0.6081
@@ -3862,8 +4535,6 @@ Mexico,Health,2020,0.3995
 Mexico,Health,2021,0.4073
 Mexico,Health,2022,0.3315
 Mexico,Health,2023,0.2893
-Mexico,Housing,2004,0.3943
-Mexico,Housing,2005,0.1867
 Mexico,Housing,2006,0.2339
 Mexico,Housing,2007,0.2377
 Mexico,Housing,2008,0.2247
@@ -3882,8 +4553,6 @@ Mexico,Housing,2020,0.2624
 Mexico,Housing,2021,0.2754
 Mexico,Housing,2022,0.1905
 Mexico,Housing,2023,0.3581
-Mexico,Income and wealth,2004,0.0517
-Mexico,Income and wealth,2005,0.0041
 Mexico,Income and wealth,2006,0.0
 Mexico,Income and wealth,2007,0.0
 Mexico,Income and wealth,2008,0.0
@@ -3903,14 +4572,23 @@ Mexico,Income and wealth,2021,0.289
 Mexico,Income and wealth,2022,0.3482
 Mexico,Income and wealth,2023,0.0
 Mexico,Knowledge and skills,2006,0.157
+Mexico,Knowledge and skills,2007,0.15093333333333334
+Mexico,Knowledge and skills,2008,0.14486666666666667
 Mexico,Knowledge and skills,2009,0.1388
+Mexico,Knowledge and skills,2010,0.1444
+Mexico,Knowledge and skills,2011,0.15
 Mexico,Knowledge and skills,2012,0.1556
+Mexico,Knowledge and skills,2013,0.2573333333333333
+Mexico,Knowledge and skills,2014,0.35906666666666665
 Mexico,Knowledge and skills,2015,0.4608
+Mexico,Knowledge and skills,2016,0.3681
 Mexico,Knowledge and skills,2017,0.2754
 Mexico,Knowledge and skills,2018,0.2367
+Mexico,Knowledge and skills,2019,0.2024
+Mexico,Knowledge and skills,2020,0.1681
+Mexico,Knowledge and skills,2021,0.1338
 Mexico,Knowledge and skills,2022,0.0995
-Mexico,Safety,2004,0.9279
-Mexico,Safety,2005,0.9062
+Mexico,Knowledge and skills,2023,0.0995
 Mexico,Safety,2006,0.5187
 Mexico,Safety,2007,0.5538
 Mexico,Safety,2008,0.4493
@@ -3965,8 +4643,6 @@ Mexico,Subjective well-being,2020,0.6566
 Mexico,Subjective well-being,2021,0.7334
 Mexico,Subjective well-being,2022,0.6795
 Mexico,Subjective well-being,2023,0.6795
-Mexico,Work and job quality,2004,0.6996
-Mexico,Work and job quality,2005,0.5975
 Mexico,Work and job quality,2006,0.662
 Mexico,Work and job quality,2007,0.7122
 Mexico,Work and job quality,2008,0.6969
@@ -3985,16 +4661,42 @@ Mexico,Work and job quality,2020,0.5958
 Mexico,Work and job quality,2021,0.6488
 Mexico,Work and job quality,2022,0.611
 Mexico,Work and job quality,2023,0.6074
+Mexico,Work-life balance,2006,0.5948
+Mexico,Work-life balance,2007,0.5948
+Mexico,Work-life balance,2008,0.5948
+Mexico,Work-life balance,2009,0.5948
+Mexico,Work-life balance,2010,0.5948
+Mexico,Work-life balance,2011,0.5948
+Mexico,Work-life balance,2012,0.5948
+Mexico,Work-life balance,2013,0.5948
 Mexico,Work-life balance,2014,0.5948
+Mexico,Work-life balance,2015,0.6147285714285714
+Mexico,Work-life balance,2016,0.6346571428571428
+Mexico,Work-life balance,2017,0.6545857142857142
+Mexico,Work-life balance,2018,0.6745142857142857
+Mexico,Work-life balance,2019,0.6944428571428571
+Mexico,Work-life balance,2020,0.7143714285714285
 Mexico,Work-life balance,2021,0.7343
+Mexico,Work-life balance,2022,0.7343
+Mexico,Work-life balance,2023,0.7343
 Netherlands,Civic engagement,2006,0.7436
+Netherlands,Civic engagement,2007,0.72975
+Netherlands,Civic engagement,2008,0.7159
+Netherlands,Civic engagement,2009,0.7020500000000001
 Netherlands,Civic engagement,2010,0.6882
+Netherlands,Civic engagement,2011,0.6942
 Netherlands,Civic engagement,2012,0.7002
+Netherlands,Civic engagement,2013,0.7124
+Netherlands,Civic engagement,2014,0.7246
+Netherlands,Civic engagement,2015,0.7368
+Netherlands,Civic engagement,2016,0.749
 Netherlands,Civic engagement,2017,0.7612
+Netherlands,Civic engagement,2018,0.681775
+Netherlands,Civic engagement,2019,0.6023499999999999
+Netherlands,Civic engagement,2020,0.522925
 Netherlands,Civic engagement,2021,0.4435
+Netherlands,Civic engagement,2022,0.5152
 Netherlands,Civic engagement,2023,0.5869
-Netherlands,Environmental quality,2004,0.923
-Netherlands,Environmental quality,2005,0.9319
 Netherlands,Environmental quality,2006,0.922
 Netherlands,Environmental quality,2007,0.9393
 Netherlands,Environmental quality,2008,0.9501
@@ -4013,8 +4715,6 @@ Netherlands,Environmental quality,2020,0.9943
 Netherlands,Environmental quality,2021,1.0
 Netherlands,Environmental quality,2022,1.0
 Netherlands,Environmental quality,2023,1.0
-Netherlands,Health,2004,0.7874
-Netherlands,Health,2005,0.6707
 Netherlands,Health,2006,0.6792
 Netherlands,Health,2007,0.6839
 Netherlands,Health,2008,0.685
@@ -4033,8 +4733,6 @@ Netherlands,Health,2020,0.6627
 Netherlands,Health,2021,0.6584
 Netherlands,Health,2022,0.6408
 Netherlands,Health,2023,0.5861
-Netherlands,Housing,2004,0.7478
-Netherlands,Housing,2005,0.4408
 Netherlands,Housing,2006,0.5025
 Netherlands,Housing,2007,0.5417
 Netherlands,Housing,2008,0.5286
@@ -4053,8 +4751,6 @@ Netherlands,Housing,2020,0.536
 Netherlands,Housing,2021,0.5424
 Netherlands,Housing,2022,0.5232
 Netherlands,Housing,2023,0.5133
-Netherlands,Income and wealth,2004,0.6895
-Netherlands,Income and wealth,2005,0.4602
 Netherlands,Income and wealth,2006,0.4318
 Netherlands,Income and wealth,2007,0.3982
 Netherlands,Income and wealth,2008,0.3993
@@ -4074,13 +4770,23 @@ Netherlands,Income and wealth,2021,0.2427
 Netherlands,Income and wealth,2022,0.1881
 Netherlands,Income and wealth,2023,0.4498
 Netherlands,Knowledge and skills,2006,0.7976
+Netherlands,Knowledge and skills,2007,0.8009333333333333
+Netherlands,Knowledge and skills,2008,0.8042666666666667
 Netherlands,Knowledge and skills,2009,0.8076
+Netherlands,Knowledge and skills,2010,0.7682
+Netherlands,Knowledge and skills,2011,0.7288
 Netherlands,Knowledge and skills,2012,0.6894
+Netherlands,Knowledge and skills,2013,0.7133333333333334
+Netherlands,Knowledge and skills,2014,0.7372666666666666
 Netherlands,Knowledge and skills,2015,0.7612
+Netherlands,Knowledge and skills,2016,0.7409
+Netherlands,Knowledge and skills,2017,0.7206
 Netherlands,Knowledge and skills,2018,0.7003
+Netherlands,Knowledge and skills,2019,0.684175
+Netherlands,Knowledge and skills,2020,0.66805
+Netherlands,Knowledge and skills,2021,0.6519250000000001
 Netherlands,Knowledge and skills,2022,0.6358
-Netherlands,Safety,2004,0.9802
-Netherlands,Safety,2005,0.9854
+Netherlands,Knowledge and skills,2023,0.6358
 Netherlands,Safety,2006,0.8109
 Netherlands,Safety,2007,0.8177
 Netherlands,Safety,2008,0.781
@@ -4102,6 +4808,7 @@ Netherlands,Safety,2023,0.7957
 Netherlands,Social connections,2006,0.903
 Netherlands,Social connections,2007,0.9078
 Netherlands,Social connections,2008,0.8856
+Netherlands,Social connections,2009,0.87775
 Netherlands,Social connections,2010,0.8699
 Netherlands,Social connections,2011,0.8563
 Netherlands,Social connections,2012,0.8493
@@ -4119,6 +4826,7 @@ Netherlands,Social connections,2023,0.8076
 Netherlands,Subjective well-being,2006,0.8163
 Netherlands,Subjective well-being,2007,0.7729
 Netherlands,Subjective well-being,2008,0.7638
+Netherlands,Subjective well-being,2009,0.7817000000000001
 Netherlands,Subjective well-being,2010,0.7996
 Netherlands,Subjective well-being,2011,0.7849
 Netherlands,Subjective well-being,2012,0.7849
@@ -4133,8 +4841,6 @@ Netherlands,Subjective well-being,2020,0.7777
 Netherlands,Subjective well-being,2021,0.7828
 Netherlands,Subjective well-being,2022,0.7774
 Netherlands,Subjective well-being,2023,0.7501
-Netherlands,Work and job quality,2004,0.8454
-Netherlands,Work and job quality,2005,0.7073
 Netherlands,Work and job quality,2006,0.7924
 Netherlands,Work and job quality,2007,0.8694
 Netherlands,Work and job quality,2008,0.8834
@@ -4153,21 +4859,42 @@ Netherlands,Work and job quality,2020,0.8485
 Netherlands,Work and job quality,2021,0.866
 Netherlands,Work and job quality,2022,0.8495
 Netherlands,Work and job quality,2023,0.843
+Netherlands,Work-life balance,2006,0.3393
+Netherlands,Work-life balance,2007,0.3393
+Netherlands,Work-life balance,2008,0.3393
+Netherlands,Work-life balance,2009,0.3393
+Netherlands,Work-life balance,2010,0.3393
+Netherlands,Work-life balance,2011,0.3393
+Netherlands,Work-life balance,2012,0.3393
 Netherlands,Work-life balance,2013,0.3393
+Netherlands,Work-life balance,2014,0.43516666666666665
+Netherlands,Work-life balance,2015,0.5310333333333334
 Netherlands,Work-life balance,2016,0.6269
+Netherlands,Work-life balance,2017,0.49515
 Netherlands,Work-life balance,2018,0.3634
+Netherlands,Work-life balance,2019,0.36125
+Netherlands,Work-life balance,2020,0.3591
+Netherlands,Work-life balance,2021,0.35695
 Netherlands,Work-life balance,2022,0.3548
-New Zealand,Civic engagement,2005,0.8433
+Netherlands,Work-life balance,2023,0.3548
+New Zealand,Civic engagement,2006,0.9486
+New Zealand,Civic engagement,2007,0.9486
 New Zealand,Civic engagement,2008,0.9486
+New Zealand,Civic engagement,2009,0.8495666666666667
+New Zealand,Civic engagement,2010,0.7505333333333333
 New Zealand,Civic engagement,2011,0.6515
+New Zealand,Civic engagement,2012,0.6423333333333333
+New Zealand,Civic engagement,2013,0.6331666666666667
 New Zealand,Civic engagement,2014,0.624
+New Zealand,Civic engagement,2015,0.6878500000000001
 New Zealand,Civic engagement,2016,0.7517
 New Zealand,Civic engagement,2017,0.7212
+New Zealand,Civic engagement,2018,0.7115
+New Zealand,Civic engagement,2019,0.7018
 New Zealand,Civic engagement,2020,0.6921
 New Zealand,Civic engagement,2021,0.5172
+New Zealand,Civic engagement,2022,0.5666
 New Zealand,Civic engagement,2023,0.616
-New Zealand,Environmental quality,2004,0.7241
-New Zealand,Environmental quality,2005,0.7925
 New Zealand,Environmental quality,2006,0.7235
 New Zealand,Environmental quality,2007,0.9648
 New Zealand,Environmental quality,2008,0.9512
@@ -4186,8 +4913,6 @@ New Zealand,Environmental quality,2020,0.9788
 New Zealand,Environmental quality,2021,1.0
 New Zealand,Environmental quality,2022,1.0
 New Zealand,Environmental quality,2023,1.0
-New Zealand,Health,2004,0.8081
-New Zealand,Health,2005,0.817
 New Zealand,Health,2006,0.8134
 New Zealand,Health,2007,0.7248
 New Zealand,Health,2008,0.8108
@@ -4206,8 +4931,6 @@ New Zealand,Health,2020,0.6808
 New Zealand,Health,2021,0.6865
 New Zealand,Health,2022,0.6748
 New Zealand,Health,2023,0.6512
-New Zealand,Housing,2004,0.3458
-New Zealand,Housing,2005,0.3049
 New Zealand,Housing,2006,0.3438
 New Zealand,Housing,2007,0.4006
 New Zealand,Housing,2008,0.3717
@@ -4224,8 +4947,8 @@ New Zealand,Housing,2018,0.5241
 New Zealand,Housing,2019,0.5369
 New Zealand,Housing,2020,0.5786
 New Zealand,Housing,2021,1.0
-New Zealand,Income and wealth,2004,0.3732
-New Zealand,Income and wealth,2005,0.3698
+New Zealand,Housing,2022,1.0
+New Zealand,Housing,2023,1.0
 New Zealand,Income and wealth,2006,0.6876
 New Zealand,Income and wealth,2007,0.5624
 New Zealand,Income and wealth,2008,0.4264
@@ -4242,15 +4965,26 @@ New Zealand,Income and wealth,2018,0.43
 New Zealand,Income and wealth,2019,0.3993
 New Zealand,Income and wealth,2020,0.3696
 New Zealand,Income and wealth,2021,0.0489
+New Zealand,Income and wealth,2022,0.0489
+New Zealand,Income and wealth,2023,0.0489
 New Zealand,Knowledge and skills,2006,0.8198
+New Zealand,Knowledge and skills,2007,0.8294666666666667
+New Zealand,Knowledge and skills,2008,0.8391333333333333
 New Zealand,Knowledge and skills,2009,0.8488
+New Zealand,Knowledge and skills,2010,0.8206666666666667
+New Zealand,Knowledge and skills,2011,0.7925333333333333
 New Zealand,Knowledge and skills,2012,0.7644
+New Zealand,Knowledge and skills,2013,0.75115
 New Zealand,Knowledge and skills,2014,0.7379
 New Zealand,Knowledge and skills,2015,0.7448
+New Zealand,Knowledge and skills,2016,0.7371
+New Zealand,Knowledge and skills,2017,0.7294
 New Zealand,Knowledge and skills,2018,0.7217
+New Zealand,Knowledge and skills,2019,0.711925
+New Zealand,Knowledge and skills,2020,0.70215
+New Zealand,Knowledge and skills,2021,0.692375
 New Zealand,Knowledge and skills,2022,0.6826
-New Zealand,Safety,2004,0.9092
-New Zealand,Safety,2005,0.9168
+New Zealand,Knowledge and skills,2023,0.6826
 New Zealand,Safety,2006,0.5999
 New Zealand,Safety,2007,0.5813
 New Zealand,Safety,2008,0.5704
@@ -4290,6 +5024,7 @@ New Zealand,Social connections,2023,0.8519
 New Zealand,Subjective well-being,2006,0.7458
 New Zealand,Subjective well-being,2007,0.6882
 New Zealand,Subjective well-being,2008,0.6822
+New Zealand,Subjective well-being,2009,0.70945
 New Zealand,Subjective well-being,2010,0.7367
 New Zealand,Subjective well-being,2011,0.7451
 New Zealand,Subjective well-being,2012,0.7451
@@ -4304,8 +5039,6 @@ New Zealand,Subjective well-being,2020,0.7356
 New Zealand,Subjective well-being,2021,0.7293
 New Zealand,Subjective well-being,2022,0.6944
 New Zealand,Subjective well-being,2023,0.6944
-New Zealand,Work and job quality,2004,0.7844
-New Zealand,Work and job quality,2005,0.6626
 New Zealand,Work and job quality,2006,0.7878
 New Zealand,Work and job quality,2007,0.7922
 New Zealand,Work and job quality,2008,0.7933
@@ -4324,15 +5057,42 @@ New Zealand,Work and job quality,2020,0.7653
 New Zealand,Work and job quality,2021,0.7882
 New Zealand,Work and job quality,2022,0.7599
 New Zealand,Work and job quality,2023,0.7555
+New Zealand,Work-life balance,2006,0.1518
+New Zealand,Work-life balance,2007,0.1518
+New Zealand,Work-life balance,2008,0.1518
 New Zealand,Work-life balance,2009,0.1518
-Norway,Civic engagement,2005,0.8076
+New Zealand,Work-life balance,2010,0.1518
+New Zealand,Work-life balance,2011,0.1518
+New Zealand,Work-life balance,2012,0.1518
+New Zealand,Work-life balance,2013,0.1518
+New Zealand,Work-life balance,2014,0.1518
+New Zealand,Work-life balance,2015,0.1518
+New Zealand,Work-life balance,2016,0.1518
+New Zealand,Work-life balance,2017,0.1518
+New Zealand,Work-life balance,2018,0.1518
+New Zealand,Work-life balance,2019,0.1518
+New Zealand,Work-life balance,2020,0.1518
+New Zealand,Work-life balance,2021,0.1518
+New Zealand,Work-life balance,2022,0.1518
+New Zealand,Work-life balance,2023,0.1518
+Norway,Civic engagement,2006,0.6724
+Norway,Civic engagement,2007,0.6724
+Norway,Civic engagement,2008,0.6724
 Norway,Civic engagement,2009,0.6724
+Norway,Civic engagement,2010,0.688125
+Norway,Civic engagement,2011,0.70385
+Norway,Civic engagement,2012,0.719575
 Norway,Civic engagement,2013,0.7353
+Norway,Civic engagement,2014,0.72015
+Norway,Civic engagement,2015,0.705
+Norway,Civic engagement,2016,0.68985
 Norway,Civic engagement,2017,0.6747
+Norway,Civic engagement,2018,0.662125
+Norway,Civic engagement,2019,0.64955
+Norway,Civic engagement,2020,0.636975
 Norway,Civic engagement,2021,0.6244
+Norway,Civic engagement,2022,0.5287499999999999
 Norway,Civic engagement,2023,0.4331
-Norway,Environmental quality,2004,0.5539
-Norway,Environmental quality,2005,0.5839
 Norway,Environmental quality,2006,0.5665
 Norway,Environmental quality,2007,0.6276
 Norway,Environmental quality,2008,0.6668
@@ -4351,8 +5111,6 @@ Norway,Environmental quality,2020,0.7179
 Norway,Environmental quality,2021,1.0
 Norway,Environmental quality,2022,1.0
 Norway,Environmental quality,2023,1.0
-Norway,Health,2004,0.6704
-Norway,Health,2005,0.6721
 Norway,Health,2006,0.6928
 Norway,Health,2007,0.7046
 Norway,Health,2008,0.6987
@@ -4371,8 +5129,6 @@ Norway,Health,2020,0.7404
 Norway,Health,2021,0.7041
 Norway,Health,2022,0.6757
 Norway,Health,2023,0.6597
-Norway,Housing,2004,0.4106
-Norway,Housing,2005,0.4198
 Norway,Housing,2006,0.4583
 Norway,Housing,2007,0.5128
 Norway,Housing,2008,0.5278
@@ -4391,8 +5147,6 @@ Norway,Housing,2020,0.5635
 Norway,Housing,2021,0.5846
 Norway,Housing,2022,0.4177
 Norway,Housing,2023,0.0788
-Norway,Income and wealth,2004,0.2558
-Norway,Income and wealth,2005,0.4085
 Norway,Income and wealth,2006,0.3585
 Norway,Income and wealth,2007,0.351
 Norway,Income and wealth,2008,0.2331
@@ -4412,13 +5166,23 @@ Norway,Income and wealth,2021,0.2279
 Norway,Income and wealth,2022,0.2052
 Norway,Income and wealth,2023,0.0493
 Norway,Knowledge and skills,2006,0.6046
+Norway,Knowledge and skills,2007,0.6326666666666667
+Norway,Knowledge and skills,2008,0.6607333333333333
 Norway,Knowledge and skills,2009,0.6888
+Norway,Knowledge and skills,2010,0.6637666666666666
+Norway,Knowledge and skills,2011,0.6387333333333334
 Norway,Knowledge and skills,2012,0.6137
+Norway,Knowledge and skills,2013,0.6441
+Norway,Knowledge and skills,2014,0.6745
 Norway,Knowledge and skills,2015,0.7049
+Norway,Knowledge and skills,2016,0.6919
+Norway,Knowledge and skills,2017,0.6789000000000001
 Norway,Knowledge and skills,2018,0.6659
+Norway,Knowledge and skills,2019,0.6474
+Norway,Knowledge and skills,2020,0.6289
+Norway,Knowledge and skills,2021,0.6104
 Norway,Knowledge and skills,2022,0.5919
-Norway,Safety,2004,0.9796
-Norway,Safety,2005,0.9911
+Norway,Knowledge and skills,2023,0.5919
 Norway,Safety,2006,0.9129
 Norway,Safety,2007,0.9942
 Norway,Safety,2008,0.882
@@ -4438,8 +5202,11 @@ Norway,Safety,2021,0.9304
 Norway,Safety,2022,0.9277
 Norway,Safety,2023,0.9237
 Norway,Social connections,2006,0.9129
+Norway,Social connections,2007,0.89105
 Norway,Social connections,2008,0.8692
+Norway,Social connections,2009,0.6800999999999999
 Norway,Social connections,2010,0.491
+Norway,Social connections,2011,0.6915
 Norway,Social connections,2012,0.892
 Norway,Social connections,2013,0.8096
 Norway,Social connections,2014,0.8996
@@ -4453,7 +5220,11 @@ Norway,Social connections,2021,0.8647
 Norway,Social connections,2022,0.843
 Norway,Social connections,2023,0.8523
 Norway,Subjective well-being,2006,0.8214
+Norway,Subjective well-being,2007,0.8082
 Norway,Subjective well-being,2008,0.795
+Norway,Subjective well-being,2009,0.783075
+Norway,Subjective well-being,2010,0.77115
+Norway,Subjective well-being,2011,0.759225
 Norway,Subjective well-being,2012,0.7473
 Norway,Subjective well-being,2013,0.8581
 Norway,Subjective well-being,2014,0.7848
@@ -4466,8 +5237,6 @@ Norway,Subjective well-being,2020,0.7583
 Norway,Subjective well-being,2021,0.749
 Norway,Subjective well-being,2022,0.7402
 Norway,Subjective well-being,2023,0.7409
-Norway,Work and job quality,2004,0.8009
-Norway,Work and job quality,2005,0.6724
 Norway,Work and job quality,2006,0.8043
 Norway,Work and job quality,2007,0.8396
 Norway,Work and job quality,2008,0.8472
@@ -4486,18 +5255,42 @@ Norway,Work and job quality,2020,0.8312
 Norway,Work and job quality,2021,0.8441
 Norway,Work and job quality,2022,0.8259
 Norway,Work and job quality,2023,0.8
+Norway,Work-life balance,2006,0.5741
+Norway,Work-life balance,2007,0.5741
+Norway,Work-life balance,2008,0.5741
+Norway,Work-life balance,2009,0.5741
 Norway,Work-life balance,2010,0.5741
+Norway,Work-life balance,2011,0.5405
+Norway,Work-life balance,2012,0.5069
 Norway,Work-life balance,2013,0.4733
+Norway,Work-life balance,2014,0.47018
+Norway,Work-life balance,2015,0.46706
+Norway,Work-life balance,2016,0.46394
+Norway,Work-life balance,2017,0.46082
 Norway,Work-life balance,2018,0.4577
+Norway,Work-life balance,2019,0.5194
+Norway,Work-life balance,2020,0.5811
+Norway,Work-life balance,2021,0.6428
 Norway,Work-life balance,2022,0.7045
-Poland,Civic engagement,2005,0.0
+Norway,Work-life balance,2023,0.7045
+Poland,Civic engagement,2006,0.34
 Poland,Civic engagement,2007,0.34
+Poland,Civic engagement,2008,0.255
+Poland,Civic engagement,2009,0.17
+Poland,Civic engagement,2010,0.085
 Poland,Civic engagement,2011,0.0
+Poland,Civic engagement,2012,0.01275
+Poland,Civic engagement,2013,0.0255
+Poland,Civic engagement,2014,0.03825
 Poland,Civic engagement,2015,0.051
+Poland,Civic engagement,2016,0.200975
+Poland,Civic engagement,2017,0.35095
+Poland,Civic engagement,2018,0.500925
 Poland,Civic engagement,2019,0.6509
+Poland,Civic engagement,2020,0.65925
+Poland,Civic engagement,2021,0.6676
+Poland,Civic engagement,2022,0.67595
 Poland,Civic engagement,2023,0.6843
-Poland,Environmental quality,2004,0.9864
-Poland,Environmental quality,2005,0.988
 Poland,Environmental quality,2006,0.9863
 Poland,Environmental quality,2007,0.9894
 Poland,Environmental quality,2008,0.9913
@@ -4516,8 +5309,6 @@ Poland,Environmental quality,2020,0.999
 Poland,Environmental quality,2021,1.0
 Poland,Environmental quality,2022,1.0
 Poland,Environmental quality,2023,1.0
-Poland,Health,2004,0.5837
-Poland,Health,2005,0.5868
 Poland,Health,2006,0.5876
 Poland,Health,2007,0.6008
 Poland,Health,2008,0.5984
@@ -4536,8 +5327,6 @@ Poland,Health,2020,0.5907
 Poland,Health,2021,0.617
 Poland,Health,2022,0.5426
 Poland,Health,2023,0.5428
-Poland,Housing,2004,0.5951
-Poland,Housing,2005,0.5028
 Poland,Housing,2006,0.4936
 Poland,Housing,2007,0.4667
 Poland,Housing,2008,0.4684
@@ -4556,8 +5345,6 @@ Poland,Housing,2020,0.3776
 Poland,Housing,2021,0.3496
 Poland,Housing,2022,0.2573
 Poland,Housing,2023,0.2069
-Poland,Income and wealth,2004,0.0969
-Poland,Income and wealth,2005,0.5177
 Poland,Income and wealth,2006,0.4935
 Poland,Income and wealth,2007,0.349
 Poland,Income and wealth,2008,0.3442
@@ -4577,13 +5364,23 @@ Poland,Income and wealth,2021,0.1642
 Poland,Income and wealth,2022,0.2265
 Poland,Income and wealth,2023,0.1478
 Poland,Knowledge and skills,2006,0.682
+Poland,Knowledge and skills,2007,0.6857000000000001
+Poland,Knowledge and skills,2008,0.6894
 Poland,Knowledge and skills,2009,0.6931
+Poland,Knowledge and skills,2010,0.6344666666666667
+Poland,Knowledge and skills,2011,0.5758333333333333
 Poland,Knowledge and skills,2012,0.5172
+Poland,Knowledge and skills,2013,0.6291
+Poland,Knowledge and skills,2014,0.741
 Poland,Knowledge and skills,2015,0.8529
+Poland,Knowledge and skills,2016,0.8141
+Poland,Knowledge and skills,2017,0.7753
 Poland,Knowledge and skills,2018,0.7365
+Poland,Knowledge and skills,2019,0.71145
+Poland,Knowledge and skills,2020,0.6864
+Poland,Knowledge and skills,2021,0.66135
 Poland,Knowledge and skills,2022,0.6363
-Poland,Safety,2004,0.8478
-Poland,Safety,2005,0.859
+Poland,Knowledge and skills,2023,0.6363
 Poland,Safety,2006,0.643
 Poland,Safety,2007,0.6458
 Poland,Safety,2008,0.6314
@@ -4638,8 +5435,6 @@ Poland,Subjective well-being,2020,0.7538
 Poland,Subjective well-being,2021,0.77
 Poland,Subjective well-being,2022,0.8093
 Poland,Subjective well-being,2023,0.7918
-Poland,Work and job quality,2004,0.5902
-Poland,Work and job quality,2005,0.5496
 Poland,Work and job quality,2006,0.616
 Poland,Work and job quality,2007,0.6683
 Poland,Work and job quality,2008,0.7067
@@ -4658,21 +5453,42 @@ Poland,Work and job quality,2020,0.7817
 Poland,Work and job quality,2021,0.8246
 Poland,Work and job quality,2022,0.776
 Poland,Work and job quality,2023,0.7324
+Poland,Work-life balance,2006,0.4299
+Poland,Work-life balance,2007,0.4299
+Poland,Work-life balance,2008,0.4299
+Poland,Work-life balance,2009,0.4299
+Poland,Work-life balance,2010,0.4299
+Poland,Work-life balance,2011,0.4299
 Poland,Work-life balance,2012,0.4299
 Poland,Work-life balance,2013,0.5012
+Poland,Work-life balance,2014,0.48822
+Poland,Work-life balance,2015,0.47524
+Poland,Work-life balance,2016,0.46226
+Poland,Work-life balance,2017,0.44928
 Poland,Work-life balance,2018,0.4363
+Poland,Work-life balance,2019,0.43385
+Poland,Work-life balance,2020,0.4314
+Poland,Work-life balance,2021,0.42895
 Poland,Work-life balance,2022,0.4265
-Portugal,Civic engagement,2005,0.503
+Poland,Work-life balance,2023,0.4265
+Portugal,Civic engagement,2006,0.2941
+Portugal,Civic engagement,2007,0.2941
+Portugal,Civic engagement,2008,0.2941
 Portugal,Civic engagement,2009,0.2941
+Portugal,Civic engagement,2010,0.26439999999999997
 Portugal,Civic engagement,2011,0.2347
+Portugal,Civic engagement,2012,0.290825
+Portugal,Civic engagement,2013,0.34695
+Portugal,Civic engagement,2014,0.403075
 Portugal,Civic engagement,2015,0.4592
+Portugal,Civic engagement,2016,0.469
+Portugal,Civic engagement,2017,0.4788
+Portugal,Civic engagement,2018,0.48860000000000003
 Portugal,Civic engagement,2019,0.4984
+Portugal,Civic engagement,2020,0.41745
 Portugal,Civic engagement,2021,0.3365
 Portugal,Civic engagement,2022,0.3201
 Portugal,Civic engagement,2023,0.3156
-Portugal,Civic engagement,2024,0.1805
-Portugal,Environmental quality,2004,0.8352
-Portugal,Environmental quality,2005,0.7988
 Portugal,Environmental quality,2006,0.7594
 Portugal,Environmental quality,2007,0.9329
 Portugal,Environmental quality,2008,0.9024
@@ -4691,8 +5507,6 @@ Portugal,Environmental quality,2020,0.9143
 Portugal,Environmental quality,2021,0.9365
 Portugal,Environmental quality,2022,0.7826
 Portugal,Environmental quality,2023,0.8667
-Portugal,Health,2004,0.5718
-Portugal,Health,2005,0.5837
 Portugal,Health,2006,0.6116
 Portugal,Health,2007,0.6408
 Portugal,Health,2008,0.6669
@@ -4711,8 +5525,6 @@ Portugal,Health,2020,0.5822
 Portugal,Health,2021,0.6021
 Portugal,Health,2022,0.5765
 Portugal,Health,2023,0.5838
-Portugal,Housing,2004,0.974
-Portugal,Housing,2005,0.7034
 Portugal,Housing,2006,0.7237
 Portugal,Housing,2007,0.7492
 Portugal,Housing,2008,0.7119
@@ -4731,8 +5543,6 @@ Portugal,Housing,2020,0.5915
 Portugal,Housing,2021,0.5924
 Portugal,Housing,2022,0.7163
 Portugal,Housing,2023,1.0
-Portugal,Income and wealth,2004,0.7559
-Portugal,Income and wealth,2005,0.5962
 Portugal,Income and wealth,2006,0.6709
 Portugal,Income and wealth,2007,0.5481
 Portugal,Income and wealth,2008,0.5465
@@ -4752,13 +5562,23 @@ Portugal,Income and wealth,2021,0.2303
 Portugal,Income and wealth,2022,0.2798
 Portugal,Income and wealth,2023,0.3295
 Portugal,Knowledge and skills,2006,0.5137
+Portugal,Knowledge and skills,2007,0.5473333333333333
+Portugal,Knowledge and skills,2008,0.5809666666666667
 Portugal,Knowledge and skills,2009,0.6146
+Portugal,Knowledge and skills,2010,0.6166333333333334
+Portugal,Knowledge and skills,2011,0.6186666666666667
 Portugal,Knowledge and skills,2012,0.6207
+Portugal,Knowledge and skills,2013,0.6719
+Portugal,Knowledge and skills,2014,0.7231
 Portugal,Knowledge and skills,2015,0.7743
+Portugal,Knowledge and skills,2016,0.736
+Portugal,Knowledge and skills,2017,0.6977
 Portugal,Knowledge and skills,2018,0.6594
+Portugal,Knowledge and skills,2019,0.632375
+Portugal,Knowledge and skills,2020,0.60535
+Portugal,Knowledge and skills,2021,0.578325
 Portugal,Knowledge and skills,2022,0.5513
-Portugal,Safety,2004,0.5692
-Portugal,Safety,2005,0.6061
+Portugal,Knowledge and skills,2023,0.5513
 Portugal,Safety,2006,0.6082
 Portugal,Safety,2007,0.9312
 Portugal,Safety,2008,0.6415
@@ -4778,6 +5598,7 @@ Portugal,Safety,2021,0.7921
 Portugal,Safety,2022,0.8115
 Portugal,Safety,2023,0.8115
 Portugal,Social connections,2006,0.804
+Portugal,Social connections,2007,0.7855000000000001
 Portugal,Social connections,2008,0.767
 Portugal,Social connections,2009,0.7449
 Portugal,Social connections,2010,0.7298
@@ -4795,6 +5616,7 @@ Portugal,Social connections,2021,0.6949
 Portugal,Social connections,2022,0.723
 Portugal,Social connections,2023,0.6887
 Portugal,Subjective well-being,2006,0.571
+Portugal,Subjective well-being,2007,0.5645
 Portugal,Subjective well-being,2008,0.558
 Portugal,Subjective well-being,2009,0.5527
 Portugal,Subjective well-being,2010,0.535
@@ -4811,8 +5633,6 @@ Portugal,Subjective well-being,2020,0.5474
 Portugal,Subjective well-being,2021,0.608
 Portugal,Subjective well-being,2022,0.585
 Portugal,Subjective well-being,2023,0.5327
-Portugal,Work and job quality,2004,0.7745
-Portugal,Work and job quality,2005,0.7132
 Portugal,Work and job quality,2006,0.7445
 Portugal,Work and job quality,2007,0.7302
 Portugal,Work and job quality,2008,0.7094
@@ -4831,17 +5651,42 @@ Portugal,Work and job quality,2020,0.7433
 Portugal,Work and job quality,2021,0.7596
 Portugal,Work and job quality,2022,0.7425
 Portugal,Work and job quality,2023,0.6795
+Portugal,Work-life balance,2006,0.5295
+Portugal,Work-life balance,2007,0.5295
+Portugal,Work-life balance,2008,0.5295
+Portugal,Work-life balance,2009,0.5295
+Portugal,Work-life balance,2010,0.5295
+Portugal,Work-life balance,2011,0.5295
+Portugal,Work-life balance,2012,0.5295
 Portugal,Work-life balance,2013,0.5295
+Portugal,Work-life balance,2014,0.5214799999999999
+Portugal,Work-life balance,2015,0.51346
+Portugal,Work-life balance,2016,0.50544
+Portugal,Work-life balance,2017,0.49742
 Portugal,Work-life balance,2018,0.4894
+Portugal,Work-life balance,2019,0.477375
+Portugal,Work-life balance,2020,0.46535000000000004
+Portugal,Work-life balance,2021,0.45332500000000003
 Portugal,Work-life balance,2022,0.4413
+Portugal,Work-life balance,2023,0.4413
 Slovak Republic,Civic engagement,2006,0.2017
+Slovak Republic,Civic engagement,2007,0.255025
+Slovak Republic,Civic engagement,2008,0.30835
+Slovak Republic,Civic engagement,2009,0.36167499999999997
 Slovak Republic,Civic engagement,2010,0.415
+Slovak Republic,Civic engagement,2011,0.41985
 Slovak Republic,Civic engagement,2012,0.4247
+Slovak Republic,Civic engagement,2013,0.4324
+Slovak Republic,Civic engagement,2014,0.44010000000000005
+Slovak Republic,Civic engagement,2015,0.44780000000000003
 Slovak Republic,Civic engagement,2016,0.4555
+Slovak Republic,Civic engagement,2017,0.36865000000000003
+Slovak Republic,Civic engagement,2018,0.2818
+Slovak Republic,Civic engagement,2019,0.19494999999999998
 Slovak Republic,Civic engagement,2020,0.1081
+Slovak Republic,Civic engagement,2021,0.15176666666666666
+Slovak Republic,Civic engagement,2022,0.19543333333333335
 Slovak Republic,Civic engagement,2023,0.2391
-Slovak Republic,Environmental quality,2004,1.0
-Slovak Republic,Environmental quality,2005,1.0
 Slovak Republic,Environmental quality,2006,1.0
 Slovak Republic,Environmental quality,2007,1.0
 Slovak Republic,Environmental quality,2008,1.0
@@ -4860,8 +5705,6 @@ Slovak Republic,Environmental quality,2020,1.0
 Slovak Republic,Environmental quality,2021,1.0
 Slovak Republic,Environmental quality,2022,1.0
 Slovak Republic,Environmental quality,2023,1.0
-Slovak Republic,Health,2004,0.6269
-Slovak Republic,Health,2005,0.5577
 Slovak Republic,Health,2006,0.5933
 Slovak Republic,Health,2007,0.5967
 Slovak Republic,Health,2008,0.5929
@@ -4880,8 +5723,6 @@ Slovak Republic,Health,2020,0.6423
 Slovak Republic,Health,2021,0.6542
 Slovak Republic,Health,2022,0.5983
 Slovak Republic,Health,2023,0.5895
-Slovak Republic,Housing,2004,0.0
-Slovak Republic,Housing,2005,0.1318
 Slovak Republic,Housing,2006,0.1052
 Slovak Republic,Housing,2007,0.1103
 Slovak Republic,Housing,2008,0.1444
@@ -4900,8 +5741,6 @@ Slovak Republic,Housing,2020,0.2579
 Slovak Republic,Housing,2021,0.2776
 Slovak Republic,Housing,2022,0.2093
 Slovak Republic,Housing,2023,0.1872
-Slovak Republic,Income and wealth,2004,0.1619
-Slovak Republic,Income and wealth,2005,0.2195
 Slovak Republic,Income and wealth,2006,0.1888
 Slovak Republic,Income and wealth,2007,0.1688
 Slovak Republic,Income and wealth,2008,0.2141
@@ -4921,13 +5760,23 @@ Slovak Republic,Income and wealth,2021,0.1552
 Slovak Republic,Income and wealth,2022,0.2855
 Slovak Republic,Income and wealth,2023,0.3308
 Slovak Republic,Knowledge and skills,2006,0.5774
+Slovak Republic,Knowledge and skills,2007,0.5839666666666666
+Slovak Republic,Knowledge and skills,2008,0.5905333333333334
 Slovak Republic,Knowledge and skills,2009,0.5971
+Slovak Republic,Knowledge and skills,2010,0.5751666666666666
+Slovak Republic,Knowledge and skills,2011,0.5532333333333334
 Slovak Republic,Knowledge and skills,2012,0.5313
+Slovak Republic,Knowledge and skills,2013,0.5241
+Slovak Republic,Knowledge and skills,2014,0.5169
 Slovak Republic,Knowledge and skills,2015,0.5097
+Slovak Republic,Knowledge and skills,2016,0.5202666666666667
+Slovak Republic,Knowledge and skills,2017,0.5308333333333334
 Slovak Republic,Knowledge and skills,2018,0.5414
+Slovak Republic,Knowledge and skills,2019,0.53395
+Slovak Republic,Knowledge and skills,2020,0.5265
+Slovak Republic,Knowledge and skills,2021,0.51905
 Slovak Republic,Knowledge and skills,2022,0.5116
-Slovak Republic,Safety,2004,0.8949
-Slovak Republic,Safety,2005,0.8983
+Slovak Republic,Knowledge and skills,2023,0.5116
 Slovak Republic,Safety,2006,0.3619
 Slovak Republic,Safety,2007,0.5862
 Slovak Republic,Safety,2008,0.8311
@@ -4947,6 +5796,9 @@ Slovak Republic,Safety,2021,0.6852
 Slovak Republic,Safety,2022,0.6275
 Slovak Republic,Safety,2023,0.6244
 Slovak Republic,Social connections,2006,0.9158
+Slovak Republic,Social connections,2007,0.8952249999999999
+Slovak Republic,Social connections,2008,0.8746499999999999
+Slovak Republic,Social connections,2009,0.854075
 Slovak Republic,Social connections,2010,0.8335
 Slovak Republic,Social connections,2011,0.8315
 Slovak Republic,Social connections,2012,0.8247
@@ -4962,6 +5814,9 @@ Slovak Republic,Social connections,2021,0.8564
 Slovak Republic,Social connections,2022,0.7615
 Slovak Republic,Social connections,2023,0.855
 Slovak Republic,Subjective well-being,2006,0.5406
+Slovak Republic,Subjective well-being,2007,0.548875
+Slovak Republic,Subjective well-being,2008,0.55715
+Slovak Republic,Subjective well-being,2009,0.565425
 Slovak Republic,Subjective well-being,2010,0.5737
 Slovak Republic,Subjective well-being,2011,0.5399
 Slovak Republic,Subjective well-being,2012,0.5399
@@ -4976,8 +5831,6 @@ Slovak Republic,Subjective well-being,2020,0.7077
 Slovak Republic,Subjective well-being,2021,0.676
 Slovak Republic,Subjective well-being,2022,0.6494
 Slovak Republic,Subjective well-being,2023,0.6727
-Slovak Republic,Work and job quality,2004,0.5526
-Slovak Republic,Work and job quality,2005,0.5382
 Slovak Republic,Work and job quality,2006,0.5641
 Slovak Republic,Work and job quality,2007,0.5681
 Slovak Republic,Work and job quality,2008,0.5939
@@ -4996,18 +5849,42 @@ Slovak Republic,Work and job quality,2020,0.7235
 Slovak Republic,Work and job quality,2021,0.7295
 Slovak Republic,Work and job quality,2022,0.6934
 Slovak Republic,Work and job quality,2023,0.6711
+Slovak Republic,Work-life balance,2006,0.457
+Slovak Republic,Work-life balance,2007,0.457
+Slovak Republic,Work-life balance,2008,0.457
+Slovak Republic,Work-life balance,2009,0.457
+Slovak Republic,Work-life balance,2010,0.457
+Slovak Republic,Work-life balance,2011,0.457
+Slovak Republic,Work-life balance,2012,0.457
 Slovak Republic,Work-life balance,2013,0.457
+Slovak Republic,Work-life balance,2014,0.45644
+Slovak Republic,Work-life balance,2015,0.45588
+Slovak Republic,Work-life balance,2016,0.45532
+Slovak Republic,Work-life balance,2017,0.45476
 Slovak Republic,Work-life balance,2018,0.4542
+Slovak Republic,Work-life balance,2019,0.44135
+Slovak Republic,Work-life balance,2020,0.4285
+Slovak Republic,Work-life balance,2021,0.41564999999999996
 Slovak Republic,Work-life balance,2022,0.4028
-Slovenia,Civic engagement,2004,0.4638
+Slovak Republic,Work-life balance,2023,0.4028
+Slovenia,Civic engagement,2006,0.1703
+Slovenia,Civic engagement,2007,0.1703
 Slovenia,Civic engagement,2008,0.1703
+Slovenia,Civic engagement,2009,0.2567666666666667
+Slovenia,Civic engagement,2010,0.3432333333333334
 Slovenia,Civic engagement,2011,0.4297
+Slovenia,Civic engagement,2012,0.39393333333333336
+Slovenia,Civic engagement,2013,0.3581666666666667
 Slovenia,Civic engagement,2014,0.3224
+Slovenia,Civic engagement,2015,0.24180000000000001
+Slovenia,Civic engagement,2016,0.1612
+Slovenia,Civic engagement,2017,0.0806
 Slovenia,Civic engagement,2018,0.0
+Slovenia,Civic engagement,2019,0.160625
+Slovenia,Civic engagement,2020,0.32125
+Slovenia,Civic engagement,2021,0.48187499999999994
 Slovenia,Civic engagement,2022,0.6425
 Slovenia,Civic engagement,2023,0.104
-Slovenia,Environmental quality,2004,0.9997
-Slovenia,Environmental quality,2005,0.9997
 Slovenia,Environmental quality,2006,0.9997
 Slovenia,Environmental quality,2007,0.9998
 Slovenia,Environmental quality,2008,0.9998
@@ -5026,8 +5903,6 @@ Slovenia,Environmental quality,2020,1.0
 Slovenia,Environmental quality,2021,1.0
 Slovenia,Environmental quality,2022,1.0
 Slovenia,Environmental quality,2023,1.0
-Slovenia,Health,2004,0.6084
-Slovenia,Health,2005,0.5621
 Slovenia,Health,2006,0.568
 Slovenia,Health,2007,0.5731
 Slovenia,Health,2008,0.5723
@@ -5046,8 +5921,6 @@ Slovenia,Health,2020,0.567
 Slovenia,Health,2021,0.6272
 Slovenia,Health,2022,0.5852
 Slovenia,Health,2023,0.5948
-Slovenia,Housing,2004,0.7786
-Slovenia,Housing,2005,0.3316
 Slovenia,Housing,2006,0.4002
 Slovenia,Housing,2007,0.4515
 Slovenia,Housing,2008,0.477
@@ -5066,8 +5939,6 @@ Slovenia,Housing,2020,0.5052
 Slovenia,Housing,2021,0.5026
 Slovenia,Housing,2022,0.4439
 Slovenia,Housing,2023,0.508
-Slovenia,Income and wealth,2004,0.1862
-Slovenia,Income and wealth,2005,0.2259
 Slovenia,Income and wealth,2006,0.2133
 Slovenia,Income and wealth,2007,0.1919
 Slovenia,Income and wealth,2008,0.2175
@@ -5087,14 +5958,23 @@ Slovenia,Income and wealth,2021,0.1371
 Slovenia,Income and wealth,2022,0.249
 Slovenia,Income and wealth,2023,0.1379
 Slovenia,Knowledge and skills,2006,0.713
+Slovenia,Knowledge and skills,2007,0.6981999999999999
+Slovenia,Knowledge and skills,2008,0.6834
 Slovenia,Knowledge and skills,2009,0.6686
+Slovenia,Knowledge and skills,2010,0.6748
+Slovenia,Knowledge and skills,2011,0.681
 Slovenia,Knowledge and skills,2012,0.6872
+Slovenia,Knowledge and skills,2013,0.68445
 Slovenia,Knowledge and skills,2014,0.6817
 Slovenia,Knowledge and skills,2015,0.7689
+Slovenia,Knowledge and skills,2016,0.7372333333333334
+Slovenia,Knowledge and skills,2017,0.7055666666666667
 Slovenia,Knowledge and skills,2018,0.6739
+Slovenia,Knowledge and skills,2019,0.6528750000000001
+Slovenia,Knowledge and skills,2020,0.63185
+Slovenia,Knowledge and skills,2021,0.610825
 Slovenia,Knowledge and skills,2022,0.5898
-Slovenia,Safety,2004,0.8629
-Slovenia,Safety,2005,0.8808
+Slovenia,Knowledge and skills,2023,0.5898
 Slovenia,Safety,2006,0.8182
 Slovenia,Safety,2007,0.8589
 Slovenia,Safety,2008,0.8522
@@ -5114,6 +5994,8 @@ Slovenia,Safety,2021,0.8706
 Slovenia,Safety,2022,0.8869
 Slovenia,Safety,2023,0.8927
 Slovenia,Social connections,2006,0.8813
+Slovenia,Social connections,2007,0.8680666666666667
+Slovenia,Social connections,2008,0.8548333333333333
 Slovenia,Social connections,2009,0.8416
 Slovenia,Social connections,2010,0.8349
 Slovenia,Social connections,2011,0.8439
@@ -5130,6 +6012,8 @@ Slovenia,Social connections,2021,0.8646
 Slovenia,Social connections,2022,0.8421
 Slovenia,Social connections,2023,0.8375
 Slovenia,Subjective well-being,2006,0.5962
+Slovenia,Subjective well-being,2007,0.5752333333333333
+Slovenia,Subjective well-being,2008,0.5542666666666667
 Slovenia,Subjective well-being,2009,0.5333
 Slovenia,Subjective well-being,2010,0.5637
 Slovenia,Subjective well-being,2011,0.5768
@@ -5145,8 +6029,6 @@ Slovenia,Subjective well-being,2020,0.7414
 Slovenia,Subjective well-being,2021,0.7523
 Slovenia,Subjective well-being,2022,0.7471
 Slovenia,Subjective well-being,2023,0.7237
-Slovenia,Work and job quality,2004,0.7476
-Slovenia,Work and job quality,2005,0.6867
 Slovenia,Work and job quality,2006,0.7389
 Slovenia,Work and job quality,2007,0.7863
 Slovenia,Work and job quality,2008,0.7883
@@ -5165,18 +6047,42 @@ Slovenia,Work and job quality,2020,0.7706
 Slovenia,Work and job quality,2021,0.8016
 Slovenia,Work and job quality,2022,0.7741
 Slovenia,Work and job quality,2023,0.7717
+Slovenia,Work-life balance,2006,0.4947
+Slovenia,Work-life balance,2007,0.4947
+Slovenia,Work-life balance,2008,0.4947
+Slovenia,Work-life balance,2009,0.4947
+Slovenia,Work-life balance,2010,0.4947
+Slovenia,Work-life balance,2011,0.4947
+Slovenia,Work-life balance,2012,0.4947
 Slovenia,Work-life balance,2013,0.4947
+Slovenia,Work-life balance,2014,0.48966
+Slovenia,Work-life balance,2015,0.48462
+Slovenia,Work-life balance,2016,0.47957999999999995
+Slovenia,Work-life balance,2017,0.47453999999999996
 Slovenia,Work-life balance,2018,0.4695
+Slovenia,Work-life balance,2019,0.460175
+Slovenia,Work-life balance,2020,0.45085
+Slovenia,Work-life balance,2021,0.44152499999999995
 Slovenia,Work-life balance,2022,0.4322
-Spain,Civic engagement,2004,0.7029
+Slovenia,Work-life balance,2023,0.4322
+Spain,Civic engagement,2006,0.7517
+Spain,Civic engagement,2007,0.7517
 Spain,Civic engagement,2008,0.7517
+Spain,Civic engagement,2009,0.6730333333333334
+Spain,Civic engagement,2010,0.5943666666666667
 Spain,Civic engagement,2011,0.5157
+Spain,Civic engagement,2012,0.517375
+Spain,Civic engagement,2013,0.51905
+Spain,Civic engagement,2014,0.520725
 Spain,Civic engagement,2015,0.5224
 Spain,Civic engagement,2016,0.5381
+Spain,Civic engagement,2017,0.6143666666666667
+Spain,Civic engagement,2018,0.6906333333333333
 Spain,Civic engagement,2019,0.7669
+Spain,Civic engagement,2020,0.68525
+Spain,Civic engagement,2021,0.6036
+Spain,Civic engagement,2022,0.52195
 Spain,Civic engagement,2023,0.4403
-Spain,Environmental quality,2004,0.5785
-Spain,Environmental quality,2005,0.4251
 Spain,Environmental quality,2006,0.4142
 Spain,Environmental quality,2007,0.8168
 Spain,Environmental quality,2008,0.7155
@@ -5195,8 +6101,6 @@ Spain,Environmental quality,2020,0.6073
 Spain,Environmental quality,2021,0.3944
 Spain,Environmental quality,2022,0.0
 Spain,Environmental quality,2023,0.1384
-Spain,Health,2004,0.6724
-Spain,Health,2005,0.6844
 Spain,Health,2006,0.6986
 Spain,Health,2007,0.6949
 Spain,Health,2008,0.6917
@@ -5215,8 +6119,6 @@ Spain,Health,2020,0.6713
 Spain,Health,2021,0.6996
 Spain,Health,2022,0.6363
 Spain,Health,2023,0.6343
-Spain,Housing,2004,0.5237
-Spain,Housing,2005,0.394
 Spain,Housing,2006,0.4235
 Spain,Housing,2007,0.4298
 Spain,Housing,2008,0.4183
@@ -5235,8 +6137,6 @@ Spain,Housing,2020,0.6395
 Spain,Housing,2021,0.6594
 Spain,Housing,2022,0.6962
 Spain,Housing,2023,0.8223
-Spain,Income and wealth,2004,0.5503
-Spain,Income and wealth,2005,0.4948
 Spain,Income and wealth,2006,0.4848
 Spain,Income and wealth,2007,0.5138
 Spain,Income and wealth,2008,0.553
@@ -5256,13 +6156,23 @@ Spain,Income and wealth,2021,0.3489
 Spain,Income and wealth,2022,0.3017
 Spain,Income and wealth,2023,0.2709
 Spain,Knowledge and skills,2006,0.5439
+Spain,Knowledge and skills,2007,0.5544666666666667
+Spain,Knowledge and skills,2008,0.5650333333333334
 Spain,Knowledge and skills,2009,0.5756
+Spain,Knowledge and skills,2010,0.5132666666666666
+Spain,Knowledge and skills,2011,0.45093333333333335
 Spain,Knowledge and skills,2012,0.3886
+Spain,Knowledge and skills,2013,0.5003
+Spain,Knowledge and skills,2014,0.612
 Spain,Knowledge and skills,2015,0.7237
+Spain,Knowledge and skills,2016,0.6635333333333333
+Spain,Knowledge and skills,2017,0.6033666666666667
 Spain,Knowledge and skills,2018,0.5432
+Spain,Knowledge and skills,2019,0.545875
+Spain,Knowledge and skills,2020,0.54855
+Spain,Knowledge and skills,2021,0.551225
 Spain,Knowledge and skills,2022,0.5539
-Spain,Safety,2004,0.9026
-Spain,Safety,2005,0.9186
+Spain,Knowledge and skills,2023,0.5539
 Spain,Safety,2006,0.6894
 Spain,Safety,2007,0.6974
 Spain,Safety,2008,0.6739
@@ -5317,8 +6227,6 @@ Spain,Subjective well-being,2020,0.6412
 Spain,Subjective well-being,2021,0.6565
 Spain,Subjective well-being,2022,0.6452
 Spain,Subjective well-being,2023,0.6305
-Spain,Work and job quality,2004,0.7361
-Spain,Work and job quality,2005,0.7161
 Spain,Work and job quality,2006,0.7191
 Spain,Work and job quality,2007,0.7732
 Spain,Work and job quality,2008,0.7136
@@ -5337,19 +6245,42 @@ Spain,Work and job quality,2020,0.6816
 Spain,Work and job quality,2021,0.6984
 Spain,Work and job quality,2022,0.6287
 Spain,Work and job quality,2023,0.6275
+Spain,Work-life balance,2006,0.6425
+Spain,Work-life balance,2007,0.6425
+Spain,Work-life balance,2008,0.6425
 Spain,Work-life balance,2009,0.6425
+Spain,Work-life balance,2010,0.59875
+Spain,Work-life balance,2011,0.5549999999999999
+Spain,Work-life balance,2012,0.51125
 Spain,Work-life balance,2013,0.4675
+Spain,Work-life balance,2014,0.45912000000000003
+Spain,Work-life balance,2015,0.45074000000000003
+Spain,Work-life balance,2016,0.44236
+Spain,Work-life balance,2017,0.43398
 Spain,Work-life balance,2018,0.4256
+Spain,Work-life balance,2019,0.42627499999999996
+Spain,Work-life balance,2020,0.42695
+Spain,Work-life balance,2021,0.42762500000000003
 Spain,Work-life balance,2022,0.4283
+Spain,Work-life balance,2023,0.4283
 Sweden,Civic engagement,2006,0.7995
+Sweden,Civic engagement,2007,0.8135
+Sweden,Civic engagement,2008,0.8275
+Sweden,Civic engagement,2009,0.8415
 Sweden,Civic engagement,2010,0.8555
+Sweden,Civic engagement,2011,0.86145
+Sweden,Civic engagement,2012,0.8674
+Sweden,Civic engagement,2013,0.87335
 Sweden,Civic engagement,2014,0.8793
+Sweden,Civic engagement,2015,0.8634499999999999
+Sweden,Civic engagement,2016,0.8475999999999999
+Sweden,Civic engagement,2017,0.83175
 Sweden,Civic engagement,2018,0.8159
+Sweden,Civic engagement,2019,0.6726333333333333
+Sweden,Civic engagement,2020,0.5293666666666667
 Sweden,Civic engagement,2021,0.3861
 Sweden,Civic engagement,2022,0.8564
 Sweden,Civic engagement,2023,0.403
-Sweden,Environmental quality,2004,0.6751
-Sweden,Environmental quality,2005,0.6984
 Sweden,Environmental quality,2006,0.7854
 Sweden,Environmental quality,2007,0.6669
 Sweden,Environmental quality,2008,0.7505
@@ -5368,8 +6299,6 @@ Sweden,Environmental quality,2020,0.7413
 Sweden,Environmental quality,2021,1.0
 Sweden,Environmental quality,2022,1.0
 Sweden,Environmental quality,2023,1.0
-Sweden,Health,2004,0.6574
-Sweden,Health,2005,0.6713
 Sweden,Health,2006,0.6779
 Sweden,Health,2007,0.6914
 Sweden,Health,2008,0.6832
@@ -5388,8 +6317,6 @@ Sweden,Health,2020,0.6562
 Sweden,Health,2021,0.6704
 Sweden,Health,2022,0.6412
 Sweden,Health,2023,0.6116
-Sweden,Housing,2004,0.2913
-Sweden,Housing,2005,0.3231
 Sweden,Housing,2006,0.3941
 Sweden,Housing,2007,0.4575
 Sweden,Housing,2008,0.4701
@@ -5408,8 +6335,6 @@ Sweden,Housing,2020,0.496
 Sweden,Housing,2021,0.4448
 Sweden,Housing,2022,0.436
 Sweden,Housing,2023,0.4814
-Sweden,Income and wealth,2004,0.3191
-Sweden,Income and wealth,2005,0.304
 Sweden,Income and wealth,2006,0.31
 Sweden,Income and wealth,2007,0.3149
 Sweden,Income and wealth,2008,0.3366
@@ -5429,13 +6354,23 @@ Sweden,Income and wealth,2021,0.2215
 Sweden,Income and wealth,2022,0.1932
 Sweden,Income and wealth,2023,0.4174
 Sweden,Knowledge and skills,2006,0.7048
+Sweden,Knowledge and skills,2007,0.6884
+Sweden,Knowledge and skills,2008,0.6719999999999999
 Sweden,Knowledge and skills,2009,0.6556
+Sweden,Knowledge and skills,2010,0.6471
+Sweden,Knowledge and skills,2011,0.6386
 Sweden,Knowledge and skills,2012,0.6301
+Sweden,Knowledge and skills,2013,0.6429
+Sweden,Knowledge and skills,2014,0.6557
 Sweden,Knowledge and skills,2015,0.6685
+Sweden,Knowledge and skills,2016,0.6781333333333334
+Sweden,Knowledge and skills,2017,0.6877666666666666
 Sweden,Knowledge and skills,2018,0.6974
+Sweden,Knowledge and skills,2019,0.68535
+Sweden,Knowledge and skills,2020,0.6733
+Sweden,Knowledge and skills,2021,0.66125
 Sweden,Knowledge and skills,2022,0.6492
-Sweden,Safety,2004,0.9818
-Sweden,Safety,2005,0.9886
+Sweden,Knowledge and skills,2023,0.6492
 Sweden,Safety,2006,0.7654
 Sweden,Safety,2007,0.7699
 Sweden,Safety,2008,0.7208
@@ -5490,8 +6425,6 @@ Sweden,Subjective well-being,2020,0.7977
 Sweden,Subjective well-being,2021,0.7682
 Sweden,Subjective well-being,2022,0.7613
 Sweden,Subjective well-being,2023,0.7773
-Sweden,Work and job quality,2004,0.8131
-Sweden,Work and job quality,2005,0.6142
 Sweden,Work and job quality,2006,0.7766
 Sweden,Work and job quality,2007,0.8335
 Sweden,Work and job quality,2008,0.8195
@@ -5510,17 +6443,42 @@ Sweden,Work and job quality,2020,0.8517
 Sweden,Work and job quality,2021,0.8304
 Sweden,Work and job quality,2022,0.8102
 Sweden,Work and job quality,2023,0.7544
+Sweden,Work-life balance,2006,1.0
+Sweden,Work-life balance,2007,1.0
+Sweden,Work-life balance,2008,1.0
+Sweden,Work-life balance,2009,1.0
 Sweden,Work-life balance,2010,1.0
+Sweden,Work-life balance,2011,0.8249333333333333
+Sweden,Work-life balance,2012,0.6498666666666666
 Sweden,Work-life balance,2013,0.4748
+Sweden,Work-life balance,2014,0.4739
+Sweden,Work-life balance,2015,0.473
+Sweden,Work-life balance,2016,0.4721
+Sweden,Work-life balance,2017,0.4712
 Sweden,Work-life balance,2018,0.4703
+Sweden,Work-life balance,2019,0.46055
+Sweden,Work-life balance,2020,0.4508
+Sweden,Work-life balance,2021,0.44105
 Sweden,Work-life balance,2022,0.4313
+Sweden,Work-life balance,2023,0.4313
+Switzerland,Civic engagement,2006,0.2496
 Switzerland,Civic engagement,2007,0.2496
+Switzerland,Civic engagement,2008,0.19092499999999998
+Switzerland,Civic engagement,2009,0.13224999999999998
+Switzerland,Civic engagement,2010,0.073575
 Switzerland,Civic engagement,2011,0.0149
+Switzerland,Civic engagement,2012,0.011175000000000001
+Switzerland,Civic engagement,2013,0.00745
+Switzerland,Civic engagement,2014,0.003725
 Switzerland,Civic engagement,2015,0.0
+Switzerland,Civic engagement,2016,0.1146
+Switzerland,Civic engagement,2017,0.2292
+Switzerland,Civic engagement,2018,0.3438
 Switzerland,Civic engagement,2019,0.4584
+Switzerland,Civic engagement,2020,0.54785
+Switzerland,Civic engagement,2021,0.6373
+Switzerland,Civic engagement,2022,0.72675
 Switzerland,Civic engagement,2023,0.8162
-Switzerland,Environmental quality,2004,0.9926
-Switzerland,Environmental quality,2005,0.9936
 Switzerland,Environmental quality,2006,0.9931
 Switzerland,Environmental quality,2007,0.9943
 Switzerland,Environmental quality,2008,0.9954
@@ -5539,8 +6497,6 @@ Switzerland,Environmental quality,2020,0.9972
 Switzerland,Environmental quality,2021,1.0
 Switzerland,Environmental quality,2022,1.0
 Switzerland,Environmental quality,2023,1.0
-Switzerland,Health,2004,0.8349
-Switzerland,Health,2005,0.8379
 Switzerland,Health,2006,0.8257
 Switzerland,Health,2007,0.7147
 Switzerland,Health,2008,0.6888
@@ -5559,8 +6515,6 @@ Switzerland,Health,2020,0.6967
 Switzerland,Health,2021,0.7129
 Switzerland,Health,2022,0.6586
 Switzerland,Health,2023,0.8386
-Switzerland,Housing,2004,0.6007
-Switzerland,Housing,2005,0.5781
 Switzerland,Housing,2006,0.5979
 Switzerland,Housing,2007,0.5011
 Switzerland,Housing,2008,0.5134
@@ -5579,8 +6533,6 @@ Switzerland,Housing,2020,0.418
 Switzerland,Housing,2021,0.5104
 Switzerland,Housing,2022,0.2716
 Switzerland,Housing,2023,0.0
-Switzerland,Income and wealth,2004,0.7784
-Switzerland,Income and wealth,2005,0.8179
 Switzerland,Income and wealth,2006,0.5771
 Switzerland,Income and wealth,2007,0.3863
 Switzerland,Income and wealth,2008,0.3785
@@ -5600,13 +6552,23 @@ Switzerland,Income and wealth,2021,0.3624
 Switzerland,Income and wealth,2022,0.4012
 Switzerland,Income and wealth,2023,0.5312
 Switzerland,Knowledge and skills,2006,0.7557
+Switzerland,Knowledge and skills,2007,0.7673666666666666
+Switzerland,Knowledge and skills,2008,0.7790333333333334
 Switzerland,Knowledge and skills,2009,0.7907
+Switzerland,Knowledge and skills,2010,0.7986333333333333
+Switzerland,Knowledge and skills,2011,0.8065666666666667
 Switzerland,Knowledge and skills,2012,0.8145
+Switzerland,Knowledge and skills,2013,0.7949333333333334
+Switzerland,Knowledge and skills,2014,0.7753666666666666
 Switzerland,Knowledge and skills,2015,0.7558
+Switzerland,Knowledge and skills,2016,0.7309
+Switzerland,Knowledge and skills,2017,0.7060000000000001
 Switzerland,Knowledge and skills,2018,0.6811
+Switzerland,Knowledge and skills,2019,0.677225
+Switzerland,Knowledge and skills,2020,0.67335
+Switzerland,Knowledge and skills,2021,0.669475
 Switzerland,Knowledge and skills,2022,0.6656
-Switzerland,Safety,2004,0.9617
-Switzerland,Safety,2005,0.9805
+Switzerland,Knowledge and skills,2023,0.6656
 Switzerland,Safety,2006,0.8311
 Switzerland,Safety,2007,0.9933
 Switzerland,Safety,2008,0.9777
@@ -5661,8 +6623,6 @@ Switzerland,Subjective well-being,2020,0.8313
 Switzerland,Subjective well-being,2021,0.793
 Switzerland,Subjective well-being,2022,0.8007
 Switzerland,Subjective well-being,2023,0.7931
-Switzerland,Work and job quality,2004,0.8293
-Switzerland,Work and job quality,2005,0.8743
 Switzerland,Work and job quality,2006,0.821
 Switzerland,Work and job quality,2007,0.8743
 Switzerland,Work and job quality,2008,0.8264
@@ -5681,6 +6641,7 @@ Switzerland,Work and job quality,2020,0.8419
 Switzerland,Work and job quality,2021,0.8592
 Switzerland,Work and job quality,2022,0.7709
 Switzerland,Work and job quality,2023,0.8128
+Switzerland,Work-life balance,2006,0.5606
 Switzerland,Work-life balance,2007,0.5606
 Switzerland,Work-life balance,2008,0.5132
 Switzerland,Work-life balance,2009,0.5485
@@ -5697,13 +6658,25 @@ Switzerland,Work-life balance,2019,0.5092
 Switzerland,Work-life balance,2020,0.6808
 Switzerland,Work-life balance,2021,0.704
 Switzerland,Work-life balance,2022,0.6989
+Switzerland,Work-life balance,2023,0.6989
+Türkiye,Civic engagement,2006,0.8303
 Türkiye,Civic engagement,2007,0.8303
+Türkiye,Civic engagement,2008,0.843225
+Türkiye,Civic engagement,2009,0.85615
+Türkiye,Civic engagement,2010,0.869075
 Türkiye,Civic engagement,2011,0.882
+Türkiye,Civic engagement,2012,0.8787
+Türkiye,Civic engagement,2013,0.8754
+Türkiye,Civic engagement,2014,0.8721
 Türkiye,Civic engagement,2015,0.8688
+Türkiye,Civic engagement,2016,0.8440666666666666
+Türkiye,Civic engagement,2017,0.8193333333333334
 Türkiye,Civic engagement,2018,0.7946
+Türkiye,Civic engagement,2019,0.83504
+Türkiye,Civic engagement,2020,0.87548
+Türkiye,Civic engagement,2021,0.91592
+Türkiye,Civic engagement,2022,0.95636
 Türkiye,Civic engagement,2023,0.9968
-Türkiye,Environmental quality,2004,0.7241
-Türkiye,Environmental quality,2005,0.6287
 Türkiye,Environmental quality,2006,0.5546
 Türkiye,Environmental quality,2007,0.5911
 Türkiye,Environmental quality,2008,0.4837
@@ -5722,8 +6695,6 @@ Türkiye,Environmental quality,2020,0.669
 Türkiye,Environmental quality,2021,0.4875
 Türkiye,Environmental quality,2022,0.518
 Türkiye,Environmental quality,2023,0.2845
-Türkiye,Health,2004,0.355
-Türkiye,Health,2005,0.3981
 Türkiye,Health,2006,0.5692
 Türkiye,Health,2007,0.584
 Türkiye,Health,2008,0.5742
@@ -5741,7 +6712,7 @@ Türkiye,Health,2019,0.5634
 Türkiye,Health,2020,0.5991
 Türkiye,Health,2021,0.6042
 Türkiye,Health,2022,0.5617
-Türkiye,Housing,2005,0.0121
+Türkiye,Health,2023,0.5617
 Türkiye,Housing,2006,0.9847
 Türkiye,Housing,2007,0.5255
 Türkiye,Housing,2008,0.5734
@@ -5764,6 +6735,7 @@ Türkiye,Income and wealth,2006,1.0
 Türkiye,Income and wealth,2007,1.0
 Türkiye,Income and wealth,2008,1.0
 Türkiye,Income and wealth,2009,1.0
+Türkiye,Income and wealth,2010,0.8693
 Türkiye,Income and wealth,2011,0.7386
 Türkiye,Income and wealth,2012,0.6572
 Türkiye,Income and wealth,2013,0.6119
@@ -5778,14 +6750,23 @@ Türkiye,Income and wealth,2021,0.4793
 Türkiye,Income and wealth,2022,0.4505
 Türkiye,Income and wealth,2023,0.445
 Türkiye,Knowledge and skills,2006,0.2896
+Türkiye,Knowledge and skills,2007,0.3194666666666667
+Türkiye,Knowledge and skills,2008,0.34933333333333333
 Türkiye,Knowledge and skills,2009,0.3792
+Türkiye,Knowledge and skills,2010,0.4056666666666667
+Türkiye,Knowledge and skills,2011,0.4321333333333333
 Türkiye,Knowledge and skills,2012,0.4586
+Türkiye,Knowledge and skills,2013,0.42735
 Türkiye,Knowledge and skills,2014,0.3961
 Türkiye,Knowledge and skills,2015,0.5113
+Türkiye,Knowledge and skills,2016,0.5099666666666667
+Türkiye,Knowledge and skills,2017,0.5086333333333333
 Türkiye,Knowledge and skills,2018,0.5073
+Türkiye,Knowledge and skills,2019,0.4957
+Türkiye,Knowledge and skills,2020,0.4841
+Türkiye,Knowledge and skills,2021,0.4725
 Türkiye,Knowledge and skills,2022,0.4609
-Türkiye,Safety,2004,0.8856
-Türkiye,Safety,2005,0.8888
+Türkiye,Knowledge and skills,2023,0.4609
 Türkiye,Safety,2006,0.3769
 Türkiye,Safety,2007,0.3993
 Türkiye,Safety,2008,0.3828
@@ -5840,8 +6821,6 @@ Türkiye,Subjective well-being,2020,0.413
 Türkiye,Subjective well-being,2021,0.3718
 Türkiye,Subjective well-being,2022,0.3741
 Türkiye,Subjective well-being,2023,0.3876
-Türkiye,Work and job quality,2004,0.4174
-Türkiye,Work and job quality,2005,0.4992
 Türkiye,Work and job quality,2006,0.4208
 Türkiye,Work and job quality,2007,0.409
 Türkiye,Work and job quality,2008,0.3991
@@ -5860,21 +6839,42 @@ Türkiye,Work and job quality,2020,0.4763
 Türkiye,Work and job quality,2021,0.5404
 Türkiye,Work and job quality,2022,0.4897
 Türkiye,Work and job quality,2023,0.3775
+Türkiye,Work-life balance,2006,0.0839
+Türkiye,Work-life balance,2007,0.0839
+Türkiye,Work-life balance,2008,0.0839
+Türkiye,Work-life balance,2009,0.0839
+Türkiye,Work-life balance,2010,0.0839
+Türkiye,Work-life balance,2011,0.0839
+Türkiye,Work-life balance,2012,0.0839
 Türkiye,Work-life balance,2013,0.0839
 Türkiye,Work-life balance,2014,0.2991
+Türkiye,Work-life balance,2015,0.254425
+Türkiye,Work-life balance,2016,0.20975
+Türkiye,Work-life balance,2017,0.165075
 Türkiye,Work-life balance,2018,0.1204
+Türkiye,Work-life balance,2019,0.108775
+Türkiye,Work-life balance,2020,0.09714999999999999
+Türkiye,Work-life balance,2021,0.08552499999999999
 Türkiye,Work-life balance,2022,0.0739
-United Kingdom,Civic engagement,2005,0.4414
+Türkiye,Work-life balance,2023,0.0739
+United Kingdom,Civic engagement,2006,0.5294
+United Kingdom,Civic engagement,2007,0.5294
+United Kingdom,Civic engagement,2008,0.5294
+United Kingdom,Civic engagement,2009,0.5294
 United Kingdom,Civic engagement,2010,0.5294
+United Kingdom,Civic engagement,2011,0.5833
+United Kingdom,Civic engagement,2012,0.6372
 United Kingdom,Civic engagement,2013,0.6911
+United Kingdom,Civic engagement,2014,0.53415
 United Kingdom,Civic engagement,2015,0.3772
+United Kingdom,Civic engagement,2016,0.45355
 United Kingdom,Civic engagement,2017,0.5299
+United Kingdom,Civic engagement,2018,0.43675
 United Kingdom,Civic engagement,2019,0.3436
+United Kingdom,Civic engagement,2020,0.29225
 United Kingdom,Civic engagement,2021,0.2409
+United Kingdom,Civic engagement,2022,0.2173
 United Kingdom,Civic engagement,2023,0.1937
-United Kingdom,Civic engagement,2024,0.1763
-United Kingdom,Environmental quality,2004,0.9503
-United Kingdom,Environmental quality,2005,0.9561
 United Kingdom,Environmental quality,2006,0.9497
 United Kingdom,Environmental quality,2007,0.961
 United Kingdom,Environmental quality,2008,0.9679
@@ -5893,8 +6893,6 @@ United Kingdom,Environmental quality,2020,0.9916
 United Kingdom,Environmental quality,2021,1.0
 United Kingdom,Environmental quality,2022,1.0
 United Kingdom,Environmental quality,2023,1.0
-United Kingdom,Health,2004,0.7634
-United Kingdom,Health,2005,0.6721
 United Kingdom,Health,2006,0.6786
 United Kingdom,Health,2007,0.6885
 United Kingdom,Health,2008,0.682
@@ -5912,8 +6910,7 @@ United Kingdom,Health,2019,0.6525
 United Kingdom,Health,2020,0.73
 United Kingdom,Health,2021,0.6872
 United Kingdom,Health,2022,0.6516
-United Kingdom,Housing,2004,0.3974
-United Kingdom,Housing,2005,0.2745
+United Kingdom,Health,2023,0.6516
 United Kingdom,Housing,2006,0.3212
 United Kingdom,Housing,2007,0.3679
 United Kingdom,Housing,2008,0.3919
@@ -5932,8 +6929,6 @@ United Kingdom,Housing,2020,0.5331
 United Kingdom,Housing,2021,0.2685
 United Kingdom,Housing,2022,0.3108
 United Kingdom,Housing,2023,0.3385
-United Kingdom,Income and wealth,2004,0.6925
-United Kingdom,Income and wealth,2005,0.4255
 United Kingdom,Income and wealth,2006,0.6327
 United Kingdom,Income and wealth,2007,0.4968
 United Kingdom,Income and wealth,2008,0.4866
@@ -5951,14 +6946,25 @@ United Kingdom,Income and wealth,2019,0.2895
 United Kingdom,Income and wealth,2020,0.2183
 United Kingdom,Income and wealth,2021,0.2335
 United Kingdom,Income and wealth,2022,0.0224
+United Kingdom,Income and wealth,2023,0.0224
 United Kingdom,Knowledge and skills,2006,0.6898
+United Kingdom,Knowledge and skills,2007,0.6878666666666666
+United Kingdom,Knowledge and skills,2008,0.6859333333333334
 United Kingdom,Knowledge and skills,2009,0.684
+United Kingdom,Knowledge and skills,2010,0.6954
+United Kingdom,Knowledge and skills,2011,0.7068
 United Kingdom,Knowledge and skills,2012,0.7182
+United Kingdom,Knowledge and skills,2013,0.7254999999999999
+United Kingdom,Knowledge and skills,2014,0.7328
 United Kingdom,Knowledge and skills,2015,0.7401
+United Kingdom,Knowledge and skills,2016,0.7293
+United Kingdom,Knowledge and skills,2017,0.7185
 United Kingdom,Knowledge and skills,2018,0.7077
+United Kingdom,Knowledge and skills,2019,0.6970000000000001
+United Kingdom,Knowledge and skills,2020,0.6863
+United Kingdom,Knowledge and skills,2021,0.6756
 United Kingdom,Knowledge and skills,2022,0.6649
-United Kingdom,Safety,2004,0.9819
-United Kingdom,Safety,2005,0.9843
+United Kingdom,Knowledge and skills,2023,0.6649
 United Kingdom,Safety,2006,0.6793
 United Kingdom,Safety,2007,0.6524
 United Kingdom,Safety,2008,0.6631
@@ -6013,8 +7019,6 @@ United Kingdom,Subjective well-being,2020,0.7188
 United Kingdom,Subjective well-being,2021,0.7303
 United Kingdom,Subjective well-being,2022,0.6989
 United Kingdom,Subjective well-being,2023,0.7249
-United Kingdom,Work and job quality,2004,0.7966
-United Kingdom,Work and job quality,2005,0.6855
 United Kingdom,Work and job quality,2006,0.7777
 United Kingdom,Work and job quality,2007,0.7906
 United Kingdom,Work and job quality,2008,0.77
@@ -6033,20 +7037,42 @@ United Kingdom,Work and job quality,2020,0.7879
 United Kingdom,Work and job quality,2021,0.8064
 United Kingdom,Work and job quality,2022,0.779
 United Kingdom,Work and job quality,2023,0.7725
+United Kingdom,Work-life balance,2006,0.5301
+United Kingdom,Work-life balance,2007,0.5301
+United Kingdom,Work-life balance,2008,0.5301
+United Kingdom,Work-life balance,2009,0.5301
+United Kingdom,Work-life balance,2010,0.5301
+United Kingdom,Work-life balance,2011,0.5301
+United Kingdom,Work-life balance,2012,0.5301
 United Kingdom,Work-life balance,2013,0.5301
 United Kingdom,Work-life balance,2014,0.5195
+United Kingdom,Work-life balance,2015,0.5106499999999999
+United Kingdom,Work-life balance,2016,0.5018
+United Kingdom,Work-life balance,2017,0.49295
 United Kingdom,Work-life balance,2018,0.4841
-United States,Civic engagement,2004,0.5929
+United Kingdom,Work-life balance,2019,0.4841
+United Kingdom,Work-life balance,2020,0.4841
+United Kingdom,Work-life balance,2021,0.4841
+United Kingdom,Work-life balance,2022,0.4841
+United Kingdom,Work-life balance,2023,0.4841
 United States,Civic engagement,2006,0.0509
+United States,Civic engagement,2007,0.1406
 United States,Civic engagement,2008,0.2303
+United States,Civic engagement,2009,0.23815
 United States,Civic engagement,2010,0.246
+United States,Civic engagement,2011,0.38285
 United States,Civic engagement,2012,0.5197
+United States,Civic engagement,2013,0.35345000000000004
 United States,Civic engagement,2014,0.1872
+United States,Civic engagement,2015,0.376
 United States,Civic engagement,2016,0.5648
+United States,Civic engagement,2017,0.33209999999999995
 United States,Civic engagement,2018,0.0994
+United States,Civic engagement,2019,0.19155
 United States,Civic engagement,2020,0.2837
-United States,Environmental quality,2004,0.6782
-United States,Environmental quality,2005,0.5624
+United States,Civic engagement,2021,0.2837
+United States,Civic engagement,2022,0.2837
+United States,Civic engagement,2023,0.2837
 United States,Environmental quality,2006,0.4761
 United States,Environmental quality,2007,0.6851
 United States,Environmental quality,2008,0.5374
@@ -6065,8 +7091,6 @@ United States,Environmental quality,2020,0.7164
 United States,Environmental quality,2021,0.6678
 United States,Environmental quality,2022,0.3116
 United States,Environmental quality,2023,0.4336
-United States,Health,2004,0.6754
-United States,Health,2005,0.6768
 United States,Health,2006,0.6759
 United States,Health,2007,0.6887
 United States,Health,2008,0.6781
@@ -6084,8 +7108,7 @@ United States,Health,2019,0.6261
 United States,Health,2020,0.6151
 United States,Health,2021,0.6123
 United States,Health,2022,0.6549
-United States,Housing,2004,0.744
-United States,Housing,2005,0.6837
+United States,Health,2023,0.6549
 United States,Housing,2006,0.7586
 United States,Housing,2007,0.6522
 United States,Housing,2008,0.7852
@@ -6104,8 +7127,6 @@ United States,Housing,2020,0.7606
 United States,Housing,2021,0.6504
 United States,Housing,2022,0.7544
 United States,Housing,2023,0.4526
-United States,Income and wealth,2004,0.9644
-United States,Income and wealth,2005,0.9932
 United States,Income and wealth,2006,1.0
 United States,Income and wealth,2007,1.0
 United States,Income and wealth,2008,1.0
@@ -6123,15 +7144,25 @@ United States,Income and wealth,2019,0.7911
 United States,Income and wealth,2020,0.6999
 United States,Income and wealth,2021,0.6784
 United States,Income and wealth,2022,0.7856
+United States,Income and wealth,2023,0.7856
 United States,Knowledge and skills,2006,0.5803
+United States,Knowledge and skills,2007,0.6079333333333333
+United States,Knowledge and skills,2008,0.6355666666666667
 United States,Knowledge and skills,2009,0.6632
+United States,Knowledge and skills,2010,0.5999
+United States,Knowledge and skills,2011,0.5366
 United States,Knowledge and skills,2012,0.4733
+United States,Knowledge and skills,2013,0.5502
+United States,Knowledge and skills,2014,0.6271
 United States,Knowledge and skills,2015,0.704
+United States,Knowledge and skills,2016,0.73245
 United States,Knowledge and skills,2017,0.7609
 United States,Knowledge and skills,2018,0.66
+United States,Knowledge and skills,2019,0.65915
+United States,Knowledge and skills,2020,0.6583
+United States,Knowledge and skills,2021,0.65745
 United States,Knowledge and skills,2022,0.6566
-United States,Safety,2004,0.8245
-United States,Safety,2005,0.8173
+United States,Knowledge and skills,2023,0.6566
 United States,Safety,2006,0.7603
 United States,Safety,2007,0.761
 United States,Safety,2008,0.7512
@@ -6151,6 +7182,7 @@ United States,Safety,2021,0.6376
 United States,Safety,2022,0.6486
 United States,Safety,2023,0.6486
 United States,Social connections,2006,0.916
+United States,Social connections,2007,0.8791500000000001
 United States,Social connections,2008,0.8423
 United States,Social connections,2009,0.8255
 United States,Social connections,2010,0.7545
@@ -6167,7 +7199,6 @@ United States,Social connections,2020,0.732
 United States,Social connections,2021,0.732
 United States,Social connections,2022,0.6856
 United States,Social connections,2023,0.6856
-United States,Social connections,2024,0.5769
 United States,Subjective well-being,2006,0.6659
 United States,Subjective well-being,2007,0.6555
 United States,Subjective well-being,2008,0.6605
@@ -6186,8 +7217,6 @@ United States,Subjective well-being,2020,0.6474
 United States,Subjective well-being,2021,0.6474
 United States,Subjective well-being,2022,0.6085
 United States,Subjective well-being,2023,0.6085
-United States,Work and job quality,2004,0.8092
-United States,Work and job quality,2005,0.6913
 United States,Work and job quality,2006,0.8007
 United States,Work and job quality,2007,0.8108
 United States,Work and job quality,2008,0.795
@@ -6206,8 +7235,6 @@ United States,Work and job quality,2020,0.7821
 United States,Work and job quality,2021,0.7977
 United States,Work and job quality,2022,0.7778
 United States,Work and job quality,2023,0.8042
-United States,Work-life balance,2004,0.3819
-United States,Work-life balance,2005,0.4116
 United States,Work-life balance,2006,0.6077
 United States,Work-life balance,2007,0.2845
 United States,Work-life balance,2008,0.1288
@@ -6222,5 +7249,7 @@ United States,Work-life balance,2016,0.2216
 United States,Work-life balance,2017,0.307
 United States,Work-life balance,2018,0.4142
 United States,Work-life balance,2019,0.3526
+United States,Work-life balance,2020,0.29410000000000003
 United States,Work-life balance,2021,0.2356
 United States,Work-life balance,2022,0.2478
+United States,Work-life balance,2023,0.2478

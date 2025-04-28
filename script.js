@@ -125,7 +125,6 @@ const DOMAIN_MAP = Object.freeze({
 
 /** Corrections for country names between TopoJSON and CSV data. */
 const COUNTRY_CORRECTIONS = Object.freeze({
-  Czechia: "Czech Republic",
   Slovakia: "Slovak Republic",
   "South Korea": "Korea",
   Turkey: "Türkiye",
@@ -1309,7 +1308,7 @@ class OECDWellbeingMap {
     const CHART_WIDTH = 220;
     const CHART_HEIGHT = 180;
     const RADIUS = Math.min(CHART_WIDTH, CHART_HEIGHT) / 2 - 25; // Radius of the radar area
-    const LABEL_OFFSET = 6; // Distance of labels from radar edge
+    const LABEL_OFFSET = 10; // Distance of labels from radar edge
 
     // --- Data Preparation ---
     const dimensionLabels = Object.values(DOMAIN_MAP);
@@ -1375,8 +1374,17 @@ class OECDWellbeingMap {
         .append("text")
         .attr("x", Math.sin(angle) * (RADIUS + LABEL_OFFSET)) // Position label outside radius
         .attr("y", -Math.cos(angle) * (RADIUS + LABEL_OFFSET))
-        .attr("font-size", "8px") // Small font size for labels
-        .attr("text-anchor", "middle") // Center text horizontally
+        .attr("font-size", "7px") // Small font size for labels
+        .attr("text-anchor", (d, i) => {
+          const angleDegrees = (angleScale(i) * 180) / Math.PI;
+          // Adjust thresholds slightly to avoid perfect vertical/horizontal alignment issues
+          if (angleDegrees > 10 && angleDegrees < 170) {
+            return "start"; // Right side
+          } else if (angleDegrees > 190 && angleDegrees < 350) {
+            return "end"; // Left side
+          }
+          return "middle"; // Top or bottom
+        })
         .attr("dominant-baseline", "middle") // Center text vertically
         // Replace hyphens with non-breaking hyphens and spaces with non-breaking spaces for better wrapping
         .text(label.replace(/-/g, "\u2011").replace(/ /g, "\u00A0"));
