@@ -100,6 +100,8 @@
     --color-map-inactive-opacity: 0.5;
     --color-map-stroke: #9ca3af;
     --color-map-active-stroke: #e0f2fe;
+
+    --color-dashboard-bg: rgba(31, 41, 55, 0.95);
   }
 
   /* Dark‑theme fallback for users who prefer dark but have no script.      */
