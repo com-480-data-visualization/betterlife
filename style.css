@@ -55,6 +55,7 @@
     --color-text: #374151; /* gray‑700  */
     --color-text-muted: #6b7280; /* gray‑500  */
     --color-text-strong: #1f2937; /* gray‑800  */
+    --color-text-secondary: #bbb; /* gray‑400  */
     --color-on-primary: #ffffff;
     --color-primary: #0ea5e9; /* sky‑500   */
     --color-primary-dark: #0284c7; /* sky‑600   */
@@ -72,6 +73,7 @@
     --color-map-inactive-opacity: 0.4;
     --color-map-stroke: #6c757d;
     --color-map-target-fill: var(--color-surface);
+    --color-dashboard-bg: rgba(255, 255, 255, 0.8);
 
     /* Misc --------------------------------------------------------------- */
     --color-select-arrow: var(--color-text-muted);
@@ -91,6 +93,7 @@
     --color-text: #d1d5db; /* gray‑300 */
     --color-text-muted: #9ca3af;
     --color-text-strong: #f9fafb; /* gray‑50  */
+    --color-text-secondary: #f9fafb; /* gray‑400  */
 
     --color-map-bg: #0c4a6e;
     --color-map-default-fill: #4b5563;
@@ -101,7 +104,7 @@
     --color-map-stroke: #9ca3af;
     --color-map-active-stroke: #e0f2fe;
 
-    --color-dashboard-bg: rgba(31, 41, 55, 0.95);
+    --color-dashboard-bg: rgba(31, 41, 55, 0.8);
   }
 
   /* Dark‑theme fallback for users who prefer dark but have no script.      */
@@ -582,8 +585,10 @@
     fill: var(--color-map-hover);
   }
   .country.target-country:focus {
-    outline: 2px solid var(--color-primary);
+    outline: none;
+    /*outline: 2px solid var(--color-primary);
     outline-offset: 2px;
+    */
   }
   .country.active {
     stroke: var(--color-map-active-stroke);

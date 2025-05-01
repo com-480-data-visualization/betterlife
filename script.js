@@ -89,14 +89,15 @@ const CONFIG = Object.freeze({
     radarFill: "var(--color-radar-fill, #0ea5e988)",
     radarStroke: "var(--color-radar-stroke, #0284c7)",
     secondaryText: "var(--color-text-secondary, #bbb)",
+    strongText: "var(--color-text-strong, #333)",
     defaultInterpolator: d3.interpolateRdYlGn, // Default color scale
     colorblindInterpolator: d3.interpolateViridis, // Colorblind-friendly scale
   }),
   zoom: Object.freeze({
     initialScale: 1.1, // Initial map zoom level relative to base size
     scaleExtent: [0.7, 30], // Min/max zoom scale
-    padding: 0.8, // Padding factor when zooming to a country (e.g., 0.8 means 80% of view)
-    maxCountryScale: 12, // Max zoom scale specifically when clicking a country
+    padding: 0.5, // Padding factor when zooming to a country (e.g., 0.8 means 80% of view)
+    maxCountryScale: 10, // Max zoom scale specifically when clicking a country
     transitionMs: 750, // Duration for zoom transitions
   }),
   animation: Object.freeze({
@@ -124,6 +125,20 @@ const DOMAIN_MAP = Object.freeze({
   environmental_quality: "Environmental quality",
   safety: "Safety",
   subjective_wellbeing: "Subjective well-being",
+});
+
+const DOMAIN_LABELS = Object.freeze({
+  income_wealth: "Income",
+  housing: "Housing",
+  work_job_quality: "Jobs",
+  work_life_balance: "Work-Life",
+  health: "Health",
+  knowledge_skills: "Skills",
+  social_connections: "Community",
+  civic_engagement: "Civic",
+  environmental_quality: "Environment",
+  safety: "Safety",
+  subjective_wellbeing: "Well-being",
 });
 
 /** Corrections for country names between TopoJSON and CSV data. */
@@ -777,20 +792,20 @@ class OECDWellbeingMap {
    */
   #syncControls() {
     const $ = this.#$;
-    if (!$) return; // Exit if UI elements aren't cached
+    if (!$) return;
 
-    const dimensionLabel =
-      $.dimensionSel?.options[$.dimensionSel.selectedIndex]?.text ?? "N/A";
+    // Use DOMAIN_LABELS based on the *value* of the select (this.#dimKey)
+    const dimensionLabel = DOMAIN_LABELS[this.#dimKey] ?? "N/A";
     const currentYear = this.#year ?? "N/A";
     const countryName = this.#selected?.properties?.name ?? "World View";
 
     // Update text displays
     if ($.yearDisplay) $.yearDisplay.textContent = currentYear;
     if ($.yearTxt) $.yearTxt.textContent = currentYear;
+    // Update dimension text using the short label
     if ($.dimensionTxt) $.dimensionTxt.textContent = dimensionLabel;
     if ($.countryTxt) $.countryTxt.textContent = countryName;
 
-    // Update slider ARIA value
     if ($.yearSlider) $.yearSlider.setAttribute("aria-valuenow", currentYear);
   }
 
@@ -1255,7 +1270,7 @@ class OECDWellbeingMap {
     const sparklineContainer = document.createElement("div");
     sparklineContainer.className = "mini-chart-container";
     sparklineContainer.innerHTML = `<h5 class="mini-chart-title">${
-      DOMAIN_MAP[this.#dimKey] // Use current dimension name
+      DOMAIN_LABELS[this.#dimKey] // Use short label for title
     } Trend</h5>`;
 
     const radarContainer = document.createElement("div");
@@ -1369,15 +1384,14 @@ class OECDWellbeingMap {
     const CHART_WIDTH = 220;
     const CHART_HEIGHT = 180;
     const RADIUS = Math.min(CHART_WIDTH, CHART_HEIGHT) / 2 - 25; // Radius of the radar area
-    const LABEL_OFFSET = 10; // Distance of labels from radar edge
+    const LABEL_OFFSET = 12; // Distance of labels from radar edge
 
     // --- Data Preparation ---
-    const dimensionLabels = Object.values(DOMAIN_MAP);
-    const dimensionValues = dimensionLabels.map(
-      (domainName) =>
-        // Get value or default to 0 if missing/invalid
-        this.#dataCsv.get(`${countryName}_${domainName}_${year}`) ?? 0
-    );
+    const dimensionKeys = Object.keys(DOMAIN_MAP);
+    const dimensionValues = dimensionKeys.map((key) => {
+      const longDomainName = DOMAIN_MAP[key]; // Get the long name needed for the data key
+      return this.#dataCsv.get(`${countryName}_${longDomainName}_${year}`) ?? 0;
+    });
 
     // Check if any data exists
     if (!dimensionValues.some((value) => Number.isFinite(value) && value > 0)) {
@@ -1389,7 +1403,7 @@ class OECDWellbeingMap {
     // Angle scale: maps dimension index to angle
     const angleScale = d3
       .scaleLinear()
-      .domain([0, dimensionLabels.length]) // Domain: 0 to number of dimensions
+      .domain([0, dimensionKeys.length]) // Domain: 0 to number of dimensions
       .range([0, 2 * Math.PI]); // Range: 0 to 360 degrees (in radians)
 
     // Radius scale: maps data value (assuming 0-1 normalized) to pixel radius
@@ -1415,7 +1429,8 @@ class OECDWellbeingMap {
       .attr("transform", `translate(${CHART_WIDTH / 2},${CHART_HEIGHT / 2})`);
 
     // --- Draw Axes and Labels ---
-    dimensionLabels.forEach((label, index) => {
+    dimensionKeys.forEach((key, index) => {
+      const shortLabel = DOMAIN_LABELS[key]; // Get the short label for display
       const angle = angleScale(index);
       const x2 = Math.sin(angle) * RADIUS; // x endpoint of axis line
       const y2 = -Math.cos(angle) * RADIUS; // y endpoint of axis line (negative for SVG y-down)
@@ -1435,7 +1450,7 @@ class OECDWellbeingMap {
         .append("text")
         .attr("x", Math.sin(angle) * (RADIUS + LABEL_OFFSET)) // Position label outside radius
         .attr("y", -Math.cos(angle) * (RADIUS + LABEL_OFFSET))
-        .attr("font-size", "7px") // Small font size for labels
+        .attr("font-size", "8px") // Small font size for labels
         .attr("text-anchor", (d, i) => {
           const angleDegrees = (angleScale(i) * 180) / Math.PI;
           // Adjust thresholds slightly to avoid perfect vertical/horizontal alignment issues
@@ -1447,8 +1462,9 @@ class OECDWellbeingMap {
           return "middle"; // Top or bottom
         })
         .attr("dominant-baseline", "middle") // Center text vertically
+        .attr("fill", CONFIG.colors.strongText)
         // Replace hyphens with non-breaking hyphens and spaces with non-breaking spaces for better wrapping
-        .text(label.replace(/-/g, "\u2011").replace(/ /g, "\u00A0"));
+        .text(shortLabel.replace(/-/g, "\u2011").replace(/ /g, "\u00A0"));
     });
 
     // --- Draw Data Polygon ---
