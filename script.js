@@ -1288,6 +1288,7 @@ class OECDWellbeingMap {
 
   /**
    * Renders a simple sparkline chart showing the trend for a specific dimension over the years.
+   * Includes start and end year labels. // <-- Added description
    * @param {HTMLElement} containerElement - The HTML element to render the chart into.
    * @param {string} countryName - The name of the country.
    * @param {string} dimensionKey - The key of the dimension to display.
@@ -1299,8 +1300,10 @@ class OECDWellbeingMap {
 
     // --- Constants ---
     const CHART_WIDTH = 220;
-    const CHART_HEIGHT = 50;
+    // Increase height slightly to accommodate labels
+    const CHART_HEIGHT = 65; // Was 50
     const MARGIN = 6; // Simple margin for aesthetics
+    const LABEL_Y_OFFSET = 12; // Space below the chart for labels
 
     // --- Data Preparation ---
     const minYear = +this.#$.yearSlider.min;
@@ -1331,13 +1334,14 @@ class OECDWellbeingMap {
       .scaleLinear()
       .domain(d3.extent(sparklineData, (d) => d.value)) // Domain: min to max value in data
       .nice() // Adjust domain to nice round values
-      .range([CHART_HEIGHT - MARGIN, MARGIN]); // Range: chart height with margin (inverted for SVG coords)
+      // Adjust range to leave space at the bottom for labels
+      .range([CHART_HEIGHT - MARGIN - LABEL_Y_OFFSET, MARGIN]); // Range: chart height with margin (inverted for SVG coords)
 
     // --- SVG Rendering ---
     const svg = d3
       .select(containerElement)
       .append("svg")
-      .attr("viewBox", `0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`)
+      .attr("viewBox", `0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`) // Use updated height
       .attr("preserveAspectRatio", "xMidYMid meet")
       .attr("role", "img")
       .attr(
@@ -1370,6 +1374,33 @@ class OECDWellbeingMap {
       .attr("cx", (d) => xScale(d.year))
       .attr("cy", (d) => yScale(d.value))
       .attr("fill", "currentColor");
+
+    // --- Add Year Labels ---
+    const firstYearData = sparklineData[0];
+    const lastYearData = sparklineData.at(-1);
+    const labelYPosition = CHART_HEIGHT - MARGIN; // Position labels at the bottom
+
+    // Start Year Label
+    svg
+      .append("text")
+      .attr("x", xScale(firstYearData.year))
+      .attr("y", labelYPosition)
+      .attr("text-anchor", "start") // Align text start with the point
+      .attr("font-size", "9px")
+      .attr("fill", CONFIG.colors.strongText) // Use strong text color
+      .attr("dominant-baseline", "baseline") // Align bottom of text
+      .text(firstYearData.year);
+
+    // End Year Label
+    svg
+      .append("text")
+      .attr("x", xScale(lastYearData.year))
+      .attr("y", labelYPosition)
+      .attr("text-anchor", "end") // Align text end with the point
+      .attr("font-size", "9px")
+      .attr("fill", CONFIG.colors.strongText) // Use strong text color
+      .attr("dominant-baseline", "baseline") // Align bottom of text
+      .text(lastYearData.year);
   }
 
   /**
