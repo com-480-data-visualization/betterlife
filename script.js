@@ -70,6 +70,7 @@ const CONFIG = Object.freeze({
       tooltip: "tooltip",
       miniDash: "mini-dashboard",
       legend: "legend",
+      colorblindCheckbox: "colorblind-checkbox",
     }),
   }),
   data: Object.freeze({
@@ -88,6 +89,8 @@ const CONFIG = Object.freeze({
     radarFill: "var(--color-radar-fill, #0ea5e988)",
     radarStroke: "var(--color-radar-stroke, #0284c7)",
     secondaryText: "var(--color-text-secondary, #bbb)",
+    defaultInterpolator: d3.interpolateRdYlGn, // Default color scale
+    colorblindInterpolator: d3.interpolateViridis, // Colorblind-friendly scale
   }),
   zoom: Object.freeze({
     initialScale: 1.1, // Initial map zoom level relative to base size
@@ -125,6 +128,7 @@ const DOMAIN_MAP = Object.freeze({
 
 /** Corrections for country names between TopoJSON and CSV data. */
 const COUNTRY_CORRECTIONS = Object.freeze({
+  "Czech Republic": "Czechia",
   Slovakia: "Slovak Republic",
   "South Korea": "Korea",
   Turkey: "Türkiye",
@@ -140,7 +144,7 @@ const TARGET_COUNTRIES = new Set([
   "Chile",
   "Colombia",
   "Costa Rica",
-  "Czech Republic",
+  "Czechia",
   "Denmark",
   "Estonia",
   "Finland",
@@ -195,17 +199,17 @@ class ContinuousLegend {
 
   /**
    * Creates a ContinuousLegend instance.
-   * @param {d3.ScaleSequential<number,string>} scale - The D3 sequential color scale to visualize.
+   * @param {d3.ScaleSequential<number,string>} initialScale - The D3 sequential color scale to visualize.
    * @param {d3.Selection<SVGSVGElement,unknown,null,undefined>} svg - The parent D3 SVG selection to append the legend to.
    */
-  constructor(scale, svg) {
-    if (!scale || typeof scale !== "function") {
+  constructor(initialScale, svg) {
+    if (!initialScale || typeof initialScale !== "function") {
       throw new Error("ContinuousLegend requires a valid D3 scale function.");
     }
     if (!svg || !svg.node() || svg.node().tagName !== "svg") {
       throw new Error("ContinuousLegend requires a valid D3 SVG selection.");
     }
-    this.#scale = scale;
+    this.#scale = initialScale;
     this.#svg = svg;
     this.#init();
   }
@@ -307,6 +311,21 @@ class ContinuousLegend {
   }
 
   /**
+   * Updates the legend's internal scale reference.
+   * Does not redraw; assumes update() will be called subsequently.
+   * @param {d3.ScaleSequential<number,string>} newScale - The new D3 scale function.
+   */
+  updateScale(newScale) {
+    if (!newScale || typeof newScale !== "function") {
+      console.warn("Legend received an invalid new scale.");
+      return;
+    }
+    this.#scale = newScale;
+    log("Legend scale updated internally.");
+    // Note: The visual update (gradient stops) happens in the update() method.
+  }
+
+  /**
    * Repositions the legend group, typically called on window resize.
    * @param {number} svgHeight - The current height of the parent SVG container.
    */
@@ -341,7 +360,9 @@ class OECDWellbeingMap {
   /** @type {d3.ZoomBehavior<Element, unknown> | null} D3 zoom behavior */
   #zoomBehaviour = null;
   /** @type {d3.ScaleSequential<number, string>} D3 color scale for data values */
-  #colorScale = d3.scaleSequential(d3.interpolateRdYlGn); // Default color scale
+  #colorScale; // Will be initialized in the constructor
+  /** @type {boolean} Tracks if colorblind-friendly mode is active */
+  #colorblindMode = false; // Track current state
   /** @type {Map<string, number>} Stores CSV data: key = "Country_Domain_Year", value = score */
   #dataCsv = new Map();
   /** @type {Array<import('geojson').Feature>} Array of TopoJSON features */
@@ -386,6 +407,9 @@ class OECDWellbeingMap {
       themeToggle: /** @type {HTMLButtonElement} */ (byId(ids.themeToggle)),
       tooltip: byId(ids.tooltip),
       miniDash: byId(ids.miniDash),
+      colorblindCheckbox: /** @type {HTMLInputElement} */ (
+        byId(ids.colorblindCheckbox)
+      ),
     };
 
     // Validate that essential UI elements were found
@@ -395,6 +419,9 @@ class OECDWellbeingMap {
         // Depending on severity, could throw an error or allow graceful degradation
       }
     }
+
+    // Initialize color scale with the default interpolator from CONFIG
+    this.#colorScale = d3.scaleSequential(CONFIG.colors.defaultInterpolator);
 
     // Initial state setup
     this.#dimKey = this.#$.dimensionSel?.value ?? Object.keys(DOMAIN_MAP)[0]; // Default if select not found
@@ -579,6 +606,32 @@ class OECDWellbeingMap {
     });
   }
 
+  /**
+   * Updates the active color scale based on user preference.
+   * @param {boolean} useColorblindFriendly - Whether to use the colorblind-friendly scale.
+   * @private
+   */
+  #setColorScheme(useColorblindFriendly) {
+    log(`Setting color scheme. Colorblind mode: ${useColorblindFriendly}`);
+    this.#colorblindMode = useColorblindFriendly; // Update internal state
+
+    const interpolator = useColorblindFriendly
+      ? CONFIG.colors.colorblindInterpolator
+      : CONFIG.colors.defaultInterpolator;
+
+    this.#colorScale = d3.scaleSequential(interpolator);
+
+    // Update the legend with the new scale function
+    if (this.#legend) {
+      this.#legend.updateScale(this.#colorScale);
+    } else {
+      console.warn("Cannot update legend scale: Legend not initialized.");
+    }
+
+    // Important: Re-apply colors and update legend visuals *after* changing the scale
+    this.#updateColours();
+  }
+
   /* ------------------------------------------------------------------
    * Initial Map Rendering
    * ---------------------------------------------------------------- */
@@ -663,6 +716,14 @@ class OECDWellbeingMap {
     // Theme toggle button
     $.themeToggle?.addEventListener("click", () => {
       this.#toggleTheme(); // Switch between light/dark themes
+    });
+
+    // --- Colorblind Mode Checkbox ---
+    $.colorblindCheckbox?.addEventListener("change", (event) => {
+      // Ensure the event target is the checkbox and has the 'checked' property
+      if (event.target instanceof HTMLInputElement) {
+        this.#setColorScheme(event.target.checked);
+      }
     });
 
     // Set ARIA attributes for slider (min, max, current value)

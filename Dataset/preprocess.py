@@ -65,7 +65,7 @@ TARGET_COUNTRIES = {
     "Chile",
     "Colombia",
     "Costa Rica",
-    "Czech Republic",
+    "Czechia",
     "Denmark",
     "Estonia",
     "Finland",
