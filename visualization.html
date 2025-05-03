@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>OECD Well-being Interactive Map</title>
+    <meta
+      name="description"
+      content="Explore OECD How's Life? well-being indicators across dimensions, years and member countries on an interactive world map."
+    />
+    <link rel="canonical" href="https://example.com/" />
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>OECD How's Life? - Well-being Map</h1>
+      <button id="theme-toggle" aria-label="Toggle color theme">
+        Dark Mode
+      </button>
+    </header>
+
+    <main>
+      <section class="controls-section" aria-labelledby="controls-heading">
+        <h2 id="controls-heading">Controls</h2>
+
+        <div>
+          <label for="dimension-select">Well-being Dimension</label>
+          <div class="select-wrapper">
+            <select id="dimension-select" name="dimension">
+              <option value="income_wealth">Income</option>
+              <option value="housing">Housing</option>
+              <option value="work_job_quality">Jobs</option>
+              <option value="health">Health</option>
+              <option value="knowledge_skills">Skills</option>
+              <option value="environmental_quality">Environment</option>
+              <option value="subjective_wellbeing" selected>Well-being</option>
+              <option value="safety">Safety</option>
+              <option value="work_life_balance">Work-Life</option>
+              <option value="social_connections">Community</option>
+              <option value="civic_engagement">Civic</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="year-slider">Year</label>
+          <div class="year-slider-controls">
+            <input
+              type="range"
+              id="year-slider"
+              name="year"
+              min="2006"
+              max="2023"
+              value="2023"
+              aria-valuemin="2006"
+              aria-valuemax="2023"
+              aria-valuenow="2023"
+              aria-describedby="year-display"
+            />
+            <button id="play-pause-button" aria-label="Play time animation">
+              Play
+            </button>
+          </div>
+          <div class="year-slider-labels">
+            <span>2006</span>
+            <span id="year-display" aria-hidden="true">2024</span>
+            <span>2023</span>
+          </div>
+        </div>
+
+        <div class="checkbox-container">
+          <input type="checkbox" id="hide-others-checkbox" name="hide-others" />
+          <label for="hide-others-checkbox">Hide non-target countries</label>
+        </div>
+
+        <div class="checkbox-container">
+          <input
+            type="checkbox"
+            id="colorblind-checkbox"
+            name="colorblind-mode"
+          />
+          <label for="colorblind-checkbox">Colorblind Friendly Mode</label>
+        </div>
+
+        <div class="selection-display" aria-live="polite">
+          <h3>Current Selection</h3>
+          <p>
+            Dimension:
+            <span id="selected-dimension">Subjective Well-being</span>
+          </p>
+          <p>Year: <span id="selected-year">2024</span></p>
+          <p>Country: <span id="selected-country-display">World View</span></p>
+        </div>
+      </section>
+
+      <section class="map-section" aria-labelledby="map-heading">
+        <h2 id="map-heading">Geographical Comparison</h2>
+
+        <figure
+          id="map-container"
+          tabindex="-1"
+          aria-label="Interactive world map displaying OECD well-being data"
+        >
+          <div id="mini-dashboard"></div>
+        </figure>
+
+        <p id="country-info">Loading map…</p>
+      </section>
+    </main>
+
+    <footer>
+      <p>Data source: OECD How's Life? Database</p>
+    </footer>
+
+    <div
+      id="tooltip"
+      role="tooltip"
+      aria-hidden="true"
+      style="display: none"
+    ></div>
+
+    <script type="module" src="script.js" defer></script>
+  </body>
+</html>

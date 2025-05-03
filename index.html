@@ -1,138 +1,441 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
-    />
-    <title>OECD Well-being Interactive Map</title>
-    <meta
-      name="description"
-      content="Explore OECD How's Life? well-being indicators across dimensions, years and member countries on an interactive world map."
-    />
-    <link rel="canonical" href="https://example.com/" />
-
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-    <script src="https://unpkg.com/topojson@3"></script>
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beyond GDP: Explore Global Well-being | OECD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <style>
+      /* Apply Inter font globally */
+      html {
+        font-family: "Inter", sans-serif;
+        /* Smooth theme transition */
+        transition: background-color 0.3s ease, color 0.3s ease;
+        scroll-behavior: smooth; /* Add smooth scroll for anchor links */
+      }
+      /* Basic light theme defaults */
+      :root {
+        --bg-color: #f8fafc; /* Light gray background */
+        --text-color: #1f2937; /* gray-800 */
+        --text-muted-color: #6b7280; /* gray-500 */
+        --text-highlight: #0ea5e9; /* sky-500 - Added for accents */
+        --header-bg: #ffffff;
+        --section-bg: #ffffff;
+        --section-alt-bg: #f1f5f9; /* gray-100 - Added for alternating sections */
+        --card-bg: #f9fafb; /* gray-50 */
+        --primary-color: #3b82f6; /* blue-500 */
+        --primary-hover: #2563eb; /* blue-600 */
+        --button-text: #ffffff;
+        --footer-bg: #e5e7eb; /* gray-200 */
+        --footer-text: #4b5563; /* gray-600 */
+      }
+      /* Dark theme overrides when html.dark exists */
+      html.dark {
+        --bg-color: #111827; /* gray-900 */
+        --text-color: #f3f4f6; /* gray-100 */
+        --text-muted-color: #9ca3af; /* gray-400 */
+        --text-highlight: #38bdf8; /* sky-400 */
+        --header-bg: #1f2937; /* gray-800 */
+        --section-bg: #1f2937; /* gray-800 */
+        --section-alt-bg: #111827; /* gray-900 */
+        --card-bg: #374151; /* gray-700 */
+        --primary-color: #60a5fa; /* blue-400 */
+        --primary-hover: #3b82f6; /* blue-500 */
+        --button-text: #1f2937; /* gray-800 */
+        --footer-bg: #1f2937; /* gray-800 */
+        --footer-text: #d1d5db; /* gray-300 */
+      }
 
-    <link rel="stylesheet" href="style.css" />
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      header,
+      section,
+      footer {
+        transition: background-color 0.3s ease;
+      }
+
+      .cta-button {
+        transition: all 0.3s ease; /* Smooth transition for hover effects */
+        background-color: var(--primary-color);
+        color: var(--button-text);
+      }
+      .cta-button:hover {
+        transform: translateY(-2px); /* Slight lift on hover */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+        background-color: var(--primary-hover);
+      }
+      /* Style for feature icons */
+      .feature-icon {
+        width: 3rem; /* 48px */
+        height: 3rem; /* 48px */
+        margin-bottom: 0.5rem; /* 8px */
+        color: var(--primary-color); /* Use theme color */
+        transition: color 0.3s ease;
+      }
+      /* Update card background and text colors */
+      .feature-card {
+        background-color: var(--card-bg);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        display: flex; /* Use flexbox for alignment */
+        flex-direction: column;
+        height: 100%; /* Make cards equal height in a grid row */
+      }
+      .feature-card h3 {
+        color: var(--text-color);
+        transition: color 0.3s ease;
+        margin-top: auto; /* Push title down if needed */
+      }
+      .feature-card p {
+        color: var(--text-muted-color);
+        transition: color 0.3s ease;
+        flex-grow: 1; /* Allow paragraph to take up space */
+      }
+
+      /* Style theme toggle button */
+      #theme-toggle {
+        background-color: transparent;
+        border: 1px solid var(--text-muted-color);
+        color: var(--text-muted-color);
+        padding: 0.4rem; /* Adjust padding */
+        border-radius: var(--radius-sm, 0.375rem); /* Match other buttons */
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex; /* Use flex to center icon */
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem; /* Fixed width */
+        height: 2.5rem; /* Fixed height */
+        margin-left: 1rem; /* Space from previous button */
+      }
+      #theme-toggle:hover {
+        background-color: rgba(128, 128, 128, 0.1); /* Subtle hover */
+        border-color: var(--text-color);
+        color: var(--text-color);
+      }
+      #theme-toggle svg {
+        width: 1.25rem; /* Icon size */
+        height: 1.25rem;
+      }
+
+      /* Section heading underline */
+      .section-heading::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 3px;
+        background-color: var(--primary-color);
+        margin: 0.5rem auto 0; /* Center the underline */
+        transition: background-color 0.3s ease;
+      }
+    </style>
   </head>
-
-  <body>
-    <header>
-      <h1>OECD How's Life? - Well-being Map</h1>
-      <button id="theme-toggle" aria-label="Toggle color theme">
-        Dark Mode
-      </button>
+  <body class="antialiased">
+    <header
+      class="shadow-sm sticky top-0 z-20"
+      style="background-color: var(--header-bg)"
+    >
+      <nav
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <div class="text-2xl font-bold" style="color: var(--primary-color)">
+          Well-being Explorer
+        </div>
+        <div class="flex items-center">
+          <a
+            href="visualization.html"
+            class="cta-button font-semibold py-2 px-5 rounded-lg shadow-md text-sm md:text-base"
+          >
+            Launch Visualization
+          </a>
+          <button id="theme-toggle" aria-label="Toggle dark mode"></button>
+        </div>
+      </nav>
     </header>
 
-    <main>
-      <section class="controls-section" aria-labelledby="controls-heading">
-        <h2 id="controls-heading">Controls</h2>
-
-        <div>
-          <label for="dimension-select">Well-being Dimension</label>
-          <div class="select-wrapper">
-            <select id="dimension-select" name="dimension">
-              <option value="income_wealth">Income</option>
-              <option value="housing">Housing</option>
-              <option value="work_job_quality">Jobs</option>
-              <option value="health">Health</option>
-              <option value="knowledge_skills">Skills</option>
-              <option value="environmental_quality">Environment</option>
-              <option value="subjective_wellbeing" selected>Well-being</option>
-              <option value="safety">Safety</option>
-              <option value="work_life_balance">Work-Life</option>
-              <option value="social_connections">Community</option>
-              <option value="civic_engagement">Civic</option>
-            </select>
-          </div>
-        </div>
-
-        <div>
-          <label for="year-slider">Year</label>
-          <div class="year-slider-controls">
-            <input
-              type="range"
-              id="year-slider"
-              name="year"
-              min="2006"
-              max="2023"
-              value="2023"
-              aria-valuemin="2006"
-              aria-valuemax="2023"
-              aria-valuenow="2023"
-              aria-describedby="year-display"
-            />
-            <button id="play-pause-button" aria-label="Play time animation">
-              Play
-            </button>
-          </div>
-          <div class="year-slider-labels">
-            <span>2006</span>
-            <span id="year-display" aria-hidden="true">2024</span>
-            <span>2023</span>
-          </div>
-        </div>
-
-        <div class="checkbox-container">
-          <input type="checkbox" id="hide-others-checkbox" name="hide-others" />
-          <label for="hide-others-checkbox">Hide non-target countries</label>
-        </div>
-
-        <div class="checkbox-container">
-          <input
-            type="checkbox"
-            id="colorblind-checkbox"
-            name="colorblind-mode"
-          />
-          <label for="colorblind-checkbox">Colorblind Friendly Mode</label>
-        </div>
-
-        <div class="selection-display" aria-live="polite">
-          <h3>Current Selection</h3>
-          <p>
-            Dimension:
-            <span id="selected-dimension">Subjective Well-being</span>
-          </p>
-          <p>Year: <span id="selected-year">2024</span></p>
-          <p>Country: <span id="selected-country-display">World View</span></p>
-        </div>
-      </section>
-
-      <section class="map-section" aria-labelledby="map-heading">
-        <h2 id="map-heading">Geographical Comparison</h2>
-
-        <figure
-          id="map-container"
-          tabindex="-1"
-          aria-label="Interactive world map displaying OECD well-being data"
+    <main class="pt-16 md:pt-24 pb-12 md:pb-16 text-center px-4">
+      <h1
+        class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight"
+        style="color: var(--text-color)"
+      >
+        Is GDP the Whole Story?
+      </h1>
+      <p
+        class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto"
+        style="color: var(--text-muted-color)"
+      >
+        Dive deeper than economic figures. Explore what truly shapes lives
+        across nations with the OECD's
+        <span style="color: var(--text-highlight); font-weight: 500"
+          >How's Life?</span
         >
-          <div id="mini-dashboard"></div>
-        </figure>
-
-        <p id="country-info">Loading map…</p>
-      </section>
+        data.
+      </p>
+      <a
+        href="visualization.html"
+        class="cta-button inline-block text-lg font-semibold py-3 px-8 rounded-lg shadow-lg mb-4"
+      >
+        Start Your Exploration
+      </a>
+      <p class="text-sm" style="color: var(--text-muted-color)">
+        or
+        <a href="#journey" class="underline hover:text-[var(--primary-color)]"
+          >learn how it works</a
+        >
+      </p>
     </main>
 
-    <footer>
-      <p>Data source: OECD How's Life? Database</p>
+    <section
+      class="py-16 md:py-24"
+      style="background-color: var(--section-alt-bg)"
+      id="why"
+    >
+      <div class="container mx-auto px-6 text-center max-w-4xl">
+        <h2
+          class="text-3xl font-bold mb-10 section-heading"
+          style="color: var(--text-color)"
+        >
+          Understanding Well-being
+        </h2>
+        <p
+          class="text-lg md:text-xl mb-6"
+          style="color: var(--text-muted-color)"
+        >
+          A country's progress isn't just about its economy. The OECD Better
+          Life Index measures well-being across
+          <strong style="color: var(--text-highlight)"
+            >11 crucial dimensions</strong
+          >
+          – from health and housing to work-life balance and community
+          connections.
+        </p>
+        <p class="text-lg md:text-xl" style="color: var(--text-muted-color)">
+          This tool brings that rich data to life, allowing you to see the world
+          through a lens that values what truly matters for people's lives.
+        </p>
+      </div>
+    </section>
+
+    <section
+      class="py-16 md:py-24"
+      style="background-color: var(--section-bg)"
+      id="journey"
+    >
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-3xl font-bold text-center mb-12 section-heading"
+          style="color: var(--text-color)"
+        >
+          Your Journey Through the Data
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div
+            class="feature-card text-center p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300"
+          >
+            <svg
+              class="feature-icon mx-auto"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              ></path>
+            </svg>
+            <h3 class="text-xl font-semibold mb-2">1. Discover Dimensions</h3>
+            <p>
+              Select what matters most to you – health, environment, safety,
+              jobs, and more. Tailor the interactive map to focus your
+              exploration.
+            </p>
+          </div>
+
+          <div
+            class="feature-card text-center p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300"
+          >
+            <svg
+              class="feature-icon mx-auto"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+              ></path>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+              ></path>
+            </svg>
+            <h3 class="text-xl font-semibold mb-2">2. Compare Places</h3>
+            <p>
+              See how nations stack up visually. Hover for quick scores, click
+              to zoom in, and even compare two countries side-by-side for
+              detailed insights.
+            </p>
+          </div>
+
+          <div
+            class="feature-card text-center p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300"
+          >
+            <svg
+              class="feature-icon mx-auto"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            <h3 class="text-xl font-semibold mb-2">3. Uncover Trends</h3>
+            <p>
+              Travel through time! Use the slider (2006-2023) to watch how
+              well-being dimensions have evolved, revealing progress and
+              challenges over the years.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="py-16 md:py-24 text-center"
+      style="background-color: var(--section-alt-bg)"
+    >
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold mb-4" style="color: var(--text-color)">
+          Ready to See the World Differently?
+        </h2>
+        <p
+          class="text-xl mb-8 max-w-3xl mx-auto"
+          style="color: var(--text-muted-color)"
+        >
+          Embark on your own data exploration. Uncover insights, compare
+          perspectives, and understand the multifaceted nature of well-being
+          across the globe.
+        </p>
+
+        <div
+          class="mt-6 mb-8 flex justify-center items-center gap-2 max-w-2xl mx-auto"
+          style="color: var(--text-muted-color)"
+        >
+          <svg
+            class="w-5 h-5 flex-shrink-0"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+            ></path>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+            ></path>
+          </svg>
+          <p class="text-base">
+            Designed for all users, featuring colorblind mode & clarity options.
+          </p>
+        </div>
+        <a
+          href="visualization.html"
+          class="cta-button inline-block text-lg font-semibold py-3 px-8 rounded-lg shadow-lg"
+        >
+          Launch the Interactive Map
+        </a>
+      </div>
+    </section>
+
+    <footer
+      class="py-8"
+      style="background-color: var(--footer-bg); color: var(--footer-text)"
+    >
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-sm">
+          &copy; <span id="year"></span> Well-being Explorer. Data source:
+          <a
+            href="https://www.oecd.org/wise/better-life-initiative.htm"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline hover:text-[var(--primary-color)]"
+            >OECD Better Life Index</a
+          >.
+        </p>
+        <p class="mt-2 text-xs">
+          Project by Francesco La Rosa, Nicholas Bunjamin, Corvin Laube
+          (COM-480)
+        </p>
+      </div>
     </footer>
 
-    <div
-      id="tooltip"
-      role="tooltip"
-      aria-hidden="true"
-      style="display: none"
-    ></div>
+    <script>
+      // --- Theme Toggle Script (unchanged) ---
+      const themeToggleBtn = document.getElementById("theme-toggle");
+      const htmlElement = document.documentElement;
+      const sunIcon = `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+        </svg>`;
+      const moonIcon = `
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+        </svg>`;
+      const applyTheme = (theme) => {
+        if (theme === "dark") {
+          htmlElement.classList.add("dark");
+          themeToggleBtn.innerHTML = sunIcon;
+          themeToggleBtn.setAttribute("aria-label", "Switch to light mode");
+        } else {
+          htmlElement.classList.remove("dark");
+          themeToggleBtn.innerHTML = moonIcon;
+          themeToggleBtn.setAttribute("aria-label", "Switch to dark mode");
+        }
+      };
+      const toggleTheme = () => {
+        const currentTheme = htmlElement.classList.contains("dark")
+          ? "light"
+          : "dark";
+        localStorage.setItem("theme", currentTheme);
+        applyTheme(currentTheme);
+      };
+      const savedTheme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
+      applyTheme(initialTheme);
+      themeToggleBtn.addEventListener("click", toggleTheme);
 
-    <script type="module" src="script.js" defer></script>
+      // --- NEW: Script to set current year in footer ---
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
   </body>
 </html>
