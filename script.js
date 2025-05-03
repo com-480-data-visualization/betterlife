@@ -1,60 +1,157 @@
+/* eslint-env browser */
+/* global d3, topojson */
+"use strict";
+
+/* -------------------------------------------------------------------------
+ * Utility helpers
+ * ---------------------------------------------------------------------- */
 /**
- * script.js
- * Handles the interactive map visualization for the OECD Well-being Prototype.
- * - Loads map data (world countries).
- * - Renders the map using D3.js.
- * - Handles user interactions: dimension/year selection, zooming/panning, country clicks.
- * - Updates the UI based on selections and interactions.
- * - Manages map state (zoom level, selected country).
+ * Typed query-selector (returns HTMLElement or null).
+ * @param {string} sel - The CSS selector.
+ * @param {Document|Element} [scope=document] - The scope to search within.
+ * @returns {HTMLElement|null} The found element or null.
  */
-
-// --- Constants ---
-// Configuration values used throughout the script.
-
-/** @const {string} ID of the HTML div element where the map SVG will be placed. */
-const MAP_CONTAINER_ID = "map-container";
-
-/** @const {string} URL to fetch the TopoJSON data for world countries. */
-const WORLD_MAP_URL =
-  "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
-
-/** @const {number} Initial map scale factor relative to container size. */
-const INITIAL_SCALE = 1.1;
-
-/** @const {Array<number>} Minimum and maximum allowed zoom scale factors. */
-const ZOOM_SCALE_EXTENT = [0.7, 30];
+const qs = (sel, scope = document) =>
+  /** @type {HTMLElement|null} */ (scope.querySelector(sel));
 
 /**
- * @const {number} Factor determining the padding around a country when zoomed in.
- * Lower value means more padding (more zoomed out relative to country size).
+ * Query selector all (NodeList → Array).
+ * @param {string} sel - The CSS selector.
+ * @param {Document|Element} [scope=document] - The scope to search within.
+ * @returns {Array<Element>} An array of found elements.
  */
-const COUNTRY_ZOOM_SCALE_FACTOR = 0.8;
+const qsa = (sel, scope = document) => Array.from(scope.querySelectorAll(sel));
 
-/** @const {number} Maximum zoom scale allowed when zooming into a single country. */
-const MAX_COUNTRY_ZOOM = 12;
+/**
+ * Shortcut for document.getElementById.
+ * @param {string} id - The element ID.
+ * @returns {HTMLElement|null} The found element or null.
+ */
+const byId = (id) =>
+  /** @type {HTMLElement|null} */ (document.getElementById(id));
 
-/** @const {number} Duration (in milliseconds) for zoom/pan transitions. */
-const ZOOM_TRANSITION_DURATION = 750;
+/**
+ * Debounces a function execution.
+ * @template {function(...any): any} T
+ * @param {T} fn - The function to debounce.
+ * @param {number} [ms=100] - The debounce delay in milliseconds.
+ * @returns {(...args: Parameters<T>) => void} The debounced function.
+ */
+const debounce = (fn, ms = 100) => {
+  let t; // Timeout ID
+  return (...a) => {
+    clearTimeout(t);
+    // Use an arrow function to preserve the `this` context if fn expects one,
+    // although in current usage with arrow functions like `() => this.#redraw()`,
+    // the `this` context is already captured lexically.
+    t = setTimeout(() => fn.apply(this, a), ms);
+  };
+};
 
-/** @const {number} Delay (in milliseconds) for debouncing resize events before redrawing the map. */
-const RESIZE_DEBOUNCE_DELAY = 150;
+/* -------------------------------------------------------------------------
+ * Configuration (frozen to prevent accidental modification)
+ * ---------------------------------------------------------------------- */
+const CONFIG = Object.freeze({
+  debug: false, // Set to true for verbose logging
+  ui: Object.freeze({
+    containerId: "map-container",
+    // IDs must match the HTML DOM structure
+    ids: Object.freeze({
+      dimensionSel: "dimension-select",
+      yearSlider: "year-slider",
+      yearDisplay: "year-display",
+      dimensionTxt: "selected-dimension",
+      yearTxt: "selected-year",
+      countryTxt: "selected-country-display",
+      countryInfo: "country-info",
+      hideOthers: "hide-others-checkbox",
+      playBtn: "play-pause-button",
+      themeToggle: "theme-toggle",
+      tooltip: "tooltip",
+      miniDash: "mini-dashboard",
+      legend: "legend",
+      colorblindCheckbox: "colorblind-checkbox",
+    }),
+  }),
+  data: Object.freeze({
+    topoUrl: "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
+    csvUrl: "Better_Life_Preprocessed.csv", // Assumed to be relative or served locally
+  }),
+  colors: Object.freeze({
+    // Uses CSS variables for theme compatibility
+    targetDefault: "var(--color-map-target-fill, #ffffff)",
+    otherDefault: "var(--color-map-default-fill, #e0e0e0)",
+    hover: "var(--color-map-hover, #b3e5fc)",
+    active: "var(--color-map-active, #4fc3f7)",
+    background: "var(--color-map-bg, #e0f2fe)",
+    graticule: "var(--color-map-graticule, #ccc)",
+    border: "var(--color-map-border, #fff)",
+    radarFill: "var(--color-radar-fill, #0ea5e988)",
+    radarStroke: "var(--color-radar-stroke, #0284c7)",
+    secondaryText: "var(--color-text-secondary, #bbb)",
+    strongText: "var(--color-text-strong, #333)",
+    defaultInterpolator: d3.interpolateRdYlGn, // Default color scale
+    colorblindInterpolator: d3.interpolateViridis, // Colorblind-friendly scale
+  }),
+  zoom: Object.freeze({
+    initialScale: 1.1, // Initial map zoom level relative to base size
+    scaleExtent: [0.7, 30], // Min/max zoom scale
+    padding: 0.5, // Padding factor when zooming to a country (e.g., 0.8 means 80% of view)
+    maxCountryScale: 10, // Max zoom scale specifically when clicking a country
+    transitionMs: 750, // Duration for zoom transitions
+  }),
+  animation: Object.freeze({
+    playMs: 1000, // Delay between year steps during playback
+    colorMs: 250, // Duration for color/legend transitions
+  }),
+});
 
-// --- CSS Variable Fallbacks (used mainly if CSS variables fail or for logic checks) ---
-// These primarily rely on the CSS :root definitions but provide fallbacks.
-/** @const {string} Fill color for target countries (default: white). */
-const TARGET_COUNTRY_FILL = "var(--color-map-target-fill, #ffffff)";
-/** @const {string} Fill color for non-target countries (default: grey). */
-const DEFAULT_COUNTRY_FILL = "var(--color-map-default-fill, #e0e0e0)";
-/** @const {string} Fill color on hover for target countries. */
-const HOVER_COUNTRY_FILL = "var(--color-map-hover, #b3e5fc)";
-/** @const {string} Fill color for the selected target country. */
-const ACTIVE_COUNTRY_FILL = "var(--color-map-active, #4fc3f7)";
-/** @const {string} Fill color for the map's background rectangle. */
-const MAP_BACKGROUND_FILL = "var(--color-map-bg, #e0f2fe)";
+/** Centralised conditional logger based on CONFIG.debug flag. */
+const log = (...args) => CONFIG.debug && console.debug("[OECD-Map]", ...args);
 
-// --- Target Countries Data ---
-/** @const {Array<string>} List of country names considered 'target' countries for interaction. */
-const TARGET_COUNTRIES_LIST = [
+/* -------------------------------------------------------------------------
+ * Domain & country name mappings and lists
+ * ---------------------------------------------------------------------- */
+/** Mapping from data dimension keys to human-readable labels. */
+const DOMAIN_MAP = Object.freeze({
+  income_wealth: "Income and wealth",
+  housing: "Housing",
+  work_job_quality: "Work and job quality",
+  work_life_balance: "Work-life balance",
+  health: "Health",
+  knowledge_skills: "Knowledge and skills",
+  social_connections: "Social connections",
+  civic_engagement: "Civic engagement",
+  environmental_quality: "Environmental quality",
+  safety: "Safety",
+  subjective_wellbeing: "Subjective well-being",
+});
+
+const DOMAIN_LABELS = Object.freeze({
+  income_wealth: "Income",
+  housing: "Housing",
+  work_job_quality: "Jobs",
+  work_life_balance: "Work-Life",
+  health: "Health",
+  knowledge_skills: "Skills",
+  social_connections: "Community",
+  civic_engagement: "Civic",
+  environmental_quality: "Environment",
+  safety: "Safety",
+  subjective_wellbeing: "Well-being",
+});
+
+/** Corrections for country names between TopoJSON and CSV data. */
+const COUNTRY_CORRECTIONS = Object.freeze({
+  "Czech Republic": "Czechia",
+  Slovakia: "Slovak Republic",
+  "South Korea": "Korea",
+  Turkey: "Türkiye",
+  "United States of America": "United States",
+});
+
+/** Set of countries included in the OECD Better Life Index data (target countries). */
+const TARGET_COUNTRIES = new Set([
   "Australia",
   "Austria",
   "Belgium",
@@ -62,7 +159,7 @@ const TARGET_COUNTRIES_LIST = [
   "Chile",
   "Colombia",
   "Costa Rica",
-  "Costa Rica",
+  "Czechia",
   "Denmark",
   "Estonia",
   "Finland",
@@ -75,6 +172,7 @@ const TARGET_COUNTRIES_LIST = [
   "Israel",
   "Italy",
   "Japan",
+  "Korea",
   "Latvia",
   "Lithuania",
   "Luxembourg",
@@ -84,885 +182,1703 @@ const TARGET_COUNTRIES_LIST = [
   "Norway",
   "Poland",
   "Portugal",
-  "Slovakia",
+  "Slovak Republic",
   "Slovenia",
-  "South Korea", // Note: Name must match TopoJSON data exactly.
   "Spain",
   "Sweden",
   "Switzerland",
-  "Turkey",
+  "Türkiye",
   "United Kingdom",
-  "United States of America", // Note: Name must match TopoJSON data exactly.
-];
-/** @const {Set<string>} A Set created from the list for efficient O(1) lookups to check if a country is a target. */
-const targetCountriesSet = new Set(TARGET_COUNTRIES_LIST);
+  "United States",
+]);
 
-// --- Global D3 & State Variables ---
-// Variables that hold references to D3 objects or track the application's state.
+/* -------------------------------------------------------------------------
+ * Legend component (pure SVG)
+ * Renders a continuous color legend for the map.
+ * ---------------------------------------------------------------------- */
+class ContinuousLegend {
+  /** @type {d3.ScaleSequential<number,string>} D3 color scale */
+  #scale;
+  /** @type {d3.Selection<SVGSVGElement,unknown,null,undefined>} Parent SVG element */
+  #svg;
+  /** @type {d3.Selection<SVGGElement,unknown,null,undefined>} Root <g> element for the legend */
+  #root;
+  /** @type {string} Unique ID for the gradient definition */
+  #gradientId = "legend-gradient";
+  /** @type {number} Width of the legend bar */
+  #width = 200;
+  /** @type {number} Total height of the legend group */
+  #height = 50;
+  /** @type {number} Number of stops for the gradient */
+  #gradientStops = 10;
 
-/** @type {d3.Selection} Reference to the main SVG element containing the map. */
-let svg;
-/** @type {d3.Selection} Reference to the group element (<g>) within the SVG that holds map features (paths, graticule). */
-let g;
-/** @type {d3.GeoProjection} The D3 geographic projection used to translate coordinates to screen positions. */
-let projection;
-/** @type {d3.GeoPath} The D3 path generator used to draw geographic features (countries, graticule). */
-let path;
-/** @type {d3.ZoomBehavior} The D3 zoom behavior handler attached to the SVG. */
-let zoom;
-/** @type {number} Current width of the map container element. */
-let width;
-/** @type {number} Current height of the map container element. */
-let height;
-/** @type {Array<object>} Array containing the GeoJSON feature objects for all countries, loaded from TopoJSON. */
-let countriesFeatures;
-/** @type {object|null} Stores the GeoJSON feature object of the currently selected target country, or null if none selected. */
-let selectedCountry = null;
-/** @type {d3.ZoomTransform} Stores the current zoom/pan state (translation [x, y] and scale [k]). */
-let currentTransform = d3.zoomIdentity; // Initial state: no translation, scale = 1
-/** @type {d3.ZoomTransform} Stores the zoom/pan state *before* the last country was clicked. Used for resetting zoom. */
-let previousTransform = d3.zoomIdentity;
-
-let dimension;
-let year;
-
-// --- DOM Element References ---
-// Caching references to frequently accessed DOM elements for performance.
-/** @type {HTMLElement} The div element containing the map SVG. */
-const mapContainer = document.getElementById(MAP_CONTAINER_ID);
-/** @type {HTMLSelectElement} The dropdown menu for selecting the well-being dimension. */
-const dimensionSelect = document.getElementById("dimension-select");
-/** @type {HTMLInputElement} The range slider for selecting the year. */
-const yearSlider = document.getElementById("year-slider");
-/** @type {HTMLElement} The span element displaying the currently selected year near the slider. */
-const yearDisplay = document.getElementById("year-display");
-/** @type {HTMLElement} The span element in the controls displaying the selected dimension text. */
-const selectedDimensionDisplay = document.getElementById("selected-dimension");
-/** @type {HTMLElement} The span element in the controls displaying the selected year. */
-const selectedYearDisplay = document.getElementById("selected-year");
-/** @type {HTMLElement} The span element in the controls displaying the selected country name or "World View". */
-const selectedCountryDisplay = document.getElementById(
-  "selected-country-display"
-);
-/** @type {HTMLElement} The div element below the map displaying info/instructions. */
-const countryInfo = document.getElementById("country-info");
-/** @type {HTMLInputElement} The checkbox for toggling the visibility of non-target countries. */
-const hideOthersCheckbox = document.getElementById("hide-others-checkbox");
-
-// Map the data of the csv into d3.
-let normalizedData = new Map();
-d3.csv("Better_Life_Preprocessed.csv").then(data => {
-  data.forEach(d => {
-    const key = `${d["Reference area"]}_${d["Domain"]}_${d["TIME_PERIOD"]}`;
-    normalizedData.set(key, +d["mean_normalized_measure"]);
-  });
-  console.log("Set colour map.");
-});
-
-// Mapping from map country names → CSV Reference area names
-const countryNameMap = {
-  "Czechia": "Czech Republic",
-  "Slovakia": "Slovak Republic",
-  "South Korea": "Korea",
-  "Turkey": "Türkiye",
-  "United States of America": "United States",
-};
-
-// Mapping from dropdown dimension keys → CSV Domain names
-const domainNameMap = {
-  "income_wealth": "Income and wealth",
-  "work_job_quality": "Work and job quality",
-  "housing": "Housing",
-  "work_life_balance": "Work-life balance",
-  "health": "Health",
-  "knowledge_skills": "Knowledge and skills",
-  "social_connections": "Social connections",
-  "civic_engagement": "Civic engagement",
-  "environmental_quality": "Environmental quality",
-  "safety": "Safety",
-  "subjective_wellbeing": "Subjective well-being",
-};
-
-// --- Control Update Logic ---
-
-// Colour map for the values of the data.
-function getColorFromValue(value) {
-  if (value == null || isNaN(value)) return TARGET_COUNTRY_FILL;
-  return d3.interpolateRgbBasis(["#ff0000", "#ffff00", "#00cc00"])(value);
-}
-
-/**
- * Updates the text displays in the control panel (selection display area)
- * based on the current values of the dimension select, year slider, and selected country.
- * Also triggers the `updateMapColors` function (currently a placeholder).
- */
-function updateDisplay() {
-  // Get selected dimension text and value
-  const selectedDimensionOption =
-    dimensionSelect.options[dimensionSelect.selectedIndex];
-  const selectedDimensionValue = selectedDimensionOption.value;
-  const selectedDimensionText = selectedDimensionOption.text;
-  // Get selected year
-  const selectedYear = yearSlider.value;
-
-  // Update text content of the display elements
-  yearDisplay.textContent = selectedYear; // Update label next to slider
-  selectedDimensionDisplay.textContent = selectedDimensionText;
-  selectedYearDisplay.textContent = selectedYear;
-  // Display the selected country's name or "World View" if none is selected
-  selectedCountryDisplay.textContent = selectedCountry
-    ? selectedCountry.properties?.name || "Unknown Country" // Use optional chaining for safety
-    : "World View";
-
-  // Placeholder: In a real application, this function would fetch/filter data
-  // based on the selected dimension and year, then update the map visualization
-  // (e.g., color countries based on data).
-  dimension = selectedDimensionValue;
-  year = selectedYear;
-  updateMapColors();
-}
-
-/**
- * Placeholder function intended to update map colors based on selected data.
- * In this prototype, it mainly re-applies styles to ensure correct active/inactive states.
- * @param {string} dimension - The selected dimension value (e.g., 'health').
- * @param {string} year - The selected year (e.g., '2023').
- */
-
-function updateMapColors() {
-  if (!g || !normalizedData) return;
-
-  const mappedDomain = domainNameMap[dimension];
-  if (!mappedDomain) {
-    console.warn(`No domain mapping found for: ${dimension}`);
-    return;
+  /**
+   * Creates a ContinuousLegend instance.
+   * @param {d3.ScaleSequential<number,string>} initialScale - The D3 sequential color scale to visualize.
+   * @param {d3.Selection<SVGSVGElement,unknown,null,undefined>} svg - The parent D3 SVG selection to append the legend to.
+   */
+  constructor(initialScale, svg) {
+    if (!initialScale || typeof initialScale !== "function") {
+      throw new Error("ContinuousLegend requires a valid D3 scale function.");
+    }
+    if (!svg || !svg.node() || svg.node().tagName !== "svg") {
+      throw new Error("ContinuousLegend requires a valid D3 SVG selection.");
+    }
+    this.#scale = initialScale;
+    this.#svg = svg;
+    this.#init();
   }
 
-  g.selectAll(".country.target-country")
-    .attr("fill", function (d) {
-      const rawName = d.properties?.name;
-      const mappedName = countryNameMap[rawName] || rawName;
-      const key = `${mappedName}_${mappedDomain}_${year}`;
-      if (!normalizedData.has(key)) {
-        return "#ffffff";
-      }
-      const value = normalizedData.get(key);
-      const colour = getColorFromValue(value);
-      // console.log(`Set colour of ${mappedName} to ${colour}`);
-      return colour;
-    });
-}
-
-/**
- * Toggles the visibility of non-target countries based on the checkbox state.
- * Uses CSS `display: none` to hide elements.
- */
-function handleHideOthersToggle() {
-  const isChecked = hideOthersCheckbox.checked; // Check if the checkbox is checked
-  console.log("Hide others toggled:", isChecked);
-  // Ensure the map group element (g) exists
-  if (!g) return;
-
-  // Select all country paths that have the 'other-country' class
-  g.selectAll(".country.other-country")
-    // Set the inline 'display' style: 'none' if checked, null (remove style) if unchecked
-    .style("display", isChecked ? "none" : null);
-}
-
-// --- Attach Event Listeners to Controls ---
-dimensionSelect.addEventListener("change", updateDisplay); // Update on dimension change
-yearSlider.addEventListener("input", updateDisplay); // Update live as slider moves
-hideOthersCheckbox.addEventListener("change", handleHideOthersToggle); // Update on checkbox change
-
-// --- D3 Map Drawing Logic ---
-
-/**
- * Initializes and draws the world map.
- * Sets up D3 projection, path generator, zoom behavior, loads geographic data,
- * renders countries and graticule, and handles window resizing.
- */
-function drawMap() {
-  /** @type {number} Timer ID for debouncing resize events. */
-  let resizeTimer;
-
   /**
-   * Handles the actual redrawing or updating of the map.
-   * This function is called initially and on window resize (debounced).
+   * Initializes the legend SVG structure (group, defs, gradient, rect, axis).
+   * @private
    */
-  const redrawMap = () => {
-    // Clear any existing SVG content in the container (important for resize)
-    d3.select(mapContainer).select("svg").remove();
+  #init() {
+    const legendHeight = this.#height;
+    const legendId = CONFIG.ui.ids.legend; // Use ID from config
 
-    // Get the current dimensions of the map container element
-    width = mapContainer.clientWidth;
-    height = mapContainer.clientHeight;
+    this.#root = this.#svg
+      .append("g")
+      .attr("id", legendId)
+      .attr("class", "map-legend")
+      .style("opacity", 0) // Start hidden, fade in on first update
+      .attr("aria-hidden", "true"); // Hide from screen readers initially
 
-    // If container has no dimensions (e.g., hidden), stop execution
-    if (width <= 0 || height <= 0) return;
+    // Gradient definition container
+    const defs = this.#root.append("defs");
 
-    // Create the main SVG element and append it to the map container
-    svg = d3
-      .select(mapContainer)
-      .append("svg")
-      .attr("width", width)
-      .attr("height", height)
-      // Use viewBox for responsive scaling; preserves aspect ratio
-      .attr("viewBox", `0 0 ${width} ${height}`);
+    // Linear gradient definition
+    defs
+      .append("linearGradient")
+      .attr("id", this.#gradientId)
+      .attr("x1", "0%") // Horizontal gradient
+      .attr("y1", "0%")
+      .attr("x2", "100%")
+      .attr("y2", "0%");
 
-    // --- Set up Zoom Behavior ---
-    zoom = d3
-      .zoom()
-      // Define the allowed range for zoom scale
-      .scaleExtent(ZOOM_SCALE_EXTENT)
-      // Register the event handler function for 'zoom' events
-      .on("zoom", zoomed);
-
-    // Apply the zoom behavior to the SVG element. This allows panning/zooming on the SVG.
-    svg.call(zoom);
-
-    // --- Add Background Rectangle ---
-    // This rectangle covers the entire SVG background.
-    // It serves two purposes:
-    // 1. Provides a background color (set via CSS).
-    // 2. Catches click events to trigger the `resetZoom` function.
-    svg
+    // Gradient rectangle bar
+    this.#root
       .append("rect")
-      .attr("class", "background") // Assign class for potential styling/selection
-      .attr("width", width)
-      .attr("height", height)
-      .attr("fill", MAP_BACKGROUND_FILL) // Use CSS variable for fill
-      .style("pointer-events", "all") // Ensure it intercepts mouse events
-      .on("click", resetZoom); // Attach click handler to reset zoom
+      .attr("x", 0)
+      .attr("y", 10) // Position below top edge
+      .attr("height", legendHeight - 30) // Bar height
+      .attr("fill", `url(#${this.#gradientId})`); // Apply gradient fill
 
-    // --- Set up Map Projection ---
-    // Defines how geographic coordinates (longitude, latitude) are mapped to 2D screen coordinates.
-    projection = d3
-      .geoMercator() // Using the Mercator projection
-      // Set initial scale based on container size and INITIAL_SCALE factor
-      .scale(Math.min(width / (2 * Math.PI), height / Math.PI) * INITIAL_SCALE)
-      // Set the center of the map projection (longitude, latitude)
-      .center([10, 50]) // Centered roughly on Europe
-      // Translate the projection to center it within the SVG container
-      .translate([width / 2, height / 2]);
-
-    // --- Set up Path Generator ---
-    // Takes GeoJSON geometry data and converts it into SVG path commands, using the defined projection.
-    path = d3.geoPath().projection(projection);
-
-    // --- Create Group for Map Elements ---
-    // All map features (countries, graticule) will be appended to this group (<g>).
-    // Applying zoom transformations to this group moves/scales all its children.
-    g = svg.append("g");
-
-    // --- Draw Graticule (Latitude/Longitude Lines) ---
-    const graticule = d3.geoGraticule10(); // Generate graticule lines every 10 degrees
-    g.append("path")
-      .datum(graticule) // Bind the graticule data
-      .attr("class", "graticule") // Assign class for styling
-      .attr("d", path) // Generate the SVG path data using the path generator
-      // Set initial stroke width, adjusted for the current zoom scale
-      .style("stroke-width", `${0.5 / currentTransform.k}px`);
-
-    // --- Apply Stored Transform ---
-    // If the map is redrawn (e.g., on resize), re-apply the last known zoom/pan state.
-    // This ensures the view remains consistent.
-    svg.call(zoom.transform, currentTransform);
-
-    // --- Load and Render Country Data ---
-    // Check if country features have already been loaded
-    if (!countriesFeatures) {
-      console.log("Loading map data from:", WORLD_MAP_URL);
-      // Fetch the TopoJSON data from the specified URL
-      d3.json(WORLD_MAP_URL)
-        .then((world) => {
-          // --- Data Processing and Verification ---
-          // Basic check for valid TopoJSON structure
-          if (!world || !world.objects || !world.objects.countries) {
-            throw new Error("Invalid TopoJSON data structure received.");
-          }
-          // Convert TopoJSON geometry to GeoJSON features
-          countriesFeatures = topojson.feature(
-            world,
-            world.objects.countries
-          ).features;
-          // Filter out features that lack a name property (e.g., Antarctica in some datasets)
-          countriesFeatures = countriesFeatures.filter(
-            (d) => d.properties && d.properties.name
-          );
-          console.log("Map data loaded and processed successfully.");
-
-          // --- Country Name Verification ---
-          // Verify that the names in TARGET_COUNTRIES_LIST match names in the loaded map data.
-          console.log("Verifying target country names against map data...");
-          // 1. Create a Set of all unique country names found in the loaded GeoJSON data.
-          const mapCountryNames = new Set(
-            countriesFeatures.map((feature) => feature.properties.name)
-          );
-          console.log(
-            `Found ${mapCountryNames.size} unique country names in the map data.`
-          );
-
-          // 2. Find target country names that are NOT present in the map data names.
-          const missingFromMap = TARGET_COUNTRIES_LIST.filter(
-            (targetName) => !mapCountryNames.has(targetName)
-          );
-
-          // 3. Report any discrepancies.
-          if (missingFromMap.length > 0) {
-            console.warn(
-              "WARNING: The following target countries were NOT found in the map data:",
-              missingFromMap
-            );
-            console.warn(
-              "Check TARGET_COUNTRIES_LIST for typos or use exact names from the map data."
-            );
-          } else {
-            console.log(
-              "SUCCESS: All target countries were found in the map data."
-            );
-          }
-          // Optional: Log countries present in map data but not in the target list (for info)
-          const extraInMap = Array.from(mapCountryNames).filter(
-            (mapName) => !targetCountriesSet.has(mapName)
-          );
-          if (extraInMap.length > 0) {
-            console.info(
-              `INFO: ${extraInMap.length} countries exist in map data but are not target countries.` // (Full list suppressed for brevity) // , extraInMap.sort());
-            );
-          }
-          // --- End Country Name Verification ---
-
-          // Render the countries using the processed and verified data
-          renderCountries();
-          // Update the control panel display now that data is available
-          updateDisplay();
-        }) // End of .then() for successful data loading
-        .catch((error) => {
-          // Handle errors during data fetching or processing
-          console.error("Error loading or processing map data:", error);
-          // Display an error message to the user in the map container
-          mapContainer.innerHTML = `<p style='color: red; text-align: center; padding: 20px;'>Could not load map data. Please check console and network.</p>`;
-        });
-    } else {
-      // If country data already exists (e.g., on resize), just re-render the countries
-      renderCountries();
-      // Re-apply active/inactive styles based on current selection
-      applyCountryStyles();
-      // Re-apply visibility based on checkbox state
-      handleHideOthersToggle();
-      // Ensure stroke widths are correct for the current zoom level
-      updateStrokeWidths(currentTransform.k);
-    }
-  }; // End of redrawMap function definition
+    // Axis group placeholder
+    this.#root.append("g").attr("class", "legend-axis");
+  }
 
   /**
-   * Renders the country paths onto the map group 'g'.
-   * Uses the D3 data join pattern (`.data().join()`).
-   * Assigns CSS classes ('country', 'target-country', 'other-country').
-   * Attaches event listeners (mouseover, mouseout, click).
+   * Updates the legend's scale, gradient stops, and axis based on new min/max values.
+   * @param {number} min - The minimum value of the current data domain.
+   * @param {number} max - The maximum value of the current data domain.
    */
-  const renderCountries = () => {
-    // Pre-condition check: ensure 'g' and 'countriesFeatures' are initialized
-    if (!g || !countriesFeatures) {
-      console.warn(
-        "Attempted to render countries before 'g' or 'countriesFeatures' was ready."
+  update(min, max) {
+    // Hide legend if data range is invalid
+    if (![min, max].every((v) => Number.isFinite(v))) {
+      this.#root.style("opacity", 0).attr("aria-hidden", "true");
+      return;
+    }
+
+    // Adjust width dynamically based on available space (simple example)
+    const availableWidth = window.innerWidth - 40; // Subtract padding
+    const dynamicWidth = Math.max(150, Math.min(220, availableWidth));
+    this.#width = dynamicWidth;
+    this.#root.select("rect").attr("width", dynamicWidth);
+
+    const stops = this.#gradientStops;
+    const gradientSelection = this.#root.select(`#${this.#gradientId}`);
+
+    // Update gradient stops
+    gradientSelection.selectAll("stop").remove(); // Clear existing stops
+    gradientSelection
+      .selectAll("stop")
+      .data(d3.range(stops + 1)) // Generate data for stops [0, 1, ..., stops]
+      .enter()
+      .append("stop")
+      .attr("offset", (d) => `${(d / stops) * 100}%`) // Position stop
+      .attr("stop-color", (d) => {
+        // Calculate value at this stop position
+        const value = min === max ? min : min + (max - min) * (d / stops);
+        return this.#scale(value); // Get color from the scale
+      });
+
+    // Update axis
+    const axisScale = d3
+      .scaleLinear()
+      .domain([min, max])
+      .range([0, dynamicWidth]);
+    const numTicks = Math.max(2, Math.min(5, Math.floor(dynamicWidth / 50))); // Dynamic ticks
+    const axis = d3
+      .axisBottom(axisScale)
+      .ticks(numTicks)
+      .tickFormat(d3.format(".2f")); // Format ticks to 2 decimal places
+
+    this.#root
+      .select(".legend-axis")
+      .attr("transform", `translate(0, ${this.#height - 20})`) // Position axis below bar
+      .transition()
+      .duration(CONFIG.animation.colorMs) // Smooth transition
+      .call(axis); // Render the axis
+
+    // Fade in the legend if it was hidden
+    this.#root.style("opacity", 1).attr("aria-hidden", "false");
+  }
+
+  /**
+   * Updates the legend's internal scale reference.
+   * Does not redraw; assumes update() will be called subsequently.
+   * @param {d3.ScaleSequential<number,string>} newScale - The new D3 scale function.
+   */
+  updateScale(newScale) {
+    if (!newScale || typeof newScale !== "function") {
+      console.warn("Legend received an invalid new scale.");
+      return;
+    }
+    this.#scale = newScale;
+    log("Legend scale updated internally.");
+    // Note: The visual update (gradient stops) happens in the update() method.
+  }
+
+  /**
+   * Repositions the legend group, typically called on window resize.
+   * @param {number} svgHeight - The current height of the parent SVG container.
+   */
+  move(svgHeight) {
+    // Position legend at bottom-left corner with padding
+    this.#root.attr(
+      "transform",
+      `translate(20, ${svgHeight - this.#height - 10})` // (x padding, y position)
+    );
+  }
+}
+
+/* -------------------------------------------------------------------------
+ * OECDWellbeingMap – Main application class
+ * Orchestrates data loading, map rendering, UI interactions, and visualization updates.
+ * ---------------------------------------------------------------------- */
+class OECDWellbeingMap {
+  /** @type {HTMLElement} Root container element */
+  #root;
+  /** @type {Object<string, HTMLElement|HTMLInputElement|HTMLSelectElement|HTMLButtonElement|null>} Cached UI elements */
+  #$;
+  /** @type {d3.Selection<SVGSVGElement, unknown, null, undefined> | null} Main SVG element */
+  #svg = null;
+  /** @type {d3.Selection<SVGGElement, unknown, null, undefined> | null} Main <g> element for map layers */
+  #g = null;
+  /** @type {ContinuousLegend | null} The map legend instance */
+  #legend = null;
+  /** @type {d3.GeoProjection | null} D3 map projection */
+  #projection = null;
+  /** @type {d3.GeoPathGenerator | null} D3 path generator for the projection */
+  #path = null;
+  /** @type {d3.ZoomBehavior<Element, unknown> | null} D3 zoom behavior */
+  #zoomBehaviour = null;
+  /** @type {d3.ScaleSequential<number, string>} D3 color scale for data values */
+  #colorScale; // Will be initialized in the constructor
+  /** @type {boolean} Tracks if colorblind-friendly mode is active */
+  #colorblindMode = false; // Track current state
+  /** @type {Map<string, number>} Stores CSV data: key = "Country_Domain_Year", value = score */
+  #dataCsv = new Map();
+  /** @type {Array<import('geojson').Feature>} Array of TopoJSON features */
+  #features = [];
+  /** @type {import('geojson').Feature | null} Currently selected country feature */
+  #selected = null;
+  /** @type {import('geojson').Feature | null} Comparison country */
+  #comparisonCountryName = null;
+  /** @type {string} Currently selected dimension key (from DOMAIN_MAP) */
+  #dimKey;
+  /** @type {string} Currently selected year */
+  #year;
+  /** @type {d3.ZoomTransform} Current zoom transform */
+  #currentTf = d3.zoomIdentity;
+  /** @type {d3.ZoomTransform} Zoom transform before selecting a country (for reset) */
+  #prevTf = d3.zoomIdentity;
+  /** @type {number | null} Interval ID for playback animation */
+  #playId = null;
+
+  /**
+   * Creates an OECDWellbeingMap instance.
+   * @param {string} containerId - The ID of the HTML element to contain the map.
+   */
+  constructor(containerId) {
+    this.#root = byId(containerId);
+    if (!this.#root) {
+      throw new Error(
+        `Map container element with ID "${containerId}" not found.`
+      );
+    }
+
+    // Cache references to UI elements defined in CONFIG
+    const ids = CONFIG.ui.ids;
+    this.#$ = {
+      dimensionSel: /** @type {HTMLSelectElement} */ (byId(ids.dimensionSel)),
+      yearSlider: /** @type {HTMLInputElement} */ (byId(ids.yearSlider)),
+      yearDisplay: byId(ids.yearDisplay),
+      dimensionTxt: byId(ids.dimensionTxt),
+      yearTxt: byId(ids.yearTxt),
+      countryTxt: byId(ids.countryTxt),
+      info: byId(ids.countryInfo),
+      hideOthers: /** @type {HTMLInputElement} */ (byId(ids.hideOthers)),
+      playBtn: /** @type {HTMLButtonElement} */ (byId(ids.playBtn)),
+      themeToggle: /** @type {HTMLButtonElement} */ (byId(ids.themeToggle)),
+      tooltip: byId(ids.tooltip),
+      miniDash: byId(ids.miniDash),
+      colorblindCheckbox: /** @type {HTMLInputElement} */ (
+        byId(ids.colorblindCheckbox)
+      ),
+    };
+
+    // Validate that essential UI elements were found
+    for (const key in this.#$) {
+      if (!this.#$[key]) {
+        console.warn(`UI element with ID "${ids[key]}" not found.`);
+        // Depending on severity, could throw an error or allow graceful degradation
+      }
+    }
+
+    // Initialize color scale with the default interpolator from CONFIG
+    this.#colorScale = d3.scaleSequential(CONFIG.colors.defaultInterpolator);
+
+    // Initial state setup
+    this.#dimKey = this.#$.dimensionSel?.value ?? Object.keys(DOMAIN_MAP)[0]; // Default if select not found
+    this.#year = this.#$.yearSlider?.value ?? "2022"; // Default if slider not found
+
+    this.#applyThemePreference(); // Apply saved theme early
+    this.#bootstrap(); // Start the loading and initialization process
+  }
+
+  /* ------------------------------------------------------------------ */
+  /**
+   * Asynchronous bootstrap process: Loads data, initializes SVG, renders map, attaches UI events.
+   * @private
+   */
+  async #bootstrap() {
+    try {
+      log("Starting bootstrap process...");
+      await this.#loadData();
+      this.#initSvg();
+      if (!this.#svg) throw new Error("SVG initialization failed."); // Guard against null SVG
+      this.#legend = new ContinuousLegend(this.#colorScale, this.#svg);
+      this.#renderCountries();
+      this.#attachUi();
+      this.#syncControls(); // Set initial UI text based on state
+      this.#updateColours(); // Apply initial colors and update legend
+      this.#inform(
+        "Hover over an OECD country for info, click to zoom. Click the background to reset zoom."
+      );
+
+      // Debounced resize handler
+      window.addEventListener(
+        "resize",
+        debounce(() => this.#redraw(), 150) // Use a slightly longer debounce for resize
+      );
+      log("Bootstrap complete.");
+    } catch (err) {
+      console.error("Fatal error during map initialization:", err);
+      this.#root.innerHTML = `
+        <p style="color:red; text-align:center; padding: 20px;">
+          Could not initialize the map visualization. Please check the console for errors.
+        </p>`;
+    }
+  }
+
+  /* ------------------------------------------------------------------
+   * Data Loading and Processing
+   * ---------------------------------------------------------------- */
+  /**
+   * Loads TopoJSON geometry and CSV data, then parses them into internal structures.
+   * @private
+   * @throws {Error} If data loading or parsing fails.
+   */
+  async #loadData() {
+    log("Loading TopoJSON & CSV data...");
+    const [topoData, csvData] = await Promise.all([
+      d3.json(CONFIG.data.topoUrl),
+      d3.csv(CONFIG.data.csvUrl, d3.autoType), // d3.autoType attempts smart type conversion
+    ]).catch((err) => {
+      throw new Error(`Failed to load data resources: ${err.message}`);
+    });
+
+    // Validate TopoJSON structure
+    if (!topoData?.objects?.countries) {
+      throw new Error("Malformed TopoJSON data: Missing 'objects.countries'.");
+    }
+    // Validate CSV data (basic check)
+    if (!Array.isArray(csvData)) {
+      throw new Error("Failed to parse CSV data or CSV data is empty.");
+    }
+
+    // Convert TopoJSON to GeoJSON features, filtering for valid names
+    this.#features = topojson
+      .feature(topoData, topoData.objects.countries)
+      .features.filter((f) => f?.properties?.name); // Ensure feature and name exist
+
+    // Process CSV data into the lookup map
+    this.#dataCsv.clear(); // Ensure map is empty before processing
+    csvData.forEach((row) => {
+      // Use optional chaining and nullish coalescing for safer access
+      const area = row["Reference area"]?.trim();
+      const domain = row["Domain"]?.trim();
+      const year = row.TIME_PERIOD; // Already potentially typed by d3.autoType
+      const value = row.mean_normalized_measure;
+
+      // Basic validation of required fields
+      if (!area || !domain || year == null) return; // Skip rows with missing key info
+
+      const key = `${area}_${domain}_${year}`;
+      // Ensure value is a finite number before storing
+      if (Number.isFinite(value)) {
+        this.#dataCsv.set(key, value);
+      }
+    });
+
+    log(
+      `Data loaded: ${this.#features.length} map features, ${
+        this.#dataCsv.size
+      } data points processed.`
+    );
+    if (this.#features.length === 0)
+      console.warn("No map features were loaded.");
+    if (this.#dataCsv.size === 0)
+      console.warn("No data points were processed from CSV.");
+  }
+
+  /* ------------------------------------------------------------------
+   * SVG Initialization and Setup
+   * ---------------------------------------------------------------- */
+  /**
+   * Initializes the SVG container, projection, path generator, graticule, and zoom behavior.
+   * @private
+   * @throws {Error} If the root container has no size.
+   */
+  #initSvg() {
+    const { clientWidth: width, clientHeight: height } = this.#root;
+    if (!width || !height) {
+      throw new Error("Map container has zero width or height.");
+    }
+
+    // Create SVG element
+    this.#svg = d3
+      .select(this.#root)
+      .append("svg")
+      .attr("width", "100%") // Use relative width
+      .attr("height", "100%") // Use relative height
+      .attr("viewBox", `0 0 ${width} ${height}`) // Maintain aspect ratio
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .attr("role", "img") // ARIA role
+      .attr("aria-label", "World map showing OECD Better Life Index data")
+      .style("cursor", "grab") // Default cursor indicates panning possible
+      .style("background-color", CONFIG.colors.background); // Set background via config
+
+    // Create main group element for transformations (zoom/pan)
+    this.#g = this.#svg.append("g");
+
+    // Configure projection and path generator
+    const baseScale = Math.min(width / (2 * Math.PI), height / Math.PI); // Basic scaling factor
+    this.#projection = d3
+      .geoMercator()
+      .center([10, 40]) // Initial center coordinates
+      .scale(baseScale * CONFIG.zoom.initialScale) // Apply initial zoom from config
+      .translate([width / 2, height / 2]); // Center projection in the SVG
+
+    this.#path = d3.geoPath(this.#projection); // Path generator for this projection
+
+    // Add graticule (map lines)
+    this.#g
+      .append("path")
+      .datum(d3.geoGraticule10()) // 10-degree graticule lines
+      .attr("class", "graticule")
+      .attr("d", this.#path)
+      .attr("fill", "none")
+      .attr("stroke", CONFIG.colors.graticule) // Use color from config
+      .attr("stroke-width", 0.5) // Initial stroke width
+      .style("pointer-events", "none") // Graticule shouldn't interfere with interactions
+      .attr("vector-effect", "non-scaling-stroke"); // Keeps stroke width consistent on zoom
+
+    // Configure zoom behavior
+    this.#zoomBehaviour = d3
+      .zoom()
+      .scaleExtent(CONFIG.zoom.scaleExtent) // Set min/max zoom levels
+      .filter((event) => {
+        // Allow wheel/double-click zoom even when a country is selected,
+        // but disable pan-dragging via filter when selected.
+        // Panning is implicitly re-enabled on resetZoom via svg click handler.
+        return this.#selected
+          ? event.type === "wheel" || event.type === "dblclick"
+          : true;
+      })
+      .on("zoom", (event) => this.#onZoom(event)); // Attach zoom event handler
+
+    // Apply zoom behavior to SVG and add background click listener for reset
+    this.#svg.call(this.#zoomBehaviour).on("click", (event) => {
+      // Reset zoom only if clicking directly on the SVG or the main <g> background
+      if (
+        event.target === this.#svg.node() ||
+        event.target === this.#g.node()
+      ) {
+        this.#resetZoom();
+        this.#hideMiniDash(); // Also hide dashboard on background click
+      }
+    });
+  }
+
+  /**
+   * Updates the active color scale based on user preference.
+   * @param {boolean} useColorblindFriendly - Whether to use the colorblind-friendly scale.
+   * @private
+   */
+  #setColorScheme(useColorblindFriendly) {
+    log(`Setting color scheme. Colorblind mode: ${useColorblindFriendly}`);
+    this.#colorblindMode = useColorblindFriendly; // Update internal state
+
+    const interpolator = useColorblindFriendly
+      ? CONFIG.colors.colorblindInterpolator
+      : CONFIG.colors.defaultInterpolator;
+
+    this.#colorScale = d3.scaleSequential(interpolator);
+
+    // Update the legend with the new scale function
+    if (this.#legend) {
+      this.#legend.updateScale(this.#colorScale);
+    } else {
+      console.warn("Cannot update legend scale: Legend not initialized.");
+    }
+
+    // Important: Re-apply colors and update legend visuals *after* changing the scale
+    this.#updateColours();
+  }
+
+  /* ------------------------------------------------------------------
+   * Initial Map Rendering
+   * ---------------------------------------------------------------- */
+  /**
+   * Renders the country features (paths) onto the map.
+   * @private
+   */
+  #renderCountries() {
+    if (!this.#g || !this.#path) return; // Ensure required elements exist
+
+    this.#g
+      .selectAll(".country")
+      .data(this.#features, (feature) => feature.id ?? feature.properties.name) // Use unique ID for data binding
+      .join("path") // D3 join pattern: enter, update, exit
+      .attr("class", (feature) => this.#countryClass(feature)) // Assign CSS classes
+      .attr("d", this.#path) // Generate path data using the geoPath generator
+      .style("fill", (feature) => this.#initialFill(feature)) // Set initial fill color
+      .attr("stroke", CONFIG.colors.border) // Country border color
+      .attr("stroke-width", 0.5) // Initial border width
+      .attr("vector-effect", "non-scaling-stroke") // Keep border width consistent on zoom
+      .attr("aria-label", (feature) => feature.properties.name) // Accessibility label
+      .attr("role", "button") // Semantically a button for interaction
+      .attr(
+        "tabindex",
+        (
+          feature // Make target countries focusable
+        ) => (TARGET_COUNTRIES.has(this.#mapName(feature)) ? "0" : null)
+      )
+      // Attach event listeners for interaction
+      .on("mouseover", (event, feature) => this.#onHover(event, feature))
+      .on("mouseout", (event, feature) => this.#onHoverOut(event, feature))
+      .on("click", (event, feature) => this.#onCountryClick(event, feature))
+      .on("keydown", (event, feature) => {
+        // Allow activation with Enter or Space key for accessibility
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault(); // Prevent default spacebar scroll
+          this.#onCountryClick(event, feature);
+        }
+      });
+  }
+
+  /* ------------------------------------------------------------------
+   * UI Event Handling Setup
+   * ---------------------------------------------------------------- */
+  /**
+   * Attaches event listeners to UI controls (select, slider, buttons, checkbox).
+   * @private
+   */
+  #attachUi() {
+    const $ = this.#$; // Use cached elements
+
+    // Dimension select change
+    $.dimensionSel?.addEventListener("change", () => {
+      this.#stopPlayback(); // Stop animation if running
+      this.#dimKey = $.dimensionSel.value;
+      this.#syncControls();
+      this.#updateColours();
+      // Re-render mini-dashboard if a country is selected
+      if (this.#selected) this.#showMiniDash(this.#selected);
+    });
+
+    // Year slider input (fires continuously during drag)
+    $.yearSlider?.addEventListener("input", () => {
+      this.#stopPlayback(); // Stop animation if running
+      this.#year = $.yearSlider.value;
+      this.#syncControls();
+      this.#updateColours();
+      // Re-render mini-dashboard if a country is selected
+      if (this.#selected) this.#showMiniDash(this.#selected);
+    });
+
+    // Hide non-target countries checkbox
+    $.hideOthers?.addEventListener("change", () => {
+      this.#toggleOthers(); // Update visibility of non-target countries
+    });
+
+    // Play/Pause button
+    $.playBtn?.addEventListener("click", () => {
+      this.#togglePlayback(); // Start or stop year animation
+    });
+
+    // Theme toggle button
+    $.themeToggle?.addEventListener("click", () => {
+      this.#toggleTheme(); // Switch between light/dark themes
+    });
+
+    // --- Colorblind Mode Checkbox ---
+    $.colorblindCheckbox?.addEventListener("change", (event) => {
+      // Ensure the event target is the checkbox and has the 'checked' property
+      if (event.target instanceof HTMLInputElement) {
+        this.#setColorScheme(event.target.checked);
+      }
+    });
+
+    // Set ARIA attributes for slider (min, max, current value)
+    if ($.yearSlider) {
+      $.yearSlider.setAttribute("aria-valuemin", $.yearSlider.min);
+      $.yearSlider.setAttribute("aria-valuemax", $.yearSlider.max);
+      // aria-valuenow is updated in #syncControls
+    }
+  }
+
+  /* ------------------------------------------------------------------
+   * Internal Helper Functions
+   * ---------------------------------------------------------------- */
+  /**
+   * Maps a feature's name to the canonical name used in the CSV data, applying corrections.
+   * @param {import('geojson').Feature} feature - The GeoJSON feature.
+   * @returns {string} The potentially corrected country name.
+   * @private
+   */
+  #mapName(feature) {
+    const rawName = feature?.properties?.name ?? "";
+    return COUNTRY_CORRECTIONS[rawName] ?? rawName; // Return corrected name or original
+  }
+
+  /**
+   * Determines the CSS classes for a country path based on whether it's a target country.
+   * @param {import('geojson').Feature} feature - The GeoJSON feature.
+   * @returns {string} The CSS class string.
+   * @private
+   */
+  #countryClass(feature) {
+    const isTarget = TARGET_COUNTRIES.has(this.#mapName(feature));
+    return isTarget ? "country target-country" : "country other-country";
+  }
+
+  /**
+   * Determines the initial fill color for a country path.
+   * @param {import('geojson').Feature} feature - The GeoJSON feature.
+   * @returns {string} The fill color (from CONFIG).
+   * @private
+   */
+  #initialFill(feature) {
+    const isTarget = TARGET_COUNTRIES.has(this.#mapName(feature));
+    return isTarget ? CONFIG.colors.targetDefault : CONFIG.colors.otherDefault;
+  }
+
+  /**
+   * Updates the text content of UI display elements (year, dimension, selected country).
+   * Also updates ARIA attributes for the slider.
+   * @private
+   */
+  #syncControls() {
+    const $ = this.#$;
+    if (!$) return;
+
+    // Use DOMAIN_LABELS based on the *value* of the select (this.#dimKey)
+    const dimensionLabel = DOMAIN_LABELS[this.#dimKey] ?? "N/A";
+    const currentYear = this.#year ?? "N/A";
+    const countryName = this.#selected?.properties?.name ?? "World View";
+
+    // Update text displays
+    if ($.yearDisplay) $.yearDisplay.textContent = currentYear;
+    if ($.yearTxt) $.yearTxt.textContent = currentYear;
+    // Update dimension text using the short label
+    if ($.dimensionTxt) $.dimensionTxt.textContent = dimensionLabel;
+    if ($.countryTxt) $.countryTxt.textContent = countryName;
+
+    if ($.yearSlider) $.yearSlider.setAttribute("aria-valuenow", currentYear);
+  }
+
+  /**
+   * Displays an informational message to the user (e.g., in a status bar element).
+   * Uses aria-live to announce changes to screen readers.
+   * @param {string} msg - The message to display.
+   * @private
+   */
+  #inform(msg) {
+    if (this.#$.info) {
+      this.#$.info.textContent = msg;
+      // Make screen readers announce the message
+      this.#$.info.setAttribute("aria-live", "polite");
+      // Optional: Remove aria-live after a short delay to prevent repeated announcements if needed
+      // setTimeout(() => this.#$.info?.removeAttribute('aria-live'), 1000);
+    }
+  }
+
+  /**
+   * Toggles the visibility of non-target countries based on the checkbox state.
+   * @private
+   */
+  #toggleOthers() {
+    if (!this.#g) return;
+    const hide = this.#$.hideOthers?.checked ?? false;
+    this.#g
+      .selectAll(".country.other-country")
+      .style("display", hide ? "none" : null) // Use null to revert to CSS default
+      .attr("aria-hidden", hide ? "true" : "false"); // Update accessibility state
+  }
+
+  /* ------------------------------------------------------------------
+   * Map Styling and Color Updates
+   * ---------------------------------------------------------------- */
+  /**
+   * Updates the color scale domain based on current data, applies colors to target countries,
+   * and updates the legend.
+   * @private
+   */
+  #updateColours() {
+    if (!this.#g || !this.#legend) return; // Ensure required elements exist
+
+    const domainName = DOMAIN_MAP[this.#dimKey];
+    if (!domainName) {
+      console.warn(`Invalid dimension key: ${this.#dimKey}`);
+      return; // Exit if the dimension key isn't valid
+    }
+
+    let minVal = Infinity;
+    let maxVal = -Infinity;
+    let hasFiniteData = false;
+
+    // Find min/max values for the current dimension and year across target countries
+    TARGET_COUNTRIES.forEach((countryName) => {
+      const dataKey = `${countryName}_${domainName}_${this.#year}`;
+      const value = this.#dataCsv.get(dataKey);
+      if (Number.isFinite(value)) {
+        hasFiniteData = true;
+        if (value < minVal) minVal = value;
+        if (value > maxVal) maxVal = value;
+      }
+    });
+
+    // Adjust domain if no data found or if min/max are identical
+    if (!hasFiniteData) {
+      minVal = 0; // Default range if no data
+      maxVal = 1;
+    } else if (minVal === maxVal) {
+      // Slightly expand range if all values are the same
+      minVal = minVal > 0 ? minVal * 0.9 : -0.1;
+      maxVal = maxVal > 0 ? maxVal * 1.1 : 0.1;
+    }
+
+    // Update the color scale's domain
+    this.#colorScale.domain([minVal, maxVal]);
+
+    // Apply colors to target countries based on the updated scale
+    this.#g
+      .selectAll(".country.target-country")
+      .transition() // Smooth color transition
+      .duration(CONFIG.animation.colorMs)
+      .style("fill", (feature) => {
+        const countryName = this.#mapName(feature);
+        const dataKey = `${countryName}_${domainName}_${this.#year}`;
+        const value = this.#dataCsv.get(dataKey);
+        // Return color from scale if value exists, otherwise default target color
+        return Number.isFinite(value)
+          ? this.#colorScale(value)
+          : CONFIG.colors.targetDefault;
+      });
+
+    // Update the legend with the new min/max values
+    this.#legend.update(minVal, maxVal);
+    // Ensure legend position is correct (might be needed after initial load/resize)
+    if (this.#root) this.#legend.move(this.#root.clientHeight);
+  }
+
+  /* ------------------------------------------------------------------
+   * Zoom and Pan Handling
+   * ---------------------------------------------------------------- */
+  /**
+   * Handles the D3 zoom event, updating the main group's transform and adjusting stroke widths.
+   * @param {d3.D3ZoomEvent<Element, unknown>} event - The D3 zoom event object.
+   * @private
+   */
+  #onZoom(event) {
+    if (!event.transform || !this.#g) return; // Exit if transform or group is missing
+
+    this.#currentTf = event.transform; // Store the latest transform
+
+    // Store the transform *before* selecting a country, so we can return to it
+    if (!this.#selected) {
+      this.#prevTf = this.#currentTf;
+    }
+
+    // Apply the transform to the main group
+    this.#g.attr("transform", this.#currentTf.toString());
+
+    // Adjust stroke widths based on zoom level for visual consistency
+    this.#adjustStroke(this.#currentTf.k); // k is the scale factor
+  }
+
+  /**
+   * Adjusts the stroke width of map features based on the current zoom scale factor.
+   * @param {number} scaleFactor - The current zoom scale factor (k).
+   * @private
+   */
+  #adjustStroke(scaleFactor) {
+    if (!this.#g) return;
+    // Calculate inverse scaled stroke width (makes strokes appear thinner when zoomed in)
+    const countryStrokeWidth = 0.5 / scaleFactor;
+    const graticuleStrokeWidth = 0.5 / scaleFactor;
+
+    this.#g.selectAll(".country").style("stroke-width", countryStrokeWidth);
+    this.#g.select(".graticule").style("stroke-width", graticuleStrokeWidth);
+  }
+
+  /* ------------------------------------------------------------------
+   * Country Interaction (Hover, Click)
+   * ---------------------------------------------------------------- */
+  /**
+   * Handles mouseover events on country paths: shows tooltip and highlights the country.
+   * @param {MouseEvent} event - The mouse event.
+   * @param {import('geojson').Feature} feature - The hovered feature.
+   * @private
+   */
+  #onHover(event, feature) {
+    const countryElement = d3.select(event.currentTarget);
+    const mappedName = this.#mapName(feature);
+
+    // Ignore hover on non-target countries or if the country is marked inactive (zoomed on another)
+    if (
+      !TARGET_COUNTRIES.has(mappedName) ||
+      countryElement.classed("inactive")
+    ) {
+      return;
+    }
+
+    // --- Tooltip Logic ---
+    const domainName = DOMAIN_MAP[this.#dimKey];
+    const dataKey = `${mappedName}_${domainName}_${this.#year}`;
+    const value = this.#dataCsv.get(dataKey);
+    const scoreText = Number.isFinite(value) ? value.toFixed(2) : "N/A";
+    const tooltipContent = `<strong>${feature.properties.name}</strong><br/>Score: ${scoreText}`;
+
+    if (this.#$.tooltip) {
+      this.#$.tooltip.innerHTML = tooltipContent;
+
+      // Position tooltip near the cursor, constrained within viewport
+      const tooltipPadding = 16;
+      const { width: tooltipWidth, height: tooltipHeight } =
+        this.#$.tooltip.getBoundingClientRect();
+      let xPos = event.pageX + 15; // Default position: right of cursor
+      let yPos = event.pageY - 10; // Default position: above cursor
+
+      // Adjust if tooltip overflows viewport
+      if (xPos + tooltipWidth + tooltipPadding > window.innerWidth) {
+        xPos = event.pageX - tooltipWidth - 15; // Move to left of cursor
+      }
+      if (yPos + tooltipHeight + tooltipPadding > window.innerHeight) {
+        yPos = event.pageY - tooltipHeight - 15; // Move further above cursor
+      }
+      // Ensure tooltip doesn't go off-screen left or top
+      if (xPos < tooltipPadding) xPos = tooltipPadding;
+      if (yPos < tooltipPadding) yPos = tooltipPadding;
+
+      // Apply position and make visible
+      Object.assign(this.#$.tooltip.style, {
+        left: `${xPos}px`,
+        top: `${yPos}px`,
+        visibility: "visible",
+        opacity: "1",
+      });
+    }
+
+    // --- Highlight Logic ---
+    // Only apply hover effect if no country is currently selected (active)
+    if (!this.#selected) {
+      countryElement.raise().style("fill", CONFIG.colors.hover); // Bring to front and apply hover color
+      // Combine country name and score for the info box
+      const infoText = `${feature.properties.name} | Score: ${scoreText}`; // Example format
+      this.#inform(infoText);
+    } else if (this.#selected === feature) {
+      // If hovering over the *selected* country, update info message
+      this.#inform(
+        `Selected: ${feature.properties.name} (Click again or background to reset)`
+      );
+    }
+  }
+
+  /**
+   * Handles mouseout events on country paths: hides tooltip and resets temporary styles.
+   * @param {MouseEvent} event - The mouse event.
+   * @param {import('geojson').Feature} feature - The feature being left.
+   * @private
+   */
+  #onHoverOut(event, feature) {
+    // Hide tooltip
+    if (this.#$.tooltip) {
+      this.#$.tooltip.style.visibility = "hidden";
+      this.#$.tooltip.style.opacity = 0;
+    }
+
+    const countryElement = d3.select(event.currentTarget);
+    const mappedName = this.#mapName(feature);
+
+    // Ignore if not a target country or if it's the currently active/selected one
+    if (!TARGET_COUNTRIES.has(mappedName) || countryElement.classed("active")) {
+      return;
+    }
+
+    // Restore original fill color only if no country is selected
+    if (!this.#selected) {
+      const domainName = DOMAIN_MAP[this.#dimKey];
+      const dataKey = `${mappedName}_${domainName}_${this.#year}`;
+      const value = this.#dataCsv.get(dataKey);
+      const originalColor = Number.isFinite(value)
+        ? this.#colorScale(value)
+        : CONFIG.colors.targetDefault;
+      countryElement.style("fill", originalColor);
+    }
+
+    // Reset informational message based on selection state
+    if (this.#selected) {
+      this.#inform(
+        `Selected: ${
+          this.#selected.properties.name
+        } (Click again or background to reset)`
+      );
+    } else {
+      this.#inform(
+        "Hover over an OECD country for info, click to zoom. Click the background to reset zoom."
+      );
+    }
+  }
+
+  /**
+   * Handles click events on country paths: selects/deselects the country and triggers zoom.
+   * @param {MouseEvent|KeyboardEvent} event - The click or keydown event.
+   * @param {import('geojson').Feature} feature - The clicked feature.
+   * @private
+   */
+  #onCountryClick(event, feature) {
+    const mappedName = this.#mapName(feature);
+    // Ignore clicks on non-target countries
+    if (!TARGET_COUNTRIES.has(mappedName)) return;
+
+    event.stopPropagation(); // Prevent click from bubbling up to SVG (which would reset zoom)
+    this.#stopPlayback(); // Stop animation if running
+
+    if (this.#selected === feature) {
+      // Clicked on the already selected country: Deselect and reset zoom
+      this.#resetZoom();
+      this.#hideMiniDash();
+    } else {
+      // Clicked on a new target country: Select and zoom in
+      // Store current transform *before* selecting, if nothing was selected yet
+      if (!this.#selected) {
+        this.#prevTf = this.#currentTf;
+      }
+      this.#selected = feature; // Set the new selected country
+      this.#applyStyles(); // Update styles for active/inactive states
+      this.#zoomTo(feature); // Zoom map to the selected country
+      this.#syncControls(); // Update UI text (selected country name)
+      this.#showMiniDash(feature); // Show the mini-dashboard for this country
+    }
+  }
+
+  /**
+   * Applies visual styles (active/inactive classes, pointer events) based on
+   * the current selection state (`this.#selected`).
+   * @private
+   */
+  #applyStyles() {
+    if (!this.#g) return;
+    const allCountries = this.#g.selectAll(".country");
+
+    if (this.#selected) {
+      // A country is selected
+      const selectedName = this.#mapName(this.#selected);
+
+      allCountries
+        .classed("inactive", (d) => this.#mapName(d) !== selectedName) // Mark non-selected as inactive
+        .classed("active", (d) => this.#mapName(d) === selectedName) // Mark selected as active
+        .style(
+          "pointer-events",
+          (
+            d // Disable pointer events for inactive countries
+          ) => (this.#mapName(d) === selectedName ? "all" : "none")
+        )
+        .filter((d) => this.#mapName(d) === selectedName) // Select only the active country
+        .style("fill", CONFIG.colors.active) // Apply active color
+        .raise(); // Bring the active country to the front
+
+      this.#svg?.style("cursor", "pointer"); // Change cursor to indicate clickable background/country
+    } else {
+      // No country is selected (resetting)
+      allCountries
+        .classed("inactive", false) // Remove inactive class
+        .classed("active", false) // Remove active class
+        .style("pointer-events", "all"); // Re-enable pointer events for all
+
+      // Reapply colors based on data (important after deselection)
+      this.#updateColours();
+
+      this.#svg?.style("cursor", "grab"); // Change cursor back to grab (panning)
+    }
+
+    // Re-apply visibility rule for non-target countries after style changes
+    this.#toggleOthers();
+  }
+
+  /* ------------------------------------------------------------------
+   * Programmatic Zoom Control
+   * ---------------------------------------------------------------- */
+  /**
+   * Zooms and pans the map to focus on the bounds of a given feature.
+   * @param {import('geojson').Feature} feature - The feature to zoom to.
+   * @private
+   */
+  #zoomTo(feature) {
+    if (!this.#path || !this.#root || !this.#svg || !this.#zoomBehaviour)
+      return;
+
+    // Calculate the bounding box of the feature in projected coordinates
+    const [[x0, y0], [x1, y1]] = this.#path.bounds(feature);
+    const { clientWidth: width, clientHeight: height } = this.#root;
+
+    const dx = x1 - x0;
+    const dy = y1 - y0;
+
+    // Handle cases where bounds are invalid (e.g., point feature)
+    if (!dx || !dy) {
+      log(
+        "Cannot zoom to feature with zero dimensions:",
+        feature.properties.name
       );
       return;
     }
-    // Remove existing country paths before drawing new ones (important for redraws)
-    g.selectAll(".country").remove();
 
-    // D3 Data Join: Bind countriesFeatures data to path elements with class 'country'
-    g.selectAll(".country")
-      .data(countriesFeatures, (d) => d.id || d.properties.name) // Use unique ID or name as key
-      .join("path") // Enter-Update-Exit pattern: creates/updates/removes paths as needed
-      // Assign CSS classes based on whether the country is in the target set
-      .attr("class", (d) => {
-        const name = d.properties?.name; // Safely access the name property
-        const isTarget = name ? targetCountriesSet.has(name) : false;
-        return `country ${isTarget ? "target-country" : "other-country"}`;
-      })
-      // Generate the 'd' attribute (path data) using the geo path generator
-      .attr("d", path)
-      // Set initial fill color: White for target countries, null for others (CSS handles default)
-      .attr("fill", (d) => {
-        const name = d.properties?.name;
-        return name && targetCountriesSet.has(name)
-          ? "#0000ff"
-          : null;
-      })
-      // Attach event listeners for interaction
-      .on("mouseover", handleMouseOver) // Handle mouse entering a country path
-      .on("mouseout", handleMouseOut) // Handle mouse leaving a country path
-      .on("click", clicked); // Handle click on a country path
-
-    // Apply initial active/inactive styles if a country is already selected
-    applyCountryStyles();
-    // Apply initial hide state based on the checkbox
-    handleHideOthersToggle();
-    // Ensure stroke widths match the current zoom level after rendering
-    updateStrokeWidths(currentTransform.k);
-  }; // End of renderCountries function definition
-
-  // --- Initial Draw and Resize Handling ---
-  // Perform the initial map draw
-  redrawMap();
-
-  // Add a resize event listener to the window
-  window.addEventListener("resize", () => {
-    // Debounce the resize event: wait RESIZE_DEBOUNCE_DELAY ms after the last resize event before redrawing
-    clearTimeout(resizeTimer); // Clear any existing timer
-    resizeTimer = setTimeout(redrawMap, RESIZE_DEBOUNCE_DELAY); // Set a new timer
-  });
-} // End of drawMap function
-
-// --- D3 Zoom Event Handler ---
-
-/**
- * Callback function executed when a D3 zoom event occurs (pan, wheel zoom, programmatic zoom).
- * Updates the transform of the main map group 'g' and adjusts stroke widths.
- * Prevents user-driven zoom/pan when a country is selected (map is locked).
- * @param {object} event - The D3 zoom event object. Contains `transform` and `sourceEvent`.
- */
-function zoomed(event) {
-  // Check if the zoom event was triggered by user interaction (mouse drag, wheel)
-  // AND if a country is currently selected.
-  if (event.sourceEvent && selectedCountry) {
-    // If yes, prevent the user from changing the zoom/pan. Re-apply the fixed transform.
-    svg.call(zoom.transform, currentTransform);
-    return; // Stop further processing of this event
-  }
-
-  // Update the global `currentTransform` state based on the event source.
-  if (event.sourceEvent) {
-    // If triggered by user interaction, use the transform from the event.
-    currentTransform = event.transform;
-    // Only update `previousTransform` (used for reset) if the user is freely panning/zooming
-    // (i.e., no country is selected).
-    if (!selectedCountry) {
-      previousTransform = currentTransform;
-    }
-  } else {
-    // If triggered programmatically (e.g., by a transition `.call(zoom.transform, ...)`),
-    // update `currentTransform` directly. We don't update `previousTransform` here because
-    // programmatic zooms (like zooming to a country) shouldn't overwrite the state to reset to.
-    currentTransform = event.transform;
-  }
-
-  // Apply the new transform (translation and scale) to the main map group 'g'.
-  g.attr("transform", currentTransform);
-
-  // Adjust the stroke widths of elements (like graticule) that need scaling inversely to zoom.
-  updateStrokeWidths(currentTransform.k);
-}
-
-// --- Helper Functions ---
-
-/**
- * Adjusts the stroke width of elements that should appear thinner when zoomed in
- * and thicker when zoomed out (e.g., graticule lines).
- * Country borders use `vector-effect: non-scaling-stroke` in CSS, so they don't need JS adjustment.
- * @param {number} scale - The current zoom scale factor (k) from the transform.
- */
-function updateStrokeWidths(scale) {
-  if (!g) return; // Ensure map group exists
-  // Adjust graticule stroke width: Base width (0.5px) divided by the current scale.
-  g.selectAll(".graticule").style("stroke-width", `${0.5 / scale}px`);
-  // Note: Country stroke widths are handled by CSS `vector-effect: non-scaling-stroke`
-  // and the `.active` class definition in CSS.
-}
-
-/**
- * Event handler for the 'mouseover' event on country paths.
- * Highlights the country if it's a target country and no other country is selected,
- * or provides context if hovering over the selected country.
- * Updates the country info text area.
- * @param {Event} event - The mouse event object.
- * @param {object} d - The GeoJSON feature data bound to the hovered element.
- */
-function handleMouseOver(event, d) {
-  const el = d3.select(event.currentTarget); // Select the path element that triggered the event
-
-  // Ignore if the element is not a target country or if it's marked as inactive
-  if (!el.classed("target-country") || el.classed("inactive")) {
-    return;
-  }
-
-  const countryName = d.properties?.name || "Unknown";
-
-  // Behavior depends on whether a country is currently selected
-  if (!selectedCountry) {
-    // --- No country selected ---
-    // Raise the hovered element to the top layer (visual effect)
-    el.raise();
-    // Apply the hover fill color (defined in CSS variables)
-    el.attr("fill", HOVER_COUNTRY_FILL);
-    // Update the info text to show the hovered country's name
-    countryInfo.textContent = `Country: ${countryName}`;
-  } else if (selectedCountry === d) {
-    // --- Hovering over the currently selected country ---
-    // Update the info text to remind the user how to reset the view
-    countryInfo.textContent = `Selected: ${countryName} (Click to return to previous view)`;
-  }
-  // Implicit else: Hovering over a non-selected target country while another *is* selected.
-  // In this case, we do nothing (the non-selected country remains visually inactive).
-}
-
-/**
- * Event handler for the 'mouseout' event on country paths.
- * Reverts style changes applied on mouseover, unless the country is selected or inactive.
- * Resets the country info text area based on the current selection state.
- * @param {Event} event - The mouse event object.
- * @param {object} d - The GeoJSON feature data bound to the element the mouse left.
- */
-function handleMouseOut(event, d) {
-  const el = d3.select(event.currentTarget);
-
-  // Ignore if the element is not a target country
-  if (!el.classed("target-country")) {
-    return;
-  }
-
-  // Only revert the fill color if the country is NOT inactive and NOT the active (selected) one.
-  if (!el.classed("inactive") && !el.classed("active")) {
-    // Revert fill to the default target country fill (white)
-    el.attr("fill", function (d) {
-      const rawName = d.properties?.name;
-      const mappedName = countryNameMap[rawName] || rawName;
-      const mappedDomain = domainNameMap[dimension];
-      const key = `${mappedName}_${mappedDomain}_${year}`;
-      if (!normalizedData.has(key)) {
-        return "#ffffff";
-      }
-      const value = normalizedData.get(key);
-      const colour = getColorFromValue(value);
-      // console.log(`Set colour of ${mappedName} to ${colour}`);
-      return colour;
-    });
-  }
-
-  // Update the info text based on whether a country is currently selected
-  if (selectedCountry) {
-    // If a country is selected, show its name and reset instructions
-    countryInfo.textContent = `Selected: ${
-      selectedCountry.properties?.name || "Unknown"
-    } (Click to return to previous view)`;
-  } else {
-    // If no country is selected, show the default instructions
-    countryInfo.textContent =
-      "Click a target country to zoom in. Click map background or selected country to return.";
-  }
-}
-
-/**
- * Event handler for the 'click' event on country paths.
- * If a target country is clicked:
- * - If it's the currently selected country, reset the zoom (`resetZoom`).
- * - If it's a different target country, zoom in on it (`applyZoomTransition`).
- * If a non-target country is clicked, do nothing.
- * Stops event propagation to prevent the background click handler from firing.
- * @param {Event} event - The click event object.
- * @param {object} d - The GeoJSON feature data bound to the clicked element.
- */
-function clicked(event, d) {
-  const el = d3.select(event.currentTarget); // The clicked path element
-
-  // --- Ignore clicks on non-target countries ---
-  if (!el.classed("target-country")) {
-    event.stopPropagation(); // Prevent the click from reaching the SVG background
-    console.log("Clicked non-target country - ignored.");
-    return; // Do nothing further
-  }
-
-  // Stop the event from propagating further (e.g., to the background rect)
-  event.stopPropagation();
-
-  // --- Handle clicks on target countries ---
-  if (selectedCountry === d) {
-    // Clicked on the *already selected* target country: Reset the view.
-    console.log("Clicked selected country - Resetting zoom.");
-    resetZoom();
-  } else {
-    // Clicked on a *new* target country: Zoom to this country.
-    console.log(`Clicked new target country: ${d.properties?.name}`);
-
-    // Before zooming to the new country, store the current transform *only if*
-    // we were in the 'world view' (no country selected previously).
-    // If another country *was* selected, `previousTransform` should already hold
-    // the correct state to return to.
-    if (!selectedCountry) {
-      previousTransform = currentTransform;
-    }
-
-    // Update the global state to reflect the new selection
-    selectedCountry = d;
-
-    // Apply CSS classes to visually highlight the selected country and fade others
-    applyCountryStyles();
-
-    // Calculate and start the animated zoom transition to the selected country
-    applyZoomTransition(d, ZOOM_TRANSITION_DURATION);
-
-    // Update the control panel display (selected country name)
-    updateDisplay();
-
-    // Update the info text below the map
-    countryInfo.textContent = `Selected: ${
-      d.properties?.name || "Unknown"
-    } (Click to return to previous view)`;
-
-    // Change map cursor to indicate clicking again will reset
-    svg.style("cursor", "pointer");
-  }
-}
-
-/**
- * Calculates the required zoom transform (scale and translation) to center
- * and zoom in on the bounding box of a given GeoJSON feature (country).
- * Initiates an animated transition to this new transform.
- * @param {object} d - The GeoJSON feature object (country) to zoom to.
- * @param {number} duration - The duration of the zoom animation in milliseconds.
- */
-function applyZoomTransition(d, duration) {
-  // --- Pre-computation Checks ---
-  // Ensure valid input data and map dimensions
-  if (!d || !path || !width || !height || width <= 0 || height <= 0) {
-    console.error("Cannot apply zoom: Invalid parameters or map dimensions.");
-    return;
-  }
-  // Calculate the screen-space bounding box of the feature using the current projection
-  const bounds = path.bounds(d);
-  // Validate the calculated bounds
-  if (
-    !bounds ||
-    !Number.isFinite(bounds[0][0]) ||
-    !Number.isFinite(bounds[0][1]) ||
-    !Number.isFinite(bounds[1][0]) ||
-    !Number.isFinite(bounds[1][1])
-  ) {
-    console.warn(
-      "Could not calculate valid bounds for country:",
-      d.properties?.name,
-      bounds
+    // Calculate desired scale, constrained by config settings
+    const scale = Math.max(
+      CONFIG.zoom.scaleExtent[0], // Ensure scale is not below minimum zoom
+      Math.min(
+        CONFIG.zoom.maxCountryScale, // Ensure scale does not exceed max country zoom
+        CONFIG.zoom.padding * Math.min(width / dx, height / dy) // Calculate scale to fit bounds with padding
+      )
     );
-    return; // Cannot proceed without valid bounds
+
+    // Calculate translation needed to center the feature's midpoint
+    const translateX = width / 2 - (scale * (x0 + x1)) / 2;
+    const translateY = height / 2 - (scale * (y0 + y1)) / 2;
+
+    // Create the target zoom transform
+    const targetTransform = d3.zoomIdentity
+      .translate(translateX, translateY)
+      .scale(scale);
+
+    // Store the target transform as the new current transform
+    this.#currentTf = targetTransform;
+
+    // Animate the zoom transition
+    this.#svg
+      .transition()
+      .duration(CONFIG.zoom.transitionMs)
+      .call(this.#zoomBehaviour.transform, targetTransform); // Apply the transform via zoom behavior
   }
 
-  // Extract coordinates from bounds: [[x0, y0], [x1, y1]]
-  const [[x0, y0], [x1, y1]] = bounds;
-  // Calculate width and height of the bounding box
-  const dx = x1 - x0;
-  const dy = y1 - y0;
-  // Check for zero-dimension bounds (can happen with points or invalid geometry)
-  if (dx <= 0 || dy <= 0) {
-    console.warn(
-      "Zero dimension bounds calculated for country:",
-      d.properties?.name,
-      { dx, dy }
-    );
-    return; // Cannot calculate scale with zero dimensions
-  }
-
-  // --- Calculate Target Transform ---
-  // Calculate the center point of the bounding box
-  const x = (x0 + x1) / 2;
-  const y = (y0 + y1) / 2;
-  // Calculate the desired scale factor:
-  const scale = Math.max(
-    ZOOM_SCALE_EXTENT[0], // Ensure scale is not less than the minimum allowed zoom
-    Math.min(
-      MAX_COUNTRY_ZOOM, // Ensure scale does not exceed the maximum country zoom
-      // Calculate scale to fit bounds within viewport, applying padding factor
-      COUNTRY_ZOOM_SCALE_FACTOR * Math.min(width / dx, height / dy)
-    )
-  );
-  // Calculate the translation needed to center the feature's center point (x, y)
-  // in the middle of the SVG container ([width / 2, height / 2]) at the calculated scale.
-  const translate = [width / 2 - scale * x, height / 2 - scale * y];
-
-  // Create the target D3 zoom transform object
-  const targetTransform = d3.zoomIdentity
-    .translate(translate[0], translate[1])
-    .scale(scale);
-
-  // Update the global `currentTransform` state immediately (reflects the target state)
-  currentTransform = targetTransform;
-
-  // --- Apply Animated Transition ---
-  svg
-    .transition() // Start a D3 transition
-    .duration(duration) // Set the animation duration
-    // Apply the target zoom transform smoothly over the duration
-    .call(zoom.transform, targetTransform)
-    // Optional: Add callbacks for transition end/interrupt
-    .on("end", () => {
-      console.log("Zoom transition ended.");
-      // Ensure styles and stroke widths are correct after transition completes
-      applyCountryStyles();
-      updateStrokeWidths(currentTransform.k);
-      svg.style("cursor", "pointer"); // Keep reset cursor
-    })
-    .on("interrupt", () => {
-      console.log("Zoom transition interrupted.");
-      // Ensure styles and stroke widths are correct if transition is interrupted
-      applyCountryStyles();
-      updateStrokeWidths(currentTransform.k);
-    });
-}
-
-/**
- * Resets the map zoom/pan state to the `previousTransform` (the state before
- * the last country was clicked). Clears the `selectedCountry` state.
- * Initiates an animated transition back to the previous view.
- * Triggered by clicking the map background or the currently selected country.
- * @param {Event} [event] - The click event object (optional). Used to check target.
- */
-function resetZoom(event) {
-  // If triggered by an event, ensure it was a direct click on the background rectangle
-  if (event && event.target !== svg.select(".background").node()) {
-    return; // Ignore clicks on other elements (like non-target countries)
-  }
-  // Stop event propagation if triggered by an event
-  if (event) {
-    event.stopPropagation();
-  }
-  // If no country is currently selected, there's nothing to reset from
-  if (!selectedCountry) {
-    return;
-  }
-
-  console.log("Resetting Zoom to Previous State");
-
-  // Clear the selection state
-  selectedCountry = null;
-
-  // The target transform for the reset is the state stored *before* the country was clicked
-  const targetTransform = previousTransform;
-  // Update the global `currentTransform` to reflect the target reset state
-  currentTransform = targetTransform;
-
-  // --- Apply Animated Reset Transition ---
-  svg
-    .transition()
-    .duration(ZOOM_TRANSITION_DURATION)
-    // Animate the zoom transform back to the target state
-    .call(zoom.transform, targetTransform)
-    // Define actions at the start of the transition
-    .on("start", () => {
-      // Apply styling changes immediately at the start
-      applyCountryStyles(); // Reset active/inactive styles
-      svg.style("cursor", "grab"); // Restore the default 'grab' cursor
-    })
-    // Define actions at the end of the transition
-    .on("end", () => {
-      console.log("Reset zoom transition ended.");
-      // Update UI elements after transition completes
-      updateDisplay(); // Update control panel display (show "World View")
-      // Reset info text to default instructions
-      countryInfo.textContent =
-        "Click a target country to zoom in. Click map background or selected country to return.";
-      // Ensure stroke widths are correct for the new zoom level
-      updateStrokeWidths(currentTransform.k);
-      // Re-apply styles just in case (belt-and-suspenders)
-      applyCountryStyles();
-      svg.style("cursor", "grab"); // Ensure grab cursor is set
-    })
-    // Define actions if the transition is interrupted
-    .on("interrupt", () => {
-      console.log("Reset zoom transition interrupted.");
-      // Ensure the UI is in the correct final state even if interrupted
-      updateDisplay();
-      updateStrokeWidths(currentTransform.k);
-      applyCountryStyles();
-      svg.style("cursor", "grab");
-    });
-
-  // Update the control panel display immediately (don't wait for transition)
-  updateDisplay();
-}
-
-/**
- * Applies 'active' and 'inactive' CSS classes to TARGET countries based on
- * the current `selectedCountry` state. Also manages `pointer-events` to
- * disable interaction with inactive countries. Ensures non-target countries
- * are not affected by these styles. Raises the active country visually.
- */
-/**
- * Applies 'active' and 'inactive' CSS classes based on the current `selectedCountry` state.
- * When a country is selected:
- *   - The selected country gets the 'active' class.
- *   - ALL other countries (target and non-target) get the 'inactive' class.
- * When no country is selected (reset):
- *   - All countries have 'active' and 'inactive' classes removed.
- *   - Default styles (fill, pointer-events) are reapplied.
- * Manages pointer events and raises the active country visually.
- */
-function applyCountryStyles() {
-  if (!g) return; // Ensure map group exists
-
-  // Select all country elements
-  const allCountries = g.selectAll(".country");
-
-  if (selectedCountry) {
-    // --- A target country IS selected ---
-
-    // 1. Initially, mark ALL countries as inactive
-    allCountries
-      .classed("inactive", true) // Add inactive class to all
-      .classed("active", false) // Ensure active is removed from any previously active
-      .style("pointer-events", "none"); // Disable pointer events for all
-
-    // 2. Find the specifically selected country and override its styles
-    const activeCountrySelection = allCountries
-      .filter((d) => d === selectedCountry) // Filter to get only the selected country's element
-      .classed("inactive", false) // REMOVE the inactive class
-      .classed("active", true) // ADD the active class
-      .style("pointer-events", "all"); // RE-ENABLE pointer events for the active one
-    // Note: The fill color for the active country is primarily handled by the `.active` CSS rule.
-    // We don't need to set it explicitly here unless overriding CSS.
-
-    // 3. Raise the active country visually above others
-    if (!activeCountrySelection.empty()) {
-      activeCountrySelection.raise();
+  /**
+   * Resets the map zoom and selection state back to the previous view (before country selection).
+   * @private
+   */
+  #resetZoom() {
+    if (!this.#selected || !this.#svg || !this.#zoomBehaviour) {
+      // Only reset if a country is actually selected
+      return;
     }
-  } else {
-    // --- No country is selected (World View / Reset) ---
 
-    // 1. Remove active/inactive classes from ALL countries
-    allCountries
-      .classed("active", false)
-      .classed("inactive", false)
-      // Reset pointer-events: null allows CSS defaults to take over
-      // (pointer for target-country, default for other-country)
-      .style("pointer-events", null)
-      // 2. Explicitly reset fill colors based on country type
-      .attr("fill", function (d) {
-        console.log(dimension);
-        console.log(year);
-        const rawName = d.properties?.name;
-        const mappedName = countryNameMap[rawName] || rawName;
-        const mappedDomain = domainNameMap[dimension];
-        const key = `${mappedName}_${mappedDomain}_${year}`;
-        console.log(key);
-        if (!normalizedData.has(key)) {
-          return "#ff0000";
-        }
-        const value = normalizedData.get(key);
-        const colour = getColorFromValue(value);
-        // console.log(`Set colour of ${mappedName} to ${colour}`);
-        return colour;
+    const previouslySelected = this.#selected; // Keep reference for style update
+    this.#selected = null; // Clear selection state
+    this.#currentTf = this.#prevTf; // Restore the previous transform state
+
+    this.#svg
+      .transition()
+      .duration(CONFIG.zoom.transitionMs)
+      .call(this.#zoomBehaviour.transform, this.#prevTf) // Animate back to previous transform
+      .on("start", () => {
+        // Optional: Apply some style changes immediately at start of transition
+        // this.#applyStyles(); // Might cause flicker, applystyles on end is usually better
+      })
+      .on("end", () => {
+        // Ensure styles are fully updated *after* the transition completes
+        this.#applyStyles();
+        this.#syncControls(); // Update UI text (back to 'World View')
+        this.#inform(
+          "Hover over an OECD country for info, click to zoom. Click the background to reset zoom."
+        );
       });
   }
+
+  /* ------------------------------------------------------------------
+   * Mini Dashboard (Country Details)
+   * ---------------------------------------------------------------- */
+  /**
+   * Hides the mini-dashboard panel and clears its content, resetting comparison state.
+   * @private
+   */
+  #hideMiniDash() {
+    if (this.#$.miniDash) {
+      this.#$.miniDash.style.display = "none";
+      this.#$.miniDash.innerHTML = ""; // Clear content
+    }
+    this.#comparisonCountryName = null; // <<< Reset comparison state
+  }
+
+  /**
+   * Shows the mini-dashboard panel and populates it with charts for the selected country.
+   * Includes an option to select a comparison country displayed side-by-side.
+   * @param {import('geojson').Feature} feature - The selected country feature.
+   * @private
+   */
+  #showMiniDash(feature) {
+    const primaryCountryName = this.#mapName(feature);
+    const primaryDisplayName = feature.properties.name; // Use original name for display
+    const currentYear = this.#year;
+    const dashElement = this.#$.miniDash;
+
+    if (!dashElement) return; // Exit if dashboard element doesn't exist
+
+    // --- Structure Setup ---
+    dashElement.innerHTML = ""; // Clear previous content
+    dashElement.style.display = "block"; // Make it visible
+
+    // Create the main wrapper for side-by-side dashboards
+    const dashboardWrapper = document.createElement("div");
+    dashboardWrapper.className = "mini-dashboard-wrapper"; // Use this for flex layout
+
+    // --- Primary Country Column ---
+    const primaryContainer = document.createElement("div");
+    primaryContainer.className = "mini-dashboard-column primary-dash-content";
+
+    // Add title and comparison selector
+    const primaryTitleArea = document.createElement("div");
+    primaryTitleArea.className = "mini-dashboard-title-area";
+    primaryTitleArea.innerHTML = `
+    <h4 class="mini-dashboard-title">${primaryDisplayName} (${currentYear})</h4>
+    <div class="comparison-selector-area">
+      <label for="comparison-select-${Date.now()}" class="sr-only">Compare with:</label> <select id="comparison-select-${Date.now()}" class="comparison-select">
+        <option value="">-- Compare with --</option>
+        ${Array.from(TARGET_COUNTRIES)
+          .filter((name) => name !== primaryCountryName) // Exclude primary country
+          .sort() // Sort alphabetically
+          .map(
+            (name) =>
+              `<option value="${name}" ${
+                this.#comparisonCountryName === name ? "selected" : "" // Keep selection on refresh
+              }>${name}</option>`
+          )
+          .join("")}
+      </select>
+    </div>
+  `;
+    primaryContainer.appendChild(primaryTitleArea);
+
+    // Add chart containers for the primary country
+    const primarySparklineContainer = document.createElement("div");
+    primarySparklineContainer.className = "mini-chart-container";
+    primarySparklineContainer.innerHTML = `<h5 class="mini-chart-title">${
+      DOMAIN_LABELS[this.#dimKey]
+    } Trend</h5>`;
+
+    const primaryRadarContainer = document.createElement("div");
+    primaryRadarContainer.className = "mini-chart-container";
+    primaryRadarContainer.innerHTML = `<h5 class="mini-chart-title">All Dimensions (${currentYear})</h5>`;
+
+    primaryContainer.append(primarySparklineContainer, primaryRadarContainer);
+    dashboardWrapper.appendChild(primaryContainer); // Add primary column to wrapper
+
+    // --- Comparison Country Column (placeholder) ---
+    const comparisonContainer = document.createElement("div");
+    comparisonContainer.className =
+      "mini-dashboard-column comparison-dash-content";
+    comparisonContainer.style.display = this.#comparisonCountryName
+      ? "block"
+      : "none"; // Hide if no comparison selected yet
+    dashboardWrapper.appendChild(comparisonContainer); // Add comparison column placeholder
+
+    // Append the wrapper to the main dashboard element
+    dashElement.appendChild(dashboardWrapper);
+
+    // --- Attach Listener to Comparison Selector ---
+    const comparisonSelect = dashElement.querySelector(".comparison-select");
+    comparisonSelect?.addEventListener("change", (event) => {
+      this.#handleComparisonSelect(event);
+    });
+
+    // --- Render Primary Charts ---
+    this.#renderSparkline(
+      primarySparklineContainer,
+      primaryCountryName,
+      this.#dimKey
+    );
+    this.#renderRadar(primaryRadarContainer, primaryCountryName, currentYear);
+
+    // --- Render Comparison Charts (if a comparison country is already selected) ---
+    if (this.#comparisonCountryName) {
+      this.#renderComparisonDash(this.#comparisonCountryName);
+    }
+  }
+
+  /**
+   * Handles the selection change event for the comparison country dropdown.
+   * @param {Event} event - The change event object from the select element.
+   * @private
+   */
+  #handleComparisonSelect(event) {
+    const selectElement = event.target;
+    if (!(selectElement instanceof HTMLSelectElement)) return;
+
+    this.#comparisonCountryName = selectElement.value || null; // Store selected name or null if default
+
+    if (this.#comparisonCountryName) {
+      this.#renderComparisonDash(this.#comparisonCountryName); // Render the comparison dashboard
+    } else {
+      // Clear the comparison column if "-- Compare with --" is selected
+      const comparisonContainer = this.#$.miniDash?.querySelector(
+        ".comparison-dash-content"
+      );
+      if (comparisonContainer) {
+        comparisonContainer.innerHTML = ""; // Clear content
+        comparisonContainer.style.display = "none"; // Hide it
+      }
+    }
+  }
+
+  /**
+   * Renders the title, sparkline, and radar chart for the selected comparison country.
+   * @param {string} comparisonCountryName - The name of the country to compare with.
+   * @private
+   */
+  #renderComparisonDash(comparisonCountryName) {
+    const comparisonContainer = this.#$.miniDash?.querySelector(
+      ".comparison-dash-content"
+    );
+    const currentYear = this.#year;
+    const currentDimKey = this.#dimKey;
+
+    if (!comparisonContainer || !comparisonCountryName) return;
+
+    // Clear previous comparison content and make visible
+    comparisonContainer.innerHTML = "";
+    comparisonContainer.style.display = "block";
+
+    // Add title for comparison country
+    comparisonContainer.insertAdjacentHTML(
+      "afterbegin",
+      `<h4 class="mini-dashboard-title comparison-title">${comparisonCountryName} (${currentYear})</h4>`
+    );
+
+    // Create chart containers for the comparison country
+    const comparisonSparklineContainer = document.createElement("div");
+    comparisonSparklineContainer.className = "mini-chart-container";
+    comparisonSparklineContainer.innerHTML = `<h5 class="mini-chart-title">${DOMAIN_LABELS[currentDimKey]} Trend</h5>`;
+
+    const comparisonRadarContainer = document.createElement("div");
+    comparisonRadarContainer.className = "mini-chart-container";
+    comparisonRadarContainer.innerHTML = `<h5 class="mini-chart-title">All Dimensions (${currentYear})</h5>`;
+
+    comparisonContainer.append(
+      comparisonSparklineContainer,
+      comparisonRadarContainer
+    );
+
+    // --- Render Comparison Charts ---
+    // Note: Pass the *comparison* country name to the rendering functions
+    this.#renderSparkline(
+      comparisonSparklineContainer,
+      comparisonCountryName, // <<< Use comparison name
+      currentDimKey
+    );
+    this.#renderRadar(
+      comparisonRadarContainer,
+      comparisonCountryName, // <<< Use comparison name
+      currentYear
+    );
+  }
+
+  /**
+   * Renders a simple sparkline chart showing the trend for a specific dimension over the years.
+   * Includes start and end year labels. // <-- Added description
+   * @param {HTMLElement} containerElement - The HTML element to render the chart into.
+   * @param {string} countryName - The name of the country.
+   * @param {string} dimensionKey - The key of the dimension to display.
+   * @private
+   */
+  #renderSparkline(containerElement, countryName, dimensionKey) {
+    const domainName = DOMAIN_MAP[dimensionKey];
+    if (!domainName || !this.#$.yearSlider) return; // Exit if dimension or slider is invalid
+
+    // --- Constants ---
+    const CHART_WIDTH = 220;
+    // Increase height slightly to accommodate labels
+    const CHART_HEIGHT = 65; // Was 50
+    const MARGIN = 6; // Simple margin for aesthetics
+    const LABEL_Y_OFFSET = 12; // Space below the chart for labels
+
+    // --- Data Preparation ---
+    const minYear = +this.#$.yearSlider.min;
+    const maxYear = +this.#$.yearSlider.max;
+    const years = d3.range(minYear, maxYear + 1); // Generate array of years
+
+    const sparklineData = years
+      .map((year) => ({
+        year: year,
+        value:
+          this.#dataCsv.get(`${countryName}_${domainName}_${year}`) ?? null, // Get value or null
+      }))
+      .filter((d) => d.value !== null && Number.isFinite(d.value)); // Filter out missing/invalid data
+
+    // Check if enough data exists to draw a line
+    if (sparklineData.length < 2) {
+      containerElement.innerHTML += `<p class="mini-chart-nodata">Not enough data for trend line.</p>`;
+      return;
+    }
+
+    // --- Scales ---
+    const xScale = d3
+      .scaleLinear()
+      .domain(d3.extent(sparklineData, (d) => d.year)) // Domain: min to max year in data
+      .range([MARGIN, CHART_WIDTH - MARGIN]); // Range: chart width with margin
+
+    const yScale = d3
+      .scaleLinear()
+      .domain(d3.extent(sparklineData, (d) => d.value)) // Domain: min to max value in data
+      .nice() // Adjust domain to nice round values
+      // Adjust range to leave space at the bottom for labels
+      .range([CHART_HEIGHT - MARGIN - LABEL_Y_OFFSET, MARGIN]); // Range: chart height with margin (inverted for SVG coords)
+
+    // --- SVG Rendering ---
+    const svg = d3
+      .select(containerElement)
+      .append("svg")
+      .attr("viewBox", `0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`) // Use updated height
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .attr("role", "img")
+      .attr(
+        "aria-label",
+        `Sparkline chart showing ${domainName} trend for ${countryName}`
+      );
+
+    // Line generator
+    const lineGenerator = d3
+      .line()
+      .x((d) => xScale(d.year))
+      .y((d) => yScale(d.value));
+
+    // Draw the line
+    svg
+      .append("path")
+      .datum(sparklineData)
+      .attr("fill", "none")
+      .attr("stroke", "currentColor") // Use CSS color
+      .attr("stroke-width", 1.5)
+      .attr("d", lineGenerator);
+
+    // Optional: Add points at start/end
+    svg
+      .selectAll(".spark-point")
+      .data([sparklineData[0], sparklineData.at(-1)]) // First and last data points
+      .join("circle")
+      .attr("class", "spark-point")
+      .attr("r", 2)
+      .attr("cx", (d) => xScale(d.year))
+      .attr("cy", (d) => yScale(d.value))
+      .attr("fill", "currentColor");
+
+    // --- Add Year Labels ---
+    const firstYearData = sparklineData[0];
+    const lastYearData = sparklineData.at(-1);
+    const labelYPosition = CHART_HEIGHT - MARGIN; // Position labels at the bottom
+
+    // Start Year Label
+    svg
+      .append("text")
+      .attr("x", xScale(firstYearData.year))
+      .attr("y", labelYPosition)
+      .attr("text-anchor", "start") // Align text start with the point
+      .attr("font-size", "9px")
+      .attr("fill", CONFIG.colors.strongText) // Use strong text color
+      .attr("dominant-baseline", "baseline") // Align bottom of text
+      .text(firstYearData.year);
+
+    // End Year Label
+    svg
+      .append("text")
+      .attr("x", xScale(lastYearData.year))
+      .attr("y", labelYPosition)
+      .attr("text-anchor", "end") // Align text end with the point
+      .attr("font-size", "9px")
+      .attr("fill", CONFIG.colors.strongText) // Use strong text color
+      .attr("dominant-baseline", "baseline") // Align bottom of text
+      .text(lastYearData.year);
+  }
+
+  /**
+   * Renders a simple radar chart showing all dimension scores for a specific country and year.
+   * @param {HTMLElement} containerElement - The HTML element to render the chart into.
+   * @param {string} countryName - The name of the country.
+   * @param {string} year - The selected year.
+   * @private
+   */
+  #renderRadar(containerElement, countryName, year) {
+    // --- Constants ---
+    const CHART_WIDTH = 220;
+    const CHART_HEIGHT = 180;
+    const RADIUS = Math.min(CHART_WIDTH, CHART_HEIGHT) / 2 - 25; // Radius of the radar area
+    const LABEL_OFFSET = 12; // Distance of labels from radar edge
+
+    // --- Data Preparation ---
+    const dimensionKeys = Object.keys(DOMAIN_MAP);
+    const dimensionValues = dimensionKeys.map((key) => {
+      const longDomainName = DOMAIN_MAP[key]; // Get the long name needed for the data key
+      return this.#dataCsv.get(`${countryName}_${longDomainName}_${year}`) ?? 0;
+    });
+
+    // Check if any data exists
+    if (!dimensionValues.some((value) => Number.isFinite(value) && value > 0)) {
+      containerElement.innerHTML += `<p class="mini-chart-nodata">No data available for ${year}.</p>`;
+      return;
+    }
+
+    // --- Scales ---
+    // Angle scale: maps dimension index to angle
+    const angleScale = d3
+      .scaleLinear()
+      .domain([0, dimensionKeys.length]) // Domain: 0 to number of dimensions
+      .range([0, 2 * Math.PI]); // Range: 0 to 360 degrees (in radians)
+
+    // Radius scale: maps data value (assuming 0-1 normalized) to pixel radius
+    // Adjust domain if data is not normalized, e.g., d3.extent(dimensionValues)
+    const radiusScale = d3
+      .scaleLinear()
+      .domain([0, 1]) // Assuming normalized data [0, 1]
+      .range([0, RADIUS]); // Range: center to max radius
+
+    // --- SVG Rendering ---
+    const svg = d3
+      .select(containerElement)
+      .append("svg")
+      .attr("viewBox", `0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`)
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .attr("role", "img")
+      .attr(
+        "aria-label",
+        `Radar chart showing all dimensions for ${countryName} in ${year}`
+      )
+      .append("g")
+      // Center the radar chart group within the SVG
+      .attr("transform", `translate(${CHART_WIDTH / 2},${CHART_HEIGHT / 2})`);
+
+    // --- Draw Axes and Labels ---
+    dimensionKeys.forEach((key, index) => {
+      const shortLabel = DOMAIN_LABELS[key]; // Get the short label for display
+      const angle = angleScale(index);
+      const x2 = Math.sin(angle) * RADIUS; // x endpoint of axis line
+      const y2 = -Math.cos(angle) * RADIUS; // y endpoint of axis line (negative for SVG y-down)
+
+      // Draw axis line from center to edge
+      svg
+        .append("line")
+        .attr("x1", 0)
+        .attr("y1", 0) // Start at center
+        .attr("x2", x2)
+        .attr("y2", y2) // End at radius edge
+        .attr("stroke", CONFIG.colors.secondaryText)
+        .attr("stroke-width", 0.5);
+
+      // Draw axis label
+      svg
+        .append("text")
+        .attr("x", Math.sin(angle) * (RADIUS + LABEL_OFFSET)) // Position label outside radius
+        .attr("y", -Math.cos(angle) * (RADIUS + LABEL_OFFSET))
+        .attr("font-size", "8px") // Small font size for labels
+        .attr("text-anchor", (d, i) => {
+          const angleDegrees = (angleScale(i) * 180) / Math.PI;
+          // Adjust thresholds slightly to avoid perfect vertical/horizontal alignment issues
+          if (angleDegrees > 10 && angleDegrees < 170) {
+            return "start"; // Right side
+          } else if (angleDegrees > 190 && angleDegrees < 350) {
+            return "end"; // Left side
+          }
+          return "middle"; // Top or bottom
+        })
+        .attr("dominant-baseline", "middle") // Center text vertically
+        .attr("fill", CONFIG.colors.strongText)
+        // Replace hyphens with non-breaking hyphens and spaces with non-breaking spaces for better wrapping
+        .text(shortLabel.replace(/-/g, "\u2011").replace(/ /g, "\u00A0"));
+    });
+
+    // --- Draw Data Polygon ---
+    // Calculate polygon points [(x1, y1), (x2, y2), ...]
+    const polygonPoints = dimensionValues.map((value, index) => {
+      const angle = angleScale(index);
+      const pointRadius = radiusScale(Math.max(0, value)); // Ensure radius is not negative
+      const x = Math.sin(angle) * pointRadius;
+      const y = -Math.cos(angle) * pointRadius;
+      return [x, y];
+    });
+
+    // Draw the polygon connecting the points
+    svg
+      .append("polygon")
+      .attr("points", polygonPoints.map((p) => p.join(",")).join(" ")) // Format points string "x1,y1 x2,y2 ..."
+      .attr("fill", CONFIG.colors.radarFill) // Use fill color from config
+      .attr("stroke", CONFIG.colors.radarStroke) // Use stroke color from config
+      .attr("stroke-width", 1);
+  }
+
+  /* ------------------------------------------------------------------
+   * Year Playback Animation
+   * ---------------------------------------------------------------- */
+  /**
+   * Toggles the year playback animation on or off.
+   * @private
+   */
+  #togglePlayback() {
+    if (this.#playId) {
+      this.#stopPlayback();
+    } else {
+      this.#startPlayback();
+    }
+  }
+
+  /**
+   * Starts the year playback animation using setInterval.
+   * @private
+   */
+  #startPlayback() {
+    if (this.#playId || !this.#$.playBtn || !this.#$.yearSlider) return; // Already playing or button missing
+
+    // Update button state
+    this.#$.playBtn.textContent = "Pause";
+    this.#$.playBtn.setAttribute("aria-label", "Pause year animation");
+    this.#$.playBtn.classList.add("playing");
+
+    // If currently at the max year, reset to min year before starting
+    const minYear = +this.#$.yearSlider.min;
+    const maxYear = +this.#$.yearSlider.max;
+    if (+this.#year >= maxYear) {
+      this.#year = String(minYear);
+      this.#$.yearSlider.value = this.#year;
+      // Update immediately after reset
+      this.#syncControls();
+      this.#updateColours();
+      if (this.#selected) this.#showMiniDash(this.#selected);
+    }
+
+    // Start the interval timer
+    this.#playId = window.setInterval(() => {
+      const currentNumericYear = +this.#year;
+      const nextYear = currentNumericYear + 1;
+
+      // Stop if the next year exceeds the maximum
+      if (nextYear > maxYear) {
+        this.#stopPlayback(); // Stop naturally at the end
+        return;
+      }
+
+      // Update state and UI for the next year
+      this.#year = String(nextYear);
+      if (this.#$.yearSlider) this.#$.yearSlider.value = this.#year;
+
+      // Call update functions directly to reflect the change
+      this.#syncControls(); // Update text displays
+      this.#updateColours(); // Update map colors and legend
+      // Update the mini-dashboard if a country is selected
+      if (this.#selected) this.#showMiniDash(this.#selected);
+    }, CONFIG.animation.playMs); // Interval delay from config
+  }
+
+  /**
+   * Stops the year playback animation by clearing the interval.
+   * @private
+   */
+  #stopPlayback() {
+    if (!this.#playId) return; // Not playing
+
+    clearInterval(this.#playId); // Clear the interval timer
+    this.#playId = null; // Reset the interval ID flag
+
+    // Update button state
+    if (this.#$.playBtn) {
+      this.#$.playBtn.textContent = "Play";
+      this.#$.playBtn.setAttribute("aria-label", "Play year animation");
+      this.#$.playBtn.classList.remove("playing");
+    }
+  }
+
+  /* ------------------------------------------------------------------
+   * Theme Management
+   * ---------------------------------------------------------------- */
+  /**
+   * Applies the theme (light/dark) based on localStorage preference.
+   * @private
+   */
+  #applyThemePreference() {
+    const savedTheme = localStorage.getItem("oecd-map-theme");
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    const isDark = savedTheme === "dark" || (!savedTheme && prefersDark);
+
+    if (isDark) {
+      document.documentElement.setAttribute("data-theme", "dark");
+      if (this.#$.themeToggle) this.#$.themeToggle.textContent = "Light Mode";
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+      if (this.#$.themeToggle) this.#$.themeToggle.textContent = "Dark Mode";
+    }
+    // Note: Map background/stroke updates happen later or in #toggleTheme
+  }
+
+  /**
+   * Toggles the theme between light and dark, updates localStorage, and refreshes relevant styles.
+   * @private
+   */
+  #toggleTheme() {
+    const isCurrentlyDark = document.documentElement.hasAttribute("data-theme");
+
+    if (isCurrentlyDark) {
+      // Switch to Light
+      document.documentElement.removeAttribute("data-theme");
+      localStorage.removeItem("oecd-map-theme");
+      if (this.#$.themeToggle) this.#$.themeToggle.textContent = "Dark Mode";
+    } else {
+      // Switch to Dark
+      document.documentElement.setAttribute("data-theme", "dark");
+      localStorage.setItem("oecd-map-theme", "dark");
+      if (this.#$.themeToggle) this.#$.themeToggle.textContent = "Light Mode";
+    }
+
+    // Re-apply styles that depend on CSS variables potentially changed by the theme
+    if (this.#svg)
+      this.#svg.style("background-color", CONFIG.colors.background);
+    if (this.#g) {
+      this.#g.select(".graticule").attr("stroke", CONFIG.colors.graticule);
+      this.#g.selectAll(".country").attr("stroke", CONFIG.colors.border);
+      // Re-color countries based on current data/selection as theme might affect default/active colors
+      this.#applyStyles(); // This implicitly calls updateColours if nothing is selected
+    }
+    // Legend colors will update automatically if updateColours is called via applyStyles
+    // If applyStyles doesn't run (e.g. no selection), explicitly update legend if needed
+    if (!this.#selected) this.#updateColours();
+  }
+
+  /* ------------------------------------------------------------------
+   * Responsive Resizing
+   * ---------------------------------------------------------------- */
+  /**
+   * Handles window resize events: updates SVG viewBox, projection, paths, legend position,
+   * and reapplies the current zoom transform.
+   * @private
+   */
+  #redraw() {
+    if (
+      !this.#root ||
+      !this.#svg ||
+      !this.#projection ||
+      !this.#path ||
+      !this.#g ||
+      !this.#legend ||
+      !this.#zoomBehaviour
+    ) {
+      log("Redraw skipped, required elements not initialized.");
+      return;
+    }
+    log("Redrawing map on resize...");
+
+    const { clientWidth: width, clientHeight: height } = this.#root;
+    if (!width || !height) return; // Skip if container collapsed
+
+    // 1. Update SVG ViewBox
+    this.#svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+    // 2. Update Projection (Scale and Translate)
+    const baseScale = Math.min(width / (2 * Math.PI), height / Math.PI);
+    this.#projection
+      .scale(baseScale * CONFIG.zoom.initialScale)
+      .translate([width / 2, height / 2]);
+
+    // 3. Update Path Generator (though it references the projection directly)
+    // this.#path.projection(this.#projection); // Redundant if projection object is mutated
+
+    // 4. Redraw Paths
+    this.#g.selectAll(".country").attr("d", this.#path);
+    this.#g.select(".graticule").attr("d", this.#path);
+
+    // 5. Reposition Legend
+    this.#legend.move(height);
+
+    // 6. Reapply Zoom
+    // Re-apply the *current* zoom transform to maintain the zoom level/pan position
+    this.#svg.call(this.#zoomBehaviour.transform, this.#currentTf);
+
+    // 7. Adjust Strokes for Current (possibly unchanged) Zoom Level
+    // Needed if the base stroke size depends on the initial render size,
+    // or simply to ensure consistency after projection changes.
+    this.#adjustStroke(this.#currentTf.k);
+  }
 }
 
-// --- Initial Setup ---
-// Wait for the HTML document's structure to be fully loaded and parsed.
+/* -------------------------------------------------------------------------
+ * Initialisation on DOM ready
+ * Ensures the script runs after the HTML structure is available.
+ * ---------------------------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("DOM Loaded. Initializing map...");
-  // Set initial instruction text below the map
-  countryInfo.textContent =
-    "Click a target country to zoom in. Click map background or selected country to return.";
-  // Call the main function to draw the map and set up interactions
-  drawMap();
-  // Note: `updateDisplay()` is initially called within `drawMap()` after data is loaded/verified.
+  const containerId = CONFIG.ui.containerId;
+  const containerElement = byId(containerId);
+
+  // Check if essential libraries are loaded
+  if (typeof d3 === "undefined" || typeof topojson === "undefined") {
+    console.error("Error: D3.js or TopoJSON library not loaded.");
+    if (containerElement) {
+      containerElement.innerHTML = `
+        <p style='color:red; text-align:center; padding: 20px;'>
+          <strong>Error:</strong> Required JavaScript libraries (D3.js, TopoJSON) are missing or failed to load. Please check the script tags in your HTML file.
+        </p>`;
+    }
+    return; // Stop execution
+  }
+
+  // Check if the main container element exists
+  if (!containerElement) {
+    console.error(
+      `Error: Map container element with ID "${containerId}" not found in the DOM.`
+    );
+    // Optionally display an error message elsewhere if the container is missing
+    return; // Stop execution
+  }
+
+  // Try to instantiate the map application
+  try {
+    log("DOM ready, initializing OECDWellbeingMap...");
+    new OECDWellbeingMap(containerId);
+    log("OECDWellbeingMap initialized successfully.");
+  } catch (err) {
+    console.error("Error during OECDWellbeingMap initialization:", err);
+    containerElement.innerHTML = `
+      <p style='color:red; text-align:center; padding: 20px;'>
+        <strong>Error:</strong> Failed to initialize the map visualization. Details have been logged to the browser console.
+      </p>`;
+  }
 });

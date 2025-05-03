@@ -1,55 +1,199 @@
-import pandas as pd
+#!/usr/bin/env python3
+"""
+OECD Better Life Index ↦ tidy CSV for the D3 map.
+
+Default behaviour
+-----------------
+• Keeps only 2006–2023 (complete enough years).
+• Leaves genuine gaps as NaN so the map shows them in grey.
+  ↳ pass --interpolate to fill those gaps.
+
+Usage examples
+--------------
+$ python preprocess.py                       # strict, no interpolation
+$ python preprocess.py --interpolate         # fill gaps
+$ python preprocess.py --year-min 2010 --year-max 2022 --all
+"""
+
+from __future__ import annotations
+import argparse, sys
+from pathlib import Path
+
 import numpy as np
+import pandas as pd
 
-# Load the CSV file
-df = pd.read_csv("Better_Life_Unfiltered.csv")
+# Indicators where a *higher* raw value is *worse* (reverse-coded)
+NEGATIVE_MEASURES = {
+    # Safety
+    "Homicides",
+    "Not feeling safe at night",
+    # Health
+    "Deaths from suicide, alcohol, drugs",
+    # Income / jobs
+    "Long-term unemployment rate",
+    "Youth not in employment, education or training",
+    "Labour market insecurity",
+    "Gender wage gap",
+    # Work–life balance
+    "Long hours in paid work",
+    # Housing
+    "Households living in overcrowded conditions",
+    # Environment
+    "Exposure to extreme temperature",
+    "Road deaths",
+    # Social connections
+    "Feeling lonely",
+    "Lack of social support",
+    # Subjective well-being
+    "Life satisfaction score less than 5",
+    "Negative affect balance",
+    "Feelings of physical pain",
+    "Satisfaction with personal relationships score less than 5",
+    # Knowledge & skills
+    "Students with low skills in reading, mathematics and science",
+    "Adults with low numeracy skills",
+    # Civic engagement
+    "Not having a say in government",
+}
 
-# Keep necessary columns and drop rows with missing required values
-df = df[['REF_AREA', 'Reference area', 'MEASURE', 'Measure', 'DOMAIN', 'Domain', 'TIME_PERIOD', 'OBS_VALUE']]
-df = df.dropna(subset=['OBS_VALUE', 'TIME_PERIOD'])
+# Same 38 countries that script.js colours
+TARGET_COUNTRIES = {
+    "Australia",
+    "Austria",
+    "Belgium",
+    "Canada",
+    "Chile",
+    "Colombia",
+    "Costa Rica",
+    "Czechia",
+    "Denmark",
+    "Estonia",
+    "Finland",
+    "France",
+    "Germany",
+    "Greece",
+    "Hungary",
+    "Iceland",
+    "Ireland",
+    "Israel",
+    "Italy",
+    "Japan",
+    "Korea",
+    "Latvia",
+    "Lithuania",
+    "Luxembourg",
+    "Mexico",
+    "Netherlands",
+    "New Zealand",
+    "Norway",
+    "Poland",
+    "Portugal",
+    "Slovak Republic",
+    "Slovenia",
+    "Spain",
+    "Sweden",
+    "Switzerland",
+    "Türkiye",
+    "United Kingdom",
+    "United States",
+}
 
-# Convert data types
-df['OBS_VALUE'] = pd.to_numeric(df['OBS_VALUE'], errors='coerce')
-df['TIME_PERIOD'] = pd.to_numeric(df['TIME_PERIOD'], errors='coerce')
-df = df.dropna(subset=['OBS_VALUE', 'TIME_PERIOD'])
 
-# Normalize values for each MEASURE per year across countries
-def normalize_group(group):
-    values = group['OBS_VALUE']
-    if values.max() != values.min():
-        group['normalized'] = (values - values.min()) / (values.max() - values.min())
-    else:
-        group['normalized'] = 0
-    return group
+# ──────────────────────────────────────────────────────────────────────────────
+def _normalise(group: pd.DataFrame) -> pd.Series:
+    v = group["OBS_VALUE"].astype(float)
+    lo, hi = v.min(), v.max()
+    if np.isclose(lo, hi):
+        return pd.Series(0.5, index=group.index, dtype=float)
+    scaled = (v - lo) / (hi - lo)
+    if group["Measure"].iat[0] in NEGATIVE_MEASURES:
+        scaled = 1 - scaled
+    return scaled
 
-df = df.groupby(['MEASURE', 'TIME_PERIOD'], group_keys=False).apply(normalize_group)
 
-# Compute mean normalized value per Reference area, Domain, and Year
-mean_df = (
-    df.groupby(['REF_AREA', 'Reference area', 'DOMAIN', 'Domain', 'TIME_PERIOD'])['normalized']
-    .mean()
-    .reset_index(name='mean_normalized_measure')
-)
+def _interpolate(df: pd.DataFrame, years: list[int]) -> pd.DataFrame:
+    """
+    Linear interpolation *inside* the observed window.
+    No extrapolation past first / last real point.
+    """
+    full_grid = (
+        df[["Reference area", "Domain"]]
+        .drop_duplicates()
+        .assign(dummy=1)
+        .merge(pd.DataFrame({"TIME_PERIOD": years, "dummy": 1}), on="dummy")
+        .drop(columns="dummy")
+    )
+    merged = full_grid.merge(df, how="left")
+    merged["mean_normalized_measure"] = merged.groupby(["Reference area", "Domain"])[
+        "mean_normalized_measure"
+    ].transform(lambda g: g.interpolate("linear", limit_direction="both"))
+    return merged
 
-# Create a full grid of all years (2004–2024) per REF_AREA + DOMAIN combo
-full_years = pd.DataFrame({'TIME_PERIOD': list(range(2004, 2025))})
-all_combinations = (
-    mean_df[['REF_AREA', 'Reference area', 'DOMAIN', 'Domain']]
-    .drop_duplicates()
-    .merge(full_years, how='cross')
-)
 
-# Merge and interpolate missing values
-full_data = all_combinations.merge(mean_df, on=['REF_AREA', 'Reference area', 'DOMAIN', 'Domain', 'TIME_PERIOD'], how='left')
+def build(
+    raw: pd.DataFrame,
+    *,
+    years: list[int],
+    keep_all: bool,
+    interpolate: bool,
+) -> pd.DataFrame:
 
-# Interpolate per REF_AREA + DOMAIN group
-full_data['mean_normalized_measure'] = (
-    full_data
-    .groupby(['REF_AREA', 'DOMAIN'])['mean_normalized_measure']
-    .transform(lambda group: group.interpolate(method='linear', limit_direction='both'))
-)
+    cols = ["Reference area", "Domain", "TIME_PERIOD", "Measure", "OBS_VALUE"]
+    df = raw[cols].dropna(subset=["OBS_VALUE"]).copy()
 
-# Save to CSV
-full_data.to_csv("Better_Life_Preprocessed.csv", index=False)
+    # 1 Normalise
+    df["norm"] = (
+        df.groupby(["Measure", "TIME_PERIOD"], group_keys=False)
+        .apply(_normalise)
+        .astype(float)
+    )
 
-print("Output saved to Better_Life_Preprocessed.csv")
+    # 2 Aggregate to domain score
+    tidy = (
+        df.groupby(["Reference area", "Domain", "TIME_PERIOD"], as_index=False)
+        .agg(mean_normalized_measure=("norm", "mean"))
+        .round(4)
+    )
+
+    # 3 Filter countries & years
+    if not keep_all:
+        tidy = tidy.query("`Reference area` in @TARGET_COUNTRIES")
+    tidy = tidy.query("@years[0] <= TIME_PERIOD <= @years[-1]")
+
+    # 4 Optional interpolation
+    if interpolate:
+        tidy = _interpolate(tidy, years)
+
+    # 5 Sort for deterministic output
+    return tidy.sort_values(["Reference area", "Domain", "TIME_PERIOD"])
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+def main(argv: list[str] | None = None) -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("-i", "--input", default="Better_Life_Unfiltered.csv", type=Path)
+    ap.add_argument("-o", "--output", default="Better_Life_Preprocessed.csv", type=Path)
+    ap.add_argument("--all", action="store_true", help="keep all countries")
+    ap.add_argument("--interpolate", action="store_true", help="fill year gaps")
+    ap.add_argument("--year-min", type=int, default=2006)
+    ap.add_argument("--year-max", type=int, default=2023)
+    args = ap.parse_args(argv)
+
+    if not args.input.exists():
+        sys.exit(f"✘ input file '{args.input}' not found")
+
+    raw = pd.read_csv(args.input, low_memory=False)
+    years = list(range(args.year_min, args.year_max + 1))
+
+    tidy = build(
+        raw,
+        years=years,
+        keep_all=args.all,
+        interpolate=args.interpolate,
+    )
+    tidy.to_csv(args.output, index=False)
+    print(f"✓ {len(tidy):,} rows → {args.output}", file=sys.stderr)
+
+
+if __name__ == "__main__":
+    main()

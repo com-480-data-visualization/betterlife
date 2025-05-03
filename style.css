@@ -1,389 +1,796 @@
-/* --- CSS Variables for Theming --- */
-/* Defines reusable colors, fonts, and layout properties */
-:root {
-  /* Font */
-  --font-sans: "Inter", sans-serif;
+/* ---------------------------------------------------------------------------
+   Cascade Layers
+   ------------------------------------------------------------------------ */
+@layer reset, tokens, base, layout, components, utilities;
 
-  /* Color Palette */
-  --color-background: #f3f4f6; /* gray-100 */
-  --color-text: #374151; /* gray-700 */
-  --color-text-muted: #6b7280; /* gray-500 */
-  --color-text-strong: #1f2937; /* gray-800 */
-  --color-header-bg: #ffffff; /* white */
-  --color-section-bg: #ffffff; /* white */
-  --color-border: #d1d5db; /* border-gray-300 */
-  --color-shadow: rgba(0, 0, 0, 0.1);
-  --color-shadow-light: rgba(0, 0, 0, 0.06);
-  --color-primary: #0ea5e9; /* sky-500 */
-  --color-primary-light: #bae6fd; /* sky-200 */
-  --color-primary-lighter: #f0f9ff; /* sky-50 */
-  --color-primary-dark: #0284c7; /* sky-600 */
+/* ---------------------------------------------------------------------------
+               Layer: reset – opinionated bare‑bones reset + sensible box‑sizing
+               ------------------------------------------------------------------------ */
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-  /* Map Specific Colors */
-  --color-map-bg: #e0f2fe; /* Lighter blue background for map container */
-  --color-map-default-fill: #e0e0e0; /* Default fill for non-target countries */
-  --color-map-target-fill: #ffffff; /* Default fill for TARGET countries */
-  --color-map-stroke: #6c757d; /* Darker stroke for country borders */
-  --color-map-graticule: #ced4da; /* Lighter graticule (lat/lon lines) */
-  --color-map-hover: #b3e5fc; /* Lighter blue hover (applies to target countries) */
-  --color-map-active: #4fc3f7; /* Distinct blue for selected target country */
-  --color-map-active-stroke: #01579b; /* Darker blue stroke for selected target country */
-  --color-map-inactive-fill: #f5f5f5; /* Very light gray for inactive target countries */
-  --color-map-inactive-opacity: 0.15; /* Opacity for inactive target countries */
-
-  /* Layout & Border */
-  --border-radius: 0.5rem; /* rounded-lg */
-  --border-radius-sm: 0.375rem; /* rounded-md */
-  --border-radius-full: 9999px; /* rounded-full */
+  /* Unset *everything* except a small allow‑list of replaced elements.      */
+  *:where(
+      :not(html, iframe, canvas, img, svg, video, audio, input):not(
+          svg *,
+          symbol *
+        )
+    ) {
+    all: unset;
+    display: revert;
+  }
 }
 
-/* --- Basic Reset and Body Styling --- */
-/* Basic reset for consistent browser rendering */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* ---------------------------------------------------------------------------
+               Layer: tokens – design‑system custom properties (a11y‑safe light default)
+               ------------------------------------------------------------------------ */
+@layer tokens {
+  :root {
+    /* Typography --------------------------------------------------------- */
+    --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+
+    /* Transition helpers ------------------------------------------------- */
+    --transition-fast: 0.2s ease;
+    --transition-med: 0.3s ease;
+    --transition-bg: background-color var(--transition-fast);
+    --transition-colors: background-color var(--transition-fast),
+      color var(--transition-fast), border-color var(--transition-fast);
+    --transition-opacity: opacity var(--transition-fast);
+
+    /* Radius & Shadow ---------------------------------------------------- */
+    --radius-sm: 0.25rem;
+    --radius: 0.5rem;
+    --radius-full: 9999px;
+    --shadow-elevation-1: 0 1px 3px 0 rgb(0 0 0 / 0.1),
+      0 1px 2px 0 rgb(0 0 0 / 0.06);
+    --shadow-elevation-2: 0 2px 5px rgb(0 0 0 / 0.2);
+
+    /* Light theme colours ------------------------------------------------ */
+    --color-bg: #f3f4f6; /* gray‑100  */
+    --color-surface: #ffffff;
+    --color-border: #d1d5db; /* gray‑300  */
+    --color-input-bg: #ffffff;
+    --color-text: #374151; /* gray‑700  */
+    --color-text-muted: #6b7280; /* gray‑500  */
+    --color-text-strong: #1f2937; /* gray‑800  */
+    --color-text-secondary: #bbb; /* gray‑400  */
+    --color-on-primary: #ffffff;
+    --color-primary: #0ea5e9; /* sky‑500   */
+    --color-primary-dark: #0284c7; /* sky‑600   */
+    --color-primary-light: #bae6fd; /* sky‑200   */
+    --color-primary-lighter: #f0f9ff; /* sky‑50 */
+
+    /* Map Colours -------------------------------------------------------- */
+    --color-map-active: var(--color-primary);
+    --color-map-active-stroke: #0369a1;
+    --color-map-bg: #e0f2fe;
+    --color-map-default-fill: #e0e0e0;
+    --color-map-graticule: #ced4da;
+    --color-map-hover: #7dd3fc;
+    --color-map-inactive-fill: #f1f5f9;
+    --color-map-inactive-opacity: 0.4;
+    --color-map-stroke: #6c757d;
+    --color-map-target-fill: var(--color-surface);
+    --color-dashboard-bg: rgba(255, 255, 255, 0.8);
+
+    /* Misc --------------------------------------------------------------- */
+    --color-select-arrow: var(--color-text-muted);
+  }
+
+  /* Dark‑theme token overrides (attribute‑based) ------------------------- */
+  :root[data-theme="dark"] {
+    --color-bg: #111827; /* gray‑900 */
+    --color-border: #4b5563;
+    --color-input-bg: #374151; /* gray‑700 */
+    --color-on-primary: #111827;
+    --color-primary: #38bdf8; /* sky‑400  */
+    --color-primary-dark: #7dd3fc;
+    --color-primary-light: #374151;
+    --color-primary-lighter: #0c4a6e;
+    --color-surface: #1f2937; /* gray‑800 */
+    --color-text: #d1d5db; /* gray‑300 */
+    --color-text-muted: #9ca3af;
+    --color-text-strong: #f9fafb; /* gray‑50  */
+    --color-text-secondary: #f9fafb; /* gray‑400  */
+
+    --color-map-bg: #0c4a6e;
+    --color-map-default-fill: #4b5563;
+    --color-map-graticule: #4b5563;
+    --color-map-hover: #7dd3fc;
+    --color-map-inactive-fill: #1f2937;
+    --color-map-inactive-opacity: 0.5;
+    --color-map-stroke: #9ca3af;
+    --color-map-active-stroke: #e0f2fe;
+
+    --color-dashboard-bg: rgba(31, 41, 55, 0.8);
+  }
+
+  /* Dark‑theme fallback for users who prefer dark but have no script.      */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      @apply: root[data-theme= "dark"];
+    }
+  }
 }
 
-/* Styles for the main body element */
-body {
-  font-family: var(--font-sans); /* Use defined sans-serif font */
-  background-color: var(--color-background); /* Use defined background color */
-  color: var(--color-text); /* Use defined text color */
-  display: flex;
-  flex-direction: column; /* Stack header, main, footer vertically */
-  min-height: 100vh; /* Ensure body takes at least full viewport height */
-  line-height: 1.5; /* Set base line height for readability */
+/* ---------------------------------------------------------------------------
+               Layer: base – element defaults & global helpers
+               ------------------------------------------------------------------------ */
+@layer base {
+  html {
+    height: 100%;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column; /* sticky‑footer layout */
+    overflow-x: hidden; /* Prevent horizontal scrolling on body */
+  }
+
+  /* Ensure UA colour‑scheme matches attribute value -------------------- */
+  [data-theme="dark"] {
+    color-scheme: dark;
+  }
+  [data-theme="light"] {
+    color-scheme: light;
+  }
 }
 
-/* --- Header Styling --- */
-header {
-  background-color: var(--color-header-bg);
-  padding: 1rem;
-  box-shadow: 0 1px 3px 0 var(--color-shadow),
-    0 1px 2px 0 var(--color-shadow-light);
-  text-align: center;
-  flex-shrink: 0; /* Prevent header from shrinking */
-}
+/* ---------------------------------------------------------------------------
+               Layer: layout – high‑level regions (header, main grid, footer)
+               ------------------------------------------------------------------------ */
+@layer layout {
+  .container {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 1rem auto;
+    width: 100%;
+    max-width: 1400px; /* Added max-width to constrain content */
+    overflow-x: hidden; /* Prevent horizontal scrolling within container */
+    padding: 0 1rem; /* Add padding to prevent content from touching edges */
+    box-sizing: border-box;
+    flex-wrap: wrap; /* Allow wrapping on very small screens */
+  }
 
-header h1 {
-  font-size: 1.5rem; /* text-2xl */
-  font-weight: 700; /* font-bold */
-  color: var(--color-text-strong);
-}
+  .map-panel,
+  .controls-panel {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 24px 0 rgb(0 0 0 / 0.1), 0 1.5px 3px 0 rgb(0 0 0 / 0.08);
+    padding: 1.5rem 1.5rem 1.2rem 1.5rem;
+    min-width: 0;
+    flex-basis: 0;
+    margin-bottom: 1.2rem;
+    transition: box-shadow var(--transition-fast),
+      background var(--transition-fast);
+    /* Remove forced max-height and overflow-y to avoid vertical scrolling */
+    box-sizing: border-box;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-x: hidden;
+  }
 
-/* --- Main Content Layout --- */
-main {
-  flex-grow: 1; /* Allow main content to fill available vertical space */
-  max-width: 1280px; /* Limit maximum content width */
-  margin-left: auto; /* Center content horizontally */
-  margin-right: auto;
-  padding: 1rem 1rem; /* Default padding */
-  display: grid; /* Use grid for layout */
-  grid-template-columns: 1fr; /* Default: single column layout (mobile first) */
-  gap: 1.5rem; /* Space between grid items */
-  width: 100%; /* Ensure main takes full width within its max-width */
-}
+  .map-panel {
+    flex: 2 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5rem;
+    background: linear-gradient(
+      135deg,
+      rgba(40, 48, 70, 0.93) 80%,
+      rgba(60, 80, 120, 0.95) 100%
+    );
+    box-sizing: border-box;
+  }
 
-/* Layout adjustments for larger screens (min-width 1024px) */
-@media (min-width: 1024px) {
+  .controls-panel {
+    flex: 1 1 0;
+    min-width: 0;
+    margin-left: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    background: linear-gradient(
+      135deg,
+      rgba(38, 42, 56, 0.97) 80%,
+      rgba(54, 68, 100, 0.97) 100%
+    );
+    border: 1px solid rgba(80, 100, 130, 0.1);
+    box-sizing: border-box;
+  }
+
+  /* Generic definition for selection display (check if used outside controls panel) */
+  .selection-display {
+    background: var(--color-surface-elevated);
+    border-radius: var(--radius);
+    box-shadow: 0 2px 8px 0 rgb(0 0 0 / 0.1);
+    padding: 0.7rem 1rem;
+    margin-top: 0.7rem; /* This might be overridden below */
+    font-size: 0.97rem;
+    color: var(--color-text-strong);
+    letter-spacing: 0.01em;
+    border: 1px solid rgba(120, 140, 180, 0.08);
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-wrap: break-word;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: var(--color-surface);
+    box-shadow: var(--shadow-elevation-1);
+    transition: var(--transition-colors);
+    flex-shrink: 0;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-strong);
+  }
+
   main {
-    /* Two columns: Map takes 5 parts, Controls take 2 parts */
-    grid-template-columns: 5fr 2fr;
-    padding: 2rem 1rem; /* Increase padding */
+    width: 100%;
+    flex-grow: 1;
+    padding: 1.5rem 2.5rem 1.5rem 1.5rem;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    box-sizing: border-box;
+    max-width: 100%;
   }
-  /* Reorder sections on larger screens */
-  .controls-section {
-    order: 2; /* Put controls on the right side */
+
+  /* Apply two-column layout for wider screens */
+  @media (min-width: 768px) {
+    main {
+      grid-template-columns: 3fr 2fr;
+      padding: 2rem 2rem 2rem 2rem;
+      gap: 2rem;
+    }
+    .map-section {
+      order: 1;
+    }
+    .controls-section {
+      order: 2;
+      min-width: 0;
+    }
   }
+
+  /* Ensure map section can grow/shrink nicely */
   .map-section {
-    order: 1; /* Put map on the left side */
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  #map-container {
+    flex-grow: 1;
+    min-height: 300px;
+  }
+
+  footer {
+    padding: 1rem 1.5rem;
+    text-align: center;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 0.875rem;
+    transition: var(--transition-colors);
+    flex-shrink: 0;
+    border-top: 1px solid var(--color-border);
   }
 }
 
-/* --- Section Styling --- */
-/* Common styles for content sections (controls, map) */
-section {
-  background-color: var(--color-section-bg);
-  padding: 1.5rem; /* Internal padding */
-  border-radius: var(--border-radius); /* Rounded corners */
-  box-shadow: 0 1px 3px 0 var(--color-shadow),
-    0 1px 2px 0 var(--color-shadow-light); /* Subtle shadow */
-}
+/* ---------------------------------------------------------------------------
+               Layer: components – buttons, form controls, map, etc.
+               ------------------------------------------------------------------------ */
+@layer components {
+  /* ========== Buttons ================================================== */
+  :is(#theme-toggle, #play-pause-button) {
+    display: inline-block;
+    border: none;
+    border-radius: var(--radius-full);
+    padding: 0.65em 1.7em;
+    font-family: var(--font-sans);
+    font-size: 1.08rem;
+    font-weight: 700;
+    background: linear-gradient(
+      90deg,
+      var(--color-primary) 60%,
+      var(--color-primary-dark) 100%
+    );
+    color: var(--color-on-primary);
+    box-shadow: 0 2px 10px 0 rgb(0 0 0 / 0.13);
+    cursor: pointer;
+    transition: var(--transition-colors), var(--transition-bg),
+      box-shadow var(--transition-fast), transform 0.14s;
+    outline: none;
+    letter-spacing: 0.01em;
+  }
+  :is(#theme-toggle, #play-pause-button):hover,
+  :is(#theme-toggle, #play-pause-button):focus {
+    background: linear-gradient(
+      90deg,
+      var(--color-primary-dark) 60%,
+      var(--color-primary) 100%
+    );
+    box-shadow: 0 4px 16px 0 rgb(0 0 0 / 0.17);
+    transform: translateY(-2px) scale(1.03);
+  }
 
-/* Specific styles for the controls section */
-.controls-section {
-  /* On larger screens (order: 2), prevent stretching vertically */
-  height: fit-content;
-}
+  /* ========== Selection Display ======================================== */
+  /* Generic definition - check if needed or if specific one below is enough */
+  .selection-display span {
+    font-weight: 600;
+    color: var(--color-text-strong);
+    transition: color var(--transition-med);
+  }
 
-/* Specific styles for the map section */
-.map-section {
-  display: flex;
-  flex-direction: column; /* Stack title, map container, info text vertically */
-  min-height: 500px; /* Ensure map section has a decent minimum height */
-}
+  /* ========== Sections ================================================= */
+  section {
+    padding: 1.5rem;
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-elevation-1);
+    transition: var(--transition-colors);
+    min-width: 0;
+    overflow: hidden;
+  }
 
-/* Increase map section height significantly on larger screens */
-@media (min-width: 1024px) {
-  .map-section {
-    min-height: 85vh; /* Use viewport height for better responsiveness */
+  section h2 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  /* ========== Forms & Controls ======================================== */
+  label {
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    transition: color var(--transition-med);
+    display: block;
+  }
+
+  /* Unified spacing for full‑width controls - MODIFIED */
+  :is(.select-wrapper, input[type="range"]) {
+    /* Target wrapper now */
+    width: 100%;
+    margin-block-end: 1.5rem;
+  }
+
+  /* --- Select Wrapper - NEW RULE --- */
+  .select-wrapper {
+    max-width: 100%; /* Ensure wrapper fits */
+    overflow: hidden; /* THE KEY: Clip the internal select */
+    /* Using the select's border, but could add border/radius here instead */
+    position: relative; /* Can sometimes help contain absolutely positioned children if any */
+  }
+
+  /* --- Select --- */
+  select {
+    appearance: none;
+    background-color: var(--color-input-bg);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='var(--color-select-arrow)' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.5em 1.5em;
+    padding: 0.5rem 1.5rem 0.5rem 0.75rem; /* Using reduced padding from previous attempts */
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-elevation-1);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: var(--transition-colors);
+    width: 100%; /* Make select fill wrapper */
+    max-width: 100%; /* Still useful */
+    /* Removed overflow/text-overflow/white-space from here as wrapper handles clipping */
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    /* white-space: nowrap; */
+    display: block; /* Ensure block behavior */
+    margin-block-end: 0; /* Spacing handled by wrapper via :is() */
+  }
+
+  select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+  }
+
+  option {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* --- Range --- */
+  input[type="range"] {
+    appearance: none;
+    /* width: 100%; -> Covered by :is() */
+    height: 8px;
+    background: var(--color-border);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    opacity: 0.9;
+    vertical-align: middle;
+    transition: var(--transition-opacity),
+      background-color var(--transition-med);
+    margin: 1.3em 0 0.6em 0; /* Keep specific range margins */
+    accent-color: var(--color-primary);
+    outline: none;
+  }
+  input[type="range"]:hover {
+    opacity: 1;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    margin-top: -6px;
+    border: none;
+    border-radius: 50%;
+    background: var(--color-primary);
+    box-shadow: 0 2px 10px 0 rgb(0 0 0 / 0.18);
+    transition: var(--transition-bg), box-shadow var(--transition-fast);
+  }
+  input[type="range"]::-moz-range-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 50%;
+    background: var(--color-primary);
+    box-shadow: 0 2px 10px 0 rgb(0 0 0 / 0.18);
+    cursor: pointer;
+    transition: var(--transition-bg), box-shadow var(--transition-fast);
+  }
+  input[type="range"]:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 4px var(--color-primary-lighter),
+      0 2px 10px 0 rgb(0 0 0 / 0.18);
+  }
+  input[type="range"]:focus::-moz-range-thumb {
+    box-shadow: 0 0 0 4px var(--color-primary-lighter),
+      0 2px 10px 0 rgb(0 0 0 / 0.18);
+  }
+
+  /* --- Checkbox --- */
+  .checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-block-end: 1.5rem;
+    cursor: pointer;
+  }
+  .checkbox-container input[type="checkbox"] {
+    height: 1.4em;
+    width: 1.4em;
+    cursor: pointer;
+    accent-color: var(--color-primary);
+    /* optical hack: lift the glyph */
+    transform: translateY(-0.25em);
+  }
+  .checkbox-container input[type="checkbox"]:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  /* --- Year Slider Compound --- */
+  .year-slider-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .year-slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin: 0.25rem 0 1.5rem;
+    transition: color var(--transition-med);
+  }
+  #year-display {
+    font-weight: 600;
+    color: var(--color-primary-dark);
+    transition: color var(--transition-med);
+  }
+
+  /* ========== Selection Display (in controls panel) =================== */
+  .controls-panel .selection-display {
+    margin-block-start: 0; /* Adjusted */
+    padding: 1rem;
+    font-size: 0.875rem;
+    background: var(--color-primary-lighter);
+    border: 1px solid var(--color-primary-light);
+    border-radius: var(--radius-sm);
+    transition: var(--transition-colors), border-color var(--transition-med);
+    overflow-wrap: break-word;
+    max-width: 100%;
+    /* margin-top: 0; -> covered by margin-block-start */
+    box-shadow: none;
+    letter-spacing: normal;
+  }
+  .controls-panel .selection-display h3 {
+    margin-block-end: 0.5rem;
+    font-weight: 600;
+    color: var(--color-text);
+    transition: color var(--transition-med);
+  }
+  .controls-panel .selection-display span {
+    font-weight: 500;
+    color: var(--color-text-strong);
+    transition: color var(--transition-med);
+  }
+
+  /* ========== Map ===================================================== */
+  #map-container {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-map-bg);
+    cursor: grab;
+    transition: var(--transition-colors), border-color var(--transition-med);
+    flex-grow: 1;
+    min-height: 300px;
+  }
+  #map-container:active {
+    cursor: grabbing;
+  }
+  #map-container svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .country {
+    vector-effect: non-scaling-stroke;
+    stroke: var(--color-map-stroke);
+    stroke-width: 0.5px;
+    pointer-events: auto;
+    transition: fill var(--transition-med), opacity var(--transition-med),
+      stroke var(--transition-med);
+  }
+  .country.other-country {
+    fill: var(--color-map-default-fill);
+  }
+  .country.target-country {
+    fill: var(--color-map-target-fill);
+    cursor: pointer;
+  }
+  .country.target-country:hover {
+    fill: var(--color-map-hover);
+  }
+  .country.target-country:focus {
+    outline: none;
+    /*outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    */
+  }
+  .country.active {
+    stroke: var(--color-map-active-stroke);
+    stroke-width: 1px;
+  }
+  .country.inactive {
+    opacity: var(--color-map-inactive-opacity);
+    pointer-events: none;
+  }
+
+  .graticule {
+    fill: none;
+    stroke: var(--color-map-graticule);
+    stroke-opacity: 0.6;
+    pointer-events: none;
+    transition: stroke var(--transition-med);
+  }
+
+  .map-legend {
+    font-size: 10px;
+    fill: var(--color-text-muted);
+    opacity: 0;
+    transition: opacity 0.5s ease, fill var(--transition-med);
+  }
+  .map-legend .legend-axis :is(path, line) {
+    stroke: var(--color-text-muted);
+    transition: stroke var(--transition-med);
+  }
+  .map-legend .legend-axis text {
+    fill: var(--color-text-muted);
+    transition: fill var(--transition-med);
+  }
+  .map-legend rect {
+    stroke: var(--color-border);
+    stroke-width: 0.5px;
+    transition: stroke var(--transition-med);
+  }
+
+  #tooltip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    border-radius: var(--radius-sm);
+    background: rgb(0 0 0 / 0.85);
+    color: var(--color-tooltip-text, #ffffff);
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-fast),
+      visibility var(--transition-fast), background-color var(--transition-med),
+      color var(--transition-med);
+  }
+
+  #mini-dashboard {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    max-height: calc(100% - 10px);
+    padding: 1rem;
+    font-size: 0.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-dashboard-bg, rgb(255 255 255 / 0.95));
+    box-shadow: var(--shadow-elevation-2);
+    display: none;
+    transition: var(--transition-colors);
+    width: auto;
+    min-width: 0; /* allow it to flex down with its parent */
+    max-width: 100%; /* never overflow horizontally */
+    overflow: visible;
+  }
+  #mini-dashboard h4 {
+    margin-block-end: 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-strong);
+  }
+
+  /* Wrapper for the two columns inside #mini-dashboard */
+  .mini-dashboard-wrapper {
+    display: flex;
+    flex-direction: row; /* Ensure side by side */
+    gap: 16px; /* Slightly reduced space between columns */
+    justify-content: space-between; /* Changed from center to space-between */
+    align-items: stretch; /* Changed from flex-start to stretch */
+    width: 100%;
+    height: auto;
+    min-height: unset;
+    box-sizing: border-box;
+  }
+
+  /* Responsive: stack on small screens */
+  @media (max-width: 900px) {
+    .mini-dashboard-wrapper {
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    #mini-dashboard {
+      min-width: 300px; /* Reduced minimum width for small screens */
+    }
+  }
+
+  /* Styling for each column (primary and comparison) */
+  .mini-dashboard-column {
+    flex: 1 1 0; /* Changed to equal growth and shrink with 0 basis */
+    min-width: 0; /* Allow columns to shrink below "min-content" */
+    border: 1px solid var(--color-border);
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    background-color: transparent;
+    box-shadow: var(--shadow-elevation-1);
+    transition: var(--transition-colors);
+    max-height: none; /* Allow it to grow with content */
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  /* Style the area containing primary title and comparison select */
+  .mini-dashboard-title-area {
+    display: flex;
+    flex-direction: column; /* Stack title and select vertically */
+    align-items: flex-start; /* Align items to the start */
+    margin-bottom: 1rem; /* Consistent margin */
+    gap: 0.5rem; /* Space between title and select */
+    width: 100%; /* Ensure full width */
+  }
+
+  /* Re-use existing h4 styling from #mini-dashboard, but add class */
+  .mini-dashboard-title {
+    /* Inherits base h4 styles, add specifics if needed */
+    font-size: 0.95rem; /* Slightly larger */
+    font-weight: 600;
+    color: var(--color-text-strong);
+    margin: 0; /* Reset margin if inheriting */
+  }
+
+  /* Optional: Style comparison title differently */
+  .comparison-title {
+    color: var(--color-text-muted); /* Example: Use muted color */
+  }
+
+  .comparison-selector-area {
+    width: 100%; /* Make the container take full width */
+  }
+
+  /* Style the comparison dropdown */
+  .comparison-select {
+    appearance: none;
+    background-color: var(--color-input-bg);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='var(--color-select-arrow)' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1.2em 1.2em;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-elevation-1);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: var(--transition-colors);
+    width: 100%;
+    max-width: 100%; /* Allow it to take full width */
+    padding: 0.4rem 1.5rem 0.4rem 0.5rem; /* Reduce padding for smaller dropdown */
+    font-size: 0.9em;
+    display: block;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* this adds an invisible block under the comparison <h4> */
+  .comparison-dash-content > .mini-dashboard-title::after {
+    content: "";
+    display: block;
+    height: 3.9em; /* tweak this to match the exact computed height of your real <select> */
   }
 }
 
-/* Section heading styles */
-section h2 {
-  font-size: 1.25rem; /* text-xl */
-  font-weight: 600; /* font-semibold */
-  margin-bottom: 1rem; /* Space below heading */
-  color: var(--color-text-muted); /* Slightly muted heading color */
-}
-
-/* --- Form Control Styling --- */
-/* Label styles */
-label {
-  display: block; /* Ensure labels are on their own line */
-  font-size: 0.875rem; /* text-sm */
-  font-weight: 500; /* font-medium */
-  color: var(--color-text-muted);
-  margin-bottom: 0.5rem; /* Space below label */
-}
-
-/* Styling for checkbox containers */
-.checkbox-container {
-  display: flex; /* Align checkbox and label horizontally */
-  align-items: center; /* Vertically center items */
-  margin-bottom: 1.5rem; /* Space below container */
-  cursor: pointer; /* Make the whole area clickable */
-}
-.checkbox-container input[type="checkbox"] {
-  width: auto; /* Override default width: 100% */
-  margin-bottom: 0; /* Override default margin */
-  margin-right: 0.5rem; /* Space between checkbox and label */
-  cursor: pointer;
-  /* Style the checkbox itself */
-  accent-color: var(--color-primary); /* Color the checkmark/box */
-  height: 1em; /* Match font size */
-  width: 1em; /* Match font size */
-}
-/* Label specifically within the checkbox container */
-.checkbox-container label {
-  margin-bottom: 0; /* Remove bottom margin specific to this label */
-  color: var(--color-text); /* Use standard text color */
-  cursor: pointer; /* Indicate label is clickable */
-}
-
-/* Common styles for select and range inputs */
-select,
-input[type="range"] {
-  width: 100%; /* Make controls fill their container width */
-  margin-bottom: 1.5rem; /* Space below control */
-}
-
-/* Select dropdown styles */
-select {
-  padding: 0.5rem; /* Internal padding */
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-sm);
-  box-shadow: 0 1px 2px 0 var(--color-shadow-light);
-  appearance: none; /* Remove default OS dropdown arrow */
-  /* Custom dropdown arrow using SVG background */
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-  background-position: right 0.5rem center;
-  background-repeat: no-repeat;
-  background-size: 1.5em 1.5em;
-  cursor: pointer;
-}
-/* Style for when the select box is focused */
-select:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 2px var(--color-primary-light); /* Focus ring */
-}
-
-/* --- Range Slider Styling --- */
-input[type="range"] {
-  -webkit-appearance: none; /* Override default look in WebKit browsers */
-  appearance: none; /* Override default look in other browsers */
-  height: 8px; /* Slider track height */
-  background: var(--color-border); /* Slider track color */
-  outline: none; /* Remove default outline */
-  opacity: 0.9; /* Slightly transparent */
-  transition: opacity 0.2s; /* Smooth opacity transition on hover */
-  border-radius: var(--border-radius-full); /* Rounded track */
-  cursor: pointer;
-}
-input[type="range"]:hover {
-  opacity: 1; /* Fully opaque on hover */
-}
-/* Style for the slider thumb (Chrome/Safari) */
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px; /* Thumb width */
-  height: 20px; /* Thumb height */
-  background: var(--color-primary); /* Thumb color */
-  cursor: pointer;
-  border-radius: 50%; /* Circular thumb */
-  border: none; /* Remove default border */
-}
-/* Style for the slider thumb (Firefox) */
-input[type="range"]::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  background: var(--color-primary);
-  cursor: pointer;
-  border-radius: 50%;
-  border: none;
-}
-
-/* Labels below the year slider (Min, Current, Max) */
-.year-slider-labels {
-  display: flex;
-  justify-content: space-between; /* Distribute labels evenly */
-  font-size: 0.75rem; /* text-xs */
-  color: var(--color-text-muted);
-  margin-top: 0.25rem; /* Space above labels */
-  /* Add margin below slider labels before next element */
-  margin-bottom: 1.5rem; /* Ensure consistent spacing with other controls */
-}
-/* Style for the currently selected year display */
-#year-display {
-  font-weight: 600; /* font-semibold */
-  color: var(--color-primary-dark); /* Use a primary color variant */
-}
-
-/* --- Selection Display Box --- */
-/* Styles the box showing current dimension/year/country */
-.selection-display {
-  margin-top: 1.5rem; /* Space above the box */
-  padding: 1rem; /* Internal padding */
-  background-color: var(--color-primary-lighter); /* Light primary background */
-  border: 1px solid var(--color-primary-light); /* Subtle primary border */
-  border-radius: var(--border-radius-sm);
-  font-size: 0.875rem; /* text-sm */
-}
-.selection-display h3 {
-  font-weight: 600; /* font-semibold */
-  color: var(--color-text);
-  margin-bottom: 0.5rem; /* Space below heading */
-}
-/* Style the actual selected values within the box */
-.selection-display p span {
-  font-weight: 500; /* font-medium */
-  color: var(--color-text-strong);
-}
-
-/* --- Map Container Styling --- */
-/* Styles the div that holds the SVG map */
-#map-container {
-  width: 100%;
-  flex-grow: 1; /* Allow map container to fill vertical space in map-section */
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-sm);
-  background-color: var(--color-map-bg); /* Map background color */
-  overflow: hidden; /* CRUCIAL: Prevents SVG content from spilling during zoom/pan */
-  position: relative; /* Needed for potential absolute positioning of children */
-  cursor: grab; /* Indicate map is pannable */
-}
-/* Change cursor while actively panning */
-#map-container:active {
-  cursor: grabbing;
-}
-
-/* SVG element within the map container */
-#map-container svg {
-  display: block; /* Remove extra space below inline SVG */
-  width: 100%; /* Fill container width */
-  height: 100%; /* Fill container height */
-  /* The background rectangle inside the SVG handles background clicks */
-}
-
-/* --- Styling for map paths (countries) --- */
-.country {
-  /* Default fill is for NON-TARGET countries */
-  stroke: var(--color-map-stroke); /* Country border color */
-  stroke-width: 0.5px; /* Base stroke width (relative to initial view) */
-  transition: fill 0.3s ease-in-out, opacity 0.5s ease-in-out; /* Smooth transitions */
-  /* Optimize rendering: stroke width doesn't scale visually with zoom */
-  vector-effect: non-scaling-stroke;
-}
-
-/* Target countries get a different default fill and cursor */
-/* White fill for target countries */
-/* Indicate target countries are clickable */
-.country.target-country {
-  /* fill: #00ff00;  */
-  cursor: pointer; 
-}
-
-/* Non-target countries are not interactive */
-.country.other-country {
-  fill: var(--color-map-default-fill);
-  cursor: default; /* Indicate non-target countries are not interactive */
-}
-
-/* Hover effect ONLY for target countries */
-/* Apply hover color on mouse over */
-/* .country.target-country:hover {
-  fill: var(--color-map-hover); 
-} */
-
-/* --- Styling for the graticule (latitude/longitude lines) --- */
-.graticule {
-  fill: none; /* Graticule lines have no fill */
-  stroke: var(--color-map-graticule); /* Graticule line color */
-  stroke-width: 0.5px; /* Base stroke width (adjusted by JS based on zoom) */
-  stroke-opacity: 0.6; /* Make lines slightly transparent */
-  /* Prevent graticule lines from intercepting mouse events for countries */
-  pointer-events: none;
-  /* vector-effect: non-scaling-stroke; */ /* Stroke width controlled by JS */
-}
-
-/* --- Styling for selected/inactive country states --- */
-/* Active style ONLY applies to TARGET countries when selected */
-/* Distinct color for selected country */
-/* Darker border for selected */
-/* Slightly thicker border (still non-scaling) */
-/* .country.target-country.active {
-  fill: var(--color-map-active); 
-  stroke: var(--color-map-active-stroke); 
-  stroke-width: 1px; 
-} */
-
-/* Inactive state applies to ALL non-selected countries when one IS selected */
-.country.inactive {
-  fill: var(
-    --color-map-inactive-fill
-  ); /* Use the light gray fill for all inactive */
-  opacity: var(
-    --color-map-inactive-opacity
-  ); /* Apply transparency to all inactive */
-  /* stroke: var(--color-map-stroke); */ /* Optional: Keep default stroke or uncomment if needed */
-  pointer-events: none; /* Disable interaction for ALL inactive */
-}
-
-/* --- Country Info Text Area below map --- */
-/* Styles the text area providing context or showing selected country */
-#country-info {
-  margin-top: 1rem; /* Space above the text area */
-  font-size: 0.875rem; /* text-sm */
-  color: var(--color-text-muted);
-  text-align: center;
-  flex-shrink: 0; /* Prevent this area from shrinking */
-  min-height: 1.5em; /* Reserve space to prevent layout jumps when text changes */
-}
-
-/* --- Footer Styling --- */
-footer {
-  background-color: var(--color-text-strong); /* Dark background */
-  color: #ffffff; /* White text */
-  text-align: center;
-  padding: 1rem; /* Padding */
-  margin-top: 2rem; /* Space above the footer */
-  flex-shrink: 0; /* Prevent footer from shrinking */
-}
-footer p {
-  font-size: 0.875rem; /* text-sm */
+/* ---------------------------------------------------------------------------
+               Layer: utilities – quick one‑off classes (add more as app scales)
+               ------------------------------------------------------------------------ */
+@layer utilities {
+  .sr-only {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
 }
