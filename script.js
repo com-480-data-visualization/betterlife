@@ -384,6 +384,8 @@ class OECDWellbeingMap {
   #features = [];
   /** @type {import('geojson').Feature | null} Currently selected country feature */
   #selected = null;
+  /** @type {import('geojson').Feature | null} Comparison country */
+  #comparisonCountryName = null;
   /** @type {string} Currently selected dimension key (from DOMAIN_MAP) */
   #dimKey;
   /** @type {string} Currently selected year */
@@ -1231,7 +1233,7 @@ class OECDWellbeingMap {
    * Mini Dashboard (Country Details)
    * ---------------------------------------------------------------- */
   /**
-   * Hides the mini-dashboard panel and clears its content.
+   * Hides the mini-dashboard panel and clears its content, resetting comparison state.
    * @private
    */
   #hideMiniDash() {
@@ -1239,51 +1241,179 @@ class OECDWellbeingMap {
       this.#$.miniDash.style.display = "none";
       this.#$.miniDash.innerHTML = ""; // Clear content
     }
+    this.#comparisonCountryName = null; // <<< Reset comparison state
   }
 
   /**
    * Shows the mini-dashboard panel and populates it with charts for the selected country.
-   * Note: This currently regenerates the HTML content on each call. For complex dashboards,
-   * a D3 data-binding approach might be more efficient.
+   * Includes an option to select a comparison country displayed side-by-side.
    * @param {import('geojson').Feature} feature - The selected country feature.
    * @private
    */
   #showMiniDash(feature) {
-    const countryName = this.#mapName(feature);
+    const primaryCountryName = this.#mapName(feature);
+    const primaryDisplayName = feature.properties.name; // Use original name for display
     const currentYear = this.#year;
     const dashElement = this.#$.miniDash;
 
     if (!dashElement) return; // Exit if dashboard element doesn't exist
 
     // --- Structure Setup ---
-    // Clear previous content (simple approach; alternatives exist)
-    dashElement.innerHTML = "";
+    dashElement.innerHTML = ""; // Clear previous content
     dashElement.style.display = "block"; // Make it visible
 
-    // Add title
-    dashElement.insertAdjacentHTML(
-      "afterbegin",
-      `<h4 class="mini-dashboard-title">${feature.properties.name} (${currentYear})</h4>`
-    );
+    // Create the main wrapper for side-by-side dashboards
+    const dashboardWrapper = document.createElement("div");
+    dashboardWrapper.className = "mini-dashboard-wrapper"; // Use this for flex layout
 
-    // Create containers for the charts
-    const sparklineContainer = document.createElement("div");
-    sparklineContainer.className = "mini-chart-container";
-    sparklineContainer.innerHTML = `<h5 class="mini-chart-title">${
-      DOMAIN_LABELS[this.#dimKey] // Use short label for title
+    // --- Primary Country Column ---
+    const primaryContainer = document.createElement("div");
+    primaryContainer.className = "mini-dashboard-column primary-dash-content";
+
+    // Add title and comparison selector
+    const primaryTitleArea = document.createElement("div");
+    primaryTitleArea.className = "mini-dashboard-title-area";
+    primaryTitleArea.innerHTML = `
+    <h4 class="mini-dashboard-title">${primaryDisplayName} (${currentYear})</h4>
+    <div class="comparison-selector-area">
+      <label for="comparison-select-${Date.now()}" class="sr-only">Compare with:</label> <select id="comparison-select-${Date.now()}" class="comparison-select">
+        <option value="">-- Compare with --</option>
+        ${Array.from(TARGET_COUNTRIES)
+          .filter((name) => name !== primaryCountryName) // Exclude primary country
+          .sort() // Sort alphabetically
+          .map(
+            (name) =>
+              `<option value="${name}" ${
+                this.#comparisonCountryName === name ? "selected" : "" // Keep selection on refresh
+              }>${name}</option>`
+          )
+          .join("")}
+      </select>
+    </div>
+  `;
+    primaryContainer.appendChild(primaryTitleArea);
+
+    // Add chart containers for the primary country
+    const primarySparklineContainer = document.createElement("div");
+    primarySparklineContainer.className = "mini-chart-container";
+    primarySparklineContainer.innerHTML = `<h5 class="mini-chart-title">${
+      DOMAIN_LABELS[this.#dimKey]
     } Trend</h5>`;
 
-    const radarContainer = document.createElement("div");
-    radarContainer.className = "mini-chart-container";
-    radarContainer.innerHTML = `<h5 class="mini-chart-title">All Dimensions (${currentYear})</h5>`;
+    const primaryRadarContainer = document.createElement("div");
+    primaryRadarContainer.className = "mini-chart-container";
+    primaryRadarContainer.innerHTML = `<h5 class="mini-chart-title">All Dimensions (${currentYear})</h5>`;
 
-    // Append containers to the dashboard
-    dashElement.append(sparklineContainer, radarContainer);
+    primaryContainer.append(primarySparklineContainer, primaryRadarContainer);
+    dashboardWrapper.appendChild(primaryContainer); // Add primary column to wrapper
 
-    // --- Render Charts ---
-    // Call rendering functions, passing the container element and data parameters
-    this.#renderSparkline(sparklineContainer, countryName, this.#dimKey);
-    this.#renderRadar(radarContainer, countryName, currentYear);
+    // --- Comparison Country Column (placeholder) ---
+    const comparisonContainer = document.createElement("div");
+    comparisonContainer.className =
+      "mini-dashboard-column comparison-dash-content";
+    comparisonContainer.style.display = this.#comparisonCountryName
+      ? "block"
+      : "none"; // Hide if no comparison selected yet
+    dashboardWrapper.appendChild(comparisonContainer); // Add comparison column placeholder
+
+    // Append the wrapper to the main dashboard element
+    dashElement.appendChild(dashboardWrapper);
+
+    // --- Attach Listener to Comparison Selector ---
+    const comparisonSelect = dashElement.querySelector(".comparison-select");
+    comparisonSelect?.addEventListener("change", (event) => {
+      this.#handleComparisonSelect(event);
+    });
+
+    // --- Render Primary Charts ---
+    this.#renderSparkline(
+      primarySparklineContainer,
+      primaryCountryName,
+      this.#dimKey
+    );
+    this.#renderRadar(primaryRadarContainer, primaryCountryName, currentYear);
+
+    // --- Render Comparison Charts (if a comparison country is already selected) ---
+    if (this.#comparisonCountryName) {
+      this.#renderComparisonDash(this.#comparisonCountryName);
+    }
+  }
+
+  /**
+   * Handles the selection change event for the comparison country dropdown.
+   * @param {Event} event - The change event object from the select element.
+   * @private
+   */
+  #handleComparisonSelect(event) {
+    const selectElement = event.target;
+    if (!(selectElement instanceof HTMLSelectElement)) return;
+
+    this.#comparisonCountryName = selectElement.value || null; // Store selected name or null if default
+
+    if (this.#comparisonCountryName) {
+      this.#renderComparisonDash(this.#comparisonCountryName); // Render the comparison dashboard
+    } else {
+      // Clear the comparison column if "-- Compare with --" is selected
+      const comparisonContainer = this.#$.miniDash?.querySelector(
+        ".comparison-dash-content"
+      );
+      if (comparisonContainer) {
+        comparisonContainer.innerHTML = ""; // Clear content
+        comparisonContainer.style.display = "none"; // Hide it
+      }
+    }
+  }
+
+  /**
+   * Renders the title, sparkline, and radar chart for the selected comparison country.
+   * @param {string} comparisonCountryName - The name of the country to compare with.
+   * @private
+   */
+  #renderComparisonDash(comparisonCountryName) {
+    const comparisonContainer = this.#$.miniDash?.querySelector(
+      ".comparison-dash-content"
+    );
+    const currentYear = this.#year;
+    const currentDimKey = this.#dimKey;
+
+    if (!comparisonContainer || !comparisonCountryName) return;
+
+    // Clear previous comparison content and make visible
+    comparisonContainer.innerHTML = "";
+    comparisonContainer.style.display = "block";
+
+    // Add title for comparison country
+    comparisonContainer.insertAdjacentHTML(
+      "afterbegin",
+      `<h4 class="mini-dashboard-title comparison-title">${comparisonCountryName} (${currentYear})</h4>`
+    );
+
+    // Create chart containers for the comparison country
+    const comparisonSparklineContainer = document.createElement("div");
+    comparisonSparklineContainer.className = "mini-chart-container";
+    comparisonSparklineContainer.innerHTML = `<h5 class="mini-chart-title">${DOMAIN_LABELS[currentDimKey]} Trend</h5>`;
+
+    const comparisonRadarContainer = document.createElement("div");
+    comparisonRadarContainer.className = "mini-chart-container";
+    comparisonRadarContainer.innerHTML = `<h5 class="mini-chart-title">All Dimensions (${currentYear})</h5>`;
+
+    comparisonContainer.append(
+      comparisonSparklineContainer,
+      comparisonRadarContainer
+    );
+
+    // --- Render Comparison Charts ---
+    // Note: Pass the *comparison* country name to the rendering functions
+    this.#renderSparkline(
+      comparisonSparklineContainer,
+      comparisonCountryName, // <<< Use comparison name
+      currentDimKey
+    );
+    this.#renderRadar(
+      comparisonRadarContainer,
+      comparisonCountryName, // <<< Use comparison name
+      currentYear
+    );
   }
 
   /**

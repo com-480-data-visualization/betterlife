@@ -172,19 +172,18 @@
   .controls-panel {
     background: var(--color-surface);
     border-radius: var(--radius);
-    box-shadow: 0 4px 24px 0 rgb(0 0 0 / 0.18), 0 1.5px 3px 0 rgb(0 0 0 / 0.13);
-    padding: 1.1rem 1.2rem 1.1rem 1.2rem;
+    box-shadow: 0 4px 24px 0 rgb(0 0 0 / 0.1), 0 1.5px 3px 0 rgb(0 0 0 / 0.08);
+    padding: 1.5rem 1.5rem 1.2rem 1.5rem;
     min-width: 0;
     flex-basis: 0;
     margin-bottom: 1.2rem;
     transition: box-shadow var(--transition-fast),
       background var(--transition-fast);
-    max-height: 85vh;
-    overflow-y: auto;
+    /* Remove forced max-height and overflow-y to avoid vertical scrolling */
     box-sizing: border-box;
-    max-width: 100%; /* Ensure it doesn't exceed container width */
-    word-wrap: break-word; /* Allow long words to break */
-    overflow-x: hidden; /* Hide horizontal overflow within panels */
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-x: hidden;
   }
 
   .map-panel {
@@ -650,8 +649,7 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    max-height: calc(100% - 20px);
-    overflow-y: auto;
+    max-height: calc(100% - 10px);
     padding: 1rem;
     font-size: 0.8rem;
     border: 1px solid var(--color-border);
@@ -660,22 +658,111 @@
     box-shadow: var(--shadow-elevation-2);
     display: none;
     transition: var(--transition-colors);
+    width: auto;
+    min-width: 0; /* allow it to flex down with its parent */
+    max-width: 100%; /* never overflow horizontally */
+    overflow: visible;
   }
   #mini-dashboard h4 {
     margin-block-end: 0.75rem;
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--color-text-strong);
-    transition: color var(--transition-med);
   }
 
-  #country-info {
-    margin-block-start: 1rem;
-    min-height: 2.5em;
-    text-align: center;
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    transition: color var(--transition-med);
+  /* Wrapper for the two columns inside #mini-dashboard */
+  .mini-dashboard-wrapper {
+    display: flex;
+    flex-direction: row; /* Ensure side by side */
+    gap: 16px; /* Slightly reduced space between columns */
+    justify-content: space-between; /* Changed from center to space-between */
+    align-items: stretch; /* Changed from flex-start to stretch */
+    width: 100%;
+    height: auto;
+    min-height: unset;
+    box-sizing: border-box;
+  }
+
+  /* Responsive: stack on small screens */
+  @media (max-width: 900px) {
+    .mini-dashboard-wrapper {
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    #mini-dashboard {
+      min-width: 300px; /* Reduced minimum width for small screens */
+    }
+  }
+
+  /* Styling for each column (primary and comparison) */
+  .mini-dashboard-column {
+    flex: 1 1 0; /* Changed to equal growth and shrink with 0 basis */
+    min-width: 0; /* Allow columns to shrink below "min-content" */
+    border: 1px solid var(--color-border);
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-elevation-1);
+    transition: var(--transition-colors);
+    max-height: none; /* Allow it to grow with content */
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  /* Style the area containing primary title and comparison select */
+  .mini-dashboard-title-area {
+    display: flex;
+    flex-direction: column; /* Stack title and select vertically */
+    align-items: flex-start; /* Align items to the start */
+    margin-bottom: 1rem; /* Consistent margin */
+    gap: 0.5rem; /* Space between title and select */
+    width: 100%; /* Ensure full width */
+  }
+
+  /* Re-use existing h4 styling from #mini-dashboard, but add class */
+  .mini-dashboard-title {
+    /* Inherits base h4 styles, add specifics if needed */
+    font-size: 0.95rem; /* Slightly larger */
+    font-weight: 600;
+    color: var(--color-text-strong);
+    margin: 0; /* Reset margin if inheriting */
+  }
+
+  /* Optional: Style comparison title differently */
+  .comparison-title {
+    color: var(--color-text-muted); /* Example: Use muted color */
+  }
+
+  .comparison-selector-area {
+    width: 100%; /* Make the container take full width */
+  }
+
+  /* Style the comparison dropdown */
+  .comparison-select {
+    appearance: none;
+    background-color: var(--color-input-bg);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='var(--color-select-arrow)' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1.2em 1.2em;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-elevation-1);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: var(--transition-colors);
+    width: 100%;
+    max-width: 100%; /* Allow it to take full width */
+    padding: 0.4rem 1.5rem 0.4rem 0.5rem; /* Reduce padding for smaller dropdown */
+    font-size: 0.9em;
+    display: block;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
