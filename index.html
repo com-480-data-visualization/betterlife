@@ -22,18 +22,22 @@
         --bg-color: #f8fafc; /* Light gray background */
         --text-color: #1f2937; /* gray-800 */
         --text-muted-color: #6b7280; /* gray-500 */
-        --text-highlight: #0ea5e9; /* sky-500 - Added for accents */
+        --text-highlight: #0ea5e9; /* sky-500 */
         --header-bg: #ffffff;
         --section-bg: #ffffff;
-        --section-alt-bg: #f1f5f9; /* gray-100 - Added for alternating sections */
+        --section-alt-bg: #f1f5f9; /* gray-100 */
         --card-bg: #f9fafb; /* gray-50 */
         --primary-color: #3b82f6; /* blue-500 */
         --primary-hover: #2563eb; /* blue-600 */
         --button-text: #ffffff;
         --footer-bg: #e5e7eb; /* gray-200 */
         --footer-text: #4b5563; /* gray-600 */
+        /* Insight accents */
+        --insight-accent-green: #10b981; /* emerald-500 */
+        --insight-accent-red: #ef4444; /* red-500 */
+        --insight-accent-yellow: #f59e0b; /* amber-500 */
       }
-      /* Dark theme overrides when html.dark exists */
+      /* Dark theme overrides */
       html.dark {
         --bg-color: #111827; /* gray-900 */
         --text-color: #f3f4f6; /* gray-100 */
@@ -48,6 +52,10 @@
         --button-text: #1f2937; /* gray-800 */
         --footer-bg: #1f2937; /* gray-800 */
         --footer-text: #d1d5db; /* gray-300 */
+        /* Insight accents - dark */
+        --insight-accent-green: #34d399; /* emerald-400 */
+        --insight-accent-red: #f87171; /* red-400 */
+        --insight-accent-yellow: #fbbf24; /* amber-400 */
       }
 
       body {
@@ -63,77 +71,265 @@
       }
 
       .cta-button {
-        transition: all 0.3s ease; /* Smooth transition for hover effects */
+        transition: all 0.3s ease;
         background-color: var(--primary-color);
         color: var(--button-text);
       }
       .cta-button:hover {
-        transform: translateY(-2px); /* Slight lift on hover */
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         background-color: var(--primary-hover);
       }
-      /* Style for feature icons */
       .feature-icon {
-        width: 3rem; /* 48px */
-        height: 3rem; /* 48px */
-        margin-bottom: 0.5rem; /* 8px */
-        color: var(--primary-color); /* Use theme color */
+        width: 3rem;
+        height: 3rem;
+        margin-bottom: 0.5rem;
+        color: var(--primary-color);
         transition: color 0.3s ease;
       }
-      /* Update card background and text colors */
       .feature-card {
         background-color: var(--card-bg);
         transition: background-color 0.3s ease, box-shadow 0.3s ease;
-        display: flex; /* Use flexbox for alignment */
+        display: flex;
         flex-direction: column;
-        height: 100%; /* Make cards equal height in a grid row */
+        height: 100%;
       }
       .feature-card h3 {
         color: var(--text-color);
         transition: color 0.3s ease;
-        margin-top: auto; /* Push title down if needed */
+        margin-top: auto;
       }
       .feature-card p {
         color: var(--text-muted-color);
         transition: color 0.3s ease;
-        flex-grow: 1; /* Allow paragraph to take up space */
+        flex-grow: 1;
       }
 
-      /* Style theme toggle button */
       #theme-toggle {
         background-color: transparent;
         border: 1px solid var(--text-muted-color);
         color: var(--text-muted-color);
-        padding: 0.4rem; /* Adjust padding */
-        border-radius: var(--radius-sm, 0.375rem); /* Match other buttons */
+        padding: 0.4rem;
+        border-radius: 0.375rem; /* rounded-md */
         cursor: pointer;
         transition: all 0.3s ease;
-        display: flex; /* Use flex to center icon */
+        display: flex;
         align-items: center;
         justify-content: center;
-        width: 2.5rem; /* Fixed width */
-        height: 2.5rem; /* Fixed height */
-        margin-left: 1rem; /* Space from previous button */
+        width: 2.5rem;
+        height: 2.5rem;
+        margin-left: 1rem;
       }
       #theme-toggle:hover {
-        background-color: rgba(128, 128, 128, 0.1); /* Subtle hover */
+        background-color: rgba(128, 128, 128, 0.1);
         border-color: var(--text-color);
         color: var(--text-color);
       }
       #theme-toggle svg {
-        width: 1.25rem; /* Icon size */
+        width: 1.25rem;
         height: 1.25rem;
       }
 
-      /* Section heading underline */
       .section-heading::after {
         content: "";
         display: block;
         width: 60px;
         height: 3px;
         background-color: var(--primary-color);
-        margin: 0.5rem auto 0; /* Center the underline */
+        margin: 0.5rem auto 0;
         transition: background-color 0.3s ease;
+      }
+
+      /* Insights section styling */
+      .insight-card {
+        background-color: var(--card-bg);
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      .insight-content {
+        padding: 1.5rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .insight-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .insight-icon {
+        width: 1.75rem;
+        height: 1.75rem;
+        flex-shrink: 0;
+        color: var(--primary-color);
+      }
+      .insight-icon.star {
+        color: var(--insight-accent-yellow);
+      }
+      .insight-icon.contrast {
+        color: var(--insight-accent-yellow);
+      }
+      .insight-icon.trend-up {
+        color: var(--insight-accent-green);
+      }
+      .insight-icon.trend-down {
+        color: var(--insight-accent-red);
+      }
+      .insight-icon.connect {
+        color: var(--insight-accent-green);
+      }
+
+      .insight-story {
+        color: var(--text-muted-color);
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        line-height: 1.6;
+        flex-grow: 1;
+      }
+      .insight-highlight {
+        background-color: rgba(128, 128, 128, 0.05);
+        padding: 0.75rem 1rem;
+        border-radius: 0.375rem;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        border-left: 3px solid var(--primary-color);
+        color: var(--text-color);
+      }
+      .insight-highlight strong {
+        font-weight: 600;
+        color: var(--text-highlight);
+      }
+      .insight-highlight.contrast-high {
+        border-left-color: var(--insight-accent-green);
+      }
+      .insight-highlight.contrast-low {
+        border-left-color: var(--insight-accent-red);
+      }
+      .insight-highlight.trend {
+        border-left-color: var(--insight-accent-green);
+      }
+      .insight-highlight.dip {
+        border-left-color: var(--insight-accent-red);
+      }
+      .insight-highlight.positive {
+        border-left-color: var(--insight-accent-green);
+      }
+
+      .insight-hook {
+        font-style: italic;
+        color: var(--primary-color);
+        font-weight: 500;
+        border-top: 1px dashed rgba(128, 128, 128, 0.3);
+        padding-top: 1rem;
+        margin-top: auto;
+        font-size: 0.95rem;
+      }
+      /* Visual elements within insight cards */
+      .visual-contrast {
+        display: flex;
+        gap: 1rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+        background-color: rgba(128, 128, 128, 0.05);
+        border-radius: 0.25rem;
+      }
+      .contrast-item {
+        flex: 1;
+        text-align: center;
+        font-size: 0.85rem;
+      }
+      .contrast-item svg {
+        margin: 0 auto 0.25rem;
+      }
+      .contrast-label {
+        font-weight: 500;
+      }
+      .contrast-value.high {
+        color: var(--insight-accent-green);
+      }
+      .contrast-value.low {
+        color: var(--insight-accent-red);
+      }
+
+      .visual-trend {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        color: var(--text-muted-color);
+      }
+      .visual-trend svg {
+        width: 1.25rem;
+        height: 1.25rem;
+        color: var(--insight-accent-green);
+      }
+      .visual-trend.dip svg {
+        color: var(--insight-accent-red);
+        transform: rotate(90deg);
+      }
+      .visual-trend.dip .recovery {
+        color: var(--insight-accent-yellow);
+      }
+
+      .visual-connection {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        margin: 0.5rem 0 1rem;
+        padding: 0.5rem;
+        background-color: rgba(128, 128, 128, 0.05);
+        border-radius: 0.25rem;
+      }
+      .visual-connection svg {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+      .connection-icon-env {
+        color: var(--insight-accent-green);
+      }
+      .connection-icon-wellbeing {
+        color: var(--text-highlight);
+      }
+      .connection-plus {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--text-muted-color);
+      }
+
+      /* Header navigation links */
+      .header-nav-link {
+        color: var(--text-muted-color);
+        transition: color 0.2s ease;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      .header-nav-link:hover {
+        color: var(--primary-color);
+      }
+
+      /* Styling for the final CTA section text */
+      .final-cta-text {
+        color: var(--text-muted-color);
+        font-size: 1.1rem; /* Slightly larger */
+        margin-bottom: 1rem;
+      }
+      .final-cta-text strong {
+        color: var(--text-highlight);
+        font-weight: 600;
       }
     </style>
   </head>
@@ -145,8 +341,15 @@
       <nav
         class="container mx-auto px-6 py-4 flex justify-between items-center"
       >
-        <div class="text-2xl font-bold" style="color: var(--primary-color)">
-          Well-being Explorer
+        <div class="flex items-center gap-4 md:gap-6">
+          <div class="text-2xl font-bold" style="color: var(--primary-color)">
+            Well-being Explorer
+          </div>
+          <div class="hidden md:flex items-center gap-4">
+            <a href="#why" class="header-nav-link">Why Well-being?</a>
+            <a href="#journey" class="header-nav-link">How it Works</a>
+            <a href="#insights" class="header-nav-link">Key Stories</a>
+          </div>
         </div>
         <div class="flex items-center">
           <a
@@ -185,9 +388,17 @@
         Start Your Exploration
       </a>
       <p class="text-sm" style="color: var(--text-muted-color)">
-        or
+        or explore sections below:
+        <a href="#why" class="underline hover:text-[var(--primary-color)]"
+          >Why</a
+        >
+        |
         <a href="#journey" class="underline hover:text-[var(--primary-color)]"
-          >learn how it works</a
+          >How</a
+        >
+        |
+        <a href="#insights" class="underline hover:text-[var(--primary-color)]"
+          >Stories</a
         >
       </p>
     </main>
@@ -321,20 +532,350 @@
     </section>
 
     <section
-      class="py-16 md:py-24 text-center"
+      class="py-16 md:py-24"
       style="background-color: var(--section-alt-bg)"
+      id="insights"
+    >
+      <div class="container mx-auto px-6 max-w-6xl">
+        <h2
+          class="text-3xl font-bold text-center mb-16 section-heading"
+          style="color: var(--text-color)"
+        >
+          Key Stories From the Data
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+          <article class="insight-card">
+            <div class="insight-content">
+              <h3 class="insight-title">
+                <svg
+                  class="insight-icon star"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                  />
+                </svg>
+                Nordic Nations: Consistently Top Performers
+              </h3>
+              <p class="insight-story">
+                Year after year (2006-2023), countries like
+                <strong>Denmark, Sweden, Norway, Finland,</strong> and
+                <strong>Iceland</strong> consistently rank among the very best
+                across nearly all aspects of well-being measured – from health
+                to education to life satisfaction. It shows their success isn't
+                accidental, but built on strong foundations.
+              </p>
+              <div class="insight-highlight">
+                Even their lowest-ranking dimension is still high compared to
+                many other countries, showcasing remarkable
+                <strong>across-the-board strength</strong>.
+              </div>
+              <p class="insight-hook">
+                “Nordics aren’t just wealthy; they show a remarkable balance,
+                excelling in health, trust, and work-life harmony all at once.”
+              </p>
+            </div>
+          </article>
+
+          <article class="insight-card">
+            <div class="insight-content">
+              <h3 class="insight-title">
+                <svg
+                  class="insight-icon contrast"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"
+                  />
+                </svg>
+                High Income Isn't Everything
+              </h3>
+              <p class="insight-story">
+                Having a high national income doesn't automatically guarantee
+                top scores everywhere else. Well-being is multi-dimensional,
+                leading to interesting contrasts.
+              </p>
+              <div class="visual-contrast">
+                <div class="contrast-item">
+                  <svg
+                    class="w-6 h-6 text-[var(--insight-accent-green)]"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0l.879-.659M12 6l-3.879 2.818m0 0L12 12.682M15.879 8.818L12 12.682"
+                    />
+                  </svg>
+                  <div class="contrast-label">USA: Income</div>
+                  <div class="contrast-value high">Very High</div>
+                </div>
+                <div class="contrast-item">
+                  <svg
+                    class="w-6 h-6 text-[var(--insight-accent-red)]"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <div class="contrast-label">USA: Work-Life</div>
+                  <div class="contrast-value low">Below Average</div>
+                </div>
+                <div class="contrast-item">
+                  <svg
+                    class="w-6 h-6 text-[var(--insight-accent-red)]"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.623a11.99 11.99 0 00-.598-3.75c-.37-.993-.748-1.95-1.14-2.851M12 2.25A11.959 11.959 0 003.598 6"
+                    />
+                  </svg>
+                  <div class="contrast-label">Ireland: Safety</div>
+                  <div class="contrast-value low">Mid-Rank</div>
+                </div>
+              </div>
+              <div class="insight-highlight contrast-low">
+                Look at the <strong>United States</strong>: a leader in income,
+                but faces challenges in work-life balance.
+                <strong>Ireland</strong> also shows a gap between its high
+                income and mid-level safety scores.
+              </div>
+              <p class="insight-hook">
+                “Money talks, but long hours and safety concerns can speak
+                louder.”
+              </p>
+            </div>
+          </article>
+
+          <article class="insight-card">
+            <div class="insight-content">
+              <h3 class="insight-title">
+                <svg
+                  class="insight-icon trend-up"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"
+                  />
+                </svg>
+                Rising Stars: Lithuania & Korea's Journey
+              </h3>
+              <p class="insight-story">
+                Some countries have made remarkable progress in improving
+                well-being over the last decade or so.
+                <strong>Lithuania</strong> and <strong>Korea</strong> stand out,
+                showing <strong>impressive gains</strong> and demonstrating that
+                positive change is achievable.
+              </p>
+              <div class="visual-trend">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"
+                  />
+                </svg>
+                <span
+                  >Significant strides in Income, Skills, and Safety
+                  improvements.</span
+                >
+              </div>
+              <div class="insight-highlight trend">
+                These nations showcase how focused efforts can lead to
+                substantial improvements in quality of life across multiple
+                important dimensions.
+              </div>
+              <p class="insight-hook">
+                “See how focused efforts helped Lithuania and Korea
+                significantly boost quality of life.”
+              </p>
+            </div>
+          </article>
+
+          <article class="insight-card">
+            <div class="insight-content">
+              <h3 class="insight-title">
+                <svg
+                  class="insight-icon trend-down"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.25 6L9 12.75l4.286-4.286a11.948 11.948 0 014.306 6.43l.776 2.898m0 0l3.182-5.511m-3.182 5.51l-5.511-3.181"
+                  />
+                </svg>
+                The Pandemic's Shadow on Well-being
+              </h3>
+              <p class="insight-story">
+                The COVID-19 pandemic caused a <strong>sharp drop</strong> in
+                reported life satisfaction across many countries in 2020. While
+                things have improved since the initial shock, the recovery has
+                been slow and incomplete for many.
+              </p>
+              <div class="visual-trend dip">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.25 6L9 12.75l4.286-4.286a11.948 11.948 0 014.306 6.43l.776 2.898m0 0l3.182-5.511m-3.182 5.51l-5.511-3.181"
+                  />
+                </svg>
+                <span
+                  >Sharp Dip (2020) →
+                  <span class="recovery">Partial Recovery</span> → Plateau</span
+                >
+              </div>
+              <div class="insight-highlight dip">
+                A majority of countries still report
+                <strong>lower well-being scores in 2023</strong> compared to
+                before the pandemic began in 2019.
+              </div>
+              <p class="insight-hook">
+                “Economies bounced back faster than spirits. Our collective mood
+                is still healing.”
+              </p>
+            </div>
+          </article>
+
+          <article class="insight-card md:col-span-2 lg:col-span-1">
+            <div class="insight-content">
+              <h3 class="insight-title">
+                <svg
+                  class="insight-icon connect"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+                  />
+                </svg>
+                Good for the Planet, Good for the Soul?
+              </h3>
+              <p class="insight-story">
+                The data suggests a <strong>clear positive link</strong>:
+                countries improving their environmental quality (like cleaner
+                air) also tend to see a rise in their population's subjective
+                well-being over time.
+              </p>
+              <div class="visual-connection">
+                <svg
+                  class="connection-icon-env"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.528-1.036.94-2.197 1.088-3.386l-.74-1.732a1.125 1.125 0 00-2.247 0l-.74 1.732c-.149 1.19-.56 2.35-1.088 3.386l-2.496 3.03M11.42 15.17l-4.13-4.13a2.652 2.652 0 010-3.75l.587-.587a2.652 2.652 0 013.75 0l4.13 4.13M3 21l3.057-3.057m0 0a2.652 2.652 0 013.75 0L17.25 21M8.688 8.688l.587.587m0 0l-3.057 3.057m3.057-3.057a2.652 2.652 0 010 3.75"
+                  />
+                </svg>
+                <span class="connection-plus">+</span>
+                <svg
+                  class="connection-icon-wellbeing"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.75 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.75 0h.008v.015h-.008V9.75z"
+                  />
+                </svg>
+              </div>
+              <div class="insight-highlight positive">
+                <strong>Estonia 🇪🇪</strong> is a great example, showing
+                significant improvements in both environmental quality
+                <i>and</i> life satisfaction between 2006 and 2023.
+              </div>
+              <p class="insight-hook">
+                “Investing in a cleaner environment might just be an investment
+                in happiness too.”
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="py-16 md:py-24 text-center"
+      style="background-color: var(--section-bg)"
     >
       <div class="container mx-auto px-6">
         <h2 class="text-3xl font-bold mb-4" style="color: var(--text-color)">
           Ready to See the World Differently?
         </h2>
+        <p class="text-xl mb-6 max-w-3xl mx-auto final-cta-text">
+          The stories above are just a few examples hidden in the data. What
+          patterns and connections will <strong>you</strong> uncover?
+        </p>
         <p
-          class="text-xl mb-8 max-w-3xl mx-auto"
+          class="text-lg mb-8 max-w-3xl mx-auto"
           style="color: var(--text-muted-color)"
         >
-          Embark on your own data exploration. Uncover insights, compare
-          perspectives, and understand the multifaceted nature of well-being
-          across the globe.
+          Embark on your own data exploration. Compare perspectives, track
+          trends, and understand the multifaceted nature of well-being across
+          the globe using the full interactive tool.
         </p>
 
         <div
@@ -397,7 +938,7 @@
     </footer>
 
     <script>
-      // --- Theme Toggle Script (unchanged) ---
+      // Theme Toggle Script
       const themeToggleBtn = document.getElementById("theme-toggle");
       const htmlElement = document.documentElement;
       const sunIcon = `
@@ -434,7 +975,7 @@
       applyTheme(initialTheme);
       themeToggleBtn.addEventListener("click", toggleTheme);
 
-      // --- NEW: Script to set current year in footer ---
+      // Set current year in footer
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>
   </body>
