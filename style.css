@@ -15,7 +15,10 @@
 
   /* Unset *everything* except a small allow‑list of replaced elements.      */
   *:where(
-      :not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)
+      :not(html, iframe, canvas, img, svg, video, audio, input):not(
+          svg *,
+          symbol *
+        )
     ) {
     all: unset;
     display: revert;
@@ -486,10 +489,12 @@
     cursor: pointer;
   }
   .checkbox-container input[type="checkbox"] {
-    height: 1.1em;
-    width: 1.1em;
+    height: 1.4em;
+    width: 1.4em;
     cursor: pointer;
     accent-color: var(--color-primary);
+    /* optical hack: lift the glyph */
+    transform: translateY(-0.25em);
   }
   .checkbox-container input[type="checkbox"]:focus-visible {
     outline: 2px solid var(--color-primary);
@@ -702,7 +707,7 @@
     border: 1px solid var(--color-border);
     padding: 8px 12px;
     border-radius: var(--radius-sm);
-    background-color: var(--color-surface);
+    background-color: transparent;
     box-shadow: var(--shadow-elevation-1);
     transition: var(--transition-colors);
     max-height: none; /* Allow it to grow with content */
@@ -763,6 +768,13 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  /* this adds an invisible block under the comparison <h4> */
+  .comparison-dash-content > .mini-dashboard-title::after {
+    content: "";
+    display: block;
+    height: 3.9em; /* tweak this to match the exact computed height of your real <select> */
   }
 }
 
