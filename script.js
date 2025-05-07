@@ -1543,7 +1543,7 @@ class OECDWellbeingMap {
   #renderRadar(containerElement, countryName, year) {
     // --- Constants ---
     const CHART_WIDTH = 220;
-    const CHART_HEIGHT = 180;
+    const CHART_HEIGHT = 160;
     const RADIUS = Math.min(CHART_WIDTH, CHART_HEIGHT) / 2 - 25; // Radius of the radar area
     const LABEL_OFFSET = 12; // Distance of labels from radar edge
 
