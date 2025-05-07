@@ -1,0 +1,51 @@
+.custom-select-wrapper {
+    position: relative;
+    width: 250px;
+    font-family: 'Inter', sans-serif;
+    border-radius: 12px;
+  }
+  
+  .custom-select-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .custom-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    display: none;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 100;
+  }
+  
+  .custom-options.show {
+    display: block;
+  }
+  
+  .custom-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .custom-option:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .custom-icon {
+    width: 20px;
+    height: 20px;
+  }

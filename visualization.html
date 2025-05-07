@@ -22,6 +22,7 @@
       rel="stylesheet"
     />
 
+    <link rel="stylesheet" href="dropdown.css"/>
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -38,10 +39,10 @@
         <h2 id="controls-heading">Controls</h2>
 
         <div>
-          <label for="dimension-select">Well-being Dimension</label>
+          <!-- <label for="dimension-select">Well-being Dimension</label>
           <div class="select-wrapper">
             <select id="dimension-select" name="dimension">
-              <option value="income_wealth" style="background-image: url(SVGs/income.svg);">Income</option>
+              <option value="income_wealth" style="background-image: url(SVGs/Dark/income.svg);">Income</option>
               <option value="housing">Housing</option>
               <option value="work_job_quality">Jobs</option>
               <option value="health">Health</option>
@@ -53,6 +54,47 @@
               <option value="social_connections">Community</option>
               <option value="civic_engagement">Civic</option>
             </select>
+          </div> -->
+          <div class="custom-select-wrapper" id="dimension-select-wrapper">
+            <div class="custom-select-trigger" id="dimension-trigger" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+              <img src="SVGs/Dark/income.svg" alt="" class="custom-icon" />
+              Well-being
+            </div>
+            <div class="custom-options" id="dimension-options" role="listbox">
+              <span class="custom-option" data-value="income_wealth">
+                <img src="SVGs/Dark/income.svg" alt="" class="custom-icon" /> Income
+              </span>
+              <span class="custom-option" data-value="housing">
+                <img src="SVGs/Dark/income.svg" alt="" class="custom-icon" /> Housing
+              </span>
+              <span class="custom-option" data-value="work_job_quality">
+                <img src="SVGs/Dark/income.svg" alt="" class="custom-icon" /> Jobs
+              </span>
+              <span class="custom-option" data-value="health">
+                <img src="SVGs/Dark/income.svg" alt="" class="custom-icon" /> Health
+              </span>
+              <span class="custom-option" data-value="knowledge_skills">
+                <img src="SVGs/Dark/income.svg" alt="" class="custom-icon" /> Skills
+              </span>
+              <span class="custom-option" data-value="environmental_quality">
+                <img src="SVGs/Dark/income.svg" alt="" class="custom-icon" /> Environment
+              </span>
+              <span class="custom-option" data-value="subjective_wellbeing">
+                <img src="SVGs/Dark/income.svg" alt="" class="custom-icon" /> Well-being
+              </span>
+              <span class="custom-option" data-value="safety">
+                <img src="SVGs/Dark/income.svg" alt="" class="custom-icon" /> Safety
+              </span>
+              <span class="custom-option" data-value="work_life_balance">
+                <img src="SVGs/Dark/income.svg" alt="" class="custom-icon" /> Work-Life
+              </span>
+              <span class="custom-option" data-value="social_connections">
+                <img src="SVGs/Dark/income.svg" alt="" class="custom-icon" /> Community
+              </span>
+              <span class="custom-option" data-value="civic_engagement">
+                <img src="SVGs/Dark/income.svg" alt="" class="custom-icon" /> Civic
+              </span>
+            </div>
           </div>
         </div>
 
@@ -134,5 +176,6 @@
     ></div>
 
     <script type="module" src="script.js" defer></script>
+    <script src="dropdown.js" defer></script>
   </body>
 </html>

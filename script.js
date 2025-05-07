@@ -700,15 +700,39 @@ class OECDWellbeingMap {
   #attachUi() {
     const $ = this.#$; // Use cached elements
 
-    // Dimension select change
-    $.dimensionSel?.addEventListener("change", () => {
-      this.#stopPlayback(); // Stop animation if running
-      this.#dimKey = $.dimensionSel.value;
-      this.#syncControls();
-      this.#updateColours();
-      // Re-render mini-dashboard if a country is selected
-      if (this.#selected) this.#showMiniDash(this.#selected);
+    // // Dimension select change
+    // $.dimensionSel?.addEventListener("change", () => {
+    //   this.#stopPlayback(); // Stop animation if running
+    //   this.#dimKey = $.dimensionSel.value;
+    //   this.#syncControls();
+    //   this.#updateColours();
+    //   // Re-render mini-dashboard if a country is selected
+    //   if (this.#selected) this.#showMiniDash(this.#selected);
+    // });
+    
+    // Neue Logik für Custom-Dropdown
+    // New logic for custom dropdown
+    document.querySelectorAll(".custom-option").forEach(option => {
+      option.addEventListener("click", () => {
+        const selectedValue = option.getAttribute("data-value");
+
+        // Update Trigger-Inhalt (Text und Icon)
+        const trigger = document.getElementById("dimension-trigger");
+        const icon = option.querySelector("img").getAttribute("src");
+        const label = option.textContent.trim();
+        trigger.innerHTML = `<img src="${icon}" alt="" class="custom-icon" /> ${label}`;
+        trigger.setAttribute("aria-expanded", "false");
+        document.getElementById("dimension-options").classList.remove("open");
+
+        // Logik wie im Original übernehmen
+        this.#stopPlayback();                        // Stop animation if running
+        this.#dimKey = selectedValue;                // Neue Dimension setzen
+        this.#syncControls();                        // UI synchronisieren
+        this.#updateColours();                       // Karte aktualisieren
+        if (this.#selected) this.#showMiniDash(this.#selected); // Mini-Dashboard ggf. neu anzeigen
+      });
     });
+
 
     // Year slider input (fires continuously during drag)
     $.yearSlider?.addEventListener("input", () => {
