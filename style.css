@@ -80,6 +80,12 @@
 
     /* Misc --------------------------------------------------------------- */
     --color-select-arrow: var(--color-text-muted);
+
+    /* Dropdown ----------------------------------------------------------- */
+    --color-select-bg: var(--color-surface);
+    --color-select-hover: var(--color-primary-lighter);
+    --color-select-text: var(--color-text);
+    --color-select-icon: var(--color-text-muted);
   }
 
   /* Dark‑theme token overrides (attribute‑based) ------------------------- */
@@ -108,6 +114,12 @@
     --color-map-active-stroke: #e0f2fe;
 
     --color-dashboard-bg: rgba(31, 41, 55, 0.8);
+
+    /* Dropdown ----------------------------------------------------------- */
+    --color-select-bg: var(--color-surface);
+    --color-select-hover: var(--color-primary-light);
+    --color-select-text: var(--color-text);
+    --color-select-icon: var(--color-text-muted);
   }
 
   /* Dark‑theme fallback for users who prefer dark but have no script.      */

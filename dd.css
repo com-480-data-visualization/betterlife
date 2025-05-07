@@ -1,0 +1,54 @@
+.custom-select-wrapper {
+    position: relative;
+    background-color: var(--color-select-bg);
+    color: var(--color-select-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+  }
+  
+  .custom-select-trigger {
+    background-color: var(--color-select-bg);
+    color: var(--color-select-text);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition-colors);
+    user-select: none;
+  }
+  
+  .custom-options {
+    background-color: var(--color-select-bg);
+    border: 1px solid var(--color-border);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    box-shadow: var(--shadow-elevation-1);
+    max-height: 300px;
+    overflow-y: auto;
+    display: none;
+  }
+
+  .custom-options.show {
+    display: block;
+  }
+  
+  .custom-option {
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-select-text);
+    cursor: pointer;
+    transition: var(--transition-bg);
+  }
+  
+  .custom-option:hover {
+    background-color: var(--color-select-hover);
+  }
+  
+  .custom-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    filter: none; /* Optional: Du könntest hier auch dynamisch invertieren */
+  }

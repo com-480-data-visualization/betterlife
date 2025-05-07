@@ -57,7 +57,7 @@ const CONFIG = Object.freeze({
     containerId: "map-container",
     // IDs must match the HTML DOM structure
     ids: Object.freeze({
-      dimensionSel: "dimension-select",
+      // dimensionSel: "dimension-select",
       yearSlider: "year-slider",
       yearDisplay: "year-display",
       dimensionTxt: "selected-dimension",
@@ -412,7 +412,7 @@ class OECDWellbeingMap {
     // Cache references to UI elements defined in CONFIG
     const ids = CONFIG.ui.ids;
     this.#$ = {
-      dimensionSel: /** @type {HTMLSelectElement} */ (byId(ids.dimensionSel)),
+      // dimensionSel: /** @type {HTMLSelectElement} */ (byId(ids.dimensionSel)),
       yearSlider: /** @type {HTMLInputElement} */ (byId(ids.yearSlider)),
       yearDisplay: byId(ids.yearDisplay),
       dimensionTxt: byId(ids.dimensionTxt),
@@ -1765,6 +1765,8 @@ class OECDWellbeingMap {
     ).matches;
     const isDark = savedTheme === "dark" || (!savedTheme && prefersDark);
 
+    this.#updateIconsForTheme(isDark);
+
     if (isDark) {
       document.documentElement.setAttribute("data-theme", "dark");
       if (this.#$.themeToggle) this.#$.themeToggle.textContent = "Light Mode";
@@ -1781,6 +1783,7 @@ class OECDWellbeingMap {
    */
   #toggleTheme() {
     const isCurrentlyDark = document.documentElement.hasAttribute("data-theme");
+    this.#updateIconsForTheme(!isCurrentlyDark);
 
     if (isCurrentlyDark) {
       // Switch to Light
@@ -1806,6 +1809,16 @@ class OECDWellbeingMap {
     // Legend colors will update automatically if updateColours is called via applyStyles
     // If applyStyles doesn't run (e.g. no selection), explicitly update legend if needed
     if (!this.#selected) this.#updateColours();
+  }
+
+  #updateIconsForTheme(isDark) {
+    // console.log(isDark);
+    const icons = document.querySelectorAll(".custom-icon");
+    icons.forEach(icon => {
+      const baseName = icon.src.split("/").pop(); // e.g. income.svg
+      const themeFolder = isDark ? "Dark" : "Light";
+      icon.src = `SVGs/${themeFolder}/${baseName}`;
+    });
   }
 
   /* ------------------------------------------------------------------

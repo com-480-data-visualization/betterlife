@@ -23,7 +23,7 @@ document.querySelectorAll(".custom-option").forEach(option => {
     }
 
     // Hier kannst du das Dropdown-Event weiterreichen:
-    console.log("Selected dimension:", value);
+    // console.log("Selected dimension:", value);
     // z.B. updateMap(value) o. ä.
   });
 });
@@ -36,19 +36,20 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// Update selection
-customOptions.forEach(option => {
-  option.addEventListener("click", () => {
-    const value = option.dataset.value;
-    const label = option.textContent.trim();
-    const iconSrc = option.querySelector("img")?.src;
+// // Update selection
+// Fix?
+// customOptions.forEach(option => {
+//   option.addEventListener("click", () => {
+//     const value = option.dataset.value;
+//     const label = option.textContent.trim();
+//     const iconSrc = option.querySelector("img")?.src;
 
-    // Update trigger display
-    trigger.innerHTML = `<img src="${iconSrc}" alt="" class="custom-icon" /> ${label}`;
-    trigger.setAttribute("aria-expanded", "false");
-    options.classList.remove("open");
+//     // Update trigger display
+//     trigger.innerHTML = `<img src="${iconSrc}" alt="" class="custom-icon" /> ${label}`;
+//     trigger.setAttribute("aria-expanded", "false");
+//     options.classList.remove("open");
 
-    // Call any handler that was previously using the native select
-    handleDimensionChange(value);  // <--- Diese Funktion musst du definieren
-  });
-});
+//     // Call any handler that was previously using the native select
+//     handleDimensionChange(value);  // <--- Diese Funktion musst du definieren
+//   });
+// });
