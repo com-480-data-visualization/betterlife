@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Dropdown mit SVG</title>
+    <style>
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            background-color: white;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            min-width: 150px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .option img {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dropdown">
+        <div class="dropdown-button" onclick="toggleDropdown()">Auswählen</div>
+        <div class="dropdown-content" id="dropdown">
+            <div class="option" onclick="selectOption('Income')">
+                <img src="income.svg" alt="Income Icon">
+                <span>Income</span>
+            </div>
+            <div class="option" onclick="selectOption('Wealth')">
+                <img src="income.svg" alt="Wealth Icon">
+                <span>Wealth</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById('dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function selectOption(value) {
+            document.querySelector('.dropdown-button').textContent = value;
+            document.getElementById('dropdown').style.display = 'none'; // Dropdown ausblenden
+        }
+
+        // Schließt das Dropdown, wenn außerhalb geklickt wird
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('dropdown');
+            const button = document.querySelector('.dropdown-button');
+            if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
+    </script>
+
+</body>
+</html>
