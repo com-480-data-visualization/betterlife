@@ -40,7 +40,7 @@
      id="layer1"
      transform="translate(-21.961629,-93.028276)">
     <path
-       style="fill:#370000;fill-opacity:0;stroke:#000000;stroke-width:18.6653;stroke-linecap:round;stroke-linejoin:round"
+       style="fill:#370000;fill-opacity:0;stroke:#f9fafb;stroke-width:18.6653;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
        d="m 97.473324,137.87412 -49.826375,80.95068 -16.353031,-9.52657 49.03927,-80.02094 -30.929771,-17.75483 29.619372,-9.16161 50.254421,27.97093 -11.04114,19.57768 z"
        id="path1"
        sodipodi:nodetypes="ccccccccc" />

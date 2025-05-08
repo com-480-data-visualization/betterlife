@@ -40,12 +40,12 @@
      id="layer1"
      transform="translate(-29.390396,-13.728412)">
     <path
-       style="fill:#000000;fill-opacity:0.00358426;stroke:#000012;stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke markers fill"
+       style="fill:#000000;fill-opacity:0.00358426;stroke:#f9fafb;stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke markers fill;stroke-opacity:1"
        d="M 47.160732,185.6105 77.069078,162.5814 C 184.30579,221.60623 173.68425,83.360439 179.23573,24.336362 121.98907,17.70714 -4.0114865,71.158179 70.507957,154.01459 L 39.38992,176.86074 Z"
        id="path1"
        sodipodi:nodetypes="ccccc" />
     <path
-       style="fill:#000000;fill-opacity:0.00358426;stroke:#000012;stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke markers fill"
+       style="fill:#000000;fill-opacity:0.00358426;stroke:#f9fafb;stroke-width:20;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:stroke markers fill;stroke-opacity:1"
        d="M 74.053048,156.77189 C 116.93408,124.13056 141.06447,88.839607 149.2878,55.145889"
        id="path2"
        sodipodi:nodetypes="cc" />

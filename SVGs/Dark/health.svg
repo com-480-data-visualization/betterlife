@@ -8,7 +8,7 @@
    version="1.1"
    id="svg1"
    inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
-   sodipodi:docname="Health.svg"
+   sodipodi:docname="health.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -40,16 +40,16 @@
      id="layer1"
      transform="translate(-2.2661578,-45.87785)">
     <path
-       style="fill:#370000;fill-opacity:0;stroke:#000000;stroke-width:19.6719;stroke-linecap:round;stroke-linejoin:round"
+       style="fill:#370000;fill-opacity:0;stroke:#f9fafb;stroke-width:19.6719;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
        d="M 98.995408,108.43684 C 151.90435,52.869205 201.41194,137.68022 98.610753,191.16579 -1.6155284,136.24018 41.59475,51.585004 99.108082,108.41316"
        id="path2"
        sodipodi:nodetypes="ccc" />
     <path
-       style="fill:#000000;fill-opacity:0;stroke:#fffffe;stroke-width:23.6063;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       style="fill:#000000;fill-opacity:0;stroke:#1f2937;stroke-width:23.6063;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
        d="m 14.069308,128.30671 49.621574,-0.39023 8.462592,-70.241562 35.004376,167.799302 10.38591,-97.55774 76.93267,-0.39023"
        id="path3-9" />
     <path
-       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:19.6719;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       style="fill:#000000;fill-opacity:0;stroke:#f9fafb;stroke-width:19.6719;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
        d="m 13.825475,128.15735 49.621574,-0.39023 8.462593,-70.241561 35.004368,167.799311 10.38591,-97.55775 76.93268,-0.39022"
        id="path3" />
   </g>
