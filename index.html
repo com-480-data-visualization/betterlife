@@ -1296,16 +1296,18 @@
         // Header stickiness logic (mobile vs desktop with zoom)
         const headerElement = document.querySelector('header');
         if (headerElement) {
-            const zoomThreshold = 2.9; // Effective zoom of ~300%
-            const mobileBreakpoint = 768; // Corresponds to Tailwind's 'md'
+            const zoomThreshold = 2.9; // Effective zoom of ~300% for desktop
 
             function adjustHeaderStickiness() {
-                const isMobile = window.innerWidth < mobileBreakpoint;
+                // Check if the device is primarily touch-operated.
+                // (pointer: coarse) indicates the primary input is not precise (e.g., touch).
+                // Using this OR (hover: none) is a common way to target mobile/tablet devices.
+                const isMobileDevice = window.matchMedia('(pointer: coarse), (hover: none)').matches;
 
-                if (isMobile) {
-                    headerElement.classList.remove('sticky'); // Always non-sticky on mobile
+                if (isMobileDevice) {
+                    headerElement.classList.remove('sticky'); // Always non-sticky on mobile devices
                 } else {
-                    // Desktop: Apply zoom-based stickiness
+                    // Desktop or other non-mobile-like devices: Apply zoom-based stickiness
                     if (window.devicePixelRatio >= zoomThreshold) {
                         headerElement.classList.remove('sticky');
                     } else {
@@ -1314,9 +1316,9 @@
                 }
             }
 
-            // Initial check
+            // Initial check when DOM is ready
             adjustHeaderStickiness();
-            // Update on resize (handles orientation changes and browser resize)
+            // Update on resize (handles orientation changes, browser resize)
             window.addEventListener('resize', adjustHeaderStickiness);
         }
 
