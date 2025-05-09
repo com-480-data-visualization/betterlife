@@ -921,7 +921,7 @@
     content: "🏆";
   }
 
-  .ranking-columns h4:last-child::before {
+  .ranking-columns h4.bottom-five-heading::before {
     content: "📉";
   }
 
