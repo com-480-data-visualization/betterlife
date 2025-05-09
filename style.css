@@ -832,43 +832,68 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     background: var(--color-surface);
-    box-shadow: var(--shadow-elevation-1);
+    box-shadow: var(--shadow-elevation-2);
+    transition: all 0.3s ease;
+  }
+
+  .ranking-panel:hover {
+    box-shadow: var(--shadow-elevation-3);
   }
 
   .ranking-panel > summary {
     cursor: pointer;
-    padding: 0.6rem 1rem;
+    padding: 0.8rem 1.2rem;
     font-weight: 600;
     color: var(--color-text-strong);
-    list-style: none; /* get rid of the default marker */
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s ease;
+  }
+
+  .ranking-panel > summary:hover {
+    background-color: var(--color-surface-hover);
+  }
+
+  .ranking-panel > summary::before {
+    content: "📊";
+    font-size: 1.2em;
   }
 
   .ranking-content {
-    padding: 0.8rem 1rem 1rem;
+    padding: 1rem 1.2rem 1.2rem;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 1rem;
   }
 
   .ranking-tabs {
     display: flex;
-    gap: 0.4rem;
+    gap: 0.6rem;
+    padding: 0 0.2rem;
   }
 
   .ranking-tabs button {
     flex: 1 1 0;
-    padding: 0.35rem 0.6rem;
+    padding: 0.5rem 0.8rem;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm);
     background: var(--color-input-bg);
-    font-size: 0.82rem;
+    font-size: 0.9rem;
+    font-weight: 500;
     cursor: pointer;
-    transition: var(--transition-colors), var(--transition-bg);
+    transition: all 0.2s ease;
+  }
+
+  .ranking-tabs button:hover {
+    background: var(--color-surface-hover);
   }
 
   .ranking-tabs button.active {
     background: var(--color-primary);
     color: var(--color-on-primary);
+    border-color: var(--color-primary);
   }
 
   .ranking-panel-body[hidden] {
@@ -878,19 +903,67 @@
   .ranking-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.8rem;
+    gap: 1.2rem;
+    padding: 0.4rem;
   }
 
   .ranking-columns h4 {
-    margin: 0 0 0.25rem;
-    font-size: 0.8rem;
+    margin: 0 0 0.4rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    color: var(--color-text-muted);
+    color: var(--color-text-strong);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
   }
+
+  .ranking-columns h4:first-child::before {
+    content: "🏆";
+  }
+
+  .ranking-columns h4:last-child::before {
+    content: "📉";
+  }
+
   .ranking-columns ol {
     margin: 0;
-    padding-inline-start: 1.2rem; /* keep ordered-list markers aligned */
-    font-size: 0.78rem;
+    padding-inline-start: 1.4rem;
+    font-size: 0.85rem;
+    list-style-position: outside;
+  }
+
+  .ranking-columns li {
+    padding: 0.2rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .ranking-columns li .value {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    color: var(--color-text-muted);
+    background: var(--color-surface-hover);
+    padding: 0.1rem 0.4rem;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Add visual indicators for top/bottom rankings */
+  .ranking-columns ol:first-child li {
+    color: var(--color-success);
+  }
+
+  .ranking-columns ol:last-child li {
+    color: var(--color-error);
+  }
+
+  /* Add subtle hover effect on list items */
+  .ranking-columns li:hover {
+    background: var(--color-surface-hover);
+    border-radius: var(--radius-sm);
+    padding: 0.2rem 0.4rem;
+    margin: 0 -0.4rem;
   }
 }
 
@@ -909,4 +982,62 @@
     white-space: nowrap;
     border: 0;
   }
+}
+
+.rankings-panel {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin: 10px;
+  font-family: 'Arial', sans-serif;
+}
+
+.rankings-panel h3 {
+  color: #333;
+  margin: 0 0 10px 0;
+  font-size: 1.1em;
+  font-weight: 600;
+  text-align: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.rankings-panel ol {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rankings-panel li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  margin: 2px 0;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.rankings-panel li:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.rankings-panel .country-name {
+  font-weight: 500;
+  color: #444;
+}
+
+.rankings-panel .value {
+  font-family: 'Courier New', monospace;
+  color: #666;
+  font-size: 0.95em;
+}
+
+.rankings-panel .top-list li .value {
+  color: #2e7d32;
+}
+
+.rankings-panel .bottom-list li .value {
+  color: #c62828;
 }

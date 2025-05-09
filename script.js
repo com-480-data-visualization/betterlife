@@ -647,6 +647,7 @@ class OECDWellbeingMap {
 
     // Important: Re-apply colors and update legend visuals *after* changing the scale
     this.#updateColours();
+    this.#updateRankings(this.#year, this.#dimKey); // Update rankings after color scheme change
   }
 
   /* ------------------------------------------------------------------
@@ -699,16 +700,6 @@ class OECDWellbeingMap {
    */
   #attachUi() {
     const $ = this.#$; // Cache reference to UI elements
-
-    // // Dimension select change
-    // $.dimensionSel?.addEventListener("change", () => {
-    //   this.#stopPlayback(); // Stop animation if running
-    //   this.#dimKey = $.dimensionSel.value;
-    //   this.#syncControls();
-    //   this.#updateColours();
-    //   // Re-render mini-dashboard if a country is selected
-    //   if (this.#selected) this.#showMiniDash(this.#selected);
-    // });
 
     // Neue Logik für Custom-Dropdown
     // New logic for custom dropdown
@@ -1819,6 +1810,7 @@ class OECDWellbeingMap {
       // Update immediately after reset
       this.#syncControls();
       this.#updateColours();
+      this.#updateRankings(this.#year, this.#dimKey); // Add rankings update
       if (this.#selected) this.#showMiniDash(this.#selected);
     }
 
@@ -1840,6 +1832,7 @@ class OECDWellbeingMap {
       // Call update functions directly to reflect the change
       this.#syncControls(); // Update text displays
       this.#updateColours(); // Update map colors and legend
+      this.#updateRankings(this.#year, this.#dimKey); // Add rankings update
       // Update the mini-dashboard if a country is selected
       if (this.#selected) this.#showMiniDash(this.#selected);
     }, CONFIG.animation.playMs); // Interval delay from config
@@ -1920,7 +1913,10 @@ class OECDWellbeingMap {
     }
     // Legend colors will update automatically if updateColours is called via applyStyles
     // If applyStyles doesn't run (e.g. no selection), explicitly update legend if needed
-    if (!this.#selected) this.#updateColours();
+    if (!this.#selected) {
+      this.#updateColours();
+      this.#updateRankings(this.#year, this.#dimKey); // Update rankings after theme change
+    }
   }
 
   #updateIconsForTheme(isDark) {
@@ -2068,7 +2064,17 @@ class OECDWellbeingMap {
       .data(list)
       .enter()
       .append('li')
-      .text(d => `${d.countryCode} – ${d.value.toFixed(1)}`);
+      .html(d => {
+        const value = d.value.toFixed(2);
+        const isTop = selector.includes('top');
+        const trend = isTop ? '↑' : '↓';
+        return `
+          <span class="country-name">${d.countryCode}</span>
+          <span class="value" title="Score: ${value}">
+            ${trend} ${value}
+          </span>
+        `;
+      });
   }
 }
 
