@@ -21,10 +21,10 @@
       :root {
         --bg-color: #f7f8fc; /* Slightly softer light gray background */
         --hyperlink-color: #0ea5e9; /* sky-500 */
-        --title-brand-color: #ea580c; /* orange-600 */
         --text-color: #1a202c; /* gray-800 - slightly darker for better contrast */
         --text-muted-color: #4a5568; /* gray-600 - slightly darker for better readability */
         --text-highlight: #0d9488; /* teal-600 */
+        --text-highlight-hover: #00695c; /* teal-800 */
         --header-bg: rgba(
           255,
           255,
@@ -43,7 +43,6 @@
         --insight-accent-green: #10b981; /* emerald-500 */
         --insight-accent-red: #ef4444; /* red-500 */
         --insight-accent-yellow: #f59e0b; /* amber-500 */
-        --insight-hook-color: #c026d3; /* Magenta */
 
         /* New variables for stunning effects */
         --hero-gradient-start: #e0f2fe; /* sky-100 */
@@ -57,10 +56,10 @@
       html.dark {
         --bg-color: #0d1117; /* Very dark gray, almost black */
         --hyperlink-color: #38bdf8; /* sky-400 */
-        --title-brand-color: #fb923c; /* orange-400 */
         --text-color: #e5e7eb; /* gray-200 - slightly brighter */
         --text-muted-color: #9ca3af; /* gray-400 */
         --text-highlight: #2dd4bf; /* teal-400 */
+        --text-highlight-hover: #80cbc4; /* teal-200 */
         --header-bg: rgba(
           17,
           24,
@@ -79,7 +78,6 @@
         --insight-accent-green: #34d399; /* emerald-400 */
         --insight-accent-red: #f87171; /* red-400 */
         --insight-accent-yellow: #fbbf24; /* amber-400 */
-        --insight-hook-color: #e879f9; /* Lighter Magenta for dark mode */
 
         /* New variables for stunning effects - dark */
         --hero-gradient-start: #1e293b; /* slate-800 */
@@ -311,18 +309,17 @@
       }
 
       .insight-hook {
-        color: var(--insight-hook-color);
-        font-family: "Inter", sans-serif; /* Changed from Calibri */
-        font-style: italic; /* Make it italic */
+        color: var(--text-highlight);
+        font-family: "Inter", sans-serif;
         font-weight: 500; /* Medium weight */
-        border-top: 1px dashed rgba(128, 128, 128, 0.4); /* Slightly more visible dash */
+        border-top: 1px dashed rgba(128, 128, 128, 0.4);
         padding-top: 1.25rem;
         margin-top: auto;
         font-size: 1.05rem; /* Slightly larger */
         transition: color 0.3s ease;
       }
       .insight-card:hover .insight-hook {
-        color: var(--primary-color); /* Change color on hover for emphasis */
+        color: var(--text-highlight-hover);
       }
 
       /* Visual elements within insight cards */
@@ -492,7 +489,7 @@
         <div class="flex items-center gap-4 md:gap-6">
           <div
             class="text-2xl font-bold"
-            style="color: var(--title-brand-color)"
+            style="color: var(--text-highlight)"
           >
             Well-being Explorer
           </div>
