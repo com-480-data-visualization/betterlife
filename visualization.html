@@ -22,7 +22,7 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="dropdown.css"/>
+    <link rel="stylesheet" href="dropdown.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -56,43 +56,72 @@
             </select>
           </div> -->
           <div class="custom-select-wrapper" id="dimension-select-wrapper">
-            <div class="custom-select-trigger" id="dimension-trigger" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+            <div
+              class="custom-select-trigger"
+              id="dimension-trigger"
+              tabindex="0"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+            >
               <img src="SVGs/Dark/income.svg" alt="" class="custom-icon" />
               Income and Wealth
             </div>
             <div class="custom-options" id="dimension-options" role="listbox">
               <span class="custom-option" data-value="income_wealth">
-                <img src="SVGs/Dark/income.svg" alt="" class="custom-icon" /> Income and Wealth
+                <img src="SVGs/Dark/income.svg" alt="" class="custom-icon" />
+                Income and Wealth
               </span>
               <span class="custom-option" data-value="housing">
-                <img src="SVGs/Dark/housing.svg" alt="" class="custom-icon" /> Housing
+                <img src="SVGs/Dark/housing.svg" alt="" class="custom-icon" />
+                Housing
               </span>
               <span class="custom-option" data-value="work_job_quality">
-                <img src="SVGs/Dark/jobs.svg" alt="" class="custom-icon" /> Work and Job Quality
+                <img src="SVGs/Dark/jobs.svg" alt="" class="custom-icon" /> Work
+                and Job Quality
               </span>
               <span class="custom-option" data-value="health">
-                <img src="SVGs/Dark/health.svg" alt="" class="custom-icon" /> Health
+                <img src="SVGs/Dark/health.svg" alt="" class="custom-icon" />
+                Health
               </span>
               <span class="custom-option" data-value="knowledge_skills">
-                <img src="SVGs/Dark/skill.svg" alt="" class="custom-icon" /> Knowledge and Skills
+                <img src="SVGs/Dark/skill.svg" alt="" class="custom-icon" />
+                Knowledge and Skills
               </span>
               <span class="custom-option" data-value="environmental_quality">
-                <img src="SVGs/Dark/environment.svg" alt="" class="custom-icon" /> Environmental Quality
+                <img
+                  src="SVGs/Dark/environment.svg"
+                  alt=""
+                  class="custom-icon"
+                />
+                Environmental Quality
               </span>
               <span class="custom-option" data-value="subjective_wellbeing">
-                <img src="SVGs/Dark/wellbeing.svg" alt="" class="custom-icon" /> Subjective Well-being
+                <img src="SVGs/Dark/wellbeing.svg" alt="" class="custom-icon" />
+                Subjective Well-being
               </span>
               <span class="custom-option" data-value="safety">
-                <img src="SVGs/Dark/safety.svg" alt="" class="custom-icon" /> Safety
+                <img src="SVGs/Dark/safety.svg" alt="" class="custom-icon" />
+                Safety
               </span>
               <span class="custom-option" data-value="work_life_balance">
-                <img src="SVGs/Dark/work_life_balance.svg" alt="" class="custom-icon" /> Work-Life Balance
+                <img
+                  src="SVGs/Dark/work_life_balance.svg"
+                  alt=""
+                  class="custom-icon"
+                />
+                Work-Life Balance
               </span>
               <span class="custom-option" data-value="social_connections">
-                <img src="SVGs/Dark/social.svg" alt="" class="custom-icon" /> Social Connections
+                <img src="SVGs/Dark/social.svg" alt="" class="custom-icon" />
+                Social Connections
               </span>
               <span class="custom-option" data-value="civic_engagement">
-                <img src="SVGs/Dark/civic_engagement.svg" alt="" class="custom-icon" /> Civic Engagement
+                <img
+                  src="SVGs/Dark/civic_engagement.svg"
+                  alt=""
+                  class="custom-icon"
+                />
+                Civic Engagement
               </span>
             </div>
           </div>
@@ -149,6 +178,62 @@
           <p>Year: <span id="selected-year">2024</span></p>
           <p>Country: <span id="selected-country-display">World View</span></p>
         </div>
+
+        <!--  controls-section, after <div class="selection-display"> … </div> -->
+        <details id="ranking-panel" class="ranking-panel">
+          <summary aria-controls="ranking-content" aria-expanded="false">
+            Rankings (Top 5 / Bottom 5)
+          </summary>
+
+          <div id="ranking-content" class="ranking-content" hidden>
+            <div class="ranking-tabs" role="tablist">
+              <button
+                role="tab"
+                id="tab-feature"
+                class="active"
+                aria-controls="panel-feature"
+              >
+                Current feature
+              </button>
+              <button role="tab" id="tab-average" aria-controls="panel-average">
+                Combined average
+              </button>
+            </div>
+
+            <!-- Current feature panel -->
+            <div id="panel-feature" class="ranking-panel-body" role="tabpanel">
+              <div class="ranking-columns">
+                <div>
+                  <h4>Top 5</h4>
+                  <ol id="feature-top5"></ol>
+                </div>
+                <div>
+                  <h4>Bottom 5</h4>
+                  <ol id="feature-bottom5"></ol>
+                </div>
+              </div>
+            </div>
+
+            <!-- Combined average panel -->
+            <div
+              id="panel-average"
+              class="ranking-panel-body"
+              role="tabpanel"
+              hidden
+            >
+              <div class="ranking-columns">
+                <div>
+                  <h4>Top 5</h4>
+                  <ol id="average-top5"></ol>
+                </div>
+                <div>
+                  <h4>Bottom 5</h4>
+                  <ol id="average-bottom5"></ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
       </section>
 
       <section class="map-section" aria-labelledby="map-heading">
@@ -162,7 +247,7 @@
           <div id="mini-dashboard"></div>
         </figure>
 
-        <p id="country-info" style="height: 3em;">Loading map…</p>
+        <p id="country-info" style="height: 3em">Loading map…</p>
       </section>
     </main>
 

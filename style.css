@@ -825,6 +825,73 @@
   #play-pause-button {
     margin-top: 6px;
   }
+
+  /* ===== Rankings panel ===== */
+  .ranking-panel {
+    margin-block-start: 0.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-elevation-1);
+  }
+
+  .ranking-panel > summary {
+    cursor: pointer;
+    padding: 0.6rem 1rem;
+    font-weight: 600;
+    color: var(--color-text-strong);
+    list-style: none; /* get rid of the default marker */
+  }
+
+  .ranking-content {
+    padding: 0.8rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .ranking-tabs {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .ranking-tabs button {
+    flex: 1 1 0;
+    padding: 0.35rem 0.6rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-input-bg);
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: var(--transition-colors), var(--transition-bg);
+  }
+
+  .ranking-tabs button.active {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+
+  .ranking-panel-body[hidden] {
+    display: none;
+  }
+
+  .ranking-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+
+  .ranking-columns h4 {
+    margin: 0 0 0.25rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+  .ranking-columns ol {
+    margin: 0;
+    padding-inline-start: 1.2rem; /* keep ordered-list markers aligned */
+    font-size: 0.78rem;
+  }
 }
 
 /* ---------------------------------------------------------------------------

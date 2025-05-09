@@ -464,11 +464,11 @@ class OECDWellbeingMap {
       this.#attachUi();
       this.#syncControls(); // Set initial UI text based on state
       this.#updateColours(); // Apply initial colors and update legend
+      this.#updateRankings(this.#year, this.#dimKey); // Initialize rankings
       this.#inform(
         "Hover over an OECD country for info, click to zoom. Click the background to reset zoom."
       );
 
-      // Debounced resize handler
       window.addEventListener(
         "resize",
         debounce(() => this.#redraw(), 150) // Use a slightly longer debounce for resize
@@ -698,7 +698,7 @@ class OECDWellbeingMap {
    * @private
    */
   #attachUi() {
-    const $ = this.#$; // Use cached elements
+    const $ = this.#$; // Cache reference to UI elements
 
     // // Dimension select change
     // $.dimensionSel?.addEventListener("change", () => {
@@ -709,10 +709,10 @@ class OECDWellbeingMap {
     //   // Re-render mini-dashboard if a country is selected
     //   if (this.#selected) this.#showMiniDash(this.#selected);
     // });
-    
+
     // Neue Logik für Custom-Dropdown
     // New logic for custom dropdown
-    document.querySelectorAll(".custom-option").forEach(option => {
+    document.querySelectorAll(".custom-option").forEach((option) => {
       option.addEventListener("click", () => {
         const selectedValue = option.getAttribute("data-value");
 
@@ -725,14 +725,14 @@ class OECDWellbeingMap {
         document.getElementById("dimension-options").classList.remove("open");
 
         // Logik wie im Original übernehmen
-        this.#stopPlayback();                        // Stop animation if running
-        this.#dimKey = selectedValue;                // Neue Dimension setzen
-        this.#syncControls();                        // UI synchronisieren
-        this.#updateColours();                       // Karte aktualisieren
+        this.#stopPlayback(); // Stop animation if running
+        this.#dimKey = selectedValue; // Neue Dimension setzen
+        this.#syncControls(); // UI synchronisieren
+        this.#updateColours(); // Karte aktualisieren
+        this.#updateRankings(this.#year, this.#dimKey); // Update rankings when dimension changes
         if (this.#selected) this.#showMiniDash(this.#selected); // Mini-Dashboard ggf. neu anzeigen
       });
     });
-
 
     // Year slider input (fires continuously during drag)
     $.yearSlider?.addEventListener("input", () => {
@@ -740,6 +740,7 @@ class OECDWellbeingMap {
       this.#year = $.yearSlider.value;
       this.#syncControls();
       this.#updateColours();
+      this.#updateRankings(this.#year, this.#dimKey); // Update rankings when year changes
       // Re-render mini-dashboard if a country is selected
       if (this.#selected) this.#showMiniDash(this.#selected);
     });
@@ -773,6 +774,46 @@ class OECDWellbeingMap {
       $.yearSlider.setAttribute("aria-valuemax", $.yearSlider.max);
       // aria-valuenow is updated in #syncControls
     }
+
+    // Add ranking tab switch handler
+    d3.selectAll('.ranking-tabs button').on('click', (event) => {
+      d3.selectAll('.ranking-tabs button').classed('active', false);
+      d3.select(event.currentTarget).classed('active', true);
+
+      const tab = event.currentTarget.id === 'tab-feature' ? 'feature' : 'average';
+      d3.select('#panel-feature').attr('hidden', tab !== 'feature');
+      d3.select('#panel-average').attr('hidden', tab !== 'average');
+    });
+
+    // Ranking panel event listeners
+    const rankingPanel = document.getElementById("ranking-panel");
+    const rankingContent = document.getElementById("ranking-content");
+    const tabFeature = document.getElementById("tab-feature");
+    const tabAverage = document.getElementById("tab-average");
+    const panelFeature = document.getElementById("panel-feature");
+    const panelAverage = document.getElementById("panel-average");
+
+    rankingPanel?.addEventListener("toggle", (event) => {
+      if (event.target.open) {
+        rankingContent?.removeAttribute("hidden");
+      } else {
+        rankingContent?.setAttribute("hidden", "");
+      }
+    });
+
+    tabFeature?.addEventListener("click", () => {
+      tabFeature.classList.add("active");
+      tabAverage?.classList.remove("active");
+      panelFeature?.removeAttribute("hidden");
+      panelAverage?.setAttribute("hidden", "");
+    });
+
+    tabAverage?.addEventListener("click", () => {
+      tabAverage.classList.add("active");
+      tabFeature?.classList.remove("active");
+      panelAverage?.removeAttribute("hidden");
+      panelFeature?.setAttribute("hidden", "");
+    });
   }
 
   /* ------------------------------------------------------------------
@@ -861,14 +902,18 @@ class OECDWellbeingMap {
     const others = this.#g.selectAll(".country.other-country");
     if (hide) {
       // Fade out, then set display to none
-      others.transition()
+      others
+        .transition()
         .duration(400)
         .style("opacity", 0)
-        .on("end", function() { d3.select(this).style("display", "none"); });
+        .on("end", function () {
+          d3.select(this).style("display", "none");
+        });
       others.attr("aria-hidden", "true");
     } else {
       // Set display to default, fade in
-      others.style("display", null)
+      others
+        .style("display", null)
         .style("opacity", 0)
         .transition()
         .duration(400)
@@ -1479,7 +1524,8 @@ class OECDWellbeingMap {
     const sparklineData = years
       .map((year) => ({
         year: year,
-        value: this.#dataCsv.get(`${countryName}_${domainName}_${year}`) ?? null,
+        value:
+          this.#dataCsv.get(`${countryName}_${domainName}_${year}`) ?? null,
       }))
       .filter((d) => d.value !== null && Number.isFinite(d.value));
 
@@ -1509,7 +1555,10 @@ class OECDWellbeingMap {
       .attr("viewBox", `0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`)
       .attr("preserveAspectRatio", "xMidYMid meet")
       .attr("role", "img")
-      .attr("aria-label", `Sparkline chart showing ${domainName} trend for ${countryName}`);
+      .attr(
+        "aria-label",
+        `Sparkline chart showing ${domainName} trend for ${countryName}`
+      );
 
     // Line generator
     const lineGenerator = d3
@@ -1612,10 +1661,7 @@ class OECDWellbeingMap {
       .domain([0, dimensionKeys.length])
       .range([0, 2 * Math.PI]);
 
-    const radiusScale = d3
-      .scaleLinear()
-      .domain([0, 1])
-      .range([0, RADIUS]);
+    const radiusScale = d3.scaleLinear().domain([0, 1]).range([0, RADIUS]);
 
     // --- SVG Rendering ---
     const svg = d3
@@ -1626,7 +1672,10 @@ class OECDWellbeingMap {
       .attr("viewBox", `0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`)
       .attr("preserveAspectRatio", "xMidYMid meet")
       .attr("role", "img")
-      .attr("aria-label", `Radar chart showing all dimensions for ${countryName} in ${year}`);
+      .attr(
+        "aria-label",
+        `Radar chart showing all dimensions for ${countryName} in ${year}`
+      );
 
     const g = svg
       .selectAll("g")
@@ -1644,11 +1693,13 @@ class OECDWellbeingMap {
     // Update or create axis lines
     axes
       .selectAll("line")
-      .data((d, i) => [{
-        angle: angleScale(i),
-        x2: Math.sin(angleScale(i)) * RADIUS,
-        y2: -Math.cos(angleScale(i)) * RADIUS
-      }])
+      .data((d, i) => [
+        {
+          angle: angleScale(i),
+          x2: Math.sin(angleScale(i)) * RADIUS,
+          y2: -Math.cos(angleScale(i)) * RADIUS,
+        },
+      ])
       .join("line")
       .attr("stroke", CONFIG.colors.secondaryText)
       .attr("stroke-width", 0.5)
@@ -1657,18 +1708,22 @@ class OECDWellbeingMap {
       .ease(d3.easeCubicInOut)
       .attr("x1", 0)
       .attr("y1", 0)
-      .attr("x2", d => d.x2)
-      .attr("y2", d => d.y2);
+      .attr("x2", (d) => d.x2)
+      .attr("y2", (d) => d.y2);
 
     // Update or create labels
     axes
       .selectAll("text")
-      .data((key, i) => [{
-        text: DOMAIN_LABELS[key].replace(/-/g, "\u2011").replace(/ /g, "\u00A0"),
-        angle: angleScale(i),
-        x: Math.sin(angleScale(i)) * (RADIUS + LABEL_OFFSET),
-        y: -Math.cos(angleScale(i)) * (RADIUS + LABEL_OFFSET)
-      }])
+      .data((key, i) => [
+        {
+          text: DOMAIN_LABELS[key]
+            .replace(/-/g, "\u2011")
+            .replace(/ /g, "\u00A0"),
+          angle: angleScale(i),
+          x: Math.sin(angleScale(i)) * (RADIUS + LABEL_OFFSET),
+          y: -Math.cos(angleScale(i)) * (RADIUS + LABEL_OFFSET),
+        },
+      ])
       .join("text")
       .attr("font-size", "8px")
       .attr("fill", CONFIG.colors.strongText)
@@ -1676,15 +1731,15 @@ class OECDWellbeingMap {
       .transition()
       .duration(750)
       .ease(d3.easeCubicInOut)
-      .attr("x", d => d.x)
-      .attr("y", d => d.y)
+      .attr("x", (d) => d.x)
+      .attr("y", (d) => d.y)
       .attr("text-anchor", (d, i) => {
         const angleDegrees = (d.angle * 180) / Math.PI;
         if (angleDegrees > 10 && angleDegrees < 170) return "start";
         if (angleDegrees > 190 && angleDegrees < 350) return "end";
         return "middle";
       })
-      .text(d => d.text);
+      .text((d) => d.text);
 
     // --- Draw Data Polygon ---
     const polygonPoints = dimensionValues.map((value, index) => {
@@ -1704,25 +1759,27 @@ class OECDWellbeingMap {
       .selectAll("polygon")
       .data([polygonPoints])
       .join(
-        enter => enter
-          .append("polygon")
-          .attr("fill", CONFIG.colors.radarFill)
-          .attr("stroke", CONFIG.colors.radarStroke)
-          .attr("stroke-width", 1)
-          .attr("points", centerPoints.map(p => p.join(",")).join(" "))
-          .transition()
-          .duration(900)
-          .ease(d3.easeCubicInOut)
-          .attr("points", polygonPoints.map(p => p.join(",")).join(" ")),
-        update => update
-          .transition()
-          .duration(750)
-          .ease(d3.easeCubicInOut)
-          .attrTween("points", function(d) {
-            const previous = d3.select(this).attr("points");
-            const current = d.map(p => p.join(",")).join(" ");
-            return d3.interpolateString(previous || current, current);
-          })
+        (enter) =>
+          enter
+            .append("polygon")
+            .attr("fill", CONFIG.colors.radarFill)
+            .attr("stroke", CONFIG.colors.radarStroke)
+            .attr("stroke-width", 1)
+            .attr("points", centerPoints.map((p) => p.join(",")).join(" "))
+            .transition()
+            .duration(900)
+            .ease(d3.easeCubicInOut)
+            .attr("points", polygonPoints.map((p) => p.join(",")).join(" ")),
+        (update) =>
+          update
+            .transition()
+            .duration(750)
+            .ease(d3.easeCubicInOut)
+            .attrTween("points", function (d) {
+              const previous = d3.select(this).attr("points");
+              const current = d.map((p) => p.join(",")).join(" ");
+              return d3.interpolateString(previous || current, current);
+            })
       );
   }
 
@@ -1869,7 +1926,7 @@ class OECDWellbeingMap {
   #updateIconsForTheme(isDark) {
     // console.log(isDark);
     const icons = document.querySelectorAll(".custom-icon");
-    icons.forEach(icon => {
+    icons.forEach((icon) => {
       const baseName = icon.src.split("/").pop(); // e.g. income.svg
       const themeFolder = isDark ? "Dark" : "Light";
       icon.src = `SVGs/${themeFolder}/${baseName}`;
@@ -1929,6 +1986,89 @@ class OECDWellbeingMap {
     // Needed if the base stroke size depends on the initial render size,
     // or simply to ensure consistency after projection changes.
     this.#adjustStroke(this.#currentTf.k);
+  }
+
+  /**
+   * Generic ranking helper (ascending = bottom, descending = top)
+   * @param {Array<{countryCode: string, value: number}>} arr - Array of country data
+   * @param {boolean} [top=true] - Whether to get top or bottom rankings
+   * @param {number} [n=5] - Number of rankings to return
+   * @returns {Array<{countryCode: string, value: number}>} Sorted and sliced array
+   * @private
+   */
+  #getRanking(arr, top = true, n = 5) {
+    const sorted = [...arr].sort((a, b) =>
+      top ? b.value - a.value : a.value - b.value
+    );
+    return sorted.slice(0, n);
+  }
+
+  /**
+   * Compute combined average for a year across all dimensions
+   * @param {string} year - The year to compute averages for
+   * @returns {Array<{countryCode: string, value: number}>} Array of country averages
+   * @private
+   */
+  #getCombinedAverage(year) {
+    const dims = Object.keys(DOMAIN_MAP); // all dimensions
+    const countryGroups = d3.groups(
+      dims.flatMap(dim => {
+        const domainName = DOMAIN_MAP[dim];
+        return Array.from(TARGET_COUNTRIES).map(country => {
+          const dataKey = `${country}_${domainName}_${year}`;
+          const value = this.#dataCsv.get(dataKey);
+          return Number.isFinite(value) ? { countryCode: country, value } : null;
+        }).filter(Boolean);
+      }),
+      d => d.countryCode
+    );
+
+    return countryGroups.map(([code, entries]) => ({
+      countryCode: code,
+      value: d3.mean(entries, d => d.value) // equal weight for each dimension
+    }));
+  }
+
+  /**
+   * Updates the rankings lists for both feature and average panels
+   * @param {string} year - The current year
+   * @param {string} dimension - The current dimension key
+   * @private
+   */
+  #updateRankings(year, dimension) {
+    const domainName = DOMAIN_MAP[dimension];
+    if (!domainName) return;
+
+    // Get current feature data
+    const curData = Array.from(TARGET_COUNTRIES).map(country => {
+      const dataKey = `${country}_${domainName}_${year}`;
+      const value = this.#dataCsv.get(dataKey);
+      return Number.isFinite(value) ? { countryCode: country, value } : null;
+    }).filter(Boolean);
+
+    // Fill feature lists
+    this.#fillList('#feature-top5', this.#getRanking(curData, true));
+    this.#fillList('#feature-bottom5', this.#getRanking(curData, false));
+
+    // Get and fill average lists
+    const avgData = this.#getCombinedAverage(year);
+    this.#fillList('#average-top5', this.#getRanking(avgData, true));
+    this.#fillList('#average-bottom5', this.#getRanking(avgData, false));
+  }
+
+  /**
+   * Fills a ranking list with country data
+   * @param {string} selector - CSS selector for the list element
+   * @param {Array<{countryCode: string, value: number}>} list - Data to populate
+   * @private
+   */
+  #fillList(selector, list) {
+    const ol = d3.select(selector).html('');
+    ol.selectAll('li')
+      .data(list)
+      .enter()
+      .append('li')
+      .text(d => `${d.countryCode} – ${d.value.toFixed(1)}`);
   }
 }
 
