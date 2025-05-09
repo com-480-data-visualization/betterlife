@@ -1299,18 +1299,37 @@
             const zoomThreshold = 2.9; // Effective zoom of ~300% for desktop
 
             function adjustHeaderStickiness() {
-                // Check if the device is primarily touch-operated.
-                // (pointer: coarse) indicates the primary input is not precise (e.g., touch).
-                // Using this OR (hover: none) is a common way to target mobile/tablet devices.
-                const isMobileDevice = window.matchMedia('(pointer: coarse), (hover: none)').matches;
+                // Log current values for debugging
+                // console.log("Screen width:", window.innerWidth);
+                // console.log("Screen height:", window.innerHeight);
+                // console.log("navigator.maxTouchPoints:", navigator.maxTouchPoints);
+                // console.log("matchMedia('(pointer: coarse)').matches:", window.matchMedia('(pointer: coarse)').matches);
+                // console.log("matchMedia('(hover: none)').matches:", window.matchMedia('(hover: none)').matches);
+                // console.log("Device Pixel Ratio:", window.devicePixelRatio);
+
+                // --- Improved Mobile Detection ---
+                // 1. Check for touch capability directly
+                const hasTouchPoints = navigator.maxTouchPoints > 0;
+
+                // 2. Use media queries as a strong secondary indicator
+                const mediaQueryMobile = window.matchMedia('(pointer: coarse), (hover: none)').matches;
+                
+                // Consider it mobile if it explicitly has touch points.
+                // For devices that might not report maxTouchPoints but behave like mobile (e.g. some tablets or specific OS),
+                // the media query can be a fallback.
+                const isMobileDevice = hasTouchPoints || mediaQueryMobile;
 
                 if (isMobileDevice) {
-                    headerElement.classList.remove('sticky'); // Always non-sticky on mobile devices
+                    // console.log("Mobile device DETECTED. Removing sticky header.");
+                    headerElement.classList.remove('sticky');
                 } else {
                     // Desktop or other non-mobile-like devices: Apply zoom-based stickiness
+                    // console.log("Desktop/Non-mobile device DETECTED. Applying zoom logic for header.");
                     if (window.devicePixelRatio >= zoomThreshold) {
+                        // console.log("High zoom on desktop. Removing sticky header.");
                         headerElement.classList.remove('sticky');
                     } else {
+                        // console.log("Normal zoom on desktop. Ensuring header is sticky.");
                         headerElement.classList.add('sticky');
                     }
                 }
@@ -1318,8 +1337,14 @@
 
             // Initial check when DOM is ready
             adjustHeaderStickiness();
+
             // Update on resize (handles orientation changes, browser resize)
             window.addEventListener('resize', adjustHeaderStickiness);
+            
+            // It can also be helpful to listen for orientationchange specifically on mobile
+            if ('onorientationchange' in window) {
+                window.addEventListener('orientationchange', adjustHeaderStickiness);
+            }
         }
 
         // Set initial focus to the page logo/title on load
