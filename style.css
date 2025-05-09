@@ -520,6 +520,7 @@
     gap: 1rem;
   }
   .year-slider-labels {
+    position: relative;
     display: flex;
     justify-content: space-between;
     font-size: 0.75rem;
@@ -527,10 +528,25 @@
     margin: 0.25rem 0 1.5rem;
     transition: color var(--transition-med);
   }
+  .year-slider-labels span {
+    flex: 1 1 0;
+    text-align: center;
+  }
+  .year-slider-labels span:first-child {
+    text-align: left;
+  }
+  .year-slider-labels span:last-child {
+    text-align: right;
+  }
   #year-display {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     font-weight: 600;
     color: var(--color-primary-dark);
     transition: color var(--transition-med);
+    pointer-events: none;
+    top: 0;
   }
 
   /* ========== Selection Display (in controls panel) =================== */
@@ -674,10 +690,10 @@
     background: var(--color-dashboard-bg, rgb(255 255 255 / 0.95));
     box-shadow: var(--shadow-elevation-2);
     display: none;
-    transition: var(--transition-colors);
+    transition: all 0.3s ease-in-out;
     width: auto;
-    min-width: 0; /* allow it to flex down with its parent */
-    max-width: 100%; /* never overflow horizontally */
+    min-width: 0;
+    max-width: 100%;
     overflow: visible;
   }
   #mini-dashboard h4 {
@@ -714,15 +730,15 @@
 
   /* Styling for each column (primary and comparison) */
   .mini-dashboard-column {
-    flex: 1 1 0; /* Changed to equal growth and shrink with 0 basis */
-    min-width: 0; /* Allow columns to shrink below "min-content" */
+    flex: 1 1 0;
+    min-width: 0;
     border: 1px solid var(--color-border);
     padding: 8px 12px;
     border-radius: var(--radius-sm);
     background-color: transparent;
     box-shadow: var(--shadow-elevation-1);
-    transition: var(--transition-colors);
-    max-height: none; /* Allow it to grow with content */
+    transition: all 0.3s ease-in-out;
+    max-height: none;
     overflow: visible;
     display: flex;
     flex-direction: column;
@@ -741,11 +757,11 @@
 
   /* Re-use existing h4 styling from #mini-dashboard, but add class */
   .mini-dashboard-title {
-    /* Inherits base h4 styles, add specifics if needed */
-    font-size: 0.95rem; /* Slightly larger */
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--color-text-strong);
-    margin: 0; /* Reset margin if inheriting */
+    margin: 0;
+    transition: all 0.3s ease-in-out;
   }
 
   /* Optional: Style comparison title differently */
@@ -770,10 +786,10 @@
     box-shadow: var(--shadow-elevation-1);
     color: var(--color-text);
     cursor: pointer;
-    transition: var(--transition-colors);
+    transition: all 0.3s ease-in-out;
     width: 100%;
-    max-width: 100%; /* Allow it to take full width */
-    padding: 0.4rem 1.5rem 0.4rem 0.5rem; /* Reduce padding for smaller dropdown */
+    max-width: 100%;
+    padding: 0.4rem 1.5rem 0.4rem 0.5rem;
     font-size: 0.9em;
     display: block;
     box-sizing: border-box;
@@ -787,6 +803,27 @@
     content: "";
     display: block;
     height: 3.9em; /* tweak this to match the exact computed height of your real <select> */
+  }
+
+  .year-slider-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .year-slider-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .year-slider-wrapper input[type="range"] {
+    width: 100%;
+  }
+  .year-slider-labels {
+    width: 100%;
+  }
+  #play-pause-button {
+    margin-top: 6px;
   }
 }
 

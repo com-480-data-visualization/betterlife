@@ -101,7 +101,7 @@ const CONFIG = Object.freeze({
     transitionMs: 750, // Duration for zoom transitions
   }),
   animation: Object.freeze({
-    playMs: 1000, // Delay between year steps during playback
+    playMs: 1800, // Delay between year steps during playback (was 1000)
     colorMs: 250, // Duration for color/legend transitions
   }),
 });
@@ -858,10 +858,23 @@ class OECDWellbeingMap {
   #toggleOthers() {
     if (!this.#g) return;
     const hide = this.#$.hideOthers?.checked ?? false;
-    this.#g
-      .selectAll(".country.other-country")
-      .style("display", hide ? "none" : null) // Use null to revert to CSS default
-      .attr("aria-hidden", hide ? "true" : "false"); // Update accessibility state
+    const others = this.#g.selectAll(".country.other-country");
+    if (hide) {
+      // Fade out, then set display to none
+      others.transition()
+        .duration(400)
+        .style("opacity", 0)
+        .on("end", function() { d3.select(this).style("display", "none"); });
+      others.attr("aria-hidden", "true");
+    } else {
+      // Set display to default, fade in
+      others.style("display", null)
+        .style("opacity", 0)
+        .transition()
+        .duration(400)
+        .style("opacity", 1);
+      others.attr("aria-hidden", "false");
+    }
   }
 
   /* ------------------------------------------------------------------
@@ -1450,29 +1463,26 @@ class OECDWellbeingMap {
    */
   #renderSparkline(containerElement, countryName, dimensionKey) {
     const domainName = DOMAIN_MAP[dimensionKey];
-    if (!domainName || !this.#$.yearSlider) return; // Exit if dimension or slider is invalid
+    if (!domainName || !this.#$.yearSlider) return;
 
     // --- Constants ---
     const CHART_WIDTH = 220;
-    // Increase height slightly to accommodate labels
-    const CHART_HEIGHT = 65; // Was 50
-    const MARGIN = 6; // Simple margin for aesthetics
-    const LABEL_Y_OFFSET = 12; // Space below the chart for labels
+    const CHART_HEIGHT = 65;
+    const MARGIN = 6;
+    const LABEL_Y_OFFSET = 12;
 
     // --- Data Preparation ---
     const minYear = +this.#$.yearSlider.min;
     const maxYear = +this.#$.yearSlider.max;
-    const years = d3.range(minYear, maxYear + 1); // Generate array of years
+    const years = d3.range(minYear, maxYear + 1);
 
     const sparklineData = years
       .map((year) => ({
         year: year,
-        value:
-          this.#dataCsv.get(`${countryName}_${domainName}_${year}`) ?? null, // Get value or null
+        value: this.#dataCsv.get(`${countryName}_${domainName}_${year}`) ?? null,
       }))
-      .filter((d) => d.value !== null && Number.isFinite(d.value)); // Filter out missing/invalid data
+      .filter((d) => d.value !== null && Number.isFinite(d.value));
 
-    // Check if enough data exists to draw a line
     if (sparklineData.length < 2) {
       containerElement.innerHTML += `<p class="mini-chart-nodata">Not enough data for trend line.</p>`;
       return;
@@ -1481,27 +1491,25 @@ class OECDWellbeingMap {
     // --- Scales ---
     const xScale = d3
       .scaleLinear()
-      .domain(d3.extent(sparklineData, (d) => d.year)) // Domain: min to max year in data
-      .range([MARGIN, CHART_WIDTH - MARGIN]); // Range: chart width with margin
+      .domain(d3.extent(sparklineData, (d) => d.year))
+      .range([MARGIN, CHART_WIDTH - MARGIN]);
 
     const yScale = d3
       .scaleLinear()
-      .domain(d3.extent(sparklineData, (d) => d.value)) // Domain: min to max value in data
-      .nice() // Adjust domain to nice round values
-      // Adjust range to leave space at the bottom for labels
-      .range([CHART_HEIGHT - MARGIN - LABEL_Y_OFFSET, MARGIN]); // Range: chart height with margin (inverted for SVG coords)
+      .domain(d3.extent(sparklineData, (d) => d.value))
+      .nice()
+      .range([CHART_HEIGHT - MARGIN - LABEL_Y_OFFSET, MARGIN]);
 
     // --- SVG Rendering ---
     const svg = d3
       .select(containerElement)
-      .append("svg")
-      .attr("viewBox", `0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`) // Use updated height
+      .selectAll("svg")
+      .data([null])
+      .join("svg")
+      .attr("viewBox", `0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`)
       .attr("preserveAspectRatio", "xMidYMid meet")
       .attr("role", "img")
-      .attr(
-        "aria-label",
-        `Sparkline chart showing ${domainName} trend for ${countryName}`
-      );
+      .attr("aria-label", `Sparkline chart showing ${domainName} trend for ${countryName}`);
 
     // Line generator
     const lineGenerator = d3
@@ -1509,52 +1517,67 @@ class OECDWellbeingMap {
       .x((d) => xScale(d.year))
       .y((d) => yScale(d.value));
 
-    // Draw the line
-    svg
-      .append("path")
-      .datum(sparklineData)
+    // Draw the line with transition
+    const path = svg
+      .selectAll("path")
+      .data([sparklineData])
+      .join("path")
       .attr("fill", "none")
-      .attr("stroke", "currentColor") // Use CSS color
+      .attr("stroke", "currentColor")
       .attr("stroke-width", 1.5)
       .attr("d", lineGenerator);
 
-    // Optional: Add points at start/end
-    svg
+    // Animate the line drawing on initial render or data change
+    if (path.node()) {
+      const totalLength = path.node().getTotalLength();
+      path
+        .attr("stroke-dasharray", totalLength)
+        .attr("stroke-dashoffset", totalLength)
+        .transition()
+        .duration(900)
+        .ease(d3.easeCubicInOut)
+        .attr("stroke-dashoffset", 0);
+    }
+
+    // Add points at start/end with transition
+    const points = svg
       .selectAll(".spark-point")
-      .data([sparklineData[0], sparklineData.at(-1)]) // First and last data points
+      .data([sparklineData[0], sparklineData.at(-1)])
       .join("circle")
       .attr("class", "spark-point")
       .attr("r", 2)
-      .attr("cx", (d) => xScale(d.year))
-      .attr("cy", (d) => yScale(d.value))
       .attr("fill", "currentColor");
+
+    points
+      .transition()
+      .duration(750)
+      .ease(d3.easeCubicInOut)
+      .attr("cx", (d) => xScale(d.year))
+      .attr("cy", (d) => yScale(d.value));
 
     // --- Add Year Labels ---
     const firstYearData = sparklineData[0];
     const lastYearData = sparklineData.at(-1);
-    const labelYPosition = CHART_HEIGHT - MARGIN; // Position labels at the bottom
+    const labelYPosition = CHART_HEIGHT - MARGIN;
 
-    // Start Year Label
-    svg
-      .append("text")
-      .attr("x", xScale(firstYearData.year))
-      .attr("y", labelYPosition)
-      .attr("text-anchor", "start") // Align text start with the point
+    // Update or create labels with transition
+    const labels = svg
+      .selectAll(".year-label")
+      .data([firstYearData, lastYearData])
+      .join("text")
+      .attr("class", "year-label")
       .attr("font-size", "9px")
-      .attr("fill", CONFIG.colors.strongText) // Use strong text color
-      .attr("dominant-baseline", "baseline") // Align bottom of text
-      .text(firstYearData.year);
+      .attr("fill", CONFIG.colors.strongText)
+      .attr("dominant-baseline", "baseline");
 
-    // End Year Label
-    svg
-      .append("text")
-      .attr("x", xScale(lastYearData.year))
+    labels
+      .transition()
+      .duration(750)
+      .ease(d3.easeCubicInOut)
+      .attr("x", (d) => xScale(d.year))
       .attr("y", labelYPosition)
-      .attr("text-anchor", "end") // Align text end with the point
-      .attr("font-size", "9px")
-      .attr("fill", CONFIG.colors.strongText) // Use strong text color
-      .attr("dominant-baseline", "baseline") // Align bottom of text
-      .text(lastYearData.year);
+      .attr("text-anchor", (d, i) => (i === 0 ? "start" : "end"))
+      .text((d) => d.year);
   }
 
   /**
@@ -1568,107 +1591,139 @@ class OECDWellbeingMap {
     // --- Constants ---
     const CHART_WIDTH = 220;
     const CHART_HEIGHT = 160;
-    const RADIUS = Math.min(CHART_WIDTH, CHART_HEIGHT) / 2 - 25; // Radius of the radar area
-    const LABEL_OFFSET = 12; // Distance of labels from radar edge
+    const RADIUS = Math.min(CHART_WIDTH, CHART_HEIGHT) / 2 - 25;
+    const LABEL_OFFSET = 12;
 
     // --- Data Preparation ---
     const dimensionKeys = Object.keys(DOMAIN_MAP);
     const dimensionValues = dimensionKeys.map((key) => {
-      const longDomainName = DOMAIN_MAP[key]; // Get the long name needed for the data key
+      const longDomainName = DOMAIN_MAP[key];
       return this.#dataCsv.get(`${countryName}_${longDomainName}_${year}`) ?? 0;
     });
 
-    // Check if any data exists
     if (!dimensionValues.some((value) => Number.isFinite(value) && value > 0)) {
       containerElement.innerHTML += `<p class="mini-chart-nodata">No data available for ${year}.</p>`;
       return;
     }
 
     // --- Scales ---
-    // Angle scale: maps dimension index to angle
     const angleScale = d3
       .scaleLinear()
-      .domain([0, dimensionKeys.length]) // Domain: 0 to number of dimensions
-      .range([0, 2 * Math.PI]); // Range: 0 to 360 degrees (in radians)
+      .domain([0, dimensionKeys.length])
+      .range([0, 2 * Math.PI]);
 
-    // Radius scale: maps data value (assuming 0-1 normalized) to pixel radius
-    // Adjust domain if data is not normalized, e.g., d3.extent(dimensionValues)
     const radiusScale = d3
       .scaleLinear()
-      .domain([0, 1]) // Assuming normalized data [0, 1]
-      .range([0, RADIUS]); // Range: center to max radius
+      .domain([0, 1])
+      .range([0, RADIUS]);
 
     // --- SVG Rendering ---
     const svg = d3
       .select(containerElement)
-      .append("svg")
+      .selectAll("svg")
+      .data([null])
+      .join("svg")
       .attr("viewBox", `0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`)
       .attr("preserveAspectRatio", "xMidYMid meet")
       .attr("role", "img")
-      .attr(
-        "aria-label",
-        `Radar chart showing all dimensions for ${countryName} in ${year}`
-      )
-      .append("g")
-      // Center the radar chart group within the SVG
+      .attr("aria-label", `Radar chart showing all dimensions for ${countryName} in ${year}`);
+
+    const g = svg
+      .selectAll("g")
+      .data([null])
+      .join("g")
       .attr("transform", `translate(${CHART_WIDTH / 2},${CHART_HEIGHT / 2})`);
 
     // --- Draw Axes and Labels ---
-    dimensionKeys.forEach((key, index) => {
-      const shortLabel = DOMAIN_LABELS[key]; // Get the short label for display
-      const angle = angleScale(index);
-      const x2 = Math.sin(angle) * RADIUS; // x endpoint of axis line
-      const y2 = -Math.cos(angle) * RADIUS; // y endpoint of axis line (negative for SVG y-down)
+    const axes = g
+      .selectAll(".axis")
+      .data(dimensionKeys)
+      .join("g")
+      .attr("class", "axis");
 
-      // Draw axis line from center to edge
-      svg
-        .append("line")
-        .attr("x1", 0)
-        .attr("y1", 0) // Start at center
-        .attr("x2", x2)
-        .attr("y2", y2) // End at radius edge
-        .attr("stroke", CONFIG.colors.secondaryText)
-        .attr("stroke-width", 0.5);
+    // Update or create axis lines
+    axes
+      .selectAll("line")
+      .data((d, i) => [{
+        angle: angleScale(i),
+        x2: Math.sin(angleScale(i)) * RADIUS,
+        y2: -Math.cos(angleScale(i)) * RADIUS
+      }])
+      .join("line")
+      .attr("stroke", CONFIG.colors.secondaryText)
+      .attr("stroke-width", 0.5)
+      .transition()
+      .duration(750)
+      .ease(d3.easeCubicInOut)
+      .attr("x1", 0)
+      .attr("y1", 0)
+      .attr("x2", d => d.x2)
+      .attr("y2", d => d.y2);
 
-      // Draw axis label
-      svg
-        .append("text")
-        .attr("x", Math.sin(angle) * (RADIUS + LABEL_OFFSET)) // Position label outside radius
-        .attr("y", -Math.cos(angle) * (RADIUS + LABEL_OFFSET))
-        .attr("font-size", "8px") // Small font size for labels
-        .attr("text-anchor", (d, i) => {
-          const angleDegrees = (angleScale(i) * 180) / Math.PI;
-          // Adjust thresholds slightly to avoid perfect vertical/horizontal alignment issues
-          if (angleDegrees > 10 && angleDegrees < 170) {
-            return "start"; // Right side
-          } else if (angleDegrees > 190 && angleDegrees < 350) {
-            return "end"; // Left side
-          }
-          return "middle"; // Top or bottom
-        })
-        .attr("dominant-baseline", "middle") // Center text vertically
-        .attr("fill", CONFIG.colors.strongText)
-        // Replace hyphens with non-breaking hyphens and spaces with non-breaking spaces for better wrapping
-        .text(shortLabel.replace(/-/g, "\u2011").replace(/ /g, "\u00A0"));
-    });
+    // Update or create labels
+    axes
+      .selectAll("text")
+      .data((key, i) => [{
+        text: DOMAIN_LABELS[key].replace(/-/g, "\u2011").replace(/ /g, "\u00A0"),
+        angle: angleScale(i),
+        x: Math.sin(angleScale(i)) * (RADIUS + LABEL_OFFSET),
+        y: -Math.cos(angleScale(i)) * (RADIUS + LABEL_OFFSET)
+      }])
+      .join("text")
+      .attr("font-size", "8px")
+      .attr("fill", CONFIG.colors.strongText)
+      .attr("dominant-baseline", "middle")
+      .transition()
+      .duration(750)
+      .ease(d3.easeCubicInOut)
+      .attr("x", d => d.x)
+      .attr("y", d => d.y)
+      .attr("text-anchor", (d, i) => {
+        const angleDegrees = (d.angle * 180) / Math.PI;
+        if (angleDegrees > 10 && angleDegrees < 170) return "start";
+        if (angleDegrees > 190 && angleDegrees < 350) return "end";
+        return "middle";
+      })
+      .text(d => d.text);
 
     // --- Draw Data Polygon ---
-    // Calculate polygon points [(x1, y1), (x2, y2), ...]
     const polygonPoints = dimensionValues.map((value, index) => {
       const angle = angleScale(index);
-      const pointRadius = radiusScale(Math.max(0, value)); // Ensure radius is not negative
-      const x = Math.sin(angle) * pointRadius;
-      const y = -Math.cos(angle) * pointRadius;
-      return [x, y];
+      const pointRadius = radiusScale(Math.max(0, value));
+      return [Math.sin(angle) * pointRadius, -Math.cos(angle) * pointRadius];
     });
 
-    // Draw the polygon connecting the points
-    svg
-      .append("polygon")
-      .attr("points", polygonPoints.map((p) => p.join(",")).join(" ")) // Format points string "x1,y1 x2,y2 ..."
-      .attr("fill", CONFIG.colors.radarFill) // Use fill color from config
-      .attr("stroke", CONFIG.colors.radarStroke) // Use stroke color from config
-      .attr("stroke-width", 1);
+    // For dynamic creation: start from center points if polygon is new
+    const centerPoints = dimensionValues.map((_, index) => {
+      const angle = angleScale(index);
+      return [Math.sin(angle) * 0, -Math.cos(angle) * 0];
+    });
+
+    // Update or create polygon with transition
+    const polygon = g
+      .selectAll("polygon")
+      .data([polygonPoints])
+      .join(
+        enter => enter
+          .append("polygon")
+          .attr("fill", CONFIG.colors.radarFill)
+          .attr("stroke", CONFIG.colors.radarStroke)
+          .attr("stroke-width", 1)
+          .attr("points", centerPoints.map(p => p.join(",")).join(" "))
+          .transition()
+          .duration(900)
+          .ease(d3.easeCubicInOut)
+          .attr("points", polygonPoints.map(p => p.join(",")).join(" ")),
+        update => update
+          .transition()
+          .duration(750)
+          .ease(d3.easeCubicInOut)
+          .attrTween("points", function(d) {
+            const previous = d3.select(this).attr("points");
+            const current = d.map(p => p.join(",")).join(" ");
+            return d3.interpolateString(previous || current, current);
+          })
+      );
   }
 
   /* ------------------------------------------------------------------
