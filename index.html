@@ -1293,19 +1293,30 @@
       });
       
       document.addEventListener('DOMContentLoaded', () => {
-      
-        // Make header non-sticky at high zoom
+        // Header stickiness logic (mobile vs desktop with zoom)
         const headerElement = document.querySelector('header');
         if (headerElement) {
-            const zoomThreshold = 2.9;
+            const zoomThreshold = 2.9; // Effective zoom of ~300%
+            const mobileBreakpoint = 768; // Corresponds to Tailwind's 'md'
+
             function adjustHeaderStickiness() {
-                if (window.devicePixelRatio >= zoomThreshold) {
-                    headerElement.classList.remove('sticky');
+                const isMobile = window.innerWidth < mobileBreakpoint;
+
+                if (isMobile) {
+                    headerElement.classList.remove('sticky'); // Always non-sticky on mobile
                 } else {
-                    headerElement.classList.add('sticky');
+                    // Desktop: Apply zoom-based stickiness
+                    if (window.devicePixelRatio >= zoomThreshold) {
+                        headerElement.classList.remove('sticky');
+                    } else {
+                        headerElement.classList.add('sticky');
+                    }
                 }
             }
+
+            // Initial check
             adjustHeaderStickiness();
+            // Update on resize (handles orientation changes and browser resize)
             window.addEventListener('resize', adjustHeaderStickiness);
         }
 
