@@ -2,6 +2,17 @@
 /* global d3, topojson */
 "use strict";
 
+const sunIcon = `
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" role="img" aria-labelledby="sun-title">
+    <title id="sun-title">Light mode icon</title>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+  </svg>`;
+const moonIcon = `
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" role="img" aria-labelledby="moon-title">
+    <title id="moon-title">Dark mode icon</title>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+  </svg>`;
+
 /* -------------------------------------------------------------------------
  * Utility helpers
  * ---------------------------------------------------------------------- */
@@ -767,13 +778,14 @@ class OECDWellbeingMap {
     }
 
     // Add ranking tab switch handler
-    d3.selectAll('.ranking-tabs button').on('click', (event) => {
-      d3.selectAll('.ranking-tabs button').classed('active', false);
-      d3.select(event.currentTarget).classed('active', true);
+    d3.selectAll(".ranking-tabs button").on("click", (event) => {
+      d3.selectAll(".ranking-tabs button").classed("active", false);
+      d3.select(event.currentTarget).classed("active", true);
 
-      const tab = event.currentTarget.id === 'tab-feature' ? 'feature' : 'average';
-      d3.select('#panel-feature').attr('hidden', tab !== 'feature');
-      d3.select('#panel-average').attr('hidden', tab !== 'average');
+      const tab =
+        event.currentTarget.id === "tab-feature" ? "feature" : "average";
+      d3.select("#panel-feature").attr("hidden", tab !== "feature");
+      d3.select("#panel-average").attr("hidden", tab !== "average");
     });
 
     // Ranking panel event listeners
@@ -1331,6 +1343,9 @@ class OECDWellbeingMap {
 
     if (!dashElement) return; // Exit if dashboard element doesn't exist
 
+    // Check if this is a timeline change (year slider or play button)
+    const isTimelineChange = this.#playId !== null || this.#$.yearSlider?.matches(':active');
+
     // --- Structure Setup ---
     dashElement.innerHTML = ""; // Clear previous content
     dashElement.style.display = "block"; // Make it visible
@@ -1402,13 +1417,19 @@ class OECDWellbeingMap {
     this.#renderSparkline(
       primarySparklineContainer,
       primaryCountryName,
-      this.#dimKey
+      this.#dimKey,
+      !isTimelineChange // Enable animations unless it's a timeline change
     );
-    this.#renderRadar(primaryRadarContainer, primaryCountryName, currentYear);
+    this.#renderRadar(
+      primaryRadarContainer,
+      primaryCountryName,
+      currentYear,
+      !isTimelineChange // Enable animations unless it's a timeline change
+    );
 
     // --- Render Comparison Charts (if a comparison country is already selected) ---
     if (this.#comparisonCountryName) {
-      this.#renderComparisonDash(this.#comparisonCountryName);
+      this.#renderComparisonDash(this.#comparisonCountryName, isTimelineChange);
     }
   }
 
@@ -1442,7 +1463,7 @@ class OECDWellbeingMap {
    * @param {string} comparisonCountryName - The name of the country to compare with.
    * @private
    */
-  #renderComparisonDash(comparisonCountryName) {
+  #renderComparisonDash(comparisonCountryName, isTimelineChange = false) {
     const comparisonContainer = this.#$.miniDash?.querySelector(
       ".comparison-dash-content"
     );
@@ -1480,12 +1501,14 @@ class OECDWellbeingMap {
     this.#renderSparkline(
       comparisonSparklineContainer,
       comparisonCountryName, // <<< Use comparison name
-      currentDimKey
+      currentDimKey,
+      !isTimelineChange // Enable animations unless it's a timeline change
     );
     this.#renderRadar(
       comparisonRadarContainer,
       comparisonCountryName, // <<< Use comparison name
-      currentYear
+      currentYear,
+      !isTimelineChange // Enable animations unless it's a timeline change
     );
   }
 
@@ -1497,7 +1520,7 @@ class OECDWellbeingMap {
    * @param {string} dimensionKey - The key of the dimension to display.
    * @private
    */
-  #renderSparkline(containerElement, countryName, dimensionKey) {
+  #renderSparkline(containerElement, countryName, dimensionKey, animate = true) {
     const domainName = DOMAIN_MAP[dimensionKey];
     if (!domainName || !this.#$.yearSlider) return;
 
@@ -1557,7 +1580,7 @@ class OECDWellbeingMap {
       .x((d) => xScale(d.year))
       .y((d) => yScale(d.value));
 
-    // Draw the line with transition
+    // Draw the line with or without transition
     const path = svg
       .selectAll("path")
       .data([sparklineData])
@@ -1567,8 +1590,8 @@ class OECDWellbeingMap {
       .attr("stroke-width", 1.5)
       .attr("d", lineGenerator);
 
-    // Animate the line drawing on initial render or data change
-    if (path.node()) {
+    // Animate the line drawing only if animate is true
+    if (animate && path.node()) {
       const totalLength = path.node().getTotalLength();
       path
         .attr("stroke-dasharray", totalLength)
@@ -1579,7 +1602,7 @@ class OECDWellbeingMap {
         .attr("stroke-dashoffset", 0);
     }
 
-    // Add points at start/end with transition
+    // Add points at start/end with or without transition
     const points = svg
       .selectAll(".spark-point")
       .data([sparklineData[0], sparklineData.at(-1)])
@@ -1588,19 +1611,25 @@ class OECDWellbeingMap {
       .attr("r", 2)
       .attr("fill", "currentColor");
 
-    points
-      .transition()
-      .duration(750)
-      .ease(d3.easeCubicInOut)
-      .attr("cx", (d) => xScale(d.year))
-      .attr("cy", (d) => yScale(d.value));
+    if (animate) {
+      points
+        .transition()
+        .duration(750)
+        .ease(d3.easeCubicInOut)
+        .attr("cx", (d) => xScale(d.year))
+        .attr("cy", (d) => yScale(d.value));
+    } else {
+      points
+        .attr("cx", (d) => xScale(d.year))
+        .attr("cy", (d) => yScale(d.value));
+    }
 
     // --- Add Year Labels ---
     const firstYearData = sparklineData[0];
     const lastYearData = sparklineData.at(-1);
     const labelYPosition = CHART_HEIGHT - MARGIN;
 
-    // Update or create labels with transition
+    // Update or create labels with or without transition
     const labels = svg
       .selectAll(".year-label")
       .data([firstYearData, lastYearData])
@@ -1610,14 +1639,22 @@ class OECDWellbeingMap {
       .attr("fill", CONFIG.colors.strongText)
       .attr("dominant-baseline", "baseline");
 
-    labels
-      .transition()
-      .duration(750)
-      .ease(d3.easeCubicInOut)
-      .attr("x", (d) => xScale(d.year))
-      .attr("y", labelYPosition)
-      .attr("text-anchor", (d, i) => (i === 0 ? "start" : "end"))
-      .text((d) => d.year);
+    if (animate) {
+      labels
+        .transition()
+        .duration(750)
+        .ease(d3.easeCubicInOut)
+        .attr("x", (d) => xScale(d.year))
+        .attr("y", labelYPosition)
+        .attr("text-anchor", (d, i) => (i === 0 ? "start" : "end"))
+        .text((d) => d.year);
+    } else {
+      labels
+        .attr("x", (d) => xScale(d.year))
+        .attr("y", labelYPosition)
+        .attr("text-anchor", (d, i) => (i === 0 ? "start" : "end"))
+        .text((d) => d.year);
+    }
   }
 
   /**
@@ -1627,7 +1664,7 @@ class OECDWellbeingMap {
    * @param {string} year - The selected year.
    * @private
    */
-  #renderRadar(containerElement, countryName, year) {
+  #renderRadar(containerElement, countryName, year, animate = true) {
     // --- Constants ---
     const CHART_WIDTH = 220;
     const CHART_HEIGHT = 160;
@@ -1681,8 +1718,8 @@ class OECDWellbeingMap {
       .join("g")
       .attr("class", "axis");
 
-    // Update or create axis lines
-    axes
+    // Update or create axis lines with or without transition
+    const axisLines = axes
       .selectAll("line")
       .data((d, i) => [
         {
@@ -1693,17 +1730,27 @@ class OECDWellbeingMap {
       ])
       .join("line")
       .attr("stroke", CONFIG.colors.secondaryText)
-      .attr("stroke-width", 0.5)
-      .transition()
-      .duration(750)
-      .ease(d3.easeCubicInOut)
-      .attr("x1", 0)
-      .attr("y1", 0)
-      .attr("x2", (d) => d.x2)
-      .attr("y2", (d) => d.y2);
+      .attr("stroke-width", 0.5);
 
-    // Update or create labels
-    axes
+    if (animate) {
+      axisLines
+        .transition()
+        .duration(750)
+        .ease(d3.easeCubicInOut)
+        .attr("x1", 0)
+        .attr("y1", 0)
+        .attr("x2", (d) => d.x2)
+        .attr("y2", (d) => d.y2);
+    } else {
+      axisLines
+        .attr("x1", 0)
+        .attr("y1", 0)
+        .attr("x2", (d) => d.x2)
+        .attr("y2", (d) => d.y2);
+    }
+
+    // Update or create labels with or without transition
+    const axisLabels = axes
       .selectAll("text")
       .data((key, i) => [
         {
@@ -1718,19 +1765,34 @@ class OECDWellbeingMap {
       .join("text")
       .attr("font-size", "8px")
       .attr("fill", CONFIG.colors.strongText)
-      .attr("dominant-baseline", "middle")
-      .transition()
-      .duration(750)
-      .ease(d3.easeCubicInOut)
-      .attr("x", (d) => d.x)
-      .attr("y", (d) => d.y)
-      .attr("text-anchor", (d, i) => {
-        const angleDegrees = (d.angle * 180) / Math.PI;
-        if (angleDegrees > 10 && angleDegrees < 170) return "start";
-        if (angleDegrees > 190 && angleDegrees < 350) return "end";
-        return "middle";
-      })
-      .text((d) => d.text);
+      .attr("dominant-baseline", "middle");
+
+    if (animate) {
+      axisLabels
+        .transition()
+        .duration(750)
+        .ease(d3.easeCubicInOut)
+        .attr("x", (d) => d.x)
+        .attr("y", (d) => d.y)
+        .attr("text-anchor", (d, i) => {
+          const angleDegrees = (d.angle * 180) / Math.PI;
+          if (angleDegrees > 10 && angleDegrees < 170) return "start";
+          if (angleDegrees > 190 && angleDegrees < 350) return "end";
+          return "middle";
+        })
+        .text((d) => d.text);
+    } else {
+      axisLabels
+        .attr("x", (d) => d.x)
+        .attr("y", (d) => d.y)
+        .attr("text-anchor", (d, i) => {
+          const angleDegrees = (d.angle * 180) / Math.PI;
+          if (angleDegrees > 10 && angleDegrees < 170) return "start";
+          if (angleDegrees > 190 && angleDegrees < 350) return "end";
+          return "middle";
+        })
+        .text((d) => d.text);
+    }
 
     // --- Draw Data Polygon ---
     const polygonPoints = dimensionValues.map((value, index) => {
@@ -1745,7 +1807,7 @@ class OECDWellbeingMap {
       return [Math.sin(angle) * 0, -Math.cos(angle) * 0];
     });
 
-    // Update or create polygon with transition
+    // Update or create polygon with or without transition
     const polygon = g
       .selectAll("polygon")
       .data([polygonPoints])
@@ -1757,19 +1819,33 @@ class OECDWellbeingMap {
             .attr("stroke", CONFIG.colors.radarStroke)
             .attr("stroke-width", 1)
             .attr("points", centerPoints.map((p) => p.join(",")).join(" "))
-            .transition()
-            .duration(900)
-            .ease(d3.easeCubicInOut)
-            .attr("points", polygonPoints.map((p) => p.join(",")).join(" ")),
+            .call((selection) => {
+              if (animate) {
+                selection
+                  .transition()
+                  .duration(900)
+                  .ease(d3.easeCubicInOut)
+                  .attr("points", polygonPoints.map((p) => p.join(",")).join(" "));
+              } else {
+                selection.attr("points", polygonPoints.map((p) => p.join(",")).join(" "));
+              }
+            }),
         (update) =>
           update
-            .transition()
-            .duration(750)
-            .ease(d3.easeCubicInOut)
-            .attrTween("points", function (d) {
-              const previous = d3.select(this).attr("points");
-              const current = d.map((p) => p.join(",")).join(" ");
-              return d3.interpolateString(previous || current, current);
+            .call((selection) => {
+              if (animate) {
+                selection
+                  .transition()
+                  .duration(750)
+                  .ease(d3.easeCubicInOut)
+                  .attrTween("points", function (d) {
+                    const previous = d3.select(this).attr("points");
+                    const current = d.map((p) => p.join(",")).join(" ");
+                    return d3.interpolateString(previous || current, current);
+                  });
+              } else {
+                selection.attr("points", polygonPoints.map((p) => p.join(",")).join(" "));
+              }
             })
       );
   }
@@ -1874,10 +1950,16 @@ class OECDWellbeingMap {
 
     if (isDark) {
       document.documentElement.setAttribute("data-theme", "dark");
-      if (this.#$.themeToggle) this.#$.themeToggle.textContent = "Light Mode";
+      if (this.#$.themeToggle) {
+        this.#$.themeToggle.innerHTML = sunIcon; // Show sun icon (to switch to light)
+        this.#$.themeToggle.setAttribute("aria-label", "Switch to light mode");
+      }
     } else {
       document.documentElement.removeAttribute("data-theme");
-      if (this.#$.themeToggle) this.#$.themeToggle.textContent = "Dark Mode";
+      if (this.#$.themeToggle) {
+        this.#$.themeToggle.innerHTML = moonIcon; // Show moon icon (to switch to dark)
+        this.#$.themeToggle.setAttribute("aria-label", "Switch to dark mode");
+      }
     }
     // Note: Map background/stroke updates happen later or in #toggleTheme
   }
@@ -1894,12 +1976,18 @@ class OECDWellbeingMap {
       // Switch to Light
       document.documentElement.removeAttribute("data-theme");
       localStorage.removeItem("oecd-map-theme");
-      if (this.#$.themeToggle) this.#$.themeToggle.textContent = "Dark Mode";
+      if (this.#$.themeToggle) {
+        this.#$.themeToggle.innerHTML = moonIcon; // Changed from sunIcon to moonIcon
+        this.#$.themeToggle.setAttribute("aria-label", "Switch to dark mode");
+      }
     } else {
       // Switch to Dark
       document.documentElement.setAttribute("data-theme", "dark");
       localStorage.setItem("oecd-map-theme", "dark");
-      if (this.#$.themeToggle) this.#$.themeToggle.textContent = "Light Mode";
+      if (this.#$.themeToggle) {
+        this.#$.themeToggle.innerHTML = sunIcon; // Changed from moonIcon to sunIcon
+        this.#$.themeToggle.setAttribute("aria-label", "Switch to light mode");
+      }
     }
 
     // Re-apply styles that depend on CSS variables potentially changed by the theme
@@ -2008,20 +2096,24 @@ class OECDWellbeingMap {
   #getCombinedAverage(year) {
     const dims = Object.keys(DOMAIN_MAP); // all dimensions
     const countryGroups = d3.groups(
-      dims.flatMap(dim => {
+      dims.flatMap((dim) => {
         const domainName = DOMAIN_MAP[dim];
-        return Array.from(TARGET_COUNTRIES).map(country => {
-          const dataKey = `${country}_${domainName}_${year}`;
-          const value = this.#dataCsv.get(dataKey);
-          return Number.isFinite(value) ? { countryCode: country, value } : null;
-        }).filter(Boolean);
+        return Array.from(TARGET_COUNTRIES)
+          .map((country) => {
+            const dataKey = `${country}_${domainName}_${year}`;
+            const value = this.#dataCsv.get(dataKey);
+            return Number.isFinite(value)
+              ? { countryCode: country, value }
+              : null;
+          })
+          .filter(Boolean);
       }),
-      d => d.countryCode
+      (d) => d.countryCode
     );
 
     return countryGroups.map(([code, entries]) => ({
       countryCode: code,
-      value: d3.mean(entries, d => d.value) // equal weight for each dimension
+      value: d3.mean(entries, (d) => d.value), // equal weight for each dimension
     }));
   }
 
@@ -2036,20 +2128,22 @@ class OECDWellbeingMap {
     if (!domainName) return;
 
     // Get current feature data
-    const curData = Array.from(TARGET_COUNTRIES).map(country => {
-      const dataKey = `${country}_${domainName}_${year}`;
-      const value = this.#dataCsv.get(dataKey);
-      return Number.isFinite(value) ? { countryCode: country, value } : null;
-    }).filter(Boolean);
+    const curData = Array.from(TARGET_COUNTRIES)
+      .map((country) => {
+        const dataKey = `${country}_${domainName}_${year}`;
+        const value = this.#dataCsv.get(dataKey);
+        return Number.isFinite(value) ? { countryCode: country, value } : null;
+      })
+      .filter(Boolean);
 
     // Fill feature lists
-    this.#fillList('#feature-top5', this.#getRanking(curData, true));
-    this.#fillList('#feature-bottom5', this.#getRanking(curData, false));
+    this.#fillList("#feature-top5", this.#getRanking(curData, true));
+    this.#fillList("#feature-bottom5", this.#getRanking(curData, false));
 
     // Get and fill average lists
     const avgData = this.#getCombinedAverage(year);
-    this.#fillList('#average-top5', this.#getRanking(avgData, true));
-    this.#fillList('#average-bottom5', this.#getRanking(avgData, false));
+    this.#fillList("#average-top5", this.#getRanking(avgData, true));
+    this.#fillList("#average-bottom5", this.#getRanking(avgData, false));
   }
 
   /**
@@ -2059,15 +2153,15 @@ class OECDWellbeingMap {
    * @private
    */
   #fillList(selector, list) {
-    const ol = d3.select(selector).html('');
-    ol.selectAll('li')
+    const ol = d3.select(selector).html("");
+    ol.selectAll("li")
       .data(list)
       .enter()
-      .append('li')
-      .html(d => {
+      .append("li")
+      .html((d) => {
         const value = d.value.toFixed(2);
-        const isTop = selector.includes('top');
-        const trend = isTop ? '↑' : '↓';
+        const isTop = selector.includes("top");
+        const trend = isTop ? "↑" : "↓";
         return `
           <span class="country-name">${d.countryCode}</span>
           <span class="value" title="Score: ${value}">

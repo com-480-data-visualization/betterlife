@@ -375,6 +375,48 @@
     transform: translateY(-2px) scale(1.03);
   }
 
+  #theme-toggle {
+    /* === Core Appearance (Overrides) === */
+    all: unset; /* Reset all inherited properties first for a clean slate */
+    display: flex; /* Then re-apply necessary properties */
+    align-items: center;
+    justify-content: center;
+
+    width: 2rem;
+    height: 2rem;
+    padding: 0.2rem; /* This was from the original, adjust if SVG needs more/less space */
+
+    background-color: transparent !important; /* Ensure transparent background */
+    background-image: none !important; /* Explicitly remove any gradient */
+
+    border: 1px solid var(--color-text-muted); /* Your variable for border */
+    border-radius: 0.375rem; /* Target border-radius */
+
+    color: var(--color-text-muted); /* Sets SVG stroke color - your variable */
+
+    cursor: pointer;
+    box-shadow: none !important; /* Remove any inherited box-shadow */
+
+    transition: all 0.3s ease;
+  }
+
+  #theme-toggle:hover {
+    background-color: rgba(128, 128, 128, 0.1); /* Subtle hover background */
+    border-color: var(--color-text); /* Your variable for border on hover */
+    color: var(--color-text); /* SVG stroke color on hover - your variable */
+    transform: rotate(15deg); /* Desired rotation */
+
+    /* Ensure other hover properties from :is() are overridden if necessary */
+    background-image: none !important;
+    box-shadow: none !important;
+  }
+
+  #theme-toggle svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    stroke-width: 1.5; /* Ensure stroke width matches if it's part of the SVG's style */
+  }
+
   /* ========== Selection Display ======================================== */
   /* Generic definition - check if needed or if specific one below is enough */
   .selection-display span {
@@ -1011,7 +1053,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 15px;
   margin: 10px;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 .rankings-panel h3 {
@@ -1050,7 +1092,7 @@
 }
 
 .rankings-panel .value {
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
   color: #666;
   font-size: 0.95em;
 }

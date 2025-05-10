@@ -4,7 +4,7 @@ OECD Better Life Index ↦ tidy CSV for the D3 map.
 
 Default behaviour
 -----------------
-• Keeps only 2006–2023 (complete enough years).
+• Keeps only 2006-2023 (complete enough years).
 • Leaves genuine gaps as NaN so the map shows them in grey.
   ↳ pass --interpolate to fill those gaps.
 
