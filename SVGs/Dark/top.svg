@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="150.77454mm"
+   height="92.477455mm"
+   viewBox="0 0 150.77454 92.477455"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="top.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.67170314"
+     inkscape:cx="343.90192"
+     inkscape:cy="276.90804"
+     inkscape:window-width="1620"
+     inkscape:window-height="992"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-14.027851,-75.082228)">
+    <path
+       style="fill:#1f2937;fill-opacity:0;stroke:#f9fafb;stroke-width:20;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill"
+       d="m 24.027851,157.55968 38.99602,-36.63263 25.20955,27.17905 63.023869,-60.266578"
+       id="path1" />
+    <path
+       style="fill:#1f2937;fill-opacity:0;stroke:#f9fafb;stroke-width:20;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill"
+       d="m 105.56499,85.082228 45.2984,1.969495 3.939,40.965517"
+       id="path2" />
+  </g>
+</svg>

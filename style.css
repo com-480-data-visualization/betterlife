@@ -941,11 +941,6 @@
     background-color: var(--color-surface-hover);
   }
 
-  .ranking-panel > summary::before {
-    content: "📊";
-    font-size: 1.2em;
-  }
-
   .ranking-content {
     padding: 1rem 1.2rem 1.2rem;
     display: flex;
@@ -1000,14 +995,6 @@
     display: flex;
     align-items: center;
     gap: 0.4rem;
-  }
-
-  .ranking-columns h4:first-child::before {
-    content: "🏆";
-  }
-
-  .ranking-columns h4.bottom-five-heading::before {
-    content: "📉";
   }
 
   .ranking-columns ol {
