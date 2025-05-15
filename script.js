@@ -71,9 +71,6 @@ const CONFIG = Object.freeze({
       // dimensionSel: "dimension-select",
       yearSlider: "year-slider",
       yearDisplay: "year-display",
-      dimensionTxt: "selected-dimension",
-      yearTxt: "selected-year",
-      countryTxt: "selected-country-display",
       countryInfo: "country-info",
       hideOthers: "hide-others-checkbox",
       playBtn: "play-pause-button",
@@ -426,9 +423,6 @@ class OECDWellbeingMap {
       // dimensionSel: /** @type {HTMLSelectElement} */ (byId(ids.dimensionSel)),
       yearSlider: /** @type {HTMLInputElement} */ (byId(ids.yearSlider)),
       yearDisplay: byId(ids.yearDisplay),
-      dimensionTxt: byId(ids.dimensionTxt),
-      yearTxt: byId(ids.yearTxt),
-      countryTxt: byId(ids.countryTxt),
       info: byId(ids.countryInfo),
       hideOthers: /** @type {HTMLInputElement} */ (byId(ids.hideOthers)),
       playBtn: /** @type {HTMLButtonElement} */ (byId(ids.playBtn)),
@@ -865,17 +859,12 @@ class OECDWellbeingMap {
     if (!$) return;
 
     // Use DOMAIN_LABELS based on the *value* of the select (this.#dimKey)
-    const dimensionLabel = DOMAIN_LABELS[this.#dimKey] ?? "N/A";
+    // const dimensionLabel = DOMAIN_LABELS[this.#dimKey] ?? "N/A";
     const currentYear = this.#year ?? "N/A";
     const countryName = this.#selected?.properties?.name ?? "World View";
 
     // Update text displays
     if ($.yearDisplay) $.yearDisplay.textContent = currentYear;
-    if ($.yearTxt) $.yearTxt.textContent = currentYear;
-    // Update dimension text using the short label
-    if ($.dimensionTxt) $.dimensionTxt.textContent = dimensionLabel;
-    if ($.countryTxt) $.countryTxt.textContent = countryName;
-
     if ($.yearSlider) $.yearSlider.setAttribute("aria-valuenow", currentYear);
   }
 
