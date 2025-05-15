@@ -549,18 +549,12 @@
     </main>
 
     <footer
-      class="py-10 mt-16"
+      class="py-10"
       style="background-color: var(--footer-bg); color: var(--footer-text)"
     >
       <div class="container mx-auto px-6 text-center">
         <p class="text-sm">
-          Process Book for Well-being Explorer. Crafted with care.
-        </p>
-        <p class="mt-3 text-xs">
-          Team: Francesco La Rosa, Nicholas Bunjamin, Corvin Laube (COM-480, EPFL)
-        </p>
-        <p class="text-xs mt-1">
-          Data source for main project:
+          &copy; <span id="year"></span> Well-being Explorer. Data source:
           <a
             href="https://www.oecd.org/wise/better-life-initiative.htm"
             target="_blank"
@@ -569,8 +563,9 @@
             >OECD Better Life Index</a
           >.
         </p>
-         <p class="text-xs mt-1">
-          Last Updated: May 15, 2025
+        <p class="mt-3 text-xs">
+          Project by Francesco La Rosa, Nicholas Bunjamin, Corvin Laube
+          (COM-480)
         </p>
       </div>
     </footer>
@@ -618,6 +613,9 @@
       applyTheme(initialTheme);
 
       themeToggleBtn.addEventListener("click", toggleTheme);
+
+      // Set current year in footer
+      document.getElementById("year").textContent = new Date().getFullYear();
 
       // Scroll Animation Script (copied from your index.html)
       const scrollElements = document.querySelectorAll(".animate-on-scroll");
