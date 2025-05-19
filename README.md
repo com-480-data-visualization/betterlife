@@ -80,6 +80,57 @@ Our approach is original in two ways. This combination of accessible visuals and
 
 **80% of the final grade**
 
+## Technical Setup and Usage
+
+This project uses Node.js and npm for managing dependencies and running build scripts. Tailwind CSS is used for styling and is compiled locally.
+
+### Prerequisites
+
+- **Node.js**: Make sure you have Node.js installed. You can download it from [nodejs.org](https://nodejs.org/). npm (Node Package Manager) is included with Node.js.
+
+### Installation
+
+1.  **Clone the repository (if you haven't already):**
+    ```bash
+    git clone https://github.com/com-480-data-visualization/betterlife.git
+    cd betterlife
+    ```
+
+2.  **Install dependencies:**
+    Navigate to the project directory in your terminal and run:
+    ```bash
+    npm install
+    ```
+    This will install Tailwind CSS, PostCSS, and other necessary development dependencies listed in `package.json`.
+
+### Running the Project
+
+1.  **Build and Watch CSS:**
+    To compile the Tailwind CSS and watch for changes as you develop, run the following command in your terminal from the project root:
+    ```bash
+    npm run build-css
+    ```
+    This command will process `input.css`, apply Tailwind CSS transformations, and output the resulting stylesheet to `dist/output.css`. It will continue running and automatically rebuild the CSS when you save changes to your HTML files, `input.css`, or `tailwind.config.js`.
+
+2.  **View in Browser:**
+    Open the `index.html` file in your web browser to view the project.
+    The `process_book.html` file can also be opened to view the process book.
+    The `visualization.html` file uses its own `style.css` and does not depend on the Tailwind CSS build process.
+
+### Project Structure
+
+-   `index.html`: The main landing page.
+-   `process_book.html`: The project's process book.
+-   `visualization.html`: The main data visualization page (uses `style.css`).
+-   `input.css`: The source file for Tailwind CSS directives.
+-   `dist/output.css`: The compiled CSS output from Tailwind. This file is linked in `index.html` and `process_book.html`.
+-   `tailwind.config.js`: Configuration file for Tailwind CSS.
+-   `postcss.config.js`: Configuration file for PostCSS.
+-   `package.json`: Lists project dependencies and scripts.
+-   `.gitignore`: Specifies intentionally untracked files that Git should ignore.
+-   `script.js`, `dropdown.js`: JavaScript files used by the HTML pages.
+-   `style.css`: Custom CSS for `visualization.html`.
+
 ## Late policy
 
 - < 24h: 80% of the grade for the milestone
