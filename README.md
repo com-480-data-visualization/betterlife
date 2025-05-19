@@ -113,9 +113,17 @@ This project uses Node.js and npm for managing dependencies and running build sc
     This command will process `input.css`, apply Tailwind CSS transformations, and output the resulting stylesheet to `dist/output.css`. It will continue running and automatically rebuild the CSS when you save changes to your HTML files, `input.css`, or `tailwind.config.js`.
 
 2.  **View in Browser:**
-    Open the `index.html` file in your web browser to view the project.
-    The `process_book.html` file can also be opened to view the process book.
-    The `visualization.html` file uses its own `style.css` and does not depend on the Tailwind CSS build process.
+    -   **For `index.html` and `process_book.html`:** You can open these files directly in your web browser.
+    -   **For `visualization.html` (Map Visualization):** This page loads data (e.g., `Better_Life_Preprocessed.csv`) and requires a local HTTP server due to browser security restrictions (CORS) when fetching local files. 
+        To run a simple local server using Python:
+        1.  Open a new terminal window.
+        2.  Navigate to the root directory of this project (`betterlife`).
+        3.  Run the command:
+            -   For Python 3: `python3 -m http.server`
+            -   For Python 2: `python -m SimpleHTTPServer`
+        4.  Open your browser and go to `http://localhost:8000/visualization.html` (or the port specified by the server, usually 8000).
+
+    The `visualization.html` page itself uses `style.css` and does not depend on the Tailwind CSS build process for its own styling, but it does need the server for data loading.
 
 ### Project Structure
 
