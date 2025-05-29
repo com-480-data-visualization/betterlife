@@ -18,7 +18,7 @@ This project presents an interactive visualization of the OECD Better Life Index
 - [Milestone 3 Process Book (PDF)](./Reports/Milestone%203%20ProcessBook.pdf)
 - [Process Book (Web Version)](./process_book.html) - *Shorter interactive version available on the website*
 
-**🎥 Project Video:** *[Video will be available here once uploaded]*
+**🎥 Project Video:** (https://youtu.be/boQ2OgiwSJk)
 
 ## 🚀 Technical Setup and Usage
 
